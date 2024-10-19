@@ -123,13 +123,13 @@ function Navbar() {
 
          {isModal && (
         <>
-          {/* Backdrop */}
+      
           <div
             className="fixed inset-0 bg-black bg-opacity-20 z-10 flex"
-            onClick={closeModal} // Closes modal when clicking outside
+            onClick={closeModal} 
           ></div>
 
-          {/* Modal */}
+
           <div className="fixed mt-[300px] left-1/2 transform -translate-x-1/2 justify-center z-50 flex items-center w-[300px] h-[300px]">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full pb-[40px]">
               <div className="flex flex-row">
@@ -250,9 +250,9 @@ function Navbar() {
 
           <div className="flex flex-row gap-x-[5px] items-center">
             <div><MdPersonOutline className="size-[20px]"/></div>
-            <div className="font-bold underline text-[#31603D]">Login</div>
+            <Link to="/signin"><div className="font-bold underline text-[#31603D]">Login</div></Link>
             or
-            <div className="font-bold underline text-[#31603D]">Create Account</div>
+            <Link to="/signup"><div className="font-bold underline text-[#31603D]">Create Account</div></Link>
           </div>
 
           </div>
