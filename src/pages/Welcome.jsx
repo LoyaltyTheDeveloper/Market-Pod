@@ -9,7 +9,7 @@ import { RiTwitterXLine } from "react-icons/ri";
 
 function Welcome() {
   return (<>
-  <div>
+  <div className="">
   <div className="flex justify-center">
         <img src={pod}/>
     </div>

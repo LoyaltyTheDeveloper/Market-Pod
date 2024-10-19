@@ -18,6 +18,7 @@ import laundry from '../assets/laundry.svg';
 import beauty from '../assets/beauty.svg';
 import toy from '../assets/toy.svg';
 import stationery from '../assets/stationery.svg';
+import { Link } from 'react-router-dom';
 
 
 function Navbar() {
@@ -45,7 +46,7 @@ function Navbar() {
   }, []);
 
   return (<>
-   <nav className="bg-white shadow-md overflow-x-hidden overflow-y-hidden">
+   <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
       <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px] ">
         <div className="flex justify-between h-[70px]">
           <div className="flex items-center">
@@ -60,7 +61,7 @@ function Navbar() {
           <div className="font-bold text-[13px]">Location</div>
           <div className="flex flex-row items-center gap-[7px]">
             <div><GrLocation className="size-[16px]"/></div>
-            <div className="text-[13px] text-[#31603D] font-bold">Yooooo</div>
+            <div className="text-[13px] text-[#31603D] font-bold">...</div>
             <div><IoIosArrowDown onClick={openModal} className="size-[16px]"/></div>
           </div>
          </div>
@@ -80,9 +81,9 @@ function Navbar() {
           <div className="font-bold text-[13px]">Account</div>
           <div className="flex flex-row items-center gap-[7px]">
             <div><MdPersonOutline className="size-[16px]"/></div>
-            <div className="text-[13px] text-[#31603D] font-bold underline">Login</div>
+            <Link to="/signin"><div className="text-[13px] text-[#31603D] font-bold underline">Login</div></Link>
             <div>or</div>
-            <div className="text-[13px] text-[#31603D] font-bold underline">Create Account</div>
+            <Link to="/signup"><div className="text-[13px] text-[#31603D] font-bold underline">Create Account</div></Link>
           </div>
          </div>
 
@@ -124,12 +125,12 @@ function Navbar() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-20 z-40"
+            className="fixed inset-0 bg-black bg-opacity-20 z-10 flex"
             onClick={closeModal} // Closes modal when clicking outside
           ></div>
 
           {/* Modal */}
-          <div className="fixed mt-[270px] z-50 flex items-center ml-[20px] w-[300px] h-[300px]">
+          <div className="fixed mt-[300px] left-1/2 transform -translate-x-1/2 justify-center z-50 flex items-center w-[300px] h-[300px]">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full pb-[40px]">
               <div className="flex flex-row">
               <h2 className="text-[15px] font-bold mb-4 text-[#31603D]">Select Location</h2>
@@ -154,7 +155,7 @@ function Navbar() {
       )}
 
          <div
-        className={`fixed z-10 top-0 left-0 h-full w-full bg-[#F9F9F9] text-white transform ${
+        className={`fixed z-10 top-0 left-0 h-full w-full bg-[white] text-white transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out`}
       >
@@ -165,7 +166,7 @@ function Navbar() {
             <div><GrLocation className="size-[20px]"/></div>
           </div>
 
-          <LiaTimesSolid className="hover:bg-[red] size-[25px] absolute right-[45px]" onClick={toggleSidebar}/>
+          <LiaTimesSolid className="hover:bg-[grey] size-[25px] absolute right-[45px] text-[#31603D]" onClick={toggleSidebar}/>
           </div>
 
           <div className="flex lg:mt-[-100px] items-center justify-center my-3">

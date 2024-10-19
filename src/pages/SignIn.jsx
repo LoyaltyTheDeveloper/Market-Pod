@@ -4,6 +4,7 @@ import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
 import { LiaKeySolid } from "react-icons/lia";
 import Footer from '../Components/Footer';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
   return (<>
@@ -46,7 +47,7 @@ function SignIn() {
           </div>
         </form>
         <div className="pt-[20px] text-[#31603D] flex flex-row gap-[10px] underline font-bold">
-            <p>Recover Password</p>
+        <Link to="/recoverpassword"><p>Recover Password</p></Link>
         </div>
         <div className="flex items-center justify-center my-3">
       <hr className="w-full border-t border-gray-300" />
@@ -62,7 +63,7 @@ function SignIn() {
             </button>
           </div>
           <div className="mt-[10px] flex flex-row justify-center gap-[5px]">
-            <p>Don't have an account?</p><p className="text-[#31603D] underline">Create Account</p>
+            <p>Don't have an account?</p><Link to="/signup"><p className="text-[#31603D] underline">Create Account</p></Link>
           </div>
       </div>
       </div>

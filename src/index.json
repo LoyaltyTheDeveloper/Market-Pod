@@ -1,0 +1,68 @@
+{
+    "shops": [
+      {
+        "id": "1",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },      
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      },
+      {
+        "id": "2",
+        "image": "./src/shops/HappinessGoods.svg",
+        "name": "Happiness Goods & Store",
+        "opentime": "9:30am",
+        "closetime": "10:00pm",
+        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+      }
+    ]
+}

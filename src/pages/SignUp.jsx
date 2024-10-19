@@ -4,6 +4,7 @@ import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
 import { LiaKeySolid } from "react-icons/lia";
 import Footer from '../Components/Footer';
+import { Link } from 'react-router-dom';
 
 function SignUp() {
   return (<>
@@ -65,10 +66,10 @@ function SignUp() {
             </button>
           </div>
           <div className="mt-[10px] flex flex-row justify-center gap-[5px]">
-            <p>You have an account?</p><p className="text-[#31603D] underline">Login</p>
+            <p>You have an account?</p><Link to="/signin"><p className="text-[#31603D] underline">Login</p></Link>
           </div>
           <div className="mt-[10px] flex flex-row justify-center gap-[5px] flex-wrap lg:flex-nowrap">
-            <p>By proceeding you agree to the</p><p className="text-[#31603D] underline">Privacy Policy</p>and<p className="text-[#31603D] underline">Terms of Use</p>
+            <p>By proceeding you agree to the</p><Link to="/privacypolicy"><p className="text-[#31603D] underline">Privacy Policy</p></Link>and<Link to="/termsofuse"><p className="text-[#31603D] underline">Terms of Use</p></Link>
           </div>
       </div>
       </div>

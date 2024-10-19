@@ -5,6 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 import { LiaFacebook } from "react-icons/lia";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { RiTwitterXLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (<>
@@ -15,18 +16,18 @@ function Footer() {
         <div className="flex gap-[60px] flex-wrap ml-[40px] lg:ml-auto lg:mr-[40px] mt-[-70px] lg:mt-[40px]">
             <div className="flex flex-col gap-[20px]">
                 <h1 className="text-[20px] font-bold">Market Pod</h1>
-                <p>About Us</p>
+                <Link to="/aboutus"><p>About Us</p></Link>
             </div>
             <div className="flex flex-col gap-[20px]">
                 <h1 className="text-[20px] font-bold">Legal</h1>
-                <p>Privacy Policy</p>
+                <Link to="/privacypolicy"><p>Privacy Policy</p></Link>
                 <p>Terms of Use</p>
             </div>
             <div className="flex flex-col gap-[20px]">
                 <h1 className="text-[20px] font-bold">Get Help</h1>
-                <p>FAQ</p>
-                <p>Chat</p>
-                <p>Email</p>
+                <Link to="/faq"><p>FAQ</p></Link>
+                <Link to="/"><p>Chat</p></Link>
+                <Link to="/"><p>Email</p></Link>
             </div>
             <div className="flex flex-col gap-[20px]">
                 <h1 className="text-[20px] font-bold">Follow Our Socials</h1>
