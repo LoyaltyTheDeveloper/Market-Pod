@@ -5,11 +5,23 @@ import Navbar from "../Components/Navbar";
 import marketData from '../index.json';
 
 function StoreList() {
+
+
+  const [markets, setMarkets] = useState([]);
+  useEffect(() => {
+    fetch('https://test.tonyicon.com.ng/site/getData')
+    .then((response) => response.json())
+    .then((data) => setComments(data.markets))
+    .catch((error) => console.error('Error fetching comments', error))
+}, )
+
+
   return (<>
   <Navbar/>
   <div className="pt-[100px] min-h-screen bg-[#F9F9F9] overflow-x-hidden">
     <div className="flex flex-row gap-x-[60px] items-center pl-[20px] lg:pl-[40px] pt-[40px]">
-        <div className="flex flex-col">
+        
+        {/* <div className="flex flex-col">
         <div className="font-bold text-[25px] lg:text-[30px]">Yoruba Road</div>
         <div className="w-[270px] lg:w-[100%] md:w-[100%] flex flex-wrap">No 34 off GRA, Adelewola Akinwuyi Road, Ilorin, Kwara State.</div>
         </div>
@@ -39,7 +51,8 @@ function StoreList() {
             </div>
         </div>
         ))}
-</div>
+</div> */}
+
     </div>
   </div>
   </>)
