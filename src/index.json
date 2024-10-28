@@ -1,68 +1,56 @@
 {
-    "shops": [
+    "dropdowns": [
+      {
+        "id": "1",
+        "image": "../assets/Vector.svg",
+        "name": "Produce",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+
       {
         "id": "1",
         "image": "./src/shops/HappinessGoods.svg",
         "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },      
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
-      },
-      {
-        "id": "2",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
-        "opentime": "9:30am",
-        "closetime": "10:00pm",
-        "categories": ["Produce", "Beverage & Packed Foods", "Dairy & Eggs", "Herbs & Spice"]
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
       }
+
     ]
 }
