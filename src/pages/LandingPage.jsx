@@ -79,13 +79,13 @@ function LandingPage() {
               {selectedDropdown.categories.map((category, index) => (
                 <div key={category.id} className="flex items-start gap-1 lg:gap-x-[50px]">
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-4">{category.category}</h3>
+                    <h3 className="text-[18px] font-semibold mb-4 whitespace-nowrap">{category.category}</h3>
 
                     {/* Display items in two columns */}
                    
                     <div className="grid grid-cols-2 gap-y-4 lg:gap-x-[10px] mb-4">
                       {category.items.map((item, itemIndex) => (
-                        <span key={itemIndex} className="text-gray-700">
+                        <span key={itemIndex} className="text-gray-700 text-[15px] whitepsace-nowrap">
                           {item}
                         </span>
                       ))}
@@ -111,13 +111,6 @@ function LandingPage() {
               ))}
             </div>
 
-            {/* Close button */}
-            {/* <button
-              onClick={closeModal}
-              className="mt-6 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            >
-              Close
-            </button> */}
           </div>
         </div>
       )}

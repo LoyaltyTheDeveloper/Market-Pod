@@ -9,13 +9,13 @@
             "id": "1",
             "category": "Produce",
             "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
-            "image": "./src/dropdown/Rectangle 45.svg"
+            "image": "./src/dropdown/Rectangle 46.svg"
           },
           {
             "id": "2",
             "category": "Fruit",
             "items": ["Apples", "Oranges", "Bananas", "Watermelons", "Coconuts", "Strawberry", "Avocados", "Grapes"],
-            "image": "./src/dropdown/Rectangle 46.svg"
+            "image": "./src/dropdown/Rectangle 45.svg"
           },
           {
             "id": "3",
@@ -33,20 +33,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Meat",
+            "items": ["Beef", "Pork", "Lamb", "Veal", "Beef Alternative"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Poultry",
+            "items": ["Chicken", "Turkey", "Duck", "Prepped", "Poultry Alternative"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Seafood",
+            "items": ["Tuna", "Argentina", "Titus", "Cat Fish", "Crab", "Tilapia", "Salmon", "Shrimp"],
             "image": "/..."
           }
         ]
@@ -58,20 +58,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Diary Products",
+            "items": ["Whole Milk", "Butter", "Margarine", "Condensed Milk", "Yogurt", "Cream", "Pudding"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Eggs",
+            "items": ["Brown Eggs", "White Eggs", "Egg Alternative"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Dairy Alternatives",
+            "items": ["Almond Milk", "Soy Milk", "Coconut Milk", "Oat Milk", "Buttermilk", "Ice-Cream"],
             "image": "/..."
           }
         ]
@@ -83,20 +83,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Fresh & Dried Herbs",
+            "items": ["Bitter Leaf", "Ewedu", "Scent Leaf", "Basil", "Dried Thyme", "Bay Leaves"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Spices & Seeds",
+            "items": ["Ground Pepper", "Alligator Pepper", "Nutmeg", "Ginger Powder", "Egusi", "Ogbono"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Seasoning & Blends",
+            "items": ["Suya Spice Mix", "Yaji Spice", "Onion Powder", "Local Curry Powder", "Locust Beans", "Sea Salt", "Seasoning Cubes"],
             "image": "/..."
           }
         ]
@@ -108,20 +108,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Cooking Oils",
+            "items": ["Palm Oil", "Groundnut Oil", "Coconut Oil", "Soybean oil", "Vegetable Oil", "Shea Butter Oil", "Olive Oil"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Infused Oils",
+            "items": ["Palm Kernel Oil", "Sesame Oil", "Herb-infused Oil", "Garlic-infused Oil", "Egusi Oil"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Vinegars",
+            "items": ["White Vinegar", "Apple Cider Vinegar", "Palm Wine Vinegar"],
             "image": "/..."
           }
         ]
@@ -133,20 +133,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Beverage",
+            "items": ["Soft Drinks", "Fruit Juices", "Cereals", "Bottled Water", "Ginger Drink", "Malt Drinks"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Packaged Foods",
+            "items": ["Pasta", "Noodles", "Dried Crayfish", "Dried Stockfish", "Tomato Paste", "Canned Sardines", "Canned Tomatoes"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Snacks",
+            "items": ["Biscuit", "Cookies", "Chin-Chin", "Plantain Chips", "Peanuts", "Kilishi"],
             "image": "/..."
           }
         ]
@@ -158,20 +158,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Plasticware",
+            "items": ["Plastic Jars", "Plastic Plates", "Plastic Cutlery", "Plastic Lunch Boxes", "Plastic Basins", "Plastic Buckets"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Plastic Bags",
+            "items": ["Nylon Bags", "Plastic Carrier Bags", "Ziploc Bgas", "Garbage", "Bags Alternative"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Special Plasticware",
+            "items": ["Takeaway Food Containers", "Plastic Wraps(Cling Film)"],
             "image": "/..."
           }
         ]
@@ -183,20 +183,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Detergents & Soaps",
+            "items": ["Bar Soaps", "Liquid Detergents", "Powder Detergents", "Local Soap"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Fabric Care Products",
+            "items": ["Fabric Softners", "Fabric Freshners", "Bleaches & Stain Removers"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Laundry Accessories",
+            "items": ["Plastic Laundry Baskets", "Woven Laundry Baskets", "Cloth Pegs/Clips", "Portable Drying Racks"],
             "image": "/..."
           }
         ]
@@ -208,20 +208,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Personal Care & Hygiene",
+            "items": ["Body Soaps & Washes", "Deodorants & Antiperspirants", "Oral Care", "Sanitary Products"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Hair Care",
+            "items": ["Shampoos & Conditioners", "Hair Oils & Treatments", "Styling Products", "Hair Extensions & Wigs"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Skin Care & Beauty",
+            "items": ["Body Lotions & Creams", "Facial Care", "Makeup & Beauty Products", "Fragrances"],
             "image": "/..."
           }
         ]
@@ -233,20 +233,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Baby Care Essentials",
+            "items": ["Diapers & Wipes", "Baby Lotions & Creams", "Baby Bath & Skincare"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Baby Food & Feeding",
+            "items": ["Infant Formula", "Baby Cereal & Snacks", "Feeding Accessories"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Kids' Clothing & Accessories",
+            "items": ["Baby Clothes", "Footwear & Accessories", "Kids' Toys & Educational items"],
             "image": "/..."
           }
         ]
@@ -258,20 +258,20 @@
         "categories": [
           {
             "id": "1",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Writing & Drawing Tools",
+            "items": ["Pens & Pencils", "Markers & Highlighters", "Erasers & Sharpeners"],
             "image": "/..."
           },
           {
             "id": "2",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Paper Products & Notebooks",
+            "items": ["Notebooks & Exercise Books", "Sticky Notes & Pads", "Paper Products"],
             "image": "/..."
           },
           {
             "id": "3",
-            "category": "Produce",
-            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "category": "Office Suppliers & Organizers",
+            "items": ["Binders & Folders", "Staplers & Punches", "Desk Accessories", "Calenders & Planners"],
             "image": "/..."
           }
         ]
