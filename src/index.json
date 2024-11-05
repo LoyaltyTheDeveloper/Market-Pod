@@ -2,8 +2,34 @@
     "dropdowns": [
       {
         "id": "1",
-        "image": "../assets/Vector.svg",
+        "image": "./src/assets/Vector.svg",
         "name": "Produce",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "./src/dropdown/Rectangle 45.svg"
+          },
+          {
+            "id": "2",
+            "category": "Fruit",
+            "items": ["Apples", "Oranges", "Bananas", "Watermelons", "Coconuts", "Strawberry", "Avocados", "Grapes"],
+            "image": "./src/dropdown/Rectangle 46.svg"
+          },
+          {
+            "id": "3",
+            "category": "Vegetable",
+            "items": ["Carrots", "Cabbage", "Cucumber", "Pepper", "Spinach", "Tomatoes", "Okro", "Lettuce"],
+            "image": "./src/dropdown/tomato.svg"
+          }
+        ]
+      },
+
+      {
+        "id": "2",
+        "image": "./src/assets/meat.svg",
+        "name": "Meat & Seafood",
         "categories": [
           {
             "id": "1",
@@ -25,11 +51,210 @@
           }
         ]
       },
-
       {
-        "id": "1",
-        "image": "./src/shops/HappinessGoods.svg",
-        "name": "Happiness Goods & Store",
+        "id": "3",
+        "image": "./src/assets/milk.svg",
+        "name": "Dairy & Eggs",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "image": "./src/assets/spice.svg",
+        "name": "Herbs & Spice",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "image": "./src/assets/oil.svg",
+        "name": "Oil & Vinegar",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "image": "./src/assets/bread.svg",
+        "name": "Beverage & Packed Foods",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "image": "./src/assets/plastic bottle.svg",
+        "name": "Plasticware & Bags",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "image": "./src/assets/laundry.svg",
+        "name": "Laundry",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      }
+      ,{
+        "id": "9",
+        "image": "./src/assets/beauty.svg",
+        "name": "Health & Beauty",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "image": "./src/assets/toy.svg",
+        "name": "Baby & Kids",
+        "categories": [
+          {
+            "id": "1",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "2",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          },
+          {
+            "id": "3",
+            "category": "Produce",
+            "items": ["Rice", "Yam", "Potato", "Beans", "Semovita", "Elubo", "Garri"],
+            "image": "/..."
+          }
+        ]
+      },
+      {
+        "id": "11",
+        "image": "./src/assets/stationery.svg",
+        "name": "Stationery",
         "categories": [
           {
             "id": "1",

@@ -24,7 +24,6 @@ function ConfirmEmail() {
 
       const handleKeyDown = (e, index) => {
         if (e.key === "Backspace" && otp[index] === "") {
-          // Move to the previous input field
           if (index > 0) {
             inputRefs.current[index - 1].focus();
           }

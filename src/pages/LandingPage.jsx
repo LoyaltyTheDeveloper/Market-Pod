@@ -1,31 +1,32 @@
 import React from 'react';
-import produce from '../assets/Vector.svg';
-import meat from '../assets/meat.svg';
-import milk from '../assets/milk.svg';
-import spice from '../assets/spice.svg';
-import oil from '../assets/oil.svg';
-import bread from '../assets/bread.svg';
-import plastic from '../assets/plastic bottle.svg';
-import laundry from '../assets/laundry.svg';
-import beauty from '../assets/beauty.svg';
-import toy from '../assets/toy.svg';
-import stationery from '../assets/stationery.svg';
 import Navbar from '../Components/Navbar';
 import { RiSearchLine } from "react-icons/ri";
 import Footer from '../Components/Footer';
-import marketData from '../index.json';
 import { useState, useEffect } from 'react';
 import { LuClock5 } from "react-icons/lu";
 import "../index.css"
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
+import dropdownData from '../index.json'
 
 
 
 function LandingPage() {
 
   const [marketss, setMarketss] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedDropdown, setSelectedCategory] = useState(null);
+
+  const openModal = (category) => {
+    setSelectedCategory(category);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedCategory(null);
+  };
 
   useEffect(() => {
     fetch('https://test.tonyicon.com.ng/site/getData')
@@ -37,64 +38,91 @@ function LandingPage() {
   return (<>
   <Navbar/>
   <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
-  <div className="h-[70px] flex flex-row px-[20px] lg:space-x-[100px] mt-[130px] justify-center items-center">
 
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={produce} className="size-[20px]"/>
-      <p className="text-[12px]">Produce</p>
+<div className="App">
+      {/* Main Dropdown Display */}
+      <div className="h-[70px] flex flex-row px-[20px] lg:space-x-[100px] mt-[130px] justify-center items-center">
+        {dropdownData.dropdowns && dropdownData.dropdowns.length > 0 ? (
+          dropdownData.dropdowns.map((item) => (
+            <div
+              key={item.id}
+              className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center cursor-pointer"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="size-[20px]"
+                onClick={() => openModal(item)} // Opens modal on image click
+              />
+              <p className="text-[12px] whitespace-nowrap">{item.name}</p>
+            </div>
+          ))
+        ) : (
+          <p>No items to display</p>
+        )}
+      </div>
+
+      {/* Modal */}
+      {selectedDropdown && (
+        <div
+          className="fixed z-50 inset-0 lg:pb-[80px] bg-black bg-opacity-50 flex items-center justify-center"
+          onClick={closeModal} // Close modal when clicking outside
+        >
+          <div
+            className="bg-white w-[75%] lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+          >
+            {/* <h2 className="text-2xl font-bold mb-6">{selectedDropdown.name}</h2> */}
+
+            {/* Display categories in modal */}
+            <div className="flex flex-col justify-center lg:flex-row">
+              {selectedDropdown.categories.map((category, index) => (
+                <div key={category.id} className="flex items-start gap-1 lg:gap-x-[50px]">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-4">{category.category}</h3>
+
+                    {/* Display items in two columns */}
+                   
+                    <div className="grid grid-cols-2 gap-y-4 lg:gap-x-[10px] mb-4">
+                      {category.items.map((item, itemIndex) => (
+                        <span key={itemIndex} className="text-gray-700">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                   
+
+                  </div>
+
+                  {/* Category image */}
+                  <div>
+                    <img
+                      src={category.image}
+                      alt={category.category}
+                      className="w-24 h-24 object-cover"
+                    />
+                  </div>
+
+                  {/* Vertical line, except after the last category */}
+                  {index < selectedDropdown.categories.length - 1 && (
+                    <div className="hidden lg:flex h-[200px] ml-[10px] mr-[10px] border-l border-gray-300 lg:flex justify-between px-[30px]"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Close button */}
+            {/* <button
+              onClick={closeModal}
+              className="mt-6 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            >
+              Close
+            </button> */}
+          </div>
+        </div>
+      )}
     </div>
 
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={meat} className="size-[20px]"/>
-      <p className="text-[12px] whitespace-nowrap">Meat & Seafood</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={milk} className="size-[20px]"/>
-      <p className="text-[12px] whitespace-nowrap">Dairy & Eggs</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={spice} className="size-[20px]"/>
-      <p className="text-[12px] whitespace-nowrap">Herbs & Spice</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={oil} className="size-[20px]"/>
-      <p className="text-[12px] whitespace-nowrap">Oil & Vinegar</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={bread} className="size-[20px]"/>
-      <p className="text-[12px] whitespace-nowrap">Beverage & Packed Foods</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={plastic} className="size-[20px]"/>
-      <p className="text-[12px] whitespace-nowrap">Plasticware & Bags</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[18px] text-[grey] flex flex-col items-center">
-      <img src={laundry} className="size-[59px]"/>
-      <p className="text-[12px] whitespace-nowrap">Laundry</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[24px] text-[grey] flex flex-col items-center">
-      <img src={beauty} className="size-[59px]"/>
-      <p className="text-[12px] whitespace-nowrap">Health & Beauty</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={toy} className="size-[59px]"/>
-      <p className="text-[12px] whitespace-nowrap">Baby & Kids</p>
-    </div>
-
-    <div className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center">
-      <img src={stationery} className="size-[59px]"/>
-      <p className="text-[12px] whitespace-nowrap">Stationery</p>
-    </div>
-
-    </div>
     
     <div className="flex justify-center mt-[-70px] lg:hidden">
     <div className="flex flex-row items-center">
@@ -109,8 +137,6 @@ function LandingPage() {
     <div>
 
   
-
-
 <div className="mt-[30px]">
   {marketss?.length > 0 ? (
     marketss.map((market) => (
