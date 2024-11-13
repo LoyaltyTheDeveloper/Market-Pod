@@ -35,7 +35,7 @@ function App() {
         <Route path="/faq" element={<FAQ/>}/>
         <Route path="/service" element={<ServiceCharge/>}/>
         <Route path="/aboutus" element={<AboutUs/>}/>
-        <Route path="/storelist" element={<StoreList/>}/>
+        <Route path="/site/getStores/:marketId" element={<StoreList/>}/>
         
       </Routes>
     </Router>

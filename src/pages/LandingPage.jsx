@@ -9,14 +9,16 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import dropdownData from '../index.json'
+import { useNavigate } from 'react-router-dom';
 
 
 
-function LandingPage() {
+function LandingPage({ markets }) {
 
   const [marketss, setMarketss] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDropdown, setSelectedCategory] = useState(null);
+  const navigate = useNavigate();
 
   const openModal = (category) => {
     setSelectedCategory(category);
@@ -32,7 +34,7 @@ function LandingPage() {
     fetch('https://test.tonyicon.com.ng/site/getData')
     .then((response) => response.json())
     .then((data) => setMarketss(data.markets))
-    .catch((error) => console.error('Error fetching comments', error))
+    .catch((error) => console.error(error))
 }, [])
 
   return (<>
@@ -98,8 +100,7 @@ function LandingPage() {
                   <div>
                     <img
                       src={category.image}
-                      alt={category.category}
-                      className="w-24 h-24 object-cover"
+                      className="w-12 h-12 object-cover"
                     />
                   </div>
 
@@ -144,7 +145,7 @@ function LandingPage() {
         </div>
 
         <div className="flex items-center gap-x-[20px] absolute right-[30px]">
-         <Link to=""> View all</Link>
+         <button onClick ={() => navigate(`/site/getStores/${market.id}`)}> View all</button>
         <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
         <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
         </div>

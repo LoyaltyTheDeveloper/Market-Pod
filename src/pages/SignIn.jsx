@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import pod from '../assets/Podlogo.svg';
 import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
@@ -7,6 +7,62 @@ import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 
 function SignIn() {
+  const [email, setEmail] = useState('');
+  const [pswd, setPassword] = useState('');
+
+  const handleSignin = (e) => {
+
+    e.preventDefault();
+    if (email === '' || pswd === '') {
+        alert('All fields are required', { 
+            autoClose: 2000, 
+          });
+        return;
+    }
+
+  const formData = {
+    userName, 
+    pswd
+  };
+
+  fetch('https://test.tonyicon.com.ng/user/signin', { 
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+  .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            localStorage.setItem('user', JSON.stringify(data))
+            dispatch({type: 'SIGNIN', payload: data})
+            toast.success(data.message, { 
+              autoClose: 2000, 
+            });
+            setIsLoading(false);
+              history.push('/homepage');
+          } else {
+            dispatch({type: 'LOGOUT'})
+            toast.error(data.message, {
+              autoClose: 2000,
+            });
+            setIsLoading(false);
+            return;
+          }
+        })
+        .catch((error) => {
+          toast.error("An error occurred. Please try again", {
+            autoClose: 2000,
+          });
+          setIsLoading(false);
+            console.error('Error:', error);
+          });
+
+  }
+  
+
   return (<>
     <div className="h-screen bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url(${background})`, height: "800px"}}>
   <div className="flex justify-center pt-[40px]">
@@ -22,6 +78,8 @@ function SignIn() {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
               required
@@ -32,6 +90,8 @@ function SignIn() {
             <input
               type="password"
               id="password"
+              value={pswd}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
               required
@@ -40,6 +100,7 @@ function SignIn() {
           <div className="flex items-center justify-between">
             <button
               type="submit"
+              onClick={handleSignin}
               className="bg-[#31603D] hover:bg-[green] text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
             >
               Proceed
