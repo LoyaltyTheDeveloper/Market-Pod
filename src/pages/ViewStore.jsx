@@ -41,7 +41,7 @@ function ViewStore() {
    {/* Body */}
     <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px]">
 
-        <div className="flex flex-col lg:flex-row gap-[50px] lg:mt-[-40px]">
+        <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-40px]">
         {/* <div>
 
         <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px]">
@@ -111,9 +111,9 @@ function ViewStore() {
 <div>
     {store && (
       <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px]">
-        <div className="flex lg:flex-col">
-          <div>
-            <img src={store.image} alt={store.name} />
+        <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[20px] lg:px-[0px]">
+          <div className="h-[100px] w-[25%] lg:size-[150px] lg:w-[70%]">
+            <img className="h-full object-cover rounded-[5px]" src={store.image}/>
           </div>
           <div className="w-[270px] flex flex-col gap-[5px]">
             <div>
@@ -161,7 +161,7 @@ function ViewStore() {
 
                 
 
-                <div className="flex flex-wrap gap-[15px] justify-center lg:justify-start">
+                <div className="flex grid grid-cols-2 lg:flex lg:flex-wrap gap-[15px] justify-center lg:justify-start">
 
 
                 <div className="flex flex-col gap-y-[10px] bg-[white] px-[15px] py-[20px] h-[auto]">
@@ -215,7 +215,10 @@ function ViewStore() {
                 <div className="flex flex-col gap-y-[10px] bg-[white] px-[15px] py-[20px] h-[auto]">
                 <div className="flex">
                     <img src={pod} className=""/>
-                    <div className="absolute ml-[140px] mt-[30px] border bg-[#31603D] rounded-full p-[9px]"><FaPlus className="text-[white]"/></div>
+
+                    <div className="absolute group ml-[140px] mt-[30px] border bg-[#31603D] rounded-full p-[9px] group"><FaPlus className="text-[white]"/></div>
+
+                    
                 </div>
                 <div className="w-[150px] text-[14px] lg:text-[16px] font-semibold">MAMA GOLD THAI RICE - 25kg</div>
                 <div className="text-[14px] lg:text-[15px]">Long grain rice (1 Bag)</div>

@@ -104,7 +104,7 @@ function Navbar() {
 
         </div>
 
-        <div className="absolute right-[50px] flex flex-row gap-x-[30px] items-center">
+        <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center">
          <div className="flex flex-col items-center lg:hidden">
             <div><PiNotepadBold className="size-[20px]"/></div>
          </div>

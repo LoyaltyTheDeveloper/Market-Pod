@@ -74,12 +74,12 @@ function StoreList() {
             {market.stores.map((store) => (
               <div
                 key={store.id}
-                
+                onClick ={() => navigate(`/site/getStore/${store.id}`)}
                 className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
               >
             
                 <div>
-                  <div className="h-[150px]" onClick ={() => navigate(`/site/getStore/${store.id}`)}>
+                  <div className="h-[150px]">
                   <img
                     src={store.image}
                     alt={store.name}
