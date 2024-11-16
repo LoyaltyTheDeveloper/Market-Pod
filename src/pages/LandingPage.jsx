@@ -74,7 +74,6 @@ function LandingPage({ markets }) {
             className="bg-white w-[75%] lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
-            {/* <h2 className="text-2xl font-bold mb-6">{selectedDropdown.name}</h2> */}
 
             {/* Display categories in modal */}
             <div className="flex flex-col justify-center lg:flex-row">
@@ -128,6 +127,7 @@ function LandingPage({ markets }) {
       />
          </div>
     </div>
+    
     <div>
 
   
@@ -138,14 +138,14 @@ function LandingPage({ markets }) {
       
       <div className="flex items-center">
         <div>
-        <div className="font-bold text-[25px] lg:text-[30px] ml-[20px]">{market.name}</div>
-        <div className="w-[270px] lg:w-[100%] md:w-[100%] flex flex-wrap ml-[20px]">
+        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px]">{market.name}</div>
+        <div className="w-[270px] lg:w-[100%] md:w-[100%] text-[14px] lg:text-[16px] flex flex-wrap ml-[20px]">
           {market.addr}
         </div>
         </div>
 
         <div className="flex items-center gap-x-[20px] absolute right-[30px]">
-         <button onClick ={() => navigate(`/site/getStores/${market.id}`)}> View all</button>
+         <button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>
         <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
         <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
         </div>
@@ -158,14 +158,14 @@ function LandingPage({ markets }) {
             {market.stores.map((store) => (
               <div
                 key={store.id}
-                className="flex flex-col bg-[white] shadow-md border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
+                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
               >
             
                 <div>
                   <div className="h-[150px]">
                   <img
                     src={store.image}
-                    alt={store.name}
+                    // alt={store.name}
                     className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
                   />
                   </div>

@@ -191,7 +191,7 @@
             "id": "2",
             "category": "Fabric Care Products",
             "items": ["Fabric Softners", "Fabric Freshners", "Bleaches & Stain Removers"],
-            "image": "./src/dropdown/bleach.svg"
+            "image": "./src/dropdown/bleaches.svg"
           },
           {
             "id": "3",

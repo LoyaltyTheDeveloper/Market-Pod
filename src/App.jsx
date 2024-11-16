@@ -15,6 +15,7 @@ import FAQ from './pages/FAQ';
 import ServiceCharge from './pages/ServiceCharge';
 import AboutUs from './pages/AboutUs';
 import StoreList from './pages/StoreList';
+import ViewStore from './pages/ViewStore';
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
         <Route path="/faq" element={<FAQ/>}/>
         <Route path="/service" element={<ServiceCharge/>}/>
         <Route path="/aboutus" element={<AboutUs/>}/>
-        <Route path="/site/getStores/:marketId" element={<StoreList/>}/>
+        <Route path="/site/getStore/:storeId" element={<ViewStore/>}/>
+        <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
         
       </Routes>
     </Router>

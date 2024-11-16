@@ -5,13 +5,16 @@ import Navbar from "../Components/Navbar";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BiHomeAlt2 } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
 import { MdOutlineArrowForwardIos } from "react-icons/md";
-import { MdOutlineArrowBackIos } from "react-icons/md";
 
 
 function StoreList() {
-  const { marketId } = useParams();
+  const { marketId, marketName, marketAddr } = useParams();
   const [market, setMarket] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://test.tonyicon.com.ng/site/getStores/${marketId}`)
@@ -24,41 +27,59 @@ function StoreList() {
   return (<>
   <Navbar/>
   <div className="pt-[100px] min-h-screen bg-[#F9F9F9] overflow-x-hidden">
-    <div className="flex flex-row gap-x-[60px] items-center pl-[20px] lg:pl-[40px] pt-[40px]">
+    <div className="flex flex-row gap-x-[60px] items-center pt-[40px] justify-center lg:flex lg:justify-start">
         
 
 <div>
       {market ? (
         <>
           <div key={market.id} className="flex flex-col mb-[30px]">
+
+           <div className="flex items-center">
+          <div className="flex items-center mb-[40px] mt-[40px]">
+        <div className="flex flex-col absolute left-0">
+        <div className="font-bold text-[25px] text-[21px] lg:text-[30px] ml-[20px]">{marketName}</div>
+        <div className="w-[270px] lg:w-[100%] md:w-[100%] flex flex-wrap ml-[20px] text-[14px] lg:text-[16px]">
+          {marketAddr}
+        </div>
+
+        </div>
+        </div>
       
       <div className="flex items-center">
         <div>
-        <div className="font-bold text-[25px] lg:text-[30px] ml-[20px]">{market.name}</div>
+        <div className="font-bold text-[25px] text-[21px] lg:text-[30px] ml-[20px]">{market.name}</div>
         <div className="w-[270px] lg:w-[100%] md:w-[100%] flex flex-wrap ml-[20px]">
           {market.addr}
         </div>
         </div>
 
         <div className="flex items-center gap-x-[20px] absolute right-[30px]">
-         {/* <Link to=""> View all</Link> */}
-        {/* <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
-        <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div> */}
+
+        <button className="hidden lg:flex" onClick ={() => navigate("/")}>
+          <div className="flex items-center gap-[5px] border rounded-[20px] py-[4px] px-[13px] border-[#31603D]">
+          <div><BiHomeAlt2 className="text-[#31603D]"/></div>
+          <div className="text-[14px] text-[#31603D]">Home</div>
+          </div>
+        </button>
         </div>
+        </div>
+
         </div>
 
         <div className="mt-[5px] pt-[20px] flex lg:flex justify-start">
 
-        <div className="flex overflow-x-scroll scrollbar-hide whitespace-nowrap space-x-4 p-4 lg:flex justify-start">
-          <div className="flex gap-[20px] lg:flex-row justify-center lg:flex justify-start">
+        <div className="flex justify-center whitespace-nowrap space-x-4 p-4 lg:flex lg:justify-start">
+          <div className="flex flex-col gap-[20px] lg:flex-row justify-center">
             {market.stores.map((store) => (
               <div
                 key={store.id}
-                className="flex flex-col bg-[white] shadow-md border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
+                
+                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
               >
             
                 <div>
-                  <div className="h-[150px]">
+                  <div className="h-[150px]" onClick ={() => navigate(`/site/getStore/${store.id}`)}>
                   <img
                     src={store.image}
                     alt={store.name}
@@ -101,10 +122,24 @@ function StoreList() {
         </>
       ) : (
         <p>Loading...</p>
-      )}
+       )}
     </div>
 
     </div>
+
+    <div className="flex mb-[20px] text-[white] lg:justify-center border border-[transparent] mx-[5%] lg:mx-[1%] bg-[#31603D] py-[15px] rounded-[5px]">
+
+      <div className="flex items-center">
+      <div className="flex lg:flex lg:justify-center text-[15px] ml-[10px]">Didn’t Find What You’re looking for here ?</div>
+
+      <div className="flex absolute right-[40px] lg:right-[50px] items-center">
+      <div className="text-[15px]"><button> Next Market </button></div>
+      <div className="lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
+      </div>
+
+      </div>
+    </div>
+
   </div>
   </>)
 }

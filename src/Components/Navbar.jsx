@@ -19,11 +19,13 @@ import beauty from '../assets/beauty.svg';
 import toy from '../assets/toy.svg';
 import stationery from '../assets/stationery.svg';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
+  const navigate = useNavigate();
 
 
   const openModal = () => setIsModal(true);
@@ -52,7 +54,7 @@ function Navbar() {
           <div className="flex items-center">
 
           <div className="ml-[-20px] flex justify-center lg:ml-[-10px]">
-           <img src={pod} className="size-[150px]"/>
+           <img src={pod} onClick ={() => navigate("/")} className="size-[150px]"/>
          </div>
          <div className="h-[50px] ml-[25px] hidden border-l border-gray-300 lg:flex justify-between"></div>
 
@@ -80,7 +82,7 @@ function Navbar() {
          <div className="hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Account</div>
           <div className="flex flex-row items-center gap-[7px]">
-            <div><MdPersonOutline className="size-[16px]"/></div>
+            <div><MdPersonOutline className="size-[20px]"/></div>
             <Link to="/signin"><div className="text-[13px] text-[#31603D] font-bold underline">Login</div></Link>
             <div>or</div>
             <Link to="/signup"><div className="text-[13px] text-[#31603D] font-bold underline">Create Account</div></Link>
@@ -89,13 +91,13 @@ function Navbar() {
 
          <div className="flex flex-col items-center hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Orders</div>
-            <div><PiNotepadBold className="size-[16px]"/></div>
+            <div><PiNotepadBold className="size-[20px]"/></div>
          </div>
 
          <div className="hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Cart</div>
           <div className="flex flex-row items-center gap-[7px]">
-            <div><GrBasket className="size-[16px]"/></div>
+            <div><GrBasket className="size-[20px]"/></div>
             <div className="text-[13px] text-[#31603D] font-bold">0 Item(s)</div>
           </div>
          </div>
@@ -104,11 +106,11 @@ function Navbar() {
 
         <div className="absolute right-[50px] flex flex-row gap-x-[30px] items-center">
          <div className="flex flex-col items-center lg:hidden">
-            <div><PiNotepadBold className="size-[16px]"/></div>
+            <div><PiNotepadBold className="size-[20px]"/></div>
          </div>
 
          <div className="lg:flex flex-col lg:hidden">
-            <div><GrBasket className="size-[16px]"/></div>
+            <div><GrBasket className="size-[20px]"/></div>
          </div>
 
          <button onClick={toggleSidebar}>
