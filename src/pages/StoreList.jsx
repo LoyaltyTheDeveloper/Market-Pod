@@ -130,11 +130,13 @@ function StoreList() {
     <div className="flex mb-[20px] text-[white] lg:justify-center border border-[transparent] mx-[5%] lg:mx-[1%] bg-[#31603D] py-[15px] rounded-[5px]">
 
       <div className="flex items-center">
-      <div className="flex lg:flex lg:justify-center text-[15px] ml-[10px]">Didn’t Find What You’re looking for here ?</div>
+      <div className="flex lg:flex lg:justify-center text-[12px] lg:text-[15px] ml-[10px]">Didn’t Find What You’re looking for here ?</div>
 
-      <div className="flex absolute right-[40px] lg:right-[50px] items-center">
-      <div className="text-[15px]"><button> Next Market </button></div>
-      <div className="lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
+      <div className="flex absolute right-[27px] lg:right-[50px] items-center">
+        <div className="flex items-center">
+      <div className="text-[12px] lg:text-[15px]"><button> Next Market </button></div>
+      <div className="lg:flex"><MdOutlineArrowForwardIos className="size-[19px] lg:size-[30px]"/></div>
+      </div>
       </div>
 
       </div>
