@@ -1,7 +1,7 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 
 const initialState = {
-  user: null,
+  // user: null,
   token: null,
   isAuthenticated: false,
 };
@@ -30,6 +30,13 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  useEffect(() =>{
+    const tokenExists = JSON.parse(localStorage.getItem('user'))
+    if(tokenExists){
+      dispatch({type: 'SIGN_IN', payload: tokenExists})
+    }
+  })
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
