@@ -44,17 +44,17 @@ function Navbar() {
   };
 
   const categories = [
-    { id: 1, name: 'Produce', image: produce, items: ['Fruits', 'Vegetables'] },
-    { id: 2, name: 'Meat & Seafood', image: meat, items: ['Beef', 'Fish'] },
-    { id: 3, name: 'Dairy & Eggs', image: milk, items: ['Milk', 'Eggs'] },
-    { id: 4, name: 'Herbs & Spice', image: spice, items: ['Salt', 'Pepper'] },
-    { id: 5, name: 'Oil and Vinegar', image: plastic, items: ['Cooking Oil', 'Vinegar'] },
-    { id: 6, name: 'Beverage & Packed Foods', image: bread, items: ['Juice', 'Snacks'] },
-    { id: 7, name: 'Plasticware & Bags', image: oil, items: ['Bags', 'Containers'] },
-    { id: 8, name: 'Laundry', image: laundry, items: ['Detergent', 'Softener'] },
-    { id: 9, name: 'Health & Beauty', image: beauty, items: ['Skincare', 'Makeup'] },
-    { id: 10, name: 'Baby & Kids', image: toy, items: ['Toys', 'Baby Food'] },
-    { id: 11, name: 'Stationery', image: stationery, items: ['Pens', 'Notebooks'] },
+    { id: 1, name: 'Produce', image: produce, items: ['Produce', 'Fruit', 'Vegetable'] },
+    { id: 2, name: 'Meat & Seafood', image: meat, items: ['Meat', 'Poultry', 'Seafood'] },
+    { id: 3, name: 'Dairy & Eggs', image: milk, items: ['Diary Products', 'Eggs', 'Dairy Alternatives'] },
+    { id: 4, name: 'Herbs & Spice', image: spice, items: ['Fresh & Dried Herbs', 'Spices & Seeds', 'Seasoning & Blends'] },
+    { id: 5, name: 'Oil and Vinegar', image: plastic, items: ['Cooking Oils', 'Infused Oils', 'Vinegars'] },
+    { id: 6, name: 'Beverage & Packed Foods', image: bread, items: ['Beverage', 'Packaged Foods', 'Snacks'] },
+    { id: 7, name: 'Plasticware & Bags', image: oil, items: ['Plastiware', 'Plastic Bags', 'Special Plasticware'] },
+    { id: 8, name: 'Laundry', image: laundry, items: ['Detergents & Soaps', 'Fabric Care Products', 'Laundry Accessories'] },
+    { id: 9, name: 'Health & Beauty', image: beauty, items: ['Personal Care & Hygiene', 'Hair Care', 'Skin Care & Beauty'] },
+    { id: 10, name: 'Baby & Kids', image: toy, items: ['Baby Care Essentials', 'Baby Food & Feeding', 'Kids Clothing & Accessories'] },
+    { id: 11, name: 'Stationery', image: stationery, items: ['Writing & Drawing Tools', 'Office Suppliers & Organizers'] },
   ];
 
   useEffect(() => {
@@ -282,7 +282,7 @@ function Navbar() {
           </div> */}
 
           <div className="p-4">
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-[20px]">
           {categories.map((category) => (
             <div key={category.id} className="flex flex-col gap-y-2">
               <div
@@ -293,15 +293,18 @@ function Navbar() {
                 <span className="text-[16px]">{category.name}</span>
                 <IoIosArrowDown
                   className={`transition-transform ${
-                    expandedCategory === category.id ? 'rotate-180' : 'rotate-0'
+                    expandedCategory === category.id ? 'rotate-0' : 'rotate-0'
                   }`}
                 />
               </div>
               {expandedCategory === category.id && (
-                <div className="pl-8">
+                <div className="pl-[50px]">
                   {category.items.map((item, index) => (
                     <p key={index} className="text-[14px] text-gray-600">
+                      <div className="flex flex-row gap-x-[10px]">
                       {item}
+                      
+                      </div>
                     </p>
                   ))}
                 </div>
@@ -311,7 +314,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center mt-[50px]">
+      <div className="flex items-center justify-center mt-[10px]">
           <hr className="w-[50%] border-t border-gray-300" />
           <hr className="w-[50%] border-t border-gray-300" />
           </div>

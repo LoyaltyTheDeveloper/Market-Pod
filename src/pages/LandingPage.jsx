@@ -87,7 +87,7 @@ function LandingPage({ markets }) {
         //   onClick={closeModal} // Close modal when clicking outside
         // >
           <div
-            className="bg-white w-[75%] lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
+            className="bg-white w-[75%] absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
             // onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
 

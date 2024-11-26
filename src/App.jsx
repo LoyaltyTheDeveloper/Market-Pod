@@ -18,6 +18,8 @@ import StoreList from './pages/StoreList';
 import ViewStore from './pages/ViewStore';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -42,8 +44,8 @@ function App() {
         <Route path="/productdetail" element={<ProductDetail/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
-        
       </Routes>
+      <ToastContainer />
     </Router>
     </>
   )

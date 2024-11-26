@@ -7,18 +7,20 @@ import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [pswd, setPassword] = useState('');
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isPending, setIsPending] = useState(false);
 
   const handleSignin = (e) => {
 
     e.preventDefault();
     if (email === '' || pswd === '') {
-      alert('All fields are required');
+      toast.error('All fields are required', {autoClose: 1000});
         return;
     }
 
@@ -42,10 +44,12 @@ function SignIn() {
               type: 'SIGN_IN',
               payload: { token: data.token },
             });
-            alert(data.message);
+            toast.success(data.message, { 
+              autoClose: 2000, 
+            });
             navigate('/');
           } else {
-            alert(data.message);
+            toast.error(data.message, {autoClose: 2000});
             return;
           }
         })
@@ -90,7 +94,8 @@ function SignIn() {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+
+          {!isPending &&<div className="flex items-center justify-between">
             <button
               type="submit"
               onClick={handleSignin}
@@ -98,7 +103,17 @@ function SignIn() {
             >
               Proceed
             </button>
-          </div>
+          </div>}
+
+          {isPending &&<div className="flex items-center justify-between">
+            <button
+            disabled
+              className="bg-[#31603D] opacity-[80%] text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
+            >
+              Loading...
+            </button>
+          </div>}
+
         </form>
         <div className="pt-[20px] text-[#31603D] flex flex-row gap-[10px] underline font-bold">
         <Link to="/recoverpassword"><p>Recover Password</p></Link>
