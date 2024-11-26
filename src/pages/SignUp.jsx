@@ -1,32 +1,34 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import pod from '../assets/Podlogo.svg';
 import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
 import { LiaKeySolid } from "react-icons/lia";
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/Context.jsx';
+import { useNavigate } from 'react-router-dom';
+
 
 function SignUp() {
   const [email, setEmail] = useState('');
   const [pswd, setPassword] = useState('');
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignup = (e) => {
 
     e.preventDefault();
     if (email === '' || pswd === '') {
-        alert('All fields are required', { 
-            autoClose: 2000, 
-          });
+        alert('All fields are required');
         return;
     }
 
     const formData = {
-      userName, 
+      email,
       pswd
     };
 
     fetch('https://test.tonyicon.com.ng/user/signup', {
-      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,27 +37,19 @@ function SignUp() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          localStorage.setItem('user', JSON.stringify(data))
-          dispatch({type: 'SIGNUP', payload: data})
-          toast.success(data.message, { 
-              autoClose: 2000, 
-            });
-            setIsLoading(false);
-              history.push('/signin');
+        if (data.status === true) {
+          // dispatch({
+          //   type: 'SIGN_UP',
+          //   payload: { user: data.user },
+          // });
+          alert(data.message);
+          navigate('/signin');
         } else {
-          toast.error(data.message, { 
-              autoClose: 2000, 
-            });
-            setIsLoading(false);
+          alert(data.message);
             return;
         }
       })
       .catch((error) => {
-        toast.error('An error occurred. Please try again.', { 
-          autoClose: 2000, 
-        });
-        setIsLoading(false);
         console.error('Error:', error);
       });
 

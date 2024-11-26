@@ -16,6 +16,8 @@ import ServiceCharge from './pages/ServiceCharge';
 import AboutUs from './pages/AboutUs';
 import StoreList from './pages/StoreList';
 import ViewStore from './pages/ViewStore';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
         <Route path="/service" element={<ServiceCharge/>}/>
         <Route path="/aboutus" element={<AboutUs/>}/>
         <Route path="/site/getStore/:storeId" element={<ViewStore/>}/>
+        <Route path="/productdetail" element={<ProductDetail/>}/>
+        <Route path="/cart" element={<Cart/>}/>
         <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
         
       </Routes>

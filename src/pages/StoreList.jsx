@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { BiHomeAlt2 } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineArrowForwardIos } from "react-icons/md";
+import Footer from '../Components/Footer';
 
 
 function StoreList() {
@@ -143,6 +144,7 @@ function StoreList() {
     </div>
 
   </div>
+  <Footer/>
   </>)
 }
 

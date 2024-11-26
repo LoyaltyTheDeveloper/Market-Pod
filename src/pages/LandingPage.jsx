@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../Components/Navbar';
 import { RiSearchLine } from "react-icons/ri";
 import Footer from '../Components/Footer';
@@ -10,6 +10,7 @@ import { MdOutlineArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import dropdownData from '../index.json'
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/Context.jsx';
 
 
 
@@ -18,17 +19,26 @@ function LandingPage({ markets }) {
   const [marketss, setMarketss] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDropdown, setSelectedCategory] = useState(null);
+  const { state } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const openModal = (category) => {
     setSelectedCategory(category);
     setModalOpen(true);
   };
+  
 
   const closeModal = () => {
     setModalOpen(false);
     setSelectedCategory(null);
   };
+
+  const Logout = () => {
+    localStorage.removeItem('user');
+    navigate('/signin');
+   dispatch({type: 'LOG_OUT', payload: {token: null}})
+   alert("logged out");
+   }
 
   useEffect(() => {
     fetch('https://test.tonyicon.com.ng/site/getData')
@@ -40,21 +50,26 @@ function LandingPage({ markets }) {
   return (<>
   <Navbar/>
   <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
-
+          
 <div className="App">
       {/* Main Dropdown Display */}
+      
       <div className="h-[70px] flex flex-row px-[20px] lg:space-x-[100px] mt-[130px] justify-center items-center">
         {dropdownData.dropdowns && dropdownData.dropdowns.length > 0 ? (
           dropdownData.dropdowns.map((item) => (
             <div
               key={item.id}
               className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center cursor-pointer"
+              // onMouseLeave={() => closeModal()}
+              onMouseOver={() => openModal(item)}
+              onMouseLeave={() => closeModal()}
             >
               <img
                 src={item.image}
                 alt={item.name}
                 className="size-[20px]"
-                onClick={() => openModal(item)} // Opens modal on image click
+                // onMouseEnter={() => openModal(item)}
+                // onMouseLeave={() => closeModal()} // closes modal on image leave
               />
               <p className="text-[12px] whitespace-nowrap">{item.name}</p>
             </div>
@@ -64,15 +79,16 @@ function LandingPage({ markets }) {
         )}
       </div>
 
+
       {/* Modal */}
       {selectedDropdown && (
-        <div
-          className="fixed z-50 inset-0 lg:pb-[80px] bg-black bg-opacity-50 flex items-center justify-center"
-          onClick={closeModal} // Close modal when clicking outside
-        >
+        // <div
+        //   className="fixed z-50 inset-0 lg:pb-[80px] flex items-center justify-center"
+        //   onClick={closeModal} // Close modal when clicking outside
+        // >
           <div
             className="bg-white w-[75%] lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+            // onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
 
             {/* Display categories in modal */}
@@ -112,7 +128,7 @@ function LandingPage({ markets }) {
             </div>
 
           </div>
-        </div>
+
       )}
     </div>
 
@@ -130,7 +146,9 @@ function LandingPage({ markets }) {
     
     <div>
 
-  
+    {/* <button className="text-[30px]" onClick={Logout}>Logout</button> */}
+    
+
 <div className="mt-[30px]">
   {marketss?.length > 0 ? (
     marketss.map((market) => (
@@ -145,7 +163,8 @@ function LandingPage({ markets }) {
         </div>
 
         <div className="flex items-center gap-x-[20px] absolute right-[30px]">
-         <button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>
+         {state.token &&<button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>}
+         {!state.token &&<button className="text-[#31603D]" onClick ={() => navigate('/signin')}> View all</button>}
         <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
         <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
         </div>

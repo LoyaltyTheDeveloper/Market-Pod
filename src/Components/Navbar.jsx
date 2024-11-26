@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import pod from '../assets/Podlogo.svg';
 import { GrLocation } from "react-icons/gr";
 import { IoIosArrowDown } from "react-icons/io";
@@ -20,12 +20,14 @@ import toy from '../assets/toy.svg';
 import stationery from '../assets/stationery.svg';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/Context.jsx';
 
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
+  const { state } = useContext(AuthContext);
 
 
   const openModal = () => setIsModal(true);
@@ -34,6 +36,26 @@ function Navbar() {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const [expandedCategory, setExpandedCategory] = useState(null);
+
+  const toggleCategory = (category) => {
+    setExpandedCategory(expandedCategory === category ? null : category);
+  };
+
+  const categories = [
+    { id: 1, name: 'Produce', image: produce, items: ['Fruits', 'Vegetables'] },
+    { id: 2, name: 'Meat & Seafood', image: meat, items: ['Beef', 'Fish'] },
+    { id: 3, name: 'Dairy & Eggs', image: milk, items: ['Milk', 'Eggs'] },
+    { id: 4, name: 'Herbs & Spice', image: spice, items: ['Salt', 'Pepper'] },
+    { id: 5, name: 'Oil and Vinegar', image: plastic, items: ['Cooking Oil', 'Vinegar'] },
+    { id: 6, name: 'Beverage & Packed Foods', image: bread, items: ['Juice', 'Snacks'] },
+    { id: 7, name: 'Plasticware & Bags', image: oil, items: ['Bags', 'Containers'] },
+    { id: 8, name: 'Laundry', image: laundry, items: ['Detergent', 'Softener'] },
+    { id: 9, name: 'Health & Beauty', image: beauty, items: ['Skincare', 'Makeup'] },
+    { id: 10, name: 'Baby & Kids', image: toy, items: ['Toys', 'Baby Food'] },
+    { id: 11, name: 'Stationery', image: stationery, items: ['Pens', 'Notebooks'] },
+  ];
 
   useEffect(() => {
     const handleResize = () => {
@@ -89,10 +111,10 @@ function Navbar() {
           </div>
          </div>
 
-         <div className="flex flex-col items-center hidden lg:flex flex-col">
+         {state.token &&<div className="flex flex-col items-center hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Orders</div>
             <div><PiNotepadBold className="size-[20px]"/></div>
-         </div>
+         </div>}
 
          <div className="hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Cart</div>
@@ -105,9 +127,9 @@ function Navbar() {
         </div>
 
         <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center">
-         <div className="flex flex-col items-center lg:hidden">
+         {state.token &&<div className="flex flex-col items-center lg:hidden">
             <div><PiNotepadBold className="size-[20px]"/></div>
-         </div>
+         </div>}
 
          <div className="lg:flex flex-col lg:hidden">
             <div><GrBasket className="size-[20px]"/></div>
@@ -177,7 +199,7 @@ function Navbar() {
           </div>
 
 
-          <div className="flex flex-col gap-y-[25px] ml-[20px]">
+          {/* <div className="flex flex-col gap-y-[25px] ml-[20px]">
         
             <div className="flex flex-row gap-x-[18px] items-center">
               <div><img src={produce} className="size-[25px]"/></div>
@@ -257,9 +279,56 @@ function Navbar() {
             <Link to="/signup"><div className="font-bold underline text-[#31603D]">Create Account</div></Link>
           </div>
 
-          </div>
+          </div> */}
+
+          <div className="p-4">
+        <div className="flex flex-col gap-y-4">
+          {categories.map((category) => (
+            <div key={category.id} className="flex flex-col gap-y-2">
+              <div
+                className="flex items-center gap-x-3 cursor-pointer"
+                onClick={() => toggleCategory(category.id)}
+              >
+                <img src={category.image} alt={category.name} className="w-6 h-6" />
+                <span className="text-[16px]">{category.name}</span>
+                <IoIosArrowDown
+                  className={`transition-transform ${
+                    expandedCategory === category.id ? 'rotate-180' : 'rotate-0'
+                  }`}
+                />
+              </div>
+              {expandedCategory === category.id && (
+                <div className="pl-8">
+                  {category.items.map((item, index) => (
+                    <p key={index} className="text-[14px] text-gray-600">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
+
+      <div className="flex items-center justify-center mt-[50px]">
+          <hr className="w-[50%] border-t border-gray-300" />
+          <hr className="w-[50%] border-t border-gray-300" />
+          </div>
+
+          <div className="flex flex-row gap-x-[5px] items-center">
+            <div><MdPersonOutline className="size-[20px]"/></div>
+            <Link to="/signin"><div className="font-bold underline text-[#31603D]">Login</div></Link>
+            or
+            <Link to="/signup"><div className="font-bold underline text-[#31603D]">Create Account</div></Link>
+          </div>
+
+        </div>
+        
+      </div>
+
+      
+     
 
       </div>
       </div>
@@ -269,4 +338,8 @@ function Navbar() {
   )
 }
 
+
+
 export default Navbar
+
+

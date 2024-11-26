@@ -39,8 +39,8 @@ function ViewStore() {
     .catch((error) => console.error('Error fetching comments', error))
 }, [])
 
-const categoryId = products?.category_id;
-const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
+// const categoryId = products?.category_id;
+// const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
 
   return (<>
     <Navbar/>
@@ -165,11 +165,11 @@ const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
   </div>
 
 
-    <div className="flex mt-[30px] justify-center lg:justify-start">
+    <div className="flex mt-[30px] justify-center  lg:justify-start">
         <div className="">
             <div className="flex flex-col">
 
-                {/* <div className="font-bold text-[25px] lg:text-[30px]">{categoryName}</div> */}
+                <div className="font-bold text-[25px] lg:text-[30px]">{}</div>
 
                 {/* {cats.map((category) => (
   <div key={category.id} className="font-bold text-[25px] lg:text-[30px]">
@@ -227,7 +227,6 @@ const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
             <div className="flex justify-center px-[50px]">
               <img
                 src={product.image}
-                alt={product.name}
                 className="w-24 h-24 object-cover flex justify-center"
               />
               <div className="absolute group ml-[140px] lg:ml-[150px] mt-[30px] border bg-[#31603D] rounded-full p-[9px] group">
@@ -238,7 +237,7 @@ const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
               <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[16px] font-semibold">
                 {product.name}
               </div>
-              <div className="text-[12px] lg:text-[15px]">{product.subtitle}</div>
+              <div className="text-[12px] w-[150px] lg:text-[15px]">{product.subtitle}</div>
               <div className="flex">
                 <div className="font-semibold text-[12px] lg:text-[16px]">
                   NGN {product.price}
