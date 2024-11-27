@@ -20,12 +20,14 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Scroll from './Components/Scroll';
 
 function App() {
 
   return (
     <>
     <Router>
+      <Scroll/>
       <Routes>
       <Route path="/" element={<LandingPage/>}/>
         <Route path="/signup" element={<SignUp/>}/>

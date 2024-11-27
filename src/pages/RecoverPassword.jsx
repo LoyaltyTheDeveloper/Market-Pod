@@ -4,6 +4,7 @@ import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
 import { LiaKeySolid } from "react-icons/lia";
 import Footer from '../Components/Footer';
+import { Link } from 'react-router-dom';
 
 function RecoverPassword() {
   return (<>
@@ -37,11 +38,11 @@ function RecoverPassword() {
           </div>
         </form>
         <div className="mt-[20px] flex flex-row gap-[5px]">
-            <p>Remember Password?</p><p className="text-[#31603D] font-bold underline">Try logging in</p>
+            <p>Remember Password?</p><Link to="/signin"><p className="text-[#31603D] font-bold underline">Try logging in</p></Link>
           </div>
   
           <div className="mt-[130px] flex flex-row justify-center gap-[5px]">
-            <p>Don't have an account?</p><p className="text-[#31603D] underline">Create Account</p>
+            <p>Don't have an account?</p><Link to="/signup"><p className="text-[#31603D] underline">Create Account</p></Link>
           </div>
       </div>
       </div>

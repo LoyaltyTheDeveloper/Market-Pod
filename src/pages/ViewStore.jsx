@@ -8,6 +8,8 @@ import { BiHomeAlt2 } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function ViewStore() {
     const { storeId } = useParams();

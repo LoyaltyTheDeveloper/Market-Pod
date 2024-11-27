@@ -7,6 +7,7 @@ import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function SignUp() {
@@ -14,12 +15,13 @@ function SignUp() {
   const [pswd, setPassword] = useState('');
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isPending, setIsPending] = useState(false);
 
   const handleSignup = (e) => {
-
+    setIsPending(true);
     e.preventDefault();
     if (email === '' || pswd === '') {
-        alert('All fields are required');
+        toast.error('All fields are required', {autoClose: 1000});
         return;
     }
 
@@ -42,15 +44,18 @@ function SignUp() {
           //   type: 'SIGN_UP',
           //   payload: { user: data.user },
           // });
-          alert(data.message);
+          toast.success(data.message, {autoClose: 2000});
+          setIsPending(false);
           navigate('/signin');
         } else {
-          alert(data.message);
+          toast.error(data.message, {autoClose: 2000});
+          setIsPending(false);
             return;
         }
       })
       .catch((error) => {
         console.error('Error:', error);
+        setIsPending(false);
       });
 
   }
@@ -89,7 +94,7 @@ function SignUp() {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          {!isPending &&<div className="flex items-center justify-between">
             <button
               type="submit"
               onClick={handleSignup}
@@ -97,7 +102,17 @@ function SignUp() {
             >
               Proceed
             </button>
-          </div>
+          </div>}
+
+          {isPending &&<div className="flex items-center justify-between">
+            <button
+            disabled
+              className="bg-[#31603D] opacity-[80%] text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
+            >
+              Loading...
+            </button>
+          </div>}
+
         </form>
         <div className="pt-[10px] flex flex-row gap-[10px]">
             <input type="checkbox" id="checkbox" className="size-[17px]"/>

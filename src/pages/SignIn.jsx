@@ -18,6 +18,7 @@ function SignIn() {
 
   const handleSignin = (e) => {
 
+    setIsPending(true);
     e.preventDefault();
     if (email === '' || pswd === '') {
       toast.error('All fields are required', {autoClose: 1000});
@@ -47,14 +48,17 @@ function SignIn() {
             toast.success(data.message, { 
               autoClose: 2000, 
             });
+            setIsPending(false);
             navigate('/');
           } else {
             toast.error(data.message, {autoClose: 2000});
+            setIsPending(false);
             return;
           }
         })
         .catch((error) => {
           console.error('Error:', error);
+          setIsPending(false);
           });
 
   }

@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import dropdownData from '../index.json'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Context.jsx';
+import { LiaTimesSolid } from "react-icons/lia";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
 
@@ -82,13 +85,10 @@ function LandingPage({ markets }) {
 
       {/* Modal */}
       {selectedDropdown && (
-        // <div
-        //   className="fixed z-50 inset-0 lg:pb-[80px] flex items-center justify-center"
-        //   onClick={closeModal} // Close modal when clicking outside
-        // >
+        
           <div
             className="bg-white w-[75%] absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
-            // onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+            
           >
 
             {/* Display categories in modal */}
@@ -148,7 +148,6 @@ function LandingPage({ markets }) {
 
       {/* <button className="text-[30px]" onClick={Logout}>Logout</button> */}
     
-
 <div className="mt-[30px]">
   {marketss?.length > 0 ? (
     marketss.map((market) => (
@@ -156,7 +155,116 @@ function LandingPage({ markets }) {
       
       <div className="flex items-center">
         <div>
-        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px]">{market.name}</div>
+        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px]">{market.name || <Skeleton width={200} />}</div>
+        <div className="w-[270px] lg:w-[100%] md:w-[100%] text-[14px] lg:text-[16px] flex flex-wrap ml-[20px]">
+          {market.addr || <Skeleton width={250} />}
+        </div>
+        </div>
+
+        <div className="flex items-center gap-x-[20px] absolute right-[30px]">
+         {state.token &&<button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>}
+         {!state.token &&<button className="text-[#31603D]" onClick ={() => navigate('/signin')}> View all</button>}
+        <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
+        <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
+        </div>
+        </div>
+
+        <div className="mt-[5px] pt-[20px] flex lg:flex justify-start">
+
+        <div className="flex overflow-x-scroll scrollbar-hide whitespace-nowrap space-x-4 p-4 lg:flex justify-start">
+          <div className="flex gap-[20px] lg:flex-row justify-center lg:flex justify-start">
+            {market.stores.map((store) => (
+              <div
+                key={store.id}
+                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
+              >
+            
+                <div>
+                  <div className="h-[150px]">
+                  <img
+                    src={store.image}
+                    
+                    className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
+                  />
+                  </div>
+                </div>
+
+                <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
+                  <div className="text-[19px] font-bold whitespace-nowrap">
+                    {store.name || <Skeleton width={200} />}
+                  </div>
+                  <div className="flex items-center gap-x-[5px] text-[#31603D]">
+                    <div><LuClock5/></div>
+                    <div className="text-[15px]">
+                     {store.open_time && store.close_time ? `Opens ${store.open_time} - Closes ${store.close_time}` : <Skeleton width={150} />}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center mb-[15px]">
+                    {store.categories.map((category, index) => (
+                      <div className="flex items-center" key={index}>
+                        {category}
+                        {index < store.categories.length - 1 && (
+                          <div className="h-[20px] ml-[10px] mr-[10px] border-l border-gray-300 lg:flex justify-between"></div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+
+
+        </div>
+      </div>
+    ))
+  ) : (
+    Array(3)
+          .fill("")
+          .map((_, index) => (
+            <div key={index} className="flex flex-col mb-[30px] justify-center">
+              <div className="flex items-center">
+              <div className="flex flex-col">
+              <div className="flex items-center ">
+                <div>
+                  <Skeleton width={200} height={30} className="ml-[20px]"/>
+                  <Skeleton width={150} height={20} className="mt-[10px] ml-[20px]" />
+                </div>
+              </div>
+              <div className="mt-[20px] ml-[20px]">
+                <Skeleton height={150} width={360}/>
+              </div>
+              </div>
+
+              <div className="flex flex-col">
+              
+              <div className="mt-[80px] ml-[20px]">
+                <Skeleton height={150} width={360}/>
+              </div>
+              </div>
+              <div className="flex flex-col">
+              
+              <div className="mt-[80px] ml-[20px]">
+                <Skeleton height={150} width={360}/>
+              </div>
+              </div>
+              </div>
+            </div>
+          ))
+  )}
+</div>
+
+{/* <div className="mt-[30px]">
+  {marketss?.length > 0 && (
+    marketss.map((market) => (
+      <div key={market.id} className="flex flex-col mb-[30px]">
+      
+      <div className="flex items-center">
+        <div>
+        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px]">{market.name || <Skeleton width={200} />}</div>
         <div className="w-[270px] lg:w-[100%] md:w-[100%] text-[14px] lg:text-[16px] flex flex-wrap ml-[20px]">
           {market.addr}
         </div>
@@ -184,7 +292,7 @@ function LandingPage({ markets }) {
                   <div className="h-[150px]">
                   <img
                     src={store.image}
-                    // alt={store.name}
+                    
                     className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
                   />
                   </div>
@@ -197,7 +305,7 @@ function LandingPage({ markets }) {
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
                     <div><LuClock5/></div>
                     <div className="text-[15px]">
-                      Opens {store.open_time} - Closes {store.close_time}
+                     Opens ${store.open_time} - Closes ${store.close_time}
                     </div>
                   </div>
 
@@ -222,10 +330,11 @@ function LandingPage({ markets }) {
         </div>
       </div>
     ))
-  ) : (
-    <div></div>
   )}
-</div>
+</div> */}
+
+
+
 
 </div>
     </div>
