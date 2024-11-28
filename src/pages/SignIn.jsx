@@ -22,6 +22,7 @@ function SignIn() {
     e.preventDefault();
     if (email === '' || pswd === '') {
       toast.error('All fields are required', {autoClose: 1000});
+      setIsPending(false);
         return;
     }
 
