@@ -124,18 +124,18 @@ function StoreList() {
       </div>
         </>
       ) : (
-        Array(3)
+        Array(1)
           .fill("")
           .map((_, index) => (
-            <div key={index} className="flex flex-col mb-[30px] justify-center">
+            <div key={index} className="flex mb-[30px] justify-center">
               <div className="flex items-center">
               <div className="flex">
-              <div className="mt-[20px] ml-[20px]">
+              <div className="mt-[20px] lg:ml-[20px]">
                 <Skeleton height={150} width={360}/>
               </div>
               </div>
-
               </div>
+             
             </div>
           ))
        )}
