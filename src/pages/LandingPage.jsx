@@ -87,7 +87,7 @@ function LandingPage({ markets }) {
       {selectedDropdown && (
         
           <div
-            className="bg-white w-[75%] absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
+            className="bg-white w-[75%] z-50 absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
             
           >
 
@@ -146,6 +146,8 @@ function LandingPage({ markets }) {
     
     <div>
 
+      <button onClick={Logout}>Logout</button>
+
       {/* <button className="text-[30px]" onClick={Logout}>Logout</button> */}
     
 <div className="mt-[30px]">
@@ -162,8 +164,7 @@ function LandingPage({ markets }) {
         </div>
 
         <div className="flex items-center gap-x-[20px] absolute right-[30px]">
-         {state.token &&<button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>}
-         {!state.token &&<button className="text-[#31603D]" onClick ={() => navigate('/signin')}> View all</button>}
+         <button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>
         <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
         <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
         </div>
