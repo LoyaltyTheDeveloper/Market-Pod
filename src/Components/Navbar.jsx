@@ -69,9 +69,10 @@ function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  
   return (<>
    <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
-      <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px] ">
+      <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px]">
         <div className="flex justify-between h-[70px]">
           <div className="flex items-center">
 
@@ -199,88 +200,6 @@ function Navbar() {
           </div>
 
 
-          {/* <div className="flex flex-col gap-y-[25px] ml-[20px]">
-        
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={produce} className="size-[25px]"/></div>
-              <div className="text-[16px]">Produce</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={meat} className="size-[25px]"/></div>
-              <div className="text-[16px]">Meat & Seafood</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={milk} className="size-[25px]"/></div>
-              <div className="text-[16px]">Dairy & Eggs</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={spice} className="size-[25px]"/></div>
-              <div className="text-[16px]">Herbs & Spice</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={plastic} className="size-[25px]"/></div>
-              <div className="text-[16px]">Oil and Vinegar</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={bread} className="size-[25px]"/></div>
-              <div className="text-[16px]">Beverage & Packed Foods</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={oil} className="size-[25px]"/></div>
-              <div className="text-[16px]">Plasticeware & Bags</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={laundry} className="size-[25px]"/></div>
-              <div className="text-[16px]">Laundry</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={beauty} className="size-[25px]"/></div>
-              <div className="text-[16px]">Health & Beauty</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={toy} className="size-[25px]"/></div>
-              <div className="text-[16px]">Bbay & Kids</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex flex-row gap-x-[18px] items-center">
-              <div><img src={stationery} className="size-[25px]"/></div>
-              <div className="text-[16px]">Sationery</div>
-              <div><IoIosArrowDown className="size-[20px]"/></div>
-            </div>
-
-            <div className="flex items-center justify-center">
-          <hr className="w-[50%] border-t border-gray-300" />
-          <hr className="w-[50%] border-t border-gray-300" />
-          </div>
-
-          <div className="flex flex-row gap-x-[5px] items-center">
-            <div><MdPersonOutline className="size-[20px]"/></div>
-            <Link to="/signin"><div className="font-bold underline text-[#31603D]">Login</div></Link>
-            or
-            <Link to="/signup"><div className="font-bold underline text-[#31603D]">Create Account</div></Link>
-          </div>
-
-          </div> */}
-
           <div className="p-4">
         <div className="flex flex-col gap-y-[20px]">
           {categories.map((category) => (
@@ -331,7 +250,9 @@ function Navbar() {
       </div>
 
       
-     
+      
+
+
 
       </div>
       </div>

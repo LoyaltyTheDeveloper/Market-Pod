@@ -19,6 +19,9 @@ function ViewStore() {
     const [cats, setCats] = useState([]);
     const navigate = useNavigate();
 
+    const addToCart = () => {
+      alert();
+    }
 
     useEffect(() => {
         fetch(`https://test.tonyicon.com.ng/site/getStore/${storeId}`)
@@ -34,12 +37,12 @@ function ViewStore() {
       .catch((error) => console.error('Error fetching comments', error))
   }, [storeId])
 
-  useEffect(() => {
-    fetch(`https://test.tonyicon.com.ng/site/getCategories`)
-    .then((response) => response.json())
-    .then((data) => setCats(data.categories))
-    .catch((error) => console.error('Error fetching comments', error))
-}, [])
+//   useEffect(() => {
+//     fetch(`https://test.tonyicon.com.ng/site/getCategories`)
+//     .then((response) => response.json())
+//     .then((data) => setCats(data.categories))
+//     .catch((error) => console.error('Error fetching comments', error))
+// }, [])
 
 // const categoryId = products?.category_id;
 // const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
@@ -231,7 +234,7 @@ function ViewStore() {
                 src={product.image}
                 className="w-24 h-24 object-cover flex justify-center"
               />
-              <div className="absolute group ml-[140px] lg:ml-[150px] mt-[30px] border bg-[#31603D] rounded-full p-[9px] group">
+              <div onClick={addToCart} className="absolute group ml-[140px] lg:ml-[150px] mt-[30px] border bg-[#31603D] rounded-full p-[9px] group">
                 <FaPlus className="text-[white]" />
               </div>
             </div>
@@ -252,7 +255,7 @@ function ViewStore() {
           </div>
         ))
       ) : (
-        <div className="flex inset-0">No products available</div>
+        <div className="flex inset-0">Please wait...</div>
       )}
     </div>
 
