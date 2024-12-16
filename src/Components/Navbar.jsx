@@ -251,7 +251,7 @@ function Navbar() {
 
       
       
-
+     <div>Like and suscribe</div>
 
 
       </div>

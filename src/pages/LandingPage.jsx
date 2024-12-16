@@ -146,7 +146,7 @@ function LandingPage({ markets }) {
     
     <div>
 
-      <button onClick={Logout}>Logout</button>
+      {/* <button onClick={Logout}>Logout</button> */}
 
       {/* <button className="text-[30px]" onClick={Logout}>Logout</button> */}
     
