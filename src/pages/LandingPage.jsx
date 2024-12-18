@@ -54,18 +54,18 @@ function LandingPage({ markets }) {
   <Navbar/>
   <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
           
-<div className="App">
+<div onMouseLeave={() => closeModal()} className="App">
       {/* Main Dropdown Display */}
-      
       <div className="h-[70px] flex flex-row px-[20px] lg:space-x-[100px] mt-[130px] justify-center items-center">
         {dropdownData.dropdowns && dropdownData.dropdowns.length > 0 ? (
           dropdownData.dropdowns.map((item) => (
+
+          
             <div
               key={item.id}
               className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center cursor-pointer"
-              // onMouseLeave={() => closeModal()}
               onMouseOver={() => openModal(item)}
-              onMouseLeave={() => closeModal()}
+              // onMouseLeave={() => closeModal()}
             >
               <img
                 src={item.image}
@@ -78,7 +78,7 @@ function LandingPage({ markets }) {
             </div>
           ))
         ) : (
-          <p>No items to display</p>
+          <p></p>
         )}
       </div>
 
@@ -86,8 +86,7 @@ function LandingPage({ markets }) {
       {/* Modal */}
       {selectedDropdown && (
         
-          <div
-            className="bg-white w-[75%] z-50 absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
+          <div onMouseLeave={() => closeModal()} className="bg-white w-[75%] z-50 absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
             
           >
 
@@ -131,6 +130,7 @@ function LandingPage({ markets }) {
 
       )}
     </div>
+    
 
     
     <div className="flex justify-center mt-[-70px] lg:hidden">
