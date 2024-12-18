@@ -21,9 +21,37 @@ import stationery from '../assets/stationery.svg';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Context.jsx';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import product from '../assets/Cart image.svg'
+import { GoTrash } from "react-icons/go";
+import { FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 
 function Navbar() {
+
+  // Cart
+   const [count, setCount] = useState(0);
+  
+    const handleIncrease = () => {
+      setCount(count + 1);
+    }
+    const handleDecrease = () => {
+      if(count < 1){
+        return;
+      }
+      setCount(count - 1);
+    } 
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
@@ -68,6 +96,45 @@ function Navbar() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const DrawerList = (
+    <Box sx={{ width: 400 }} role="presentation">
+     <div>
+      <div className="bg-white z-50 fixed h-[50px] shadow-md overflow-x-hidden overflow-y-hidden w-full">
+      
+        <div className="flex items-center my-[10px] mx-[10px] gap-[260px]">
+        <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart(0)</div>
+        <div onClick={toggleDrawer(false)} className=""><LiaTimesSolid className="size-[25px] text-[#31603D]"/></div>
+        </div>
+      
+        </div>
+        <div className="flex justify-center pt-[20px]">
+        <div className="pt-[50px]">
+          <div className="font-bold">Produce</div>
+          <div className="flex">
+            <div><img src={product} className="size-[90px]"/></div>
+            <div className="flex flex-col gap-[10px]">
+              <div>MAMA GOLD THAI RICE - 25KG</div>
+              <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
+              <div className="flex items-center gap-[15px]">
+               <div className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
+               <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+                <div onClick={handleDecrease}className="text"><FaMinus className="size-[12px]"/></div>
+                <div className="text-[18px]">{count}</div>
+                <div onClick={handleIncrease}className="text"><FaPlus className="size-[12px]"/></div>
+               </div>
+               <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN 32500</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div className="pt-[300px] flex justify-center">
+          <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
+        </div>
+        </div>
+    </Box>
+  );
 
   
   return (<>
@@ -117,7 +184,7 @@ function Navbar() {
             <div><PiNotepadBold className="size-[20px]"/></div>
          </div>}
 
-         <div className="hidden lg:flex flex-col">
+         <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Cart</div>
           <div className="flex flex-row items-center gap-[7px]">
             <div><GrBasket className="size-[20px]"/></div>
@@ -132,7 +199,7 @@ function Navbar() {
             <div><PiNotepadBold className="size-[20px]"/></div>
          </div>}
 
-         <div className="lg:flex flex-col lg:hidden">
+         <div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
             <div><GrBasket className="size-[20px]"/></div>
          </div>
 
@@ -250,13 +317,17 @@ function Navbar() {
       </div>
 
       
-      
-     <div>Like and suscribe</div>
 
 
       </div>
       </div>
       </div>
+      <div>
+      {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button> */}
+      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
+    </div>
     </nav>
   </>
   )
