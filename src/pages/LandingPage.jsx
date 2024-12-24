@@ -14,6 +14,9 @@ import { AuthContext } from '../context/Context.jsx';
 import { LiaTimesSolid } from "react-icons/lia";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import landing1 from '/assets/landing1.svg'
+import landing3 from '/assets/landing3.svg'
+import landing4 from '/assets/landing4.svg'
 
 
 
@@ -44,7 +47,7 @@ function LandingPage({ markets }) {
    }
 
   useEffect(() => {
-    fetch('https://test.tonyicon.com.ng/site/getData')
+    fetch('https://apis.emarketpod.com/site/getData')
     .then((response) => response.json())
     .then((data) => setMarketss(data.markets))
     .catch((error) => console.error(error))
@@ -56,17 +59,18 @@ function LandingPage({ markets }) {
           
 <div onMouseLeave={() => closeModal()} className="App">
       {/* Main Dropdown Display */}
-      <div className="h-[70px] flex flex-row px-[20px] lg:space-x-[100px] mt-[130px] justify-center items-center">
+      <div className="h-[70px] flex flex-row px-[20px] justify-between whitespac-nowrap lg:space-x-[100p] mt-[130px] justify-center items-center">
         {dropdownData.dropdowns && dropdownData.dropdowns.length > 0 ? (
           dropdownData.dropdowns.map((item) => (
 
           
             <div
               key={item.id}
-              className="hidden lg:flex color-[grey] size-[25px] text-[grey] flex flex-col items-center cursor-pointer"
+              className="hidden whitespace-nowrap justify-between lg:flex lg:flex-col color-[grey] size-[25px] text-[grey] flex flex-col items-center cursor-pointer"
               onMouseOver={() => openModal(item)}
               // onMouseLeave={() => closeModal()}
             >
+           
               <img
                 src={item.image}
                 alt={item.name}
@@ -74,7 +78,13 @@ function LandingPage({ markets }) {
                 // onMouseEnter={() => openModal(item)}
                 // onMouseLeave={() => closeModal()} // closes modal on image leave
               />
-              <p className="text-[12px] whitespace-nowrap">{item.name}</p>
+          
+
+              <div>
+              <p className="text-[12px]">{item.name}</p>
+              </div>
+
+
             </div>
           ))
         ) : (
@@ -86,7 +96,7 @@ function LandingPage({ markets }) {
       {/* Modal */}
       {selectedDropdown && (
         
-          <div onMouseLeave={() => closeModal()} className="bg-white w-[75%] z-50 absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
+          <div onMouseLeave={() => closeModal()} className="flex justify-center items-center bg-white w-[75%] z-50 absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
             
           >
 
@@ -129,6 +139,7 @@ function LandingPage({ markets }) {
           </div>
 
       )}
+    
     </div>
     
 
@@ -334,6 +345,30 @@ function LandingPage({ markets }) {
   )}
 </div> */}
 
+<div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
+  <div className="flex flex-col gap-y-[10px]">
+    <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Skip the delivery fees</div>
+    <div className="lg:w-[518px]">New customers get DeliveryPass perks on us for 60 days, including unlimited free delivery, timeslot reservations, and exclusive savings.</div>
+    <div className="text-[#31603D] underline lg:mt-[20px]">Create Account</div>
+  </div>
+  <div className="">
+    <img className="object-cover rounded-[10px]" src={landing1}/>
+  </div>
+</div>
+
+<div className="mt-[20px] mb-[60px] flex justify-center">
+  <div className="flex flex-col lg:flex-row px-[15px]">
+    <div className="bg-[#31603D] rounded-tl-[5px] rounded-tr-[5px] lg:rounded-tr-[0px] lg:rounded-tl-[10px] lg:rounded-bl-[10px] text-[white] lg:px-[80px] flex flex-col justify-center text-center p-6">
+    <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold">There's more to explore</div>
+    <div className="text-[12px]">There are 106 stores (and counting) available in</div>
+    <div className="text-[12px]"><span className="underline">Ilorin, Kwara State.</span> <span>Explore them all with</span></div>
+    <div className="text-[12px]">Market Pod today !</div>
+    <div><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
+    </div>
+    <div className="hidden lg:flex w-[350px] h-[300p]"><img className="object-cover" src={landing3}/></div>
+    <div className="lg:hidden w-[full]"><img className="object-cover w-[100%]" src={landing4}/></div>
+  </div>
+</div>
 
 
 

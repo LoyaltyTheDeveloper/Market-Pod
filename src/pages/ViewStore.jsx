@@ -24,14 +24,14 @@ function ViewStore() {
     }
 
     useEffect(() => {
-        fetch(`https://test.tonyicon.com.ng/site/getStore/${storeId}`)
+        fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
         .then((response) => response.json())
         .then((data) => setStore(data.data))
         .catch((error) => console.error('Error fetching comments', error))
     }, [storeId])
 
     useEffect(() => {
-      fetch(`https://test.tonyicon.com.ng/site/getProducts/${storeId}`)
+      fetch(`https://apis.emarketpod.com/site/getProducts/${storeId}`)
       .then((response) => response.json())
       .then((data) => setProducts(data.data))
       .catch((error) => console.error('Error fetching comments', error))

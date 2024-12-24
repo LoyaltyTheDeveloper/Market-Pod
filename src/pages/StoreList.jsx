@@ -20,7 +20,7 @@ function StoreList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://test.tonyicon.com.ng/site/getStores/${marketId}`)
+    fetch(`https://apis.emarketpod.com/site/getStores/${marketId}`)
     .then((response) => response.json())
     .then((data) => setMarket(data))
     .catch((error) => console.error('Error fetching comments', error))
