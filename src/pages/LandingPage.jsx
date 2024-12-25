@@ -161,9 +161,11 @@ function LandingPage({ markets }) {
 
       {/* <button className="text-[30px]" onClick={Logout}>Logout</button> */}
     
+<div>
+
 <div className="mt-[30px]">
   {marketss?.length > 0 ? (
-    marketss.map((market) => (
+    marketss.map((market, index) => (
       <div key={market.id} className="flex flex-col mb-[30px]">
       
       <div className="flex items-center">
@@ -180,7 +182,8 @@ function LandingPage({ markets }) {
         <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
         </div>
         </div>
-
+         
+         
         <div className="mt-[5px] pt-[20px] flex lg:flex justify-start">
 
         <div className="flex overflow-x-scroll scrollbar-hide whitespace-nowrap space-x-4 p-4 lg:flex justify-start">
@@ -212,6 +215,7 @@ function LandingPage({ markets }) {
                     </div>
                   </div>
 
+                 
                   <div className="flex flex-wrap items-center mb-[15px]">
                     {store.categories.map((category, index) => (
                       <div className="flex items-center" key={index}>
@@ -219,18 +223,48 @@ function LandingPage({ markets }) {
                         {index < store.categories.length - 1 && (
                           <div className="h-[20px] ml-[10px] mr-[10px] border-l border-gray-300 lg:flex justify-between"></div>
                         )}
+                       
                       </div>
                     ))}
+                    
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
-
-
         </div>
+        {index === 1 && (
+                <div>
+                <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
+                  <div className="flex flex-col gap-y-[10px]">
+                    <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Skip the delivery fees</div>
+                    <div className="lg:w-[518px]">New customers get DeliveryPass perks on us for 60 days, including unlimited free delivery, timeslot reservations, and exclusive savings.</div>
+                    <div className="text-[#31603D] underline lg:mt-[20px]">Create Account</div>
+                  </div>
+                  <div className="">
+                    <img className="object-cover rounded-[10px]" src={landing1}/>
+                  </div>
+                </div>
+                </div>
+              )}
+
+      {index === marketss.length -1 && (
+        <div className="mt-[20px] mb-[60px] flex justify-center">
+        <div className="flex flex-col lg:flex-row px-[15px]">
+          <div className="bg-[#31603D] rounded-tl-[5px] rounded-tr-[5px] lg:rounded-tr-[0px] lg:rounded-tl-[10px] lg:rounded-bl-[10px] text-[white] lg:px-[80px] flex flex-col justify-center text-center p-6">
+          <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold">There's more to explore</div>
+          <div className="text-[12px]">There are 106 stores (and counting) available in</div>
+          <div className="text-[12px]"><span className="underline">Ilorin, Kwara State.</span> <span>Explore them all with</span></div>
+          <div className="text-[12px]">Market Pod today !</div>
+          <div><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
+          </div>
+          <div className="hidden lg:flex w-[350px] h-[300p]"><img className="object-cover" src={landing3}/></div>
+          <div className="lg:hidden w-[full]"><img className="object-cover w-[100%]" src={landing4}/></div>
+        </div>
+      </div>
+      )}
+
       </div>
     ))
   ) : (
@@ -268,83 +302,9 @@ function LandingPage({ markets }) {
           ))
   )}
 </div>
+</div>
 
-{/* <div className="mt-[30px]">
-  {marketss?.length > 0 && (
-    marketss.map((market) => (
-      <div key={market.id} className="flex flex-col mb-[30px]">
-      
-      <div className="flex items-center">
-        <div>
-        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px]">{market.name || <Skeleton width={200} />}</div>
-        <div className="w-[270px] lg:w-[100%] md:w-[100%] text-[14px] lg:text-[16px] flex flex-wrap ml-[20px]">
-          {market.addr}
-        </div>
-        </div>
-
-        <div className="flex items-center gap-x-[20px] absolute right-[30px]">
-         {state.token &&<button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>}
-         {!state.token &&<button className="text-[#31603D]" onClick ={() => navigate('/signin')}> View all</button>}
-        <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
-        <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
-        </div>
-        </div>
-
-        <div className="mt-[5px] pt-[20px] flex lg:flex justify-start">
-
-        <div className="flex overflow-x-scroll scrollbar-hide whitespace-nowrap space-x-4 p-4 lg:flex justify-start">
-          <div className="flex gap-[20px] lg:flex-row justify-center lg:flex justify-start">
-            {market.stores.map((store) => (
-              <div
-                key={store.id}
-                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
-              >
-            
-                <div>
-                  <div className="h-[150px]">
-                  <img
-                    src={store.image}
-                    
-                    className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
-                  />
-                  </div>
-                </div>
-
-                <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
-                  <div className="text-[19px] font-bold whitespace-nowrap">
-                    {store.name}
-                  </div>
-                  <div className="flex items-center gap-x-[5px] text-[#31603D]">
-                    <div><LuClock5/></div>
-                    <div className="text-[15px]">
-                     Opens ${store.open_time} - Closes ${store.close_time}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center mb-[15px]">
-                    {store.categories.map((category, index) => (
-                      <div className="flex items-center" key={index}>
-                        {category}
-                        {index < store.categories.length - 1 && (
-                          <div className="h-[20px] ml-[10px] mr-[10px] border-l border-gray-300 lg:flex justify-between"></div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-
-
-        </div>
-      </div>
-    ))
-  )}
-</div> */}
-
+{/* <div>
 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
   <div className="flex flex-col gap-y-[10px]">
     <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Skip the delivery fees</div>
@@ -354,6 +314,7 @@ function LandingPage({ markets }) {
   <div className="">
     <img className="object-cover rounded-[10px]" src={landing1}/>
   </div>
+</div>
 </div>
 
 <div className="mt-[20px] mb-[60px] flex justify-center">
@@ -368,7 +329,7 @@ function LandingPage({ markets }) {
     <div className="hidden lg:flex w-[350px] h-[300p]"><img className="object-cover" src={landing3}/></div>
     <div className="lg:hidden w-[full]"><img className="object-cover w-[100%]" src={landing4}/></div>
   </div>
-</div>
+</div> */}
 
 
 
