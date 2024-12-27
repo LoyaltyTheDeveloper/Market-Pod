@@ -17,7 +17,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import landing1 from '/assets/landing1.svg'
 import landing3 from '/assets/landing3.svg'
 import landing4 from '/assets/landing4.svg'
-
+import landing5 from '/assets/landing5.svg'
 
 
 function LandingPage({ markets }) {
@@ -234,8 +234,8 @@ function LandingPage({ markets }) {
           </div>
         </div>
         </div>
-        {index === 1 && (
-                <div>
+        {index === 1 && (<>
+                <div className="lg:hidden">
                 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
                   <div className="flex flex-col gap-y-[10px]">
                     <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Skip the delivery fees</div>
@@ -247,7 +247,36 @@ function LandingPage({ markets }) {
                   </div>
                 </div>
                 </div>
-              )}
+
+                <div className="hidden lg:flex">
+                <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
+                  <div className="flex flex-col gap-y-[10px]">
+                    <div className="w-[70%] lg:w-[450px] text-[30px] lg:text-[40px] font-bold">Back to School Food Bundle For 50k !</div>
+                    {/* <div className="lg:w-[518px]">New customers get DeliveryPass perks on us for 60 days, including unlimited free delivery, timeslot reservations, and exclusive savings.</div> */}
+                    <ul className="list-disc pl-8 text-[14px]">
+                      <div className="flex gap-x-[50px]">
+                      <div className="space-y-2">
+                      <li>10KG Rice</li>
+                      <li>1lt Ground Nut Oil</li>
+                      <li>Half Pack Indomie</li>
+                      <li>5 Tubers of Yam</li>
+                      </div>
+                      <div className="space-y-2">
+                      <li>1 Box of Spaghetti </li>
+                      <li>15g Golden Morn</li>
+                      <li>25g Corn Flakes Box</li>
+                      <li>Seasoning Mixture</li>
+                      </div>
+                      </div>
+                    </ul>
+                    <div className="mt-[50px]"><button className="border border-[#31603D] bg-[#31603D] px-14 py-3 rounded-full text-white text-[14px]">Add to cart</button></div>
+                  </div>
+                  <div className="">
+                    <img className="object-cover rounded-[10px]" src={landing5}/>
+                  </div>
+                </div>
+                </div>
+              </>)}
 
       {index === marketss.length -1 && (
         <div className="mt-[20px] mb-[60px] flex justify-center">
@@ -335,6 +364,7 @@ function LandingPage({ markets }) {
 
 </div>
     </div>
+    
   <Footer/>
   </>)
 }

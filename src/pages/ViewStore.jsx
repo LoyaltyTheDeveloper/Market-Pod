@@ -243,11 +243,11 @@ function ViewStore() {
                 {product.name}
               </div>
               <div className="text-[12px] w-[150px] lg:text-[15px]">{product.subtitle}</div>
-              <div className="flex">
+              <div className="flex absolute bottom-[180px] lg:bottom-[380px]">
                 <div className="font-semibold text-[12px] lg:text-[16px]">
                   NGN {product.price}
                 </div>
-                <div className="absolute ml-[140px] text-[#31603D] text-[10px] lg:text-[14px] font-semibold">
+                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[14px] font-semibold">
                    {product.status === 1 ? "In-stock":"Unavailable"}
                 </div>
               </div>
