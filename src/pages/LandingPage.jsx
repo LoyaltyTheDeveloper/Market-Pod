@@ -18,6 +18,7 @@ import landing1 from '/assets/landing1.svg'
 import landing3 from '/assets/landing3.svg'
 import landing4 from '/assets/landing4.svg'
 import landing5 from '/assets/landing5.svg'
+import { FaPlus } from "react-icons/fa";
 
 
 function LandingPage({ markets }) {
@@ -41,8 +42,7 @@ function LandingPage({ markets }) {
         return response.json();
       })
       .then((data) => {
-        console.log(data.results)
-        setSearchResults(Array.isArray(data.results) ? data.results : []);
+        navigate("/search", { state: { searchQuery, searchResults: data.results } });
        
       })
       .catch((error) => {
@@ -53,7 +53,9 @@ function LandingPage({ markets }) {
       });
   };
 
-
+ const addToCart = () => {
+  alert();
+ }
   
 
   const openModal = (category) => {
@@ -87,7 +89,8 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
   return (<>
   <Navbar/>
-  <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
+  
+ <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
           
 <div onMouseLeave={() => closeModal()} className="App">
       {/* Main Dropdown Display */}
@@ -184,7 +187,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
-          placeholder="Search Markets, Shops, Products..."
+          placeholder="Search Stalls & Products"
       />
          </div>
     </div>
@@ -399,98 +402,14 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
 </div>
     </div>
+  
 
-
-    <div className="p-4 ">
-     
+      
+   
     
 
-      {/* Render Markets and Products */}
-      <div className="mt-4">
-        {marketsss.map((market) => (
-          <div key={market.data.id} className="mb-4 p-4 border rounded">
-            <h3 className="font-bold text-lg">{market.data.name}</h3>
-            <p>{market.data.addr}</p>
-            <img
-              src={market.data.image}
-              alt={market.data.name}
-              className="w-32 h-32"
-            />
+   
 
-            {/* Render products related to the market category */}
-            <div className="mt-4">
-              <h4 className="font-bold">Products:</h4>
-              {products
-                .filter(
-                  (product) => product.data.category_name === market.data.name
-                )
-                .map((product) => (
-                  <div
-                    key={product.data.id}
-                    className="p-2 border rounded mb-2"
-                  >
-                    <p>{product.data.name}</p>
-                    <img
-                      src={product.data.image}
-                      alt={product.data.name}
-                      className="w-16 h-16"
-                    />
-                  </div>
-                ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-
-    <div className="p-4">
-      
-
-      <div className="mt-4">
-        {marketsss && marketsss.length > 0 ? (
-          
-          marketsss.map((market) => (
-            
-            <div key={market.data.id} className="mb-4 p-4 border rounded">
-              <h3 className="font-bold text-lg">{market.data.name}</h3>
-              <p>{market.data.addr}</p>
-              <img
-                src={market.data.image}
-                alt={market.data.name}
-                className="w-32 h-32"
-              />
-
-              {/* Render products related to the market category */}
-              <div className="mt-4">
-                <h4 className="font-bold">Products:</h4>
-                {products &&
-                  products
-                    .filter(
-                      (product) =>
-                        product.data.category_name === market.data.name
-                    )
-                    .map((product) => (
-                      <div
-                        key={product.data.id}
-                        className="p-2 border rounded mb-2"
-                      >
-                        <p>{product.data.name}</p>
-                        <img
-                          src={product.data.image}
-                          alt={product.data.name}
-                          className="w-16 h-16"
-                        />
-                      </div>
-                    ))}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No markets found</p>
-        )}
-      </div>
-    </div>
    
 
     

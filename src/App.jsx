@@ -21,6 +21,7 @@ import Cart from './pages/Cart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Scroll from './Components/Scroll';
+import Search from './pages/Search';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/productdetail" element={<ProductDetail/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
+        <Route path="/search" element={<Search/>}/>
       </Routes>
       <ToastContainer />
     </Router>

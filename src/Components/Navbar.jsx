@@ -32,6 +32,31 @@ import { FaPlus } from "react-icons/fa";
 
 function Navbar() {
 
+  const [searchQuery, setSearchQuery] = useState(""); // For user input
+    const [searchResults, setSearchResults] = useState([]);
+    
+
+  const handleSearch = () => {
+
+    fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        navigate("/search", { state: { searchQuery, searchResults: data.results } });
+       
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      })
+      .finally(() => {
+      
+      });
+  };
+
   // Cart
    const [count, setCount] = useState(0);
   
@@ -161,9 +186,11 @@ function Navbar() {
          <div className="absolute right-[120px] flex flex-row items-center gap-x-[50px]">
 
          <div className="flex flex-row items-center hidden lg:flex md:hidden">
-         <RiSearchLine className="absolute ml-[20px] size-[15px]"/>
+         <RiSearchLine onClick={handleSearch} className="absolute ml-[20px] size-[15px]"/>
          <input
           type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[#F9F9F9] focus:outline-none text-[13px]"
           placeholder="Search Stalls & products"
       />
