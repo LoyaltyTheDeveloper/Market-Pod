@@ -165,7 +165,7 @@ function Navbar() {
          <input
           type="text"
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[#F9F9F9] focus:outline-none text-[13px]"
-          placeholder="Search Markets, Shops, Products..."
+          placeholder="Search Stalls & products"
       />
          </div>
 

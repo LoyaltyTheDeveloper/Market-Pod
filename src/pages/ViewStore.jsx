@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { useRef } from "react";
 
 function ViewStore() {
     const { storeId } = useParams();
@@ -18,6 +19,13 @@ function ViewStore() {
     const [products, setProducts] = useState(null);
     const [cats, setCats] = useState([]);
     const navigate = useNavigate();
+    const refs = useRef({});
+
+    const scroll = (category) => {
+      if (refs.current[category]) {
+        refs.current[category].scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
 
     const addToCart = () => {
       alert();
@@ -58,7 +66,7 @@ function ViewStore() {
          <input
           type="text"
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
-          placeholder="Search Markets, Shops, Products..."
+          placeholder="Search Stalls & products"
       />
          </div>
     </div>
@@ -68,71 +76,7 @@ function ViewStore() {
     <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px]">
 
         <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-40px]">
-        {/* <div>
-
-        <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px]">
-
-        <div className="flex lg:flex-col">
-        <div><img src={pod}></img></div>
-        <div className="w-[270px] flex flex-col gap-[5px]">
-        <div>
-        <div className="font-semibold text-[20px]">Happiness Goods & Store</div>
-        <div className="text-[15px]">Opened</div>
-        <div className="text-[15px]">No 34 off GRA, Adelewola Akinwuyi Road, Ilorin, Kwara State.</div>
-        </div>
-        </div>
-        </div>
-
-    <div className="flex my-3 hidden lg:flex py-[5px]">
-      <hr className="w-[45%] border-t border-gray-300" />
-      <hr className="w-[45%] border-t border-gray-300" />
-    </div>
-
-    <div className="hidden lg:flex">
-        <div className="flex flex-col gap-[10px]">
-        <div className="font-semibold">Browse Categories</div>
-        <div className="text-[15px]">Produce</div>
-        <div className="text-[15px]">Beverage & Packed Foods</div>
-        </div>
-
-    </div>
-
-    </div>
-
-    </div> */}
-
-{/* <div>
-      <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px]">
-        <div className="flex lg:flex-col">
-          <div>
-            <img src={store.image} alt={store.name} />
-          </div>
-          <div className="w-[270px] flex flex-col gap-[5px]">
-            <div>
-              <div className="font-semibold text-[20px]">{store.name}</div>
-              <div className="text-[15px]">{store.status}</div>
-              <div className="text-[15px]">{store.address}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex my-3 hidden lg:flex py-[5px]">
-          <hr className="w-[45%] border-t border-gray-300" />
-          <hr className="w-[45%] border-t border-gray-300" />
-        </div>
-
-        <div className="hidden lg:flex">
-          <div className="flex flex-col gap-[10px]">
-            <div className="font-semibold">Browse Categories</div>
-            {store.categories.map((category) => (
-              <div key={category.id} className="text-[15px]">
-                {category.name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div> */}
+        
 
 <div>
     {store && (
@@ -159,8 +103,8 @@ function ViewStore() {
           <div className="flex flex-col gap-[10px]">
             <div className="font-semibold">Browse Categories</div>
             {store.categories && store.categories.map((category) => (
-              <div key={category.id} className="text-[15px]">
-                {category}
+              <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
+                <div className="cursor-pointer">{category}</div>
               </div>
             ))}
           </div>
@@ -194,39 +138,19 @@ function ViewStore() {
 
                 
 
-                {/* <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
-
-
-                <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto]">
-                <div className="flex">
-                    <img src={pod} className=""/>
-
-                    <div className="absolute group ml-[130px] lg:ml-[150px] mt-[30px] border bg-[#31603D] rounded-full p-[9px] group"><FaPlus className="text-[white]"/></div>
-
-                    
-                </div>
-                <div className="flex flex-col gap-[10px] px-[10px]">
-                <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[16px] font-semibold">MAMA GOLD THAI RICE - 25kg</div>
-                <div className="text-[12px] lg:text-[15px]">Long grain rice (1 Bag)</div>
-                <div className="flex">
-                    <div className="font-semibold text-[12px] lg:text-[16px]">NGN 32,500</div>
-                    <div className="absolute ml-[120px] text-[#31603D] text-[10px] lg:text-[14px] font-semibold ">In-Stock</div>
-                </div>
-                </div>
-                </div>
-
-               </div> */}
+                
 
 
 
 
 
-
-<div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
+<div className="">
       {products && products.length > 0 ? (
         products.map((product) => (
+          <div className="mb-[30px]" key={product.category_name} ref={(el) => (refs.current[product.category_name] = el)}>
+            <div className="text-[24px] font-bold">{product.category_name}</div>
+            <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
-            key={product.id}
             className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto]"
           >
             <div className="flex justify-center px-[50px]">
@@ -234,31 +158,33 @@ function ViewStore() {
                 src={product.image}
                 className="w-24 h-24 object-cover flex justify-center"
               />
-              <div onClick={addToCart} className="absolute group ml-[140px] lg:ml-[150px] mt-[30px] border bg-[#31603D] rounded-full p-[9px] group">
+              <div onClick={addToCart} className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] border bg-[#31603D] rounded-full p-[7px] group">
                 <FaPlus className="text-[white]" />
               </div>
             </div>
-            <div className="flex flex-col gap-[10px] px-[10px]">
-              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[16px] font-semibold">
+            <div className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold">
                 {product.name}
               </div>
-              <div className="text-[12px] w-[150px] lg:text-[15px]">{product.subtitle}</div>
-              <div className="flex absolute bottom-[180px] lg:bottom-[380px]">
+              <div className="text-[12px] w-[150px] lg:text-[13px]">{product.subtitle}</div>
+              <div className="flex absolte bttom-[180px] lg:botom-[380px]">
                 <div className="font-semibold text-[12px] lg:text-[16px]">
                   NGN {product.price}
                 </div>
-                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[14px] font-semibold">
+                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
                    {product.status === 1 ? "In-stock":"Unavailable"}
                 </div>
               </div>
             </div>
           </div>
+          </div>
+          </div>
         ))
       ) : (
-        <div className="flex inset-0">Please wait...</div>
+        <div className="flex inset-0">Loading products...</div>
       )}
-    </div>
-
+    
+</div>
                
 
                 </div>

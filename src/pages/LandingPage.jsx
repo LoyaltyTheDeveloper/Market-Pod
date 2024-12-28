@@ -26,7 +26,35 @@ function LandingPage({ markets }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDropdown, setSelectedCategory] = useState(null);
   const { state } = useContext(AuthContext);
+  const [searchQuery, setSearchQuery] = useState(""); // For user input
+  const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
+
+
+  const handleSearch = () => {
+
+    fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.results)
+        setSearchResults(Array.isArray(data.results) ? data.results : []);
+       
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      })
+      .finally(() => {
+      
+      });
+  };
+
+
+  
 
   const openModal = (category) => {
     setSelectedCategory(category);
@@ -52,6 +80,10 @@ function LandingPage({ markets }) {
     .then((data) => setMarketss(data.markets))
     .catch((error) => console.error(error))
 }, [])
+
+
+const marketsss = Array.isArray(searchResults) ? searchResults.filter((result) => result.type === "market") : [];
+const products = Array.isArray(searchResults) ? searchResults.filter((result) => result.type === "product") : [];
 
   return (<>
   <Navbar/>
@@ -146,9 +178,11 @@ function LandingPage({ markets }) {
     
     <div className="flex justify-center mt-[-70px] lg:hidden">
     <div className="flex flex-row items-center">
-         <RiSearchLine className="absolute ml-[20px] size-[15px]"/>
+         <RiSearchLine onClick={handleSearch} className="absolute ml-[20px] size-[15px]"/>
          <input
           type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
           placeholder="Search Markets, Shops, Products..."
       />
@@ -235,7 +269,7 @@ function LandingPage({ markets }) {
         </div>
         </div>
         {index === 1 && (<>
-                <div className="lg:hidden">
+                <div className="">
                 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
                   <div className="flex flex-col gap-y-[10px]">
                     <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Skip the delivery fees</div>
@@ -248,7 +282,7 @@ function LandingPage({ markets }) {
                 </div>
                 </div>
 
-                <div className="hidden lg:flex">
+                <div className="hidden">
                 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
                   <div className="flex flex-col gap-y-[10px]">
                     <div className="w-[70%] lg:w-[450px] text-[30px] lg:text-[40px] font-bold">Back to School Food Bundle For 50k !</div>
@@ -276,6 +310,7 @@ function LandingPage({ markets }) {
                   </div>
                 </div>
                 </div>
+                
               </>)}
 
       {index === marketss.length -1 && (
@@ -364,6 +399,100 @@ function LandingPage({ markets }) {
 
 </div>
     </div>
+
+
+    <div className="p-4 ">
+     
+    
+
+      {/* Render Markets and Products */}
+      <div className="mt-4">
+        {marketsss.map((market) => (
+          <div key={market.data.id} className="mb-4 p-4 border rounded">
+            <h3 className="font-bold text-lg">{market.data.name}</h3>
+            <p>{market.data.addr}</p>
+            <img
+              src={market.data.image}
+              alt={market.data.name}
+              className="w-32 h-32"
+            />
+
+            {/* Render products related to the market category */}
+            <div className="mt-4">
+              <h4 className="font-bold">Products:</h4>
+              {products
+                .filter(
+                  (product) => product.data.category_name === market.data.name
+                )
+                .map((product) => (
+                  <div
+                    key={product.data.id}
+                    className="p-2 border rounded mb-2"
+                  >
+                    <p>{product.data.name}</p>
+                    <img
+                      src={product.data.image}
+                      alt={product.data.name}
+                      className="w-16 h-16"
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+
+    <div className="p-4">
+      
+
+      <div className="mt-4">
+        {marketsss && marketsss.length > 0 ? (
+          
+          marketsss.map((market) => (
+            
+            <div key={market.data.id} className="mb-4 p-4 border rounded">
+              <h3 className="font-bold text-lg">{market.data.name}</h3>
+              <p>{market.data.addr}</p>
+              <img
+                src={market.data.image}
+                alt={market.data.name}
+                className="w-32 h-32"
+              />
+
+              {/* Render products related to the market category */}
+              <div className="mt-4">
+                <h4 className="font-bold">Products:</h4>
+                {products &&
+                  products
+                    .filter(
+                      (product) =>
+                        product.data.category_name === market.data.name
+                    )
+                    .map((product) => (
+                      <div
+                        key={product.data.id}
+                        className="p-2 border rounded mb-2"
+                      >
+                        <p>{product.data.name}</p>
+                        <img
+                          src={product.data.image}
+                          alt={product.data.name}
+                          className="w-16 h-16"
+                        />
+                      </div>
+                    ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No markets found</p>
+        )}
+      </div>
+    </div>
+   
+
     
   <Footer/>
   </>)
