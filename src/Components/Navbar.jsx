@@ -57,6 +57,11 @@ function Navbar() {
       });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
   // Cart
    const [count, setCount] = useState(0);
   
@@ -173,7 +178,6 @@ function Navbar() {
          </div>
          <div className="h-[50px] ml-[25px] hidden border-l border-gray-300 lg:flex justify-between"></div>
 
-
          <div className="ml-[30px] hidden lg:flex flex-col">
           <div className="font-bold text-[13px]">Location</div>
           <div className="flex flex-row items-center gap-[7px]">
@@ -191,6 +195,7 @@ function Navbar() {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[#F9F9F9] focus:outline-none text-[13px]"
           placeholder="Search Stalls & products"
       />

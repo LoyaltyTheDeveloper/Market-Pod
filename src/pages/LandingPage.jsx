@@ -19,6 +19,7 @@ import landing3 from '/assets/landing3.svg'
 import landing4 from '/assets/landing4.svg'
 import landing5 from '/assets/landing5.svg'
 import { FaPlus } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 
 function LandingPage({ markets }) {
@@ -33,6 +34,10 @@ function LandingPage({ markets }) {
 
 
   const handleSearch = () => {
+
+    if(!searchQuery){
+      toast.error('Please Search a stall or product', {autoClose: 1000});
+    }
 
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
       .then((response) => {
@@ -53,9 +58,17 @@ function LandingPage({ markets }) {
       });
   };
 
+  
+
  const addToCart = () => {
   alert();
  }
+
+ const handleKeyDown = (event) => {
+  if (event.key === "Enter") {
+    handleSearch();
+  }
+};
   
 
   const openModal = (category) => {
@@ -186,6 +199,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
           placeholder="Search Stalls & Products"
       />

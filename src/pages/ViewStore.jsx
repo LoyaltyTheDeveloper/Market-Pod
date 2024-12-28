@@ -20,6 +20,9 @@ function ViewStore() {
     const [cats, setCats] = useState([]);
     const navigate = useNavigate();
     const refs = useRef({});
+    const [searchQuery, setSearchQuery] = useState(""); // For user input
+      const [searchResults, setSearchResults] = useState([]);
+      
 
     const scroll = (category) => {
       if (refs.current[category]) {
@@ -30,6 +33,34 @@ function ViewStore() {
     const addToCart = () => {
       alert();
     }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        handleSearch();
+      }
+    };
+
+    const handleSearch = () => {
+
+      fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          navigate("/search", { state: { searchQuery, searchResults: data.results } });
+         
+        })
+        .catch((error) => {
+          console.error("Error fetching search results:", error);
+        })
+        .finally(() => {
+        
+        });
+    };
+  
 
     useEffect(() => {
         fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
@@ -65,6 +96,9 @@ function ViewStore() {
          <RiSearchLine className="absolute ml-[20px] size-[15px]"/>
          <input
           type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
           placeholder="Search Stalls & products"
       />
