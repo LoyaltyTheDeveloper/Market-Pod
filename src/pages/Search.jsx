@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from '../Components/Navbar';
 import { FaPlus } from "react-icons/fa";
+import Footer from '../Components/Footer';
 
 function Search() {
 
@@ -17,11 +18,11 @@ function Search() {
     <Navbar/>
     <div className="pt-[100px] p-4 min-h-screen bg-[#F9F9F9]">
 <div className="mt-[40px] mb-[40px] text-[22px] font-bold">Search Results</div>
-{/* Render Results */}
-<div className="mt-4 flex flex-col lg:flex-row gap-x-[20px]">
+
+<div className="mt-4 flex flex-col lg:flex-row lg:flex-wrap gap-x-[20px] gap-y-[30px]">
   {searchResults.length > 0 ? (
     searchResults.map((result) => {
-      // Check the type (product or market) and render accordingly
+      
       if (result.type === "product") {
         return (<>
         <div className="mb-[30px]" key={result.data.id}>
@@ -60,8 +61,10 @@ function Search() {
         </>);
       }
 
+    
       if (result.type === "store") {
         return (<>
+        
 <div key={result.data.id} className="lg:border lg:border-transparent flex justify-center lg:flex-col lg:px-[10px]">
   <div className="flex justify-center lg:justify-start gap-[20px] px-[10px]">
     <div className="h-[100px] w-[30%] lg:size-[150px]">
@@ -81,8 +84,9 @@ function Search() {
 
         </>);
       }
+    
 
-      return null; // Return null if the type doesn't match (optional)
+      return null; 
     })
   ) : (
     <p className="flex justify-center">No results found</p>
@@ -90,6 +94,7 @@ function Search() {
 </div>
 
 </div>
+<Footer/>
   </>)
 }
 

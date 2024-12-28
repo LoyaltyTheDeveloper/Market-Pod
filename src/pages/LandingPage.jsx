@@ -18,6 +18,7 @@ import landing1 from '/assets/landing1.svg'
 import landing3 from '/assets/landing3.svg'
 import landing4 from '/assets/landing4.svg'
 import landing5 from '/assets/landing5.svg'
+import landing7 from '/assets/landing7.svg'
 import { FaPlus } from "react-icons/fa";
 import { toast } from 'react-toastify';
 
@@ -286,18 +287,35 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         </div>
         </div>
         {index === 1 && (<>
-                <div className="">
+        
+        {!state.token &&
+                <div className="mt-[20px] mb-[20px]">
                 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
                   <div className="flex flex-col gap-y-[10px]">
                     <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Skip the delivery fees</div>
                     <div className="lg:w-[518px]">New customers get DeliveryPass perks on us for 60 days, including unlimited free delivery, timeslot reservations, and exclusive savings.</div>
-                    <div className="text-[#31603D] underline lg:mt-[20px]">Create Account</div>
+                    <div className="text-[#31603D] underline lg:mt-[20px]"><Link to="/signup">Create Account</Link></div>
                   </div>
                   <div className="">
                     <img className="object-cover rounded-[10px]" src={landing1}/>
                   </div>
                 </div>
+                </div>}
+
+                {state.token &&
+                <div className="mt-[20px] mb-[20px]">
+                <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
+                  <div className="flex flex-col gap-y-[10px]">
+                    <div className="w-[70%] lg:w-[380px] text-[30px] lg:text-[40px] font-bold">Popular products right now</div>
+                    <div className="lg:w-[518px]">Check out these hot items that everyone is raving about, from everyday customers favorites to unique items you wont find anywhere else !</div>
+                    <div className="text-[#31603D] underline lg:mt-[20px]">View all</div>
+                  </div>
+                  <div className="lg:w-[100%]">
+                    <img className="object-cover rounded-[10px] size-[100%] lg:w-[full]" src={landing7}/>
+                  </div>
                 </div>
+                </div>}
+                
 
                 <div className="hidden">
                 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">

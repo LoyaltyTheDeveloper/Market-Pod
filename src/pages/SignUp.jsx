@@ -7,7 +7,7 @@ import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 
 function SignUp() {
@@ -21,7 +21,7 @@ function SignUp() {
     setIsPending(true);
     e.preventDefault();
     if (email === '' || pswd === '') {
-        toast.error('All fields are required', {autoClose: 1000});
+        toast.error('All fields are required');
         setIsPending(false);
         return;
     }
@@ -45,11 +45,11 @@ function SignUp() {
           //   type: 'SIGN_UP',
           //   payload: { user: data.user },
           // });
-          toast.success(data.message, {autoClose: 2000});
+          toast.success(data.message);
           setIsPending(false);
           navigate('/signin');
         } else {
-          toast.error(data.message, {autoClose: 2000});
+          toast.error(data.message);
           setIsPending(false);
             return;
         }
