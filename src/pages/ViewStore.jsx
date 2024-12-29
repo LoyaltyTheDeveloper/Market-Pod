@@ -6,13 +6,15 @@ import pod from '../assets/Podlogo.svg';
 import Footer from '../Components/Footer';
 import { BiHomeAlt2 } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext, } from 'react';
 import { useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useRef } from "react";
+import { AuthContext } from '../context/Context.jsx';
 
 function ViewStore() {
+   const { state } = useContext(AuthContext);
     const { storeId } = useParams();
     const { marketId } = useParams();
     const [store, setStore] = useState(null);
@@ -22,6 +24,8 @@ function ViewStore() {
     const refs = useRef({});
     const [searchQuery, setSearchQuery] = useState(""); // For user input
       const [searchResults, setSearchResults] = useState([]);
+      const [cart, setCart] = useState({ store: null, items: [] });
+      const [error, setError] = useState("");
       
 
     const scroll = (category) => {
@@ -30,9 +34,38 @@ function ViewStore() {
       }
     }
 
-    const addToCart = () => {
-      alert();
-    }
+    const addToCart = (product) => {
+      // Check if the cart is empty or the product is from the same store
+      if (cart.store && cart.store !== product.store) {
+        setError(`Cannot add products from ${product.store}. Your cart contains products from ${cart.store}.`);
+        return;
+      }
+  
+      setError(""); 
+      fetch('https://apis.emarketpod.com/user/cart/add', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${state.token}`
+          
+        },
+        body: JSON.stringify({ product_id: product.product_id }),
+      })
+        .then((response) => {
+          response.json();
+        })
+        .then((data) => {
+          
+          // Update the cart state with the new product
+          setCart((prevCart) => ({
+            store: product.store,
+            items: [...prevCart.items, product],
+          }));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
 
     const handleKeyDown = (event) => {
       if (event.key === "Enter") {

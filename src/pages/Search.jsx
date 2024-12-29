@@ -1,14 +1,52 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from '../Components/Navbar';
 import { FaPlus } from "react-icons/fa";
 import Footer from '../Components/Footer';
+import { RiSearchLine } from "react-icons/ri";
 
 function Search() {
 
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        handleSearch();
+      }
+    };
+
     const location = useLocation();
   const navigate = useNavigate();
-  const { searchQuery, searchResults } = location.state || { searchQuery: "", searchResults: [] };
+  const { searchQuery: initialQuery, searchResults: initialResults } = location.state || { searchQuery: "", searchResults: [] };
+
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const [searchResults, setSearchResults] = useState(initialResults); 
+
+
+  const handleSearch = () => {
+  
+    if(!searchQuery){
+      toast.error('Please Search a stall or product');
+    }
+
+    fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSearchResults(data.results);
+       
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      })
+      .finally(() => {
+      
+      });
+    
+  };
+
 
   const addToCart = () => {
     alert()
@@ -16,7 +54,21 @@ function Search() {
 
   return (<>
     <Navbar/>
-    <div className="pt-[100px] p-4 min-h-screen bg-[#F9F9F9]">
+    <div className="p-4 min-h-screen bg-[#F9F9F9]">
+    <div className="flex justify-center pt-[120px] lg:hidden">
+        <div className="flex flex-row items-center">
+             <RiSearchLine onClick={handleSearch} className="absolute ml-[20px] size-[15px]"/>
+             <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
+              placeholder="Search Stalls & Products"
+          />
+             </div>
+        </div>
+
 <div className="mt-[40px] mb-[40px] text-[22px] font-bold">Search Results</div>
 
 <div className="mt-4 flex flex-col lg:flex-row lg:flex-wrap gap-x-[20px] gap-y-[30px]">
@@ -75,7 +127,7 @@ function Search() {
         <div className="font-semibold text-[20px]">{result.data.name}</div>
         {/* <div className="text-[15px]">{store.status}</div> */}
         <div className="text-[15px]">{result.data.addr}</div>
-        <div><button>View store</button></div>
+        <div onClick ={() => navigate(`/site/getStore/${result.data.id}`)} className="text-white"><button className="border border-[#31603D] bg-[#31603D] px-4 py-1 rounded-full">View store</button></div>
       </div>
     </div>
   </div>

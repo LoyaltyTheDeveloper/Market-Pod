@@ -31,7 +31,7 @@ function SignUp() {
       pswd
     };
 
-    fetch('https://test.tonyicon.com.ng/user/signup', {
+    fetch('https://apis.emarketpod.com/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
