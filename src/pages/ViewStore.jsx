@@ -12,13 +12,14 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useRef } from "react";
 import { AuthContext } from '../context/Context.jsx';
+import { toast } from 'react-hot-toast';
 
 function ViewStore() {
    const { state } = useContext(AuthContext);
     const { storeId } = useParams();
     const { marketId } = useParams();
     const [store, setStore] = useState(null);
-    const [products, setProducts] = useState(null);
+    const [products, setProducts] = useState([]);
     const [cats, setCats] = useState([]);
     const navigate = useNavigate();
     const refs = useRef({});
@@ -34,28 +35,42 @@ function ViewStore() {
       }
     }
 
+    useEffect(() => {
+      fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
+      .then((response) => response.json())
+      .then((data) => setStore(data.data))
+      .catch((error) => console.error('Error fetching comments', error))
+  }, [storeId])
+
+  useEffect(() => {
+    fetch(`https://apis.emarketpod.com/site/getProducts/${storeId}`)
+    .then((response) => response.json())
+    .then((data) => setProducts(data.data))
+    .catch((error) => console.error('Error fetching comments', error))
+}, [storeId])
+
     const addToCart = (product) => {
       // Check if the cart is empty or the product is from the same store
-      if (cart.store && cart.store !== product.store) {
-        setError(`Cannot add products from ${product.store}. Your cart contains products from ${cart.store}.`);
-        return;
-      }
+      // if (cart.store && cart.store !== product.store) {
+      //   setError(`Cannot add products from ${product.store}. Your cart contains products from ${cart.store}.`);
+      //   return;
+      // }
   
       setError(""); 
       fetch('https://apis.emarketpod.com/user/cart/add', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `${state.token}`
+          Authorization: state.token,
           
         },
-        body: JSON.stringify({ product_id: product.product_id }),
+        body: JSON.stringify({ product_id: product.id }),
       })
         .then((response) => {
           response.json();
         })
         .then((data) => {
-          
+          console.log(data.message);
           // Update the cart state with the new product
           setCart((prevCart) => ({
             store: product.store,
@@ -65,6 +80,8 @@ function ViewStore() {
         .catch((error) => {
           console.error(error);
         });
+        console.log(state.token);
+        console.log("Body:", { product_id: product.id });
     };
 
     const handleKeyDown = (event) => {
@@ -74,7 +91,9 @@ function ViewStore() {
     };
 
     const handleSearch = () => {
-
+      if(!searchQuery){
+                toast.error('Please search a stall or product');
+              }
       fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
         .then((response) => {
           if (!response.ok) {
@@ -95,29 +114,7 @@ function ViewStore() {
     };
   
 
-    useEffect(() => {
-        fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
-        .then((response) => response.json())
-        .then((data) => setStore(data.data))
-        .catch((error) => console.error('Error fetching comments', error))
-    }, [storeId])
-
-    useEffect(() => {
-      fetch(`https://apis.emarketpod.com/site/getProducts/${storeId}`)
-      .then((response) => response.json())
-      .then((data) => setProducts(data.data))
-      .catch((error) => console.error('Error fetching comments', error))
-  }, [storeId])
-
-//   useEffect(() => {
-//     fetch(`https://test.tonyicon.com.ng/site/getCategories`)
-//     .then((response) => response.json())
-//     .then((data) => setCats(data.categories))
-//     .catch((error) => console.error('Error fetching comments', error))
-// }, [])
-
-// const categoryId = products?.category_id;
-// const categoryName = cats.find((cat) => cat.id === categoryId)?.name;
+    
 
   return (<>
     <Navbar/>
@@ -225,7 +222,7 @@ function ViewStore() {
                 src={product.image}
                 className="w-24 h-24 object-cover flex justify-center"
               />
-              <div onClick={addToCart} className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] border bg-[#31603D] rounded-full p-[7px] group">
+              <div onClick={()=> addToCart(product)} className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] border bg-[#31603D] rounded-full p-[7px] group">
                 <FaPlus className="text-[white]" />
               </div>
             </div>

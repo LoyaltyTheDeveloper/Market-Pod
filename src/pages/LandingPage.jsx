@@ -20,7 +20,7 @@ import landing4 from '/assets/landing4.svg'
 import landing5 from '/assets/landing5.svg'
 import landing7 from '/assets/landing7.svg'
 import { FaPlus } from "react-icons/fa";
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 
 function LandingPage({ markets }) {
@@ -37,7 +37,7 @@ function LandingPage({ markets }) {
   const handleSearch = () => {
 
     if(!searchQuery){
-      toast.error('Please Search a stall or product', {autoClose: 1000});
+      toast.error('Please search a stall or product');
     }
 
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)

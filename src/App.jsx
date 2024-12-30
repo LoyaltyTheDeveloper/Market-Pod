@@ -24,6 +24,8 @@ import Scroll from './Components/Scroll';
 import Search from './pages/Search';
 import { Toaster } from 'react-hot-toast';
 
+
+
 function App() {
 
   return (

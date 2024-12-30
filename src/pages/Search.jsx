@@ -4,6 +4,7 @@ import Navbar from '../Components/Navbar';
 import { FaPlus } from "react-icons/fa";
 import Footer from '../Components/Footer';
 import { RiSearchLine } from "react-icons/ri";
+import { toast } from 'react-hot-toast';
 
 function Search() {
 
@@ -24,7 +25,7 @@ function Search() {
   const handleSearch = () => {
   
     if(!searchQuery){
-      toast.error('Please Search a stall or product');
+      toast.error('Please search a stall or product');
     }
 
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
@@ -47,13 +48,17 @@ function Search() {
     
   };
 
+  const handleSecondSearch = (data) => {
+    console.log(data);
+  }
+
 
   const addToCart = () => {
     alert()
   }
 
   return (<>
-    <Navbar/>
+    <Navbar onClick={handleSearch}/>
     <div className="p-4 min-h-screen bg-[#F9F9F9]">
     <div className="flex justify-center pt-[120px] lg:hidden">
         <div className="flex flex-row items-center">
@@ -69,8 +74,7 @@ function Search() {
              </div>
         </div>
 
-<div className="mt-[40px] mb-[40px] text-[22px] font-bold">Search Results</div>
-
+<div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px]">Search Results</div>
 <div className="mt-4 flex flex-col lg:flex-row lg:flex-wrap gap-x-[20px] gap-y-[30px]">
   {searchResults.length > 0 ? (
     searchResults.map((result) => {

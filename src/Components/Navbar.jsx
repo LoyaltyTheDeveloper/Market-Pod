@@ -28,6 +28,7 @@ import product from '../assets/Cart image.svg'
 import { GoTrash } from "react-icons/go";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
+import { toast } from 'react-hot-toast';
 
 
 function Navbar() {
@@ -37,6 +38,10 @@ function Navbar() {
     
 
   const handleSearch = () => {
+   
+     if(!searchQuery){
+          toast.error('Please search a stall or product');
+        }
 
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
       .then((response) => {
