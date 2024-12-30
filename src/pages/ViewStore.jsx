@@ -66,22 +66,19 @@ function ViewStore() {
         },
         body: JSON.stringify({ product_id: product.id }),
       })
-        .then((response) => {
-          response.json();
-        })
+      .then((response) => response.json())
         .then((data) => {
-          console.log(data.message);
+          toast.success(data.message);
+          return;
           // Update the cart state with the new product
-          setCart((prevCart) => ({
-            store: product.store,
-            items: [...prevCart.items, product],
-          }));
+          // setCart((prevCart) => ({
+          //   store: product.store,
+          //   items: [...prevCart.items, product],
+          // }));
         })
         .catch((error) => {
           console.error(error);
         });
-        console.log(state.token);
-        console.log("Body:", { product_id: product.id });
     };
 
     const handleKeyDown = (event) => {

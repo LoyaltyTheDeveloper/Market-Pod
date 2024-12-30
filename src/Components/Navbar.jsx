@@ -35,7 +35,59 @@ function Navbar() {
 
   const [searchQuery, setSearchQuery] = useState(""); // For user input
     const [searchResults, setSearchResults] = useState([]);
-    
+    const [products, setProducts] = useState([]);
+
+
+
+ 
+
+
+   const getProducts = () => {
+     
+        
+         fetch('https://apis.emarketpod.com/user/cart', {
+           method: "GET",
+           headers: {
+             "Content-Type": "application/json",
+             Authorization: state.token,
+             
+           },
+         })
+         .then((response) => response.json())
+           .then((data) => {
+             setProducts(data);
+   
+             // Update the cart state with the new product
+             // setCart((prevCart) => ({
+             //   store: product.store,
+             //   items: [...prevCart.items, product],
+             // }));
+           })
+           .catch((error) => {
+             console.error(error);
+           });
+       };
+
+       const deleteProduct = (product) => {
+        fetch('https://apis.emarketpod.com/user/cart/remove', {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: state.token,
+          },
+          body: JSON.stringify({ product_id: product.product_id }),
+        })
+        .then((response) => response.json())
+          .then((data) => {
+            toast.success(data.message);
+            return;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
+
+
 
   const handleSearch = () => {
    
@@ -62,6 +114,11 @@ function Navbar() {
       });
   };
 
+  const showCart =()=>{
+    toggleDrawer(true);
+    getProducts;
+  }
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSearch();
@@ -85,6 +142,7 @@ function Navbar() {
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+    getProducts();
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -134,6 +192,7 @@ function Navbar() {
 
   const DrawerList = (
     <Box sx={{ width: 400 }} role="presentation">
+
      <div>
       <div className="bg-white z-50 fixed h-[50px] shadow-md overflow-x-hidden overflow-y-hidden w-full">
       
@@ -143,31 +202,72 @@ function Navbar() {
         </div>
       
         </div>
+
         <div className="flex justify-center pt-[20px]">
         <div className="pt-[50px]">
+
+
+
+
+
+
+        {Array.isArray(products) && products.length > 0 ? (
+        <ul>
+          {products.map((product) => (
+            <div key={product.product_id}>
+              
+            <div>
           <div className="font-bold">Produce</div>
           <div className="flex">
             <div><img src={product} className="size-[90px]"/></div>
             <div className="flex flex-col gap-[10px]">
-              <div>MAMA GOLD THAI RICE - 25KG</div>
+              <div>{product.name} - {product.weight}KG</div>
               <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
               <div className="flex items-center gap-[15px]">
-               <div className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
+               <div onClick={()=> deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
                <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
                 <div onClick={handleDecrease}className="text"><FaMinus className="size-[12px]"/></div>
                 <div className="text-[18px]">{count}</div>
                 <div onClick={handleIncrease}className="text"><FaPlus className="size-[12px]"/></div>
                </div>
-               <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN 32500</div>
+               <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price}</div>
               </div>
             </div>
           </div>
+        </div>
+
+
+            </div>
+          ))}
+        </ul>
+      ) : (
+       <div>Sup?</div>
+      )}
+
+
+
+
+         
+
         </div>
         </div>
         <div className="pt-[300px] flex justify-center">
           <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
         </div>
         </div>
+
+       
+
+
+
+
+
+
+
+
+
+
+
     </Box>
   );
 
@@ -348,6 +448,7 @@ function Navbar() {
             or
             <Link to="/signup"><div className="font-bold underline text-[#31603D]">Create Account</div></Link>
           </div>
+          
 
         </div>
         
