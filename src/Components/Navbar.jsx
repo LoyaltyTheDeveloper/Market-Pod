@@ -251,10 +251,10 @@ function Navbar() {
 
         {Array.isArray(products) && products.length > 0 ? (
         <ul>
-          {products.map((product) => (
+          {products.map((product) => (<>
             <div className="" key={product.product_id}>
               
-            <div className="bg-[#F9F9F9] pt-[20px]">
+            <div className="bg-[] pt-[20px]">
           <div className="font-bold ml-[10px]">Produce</div>
           <div className="flex">
             <div><img src={product} className="size-[90px]"/></div>
@@ -273,12 +273,14 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className="mt-[150px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
-          <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
-        </div>
             </div>
-          ))}
+             <hr className="mt-[10px] mx-[2%]"></hr>
+          </>))}
+          <div className="mt-[150px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
+             <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
+           </div>
         </ul>
+        
       ) : (
        <div className="flex">Nothing to see here</div>
       )}
