@@ -25,7 +25,14 @@ function ViewStore() {
     const refs = useRef({});
     const [searchQuery, setSearchQuery] = useState(""); // For user input
       const [searchResults, setSearchResults] = useState([]);
-      const [cart, setCart] = useState({ store: null, items: [] });
+      const [cart, setCart] = useState(() => {
+        {
+          
+          const savedCart = localStorage.getItem("cart");
+          return savedCart ? JSON.parse(savedCart) : [];
+        }
+      });
+      const [storeIdd, setStoreIdd] = useState(null);
       const [error, setError] = useState("");
       
 
@@ -34,6 +41,10 @@ function ViewStore() {
         refs.current[category].scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
+
+    useEffect(() => {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
     useEffect(() => {
       fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
@@ -50,43 +61,41 @@ function ViewStore() {
 }, [storeId])
 
     const addToCart = (product) => {
-      // Check if the cart is empty or the product is from the same store
-      // if (cart.store && cart.store !== product.store) {
-      //   setError(`Cannot add products from ${product.store}. Your cart contains products from ${cart.store}.`);
+     
+
+      const isProductInCart = cart.some((item) => item.id === product.id);
+      // if (isProductInCart) {
+      //   toast.error("This product is already in your cart!");
       //   return;
       // }
-  
-      setError(""); 
+      // if (cart.length > 0 && product.storeIdd !== product.store_id) {
+      //   alert("You can only add products from the same store!");
+      //   return;
+      // }
       fetch('https://apis.emarketpod.com/user/cart/add', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: state.token,
-          
         },
         body: JSON.stringify({ product_id: product.id }),
       })
       .then((response) => response.json())
         .then((data) => {
           toast.success(data.message);
+          // setCart((prevCart) => [...prevCart, product]);
+          // setStoreIdd(product.storeIdd);
           return;
-          // Update the cart state with the new product
-          // setCart((prevCart) => ({
-          //   store: product.store,
-          //   items: [...prevCart.items, product],
-          // }));
         })
         .catch((error) => {
           console.error(error);
         });
     };
-
     const handleKeyDown = (event) => {
       if (event.key === "Enter") {
         handleSearch();
       }
     };
-
     const handleSearch = () => {
       if(!searchQuery){
                 toast.error('Please search a stall or product');
@@ -109,9 +118,6 @@ function ViewStore() {
         
         });
     };
-  
-
-    
 
   return (<>
     <Navbar/>
@@ -132,6 +138,7 @@ function ViewStore() {
          </div>
     </div>
     </div>
+
 
    {/* Body */}
     <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px]">

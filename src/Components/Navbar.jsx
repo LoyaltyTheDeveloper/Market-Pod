@@ -33,42 +33,61 @@ import { toast } from 'react-hot-toast';
 
 function Navbar() {
 
-  const [searchQuery, setSearchQuery] = useState(""); // For user input
+  const [searchQuery, setSearchQuery] = useState(""); 
     const [searchResults, setSearchResults] = useState([]);
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
+    const [refresh, setRefresh] = useState(false);
+    const [quantity, setQuantity] = useState(
+      products.reduce((acc, product) => {
+        acc[product.product_id] = product.quantity || 0;
+        return acc;
+      }, {})
+    );
 
-
-
- 
-
-
-   const getProducts = () => {
-     
+    
+  //  const getProducts = () => {
         
-         fetch('https://apis.emarketpod.com/user/cart', {
-           method: "GET",
-           headers: {
-             "Content-Type": "application/json",
-             Authorization: state.token,
+  //        fetch('https://apis.emarketpod.com/user/cart', {
+  //          method: "GET",
+  //          headers: {
+  //            "Content-Type": "application/json",
+  //            Authorization: state.token,
              
-           },
-         })
-         .then((response) => response.json())
-           .then((data) => {
-             setProducts(data);
-   
-             // Update the cart state with the new product
-             // setCart((prevCart) => ({
-             //   store: product.store,
-             //   items: [...prevCart.items, product],
-             // }));
-           })
-           .catch((error) => {
-             console.error(error);
-           });
-       };
+  //          },
+  //        })
+  //        .then((response) => response.json())
+  //          .then((data) => {
+  //            setProducts(data);
+  //          })
+  //          .catch((error) => {
+  //            console.error(error);
+  //          });
+  //      };
 
+
+  useEffect(() => {
+        
+    fetch('https://apis.emarketpod.com/user/cart', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: state.token,
+        
+      },
+    })
+    .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [refresh]);
+   
        const deleteProduct = (product) => {
+        // const updatedCart = cart.filter((item) => item.id !== product.id);
+        // setCart(updatedCart);
         fetch('https://apis.emarketpod.com/user/cart/remove', {
           method: "DELETE",
           headers: {
@@ -80,6 +99,7 @@ function Navbar() {
         .then((response) => response.json())
           .then((data) => {
             toast.success(data.message);
+            setRefresh(!refresh);
             return;
           })
           .catch((error) => {
@@ -87,6 +107,30 @@ function Navbar() {
           });
       };
 
+      const updateQuantity = (productId, newQuantity) => {
+        fetch('https://apis.emarketpod.com/user/cart/update-quantity', {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: state.token,
+          },
+          body: JSON.stringify({ product_id: productId, quantity: newQuantity}),
+        })
+        .then((response) => response.json())
+          .then((data) => {
+            toast.success(data.message);
+            setRefresh(!refresh);
+            setQuantity((prevQuantities) => ({
+              ...prevQuantities,
+              [productId]: newQuantity,
+            }));
+            // console.log({product_id: productId, quantity: newQuantity});
+            return;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
 
 
   const handleSearch = () => {
@@ -114,35 +158,32 @@ function Navbar() {
       });
   };
 
-  const showCart =()=>{
-    toggleDrawer(true);
-    getProducts;
-  }
-
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSearch();
     }
   };
-  // Cart
-   const [count, setCount] = useState(0);
-  
-    const handleIncrease = () => {
-      setCount(count + 1);
-    }
-    const handleDecrease = () => {
-      if(count < 1){
-        return;
-      }
-      setCount(count - 1);
-    } 
 
+    const handleIncrease = (productId) => {
+      const currentQuantity = quantity[productId] || 0;
+      const newQuantity = currentQuantity + 1;
+      updateQuantity(productId, newQuantity);
+    }
+    const handleDecrease = (productId) => {
+      const currentQuantity = quantity[productId] || 0;
+      if(currentQuantity > 1){
+        const newQuantity = currentQuantity - 1;
+        updateQuantity(productId, newQuantity);
+        
+      }
+    } 
 
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
-    getProducts();
+    // getProducts();
+    setRefresh(!refresh);
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -197,27 +238,22 @@ function Navbar() {
       <div className="bg-white z-50 fixed h-[50px] shadow-md overflow-x-hidden overflow-y-hidden w-full">
       
         <div className="flex items-center my-[10px] mx-[10px] gap-[260px]">
-        <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart(0)</div>
+        <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({products.length})</div>
         <div onClick={toggleDrawer(false)} className=""><LiaTimesSolid className="size-[25px] text-[#31603D]"/></div>
         </div>
       
         </div>
 
-        <div className="flex justify-center pt-[20px]">
+        <div className="flex justify-center pt-[px]">
         <div className="pt-[50px]">
-
-
-
-
-
 
         {Array.isArray(products) && products.length > 0 ? (
         <ul>
           {products.map((product) => (
-            <div key={product.product_id}>
+            <div className="" key={product.product_id}>
               
-            <div>
-          <div className="font-bold">Produce</div>
+            <div className="bg-[#F9F9F9] pt-[20px]">
+          <div className="font-bold ml-[10px]">Produce</div>
           <div className="flex">
             <div><img src={product} className="size-[90px]"/></div>
             <div className="flex flex-col gap-[10px]">
@@ -226,47 +262,27 @@ function Navbar() {
               <div className="flex items-center gap-[15px]">
                <div onClick={()=> deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
                <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-                <div onClick={handleDecrease}className="text"><FaMinus className="size-[12px]"/></div>
-                <div className="text-[18px]">{count}</div>
-                <div onClick={handleIncrease}className="text"><FaPlus className="size-[12px]"/></div>
+                <div onClick={()=> handleDecrease (product.product_id)}className="text"><FaMinus className="size-[12px]"/></div>
+                <div className="text-[18px]">{product.quantity}</div>
+                <div onClick={()=> handleIncrease(product.product_id)}className="text"><FaPlus className="size-[12px]"/></div>
                </div>
                <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price}</div>
               </div>
             </div>
           </div>
         </div>
-
-
+        <div className="mt-[150px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
+          <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
+        </div>
             </div>
           ))}
         </ul>
       ) : (
-       <div>Sup?</div>
+       <div className="flex">Nothing to see here</div>
       )}
-
-
-
-
-         
-
         </div>
         </div>
-        <div className="pt-[300px] flex justify-center">
-          <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
         </div>
-        </div>
-
-       
-
-
-
-
-
-
-
-
-
-
 
     </Box>
   );
@@ -325,7 +341,7 @@ function Navbar() {
           <div className="font-bold text-[13px]">Cart</div>
           <div className="flex flex-row items-center gap-[7px]">
             <div><GrBasket className="size-[20px]"/></div>
-            <div className="text-[13px] text-[#31603D] font-bold">0 Item(s)</div>
+            <div className="text-[13px] text-[#31603D] font-bold">{products.length} Item(s)</div>
           </div>
          </div>
 
