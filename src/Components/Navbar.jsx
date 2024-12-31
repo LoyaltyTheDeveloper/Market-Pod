@@ -39,10 +39,12 @@ function Navbar() {
     const [cart, setCart] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [quantity, setQuantity] = useState(
-      products.reduce((acc, product) => {
-        acc[product.product_id] = product.quantity || 0;
-        return acc;
-      }, {})
+      Array.isArray(products)
+      ? products.reduce((acc, product) => {
+          acc[product.id] = product.quantity || 0;
+          return acc;
+        }, {})
+      : {}
     );
 
     
@@ -336,8 +338,10 @@ function Navbar() {
           <div className="font-bold text-[13px]">Orders</div>
             <div><PiNotepadBold className="size-[20px]"/></div>
          </div>}
-
+          
+         
          <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
+         {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[76px] top-[18px]"></div>}
           <div className="font-bold text-[13px]">Cart</div>
           <div className="flex flex-row items-center gap-[7px]">
             <div><GrBasket className="size-[20px]"/></div>
@@ -352,7 +356,9 @@ function Navbar() {
             <div><PiNotepadBold className="size-[20px]"/></div>
          </div>}
 
+         
          <div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
+         {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
             <div><GrBasket className="size-[20px]"/></div>
          </div>
 
