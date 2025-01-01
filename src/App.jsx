@@ -23,6 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Scroll from './Components/Scroll';
 import Search from './pages/Search';
 import { Toaster } from 'react-hot-toast';
+import Checkout from './pages/Checkout';
 
 
 
@@ -51,6 +52,7 @@ function App() {
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
         <Route path="/search" element={<Search/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Router>

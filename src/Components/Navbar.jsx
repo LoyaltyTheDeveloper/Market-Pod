@@ -236,7 +236,7 @@ function Navbar() {
   const DrawerList = (
     <Box sx={{ width: 400 }} role="presentation">
 
-     <div>
+     <div className="bg-[#F9F9F9] min-h-screen">
       <div className="bg-white z-50 fixed h-[50px] shadow-md overflow-x-hidden overflow-y-hidden w-full">
       
         <div className="flex items-center my-[10px] mx-[10px] gap-[260px]">
@@ -276,16 +276,22 @@ function Navbar() {
             </div>
              <hr className="mt-[10px] mx-[2%]"></hr>
           </>))}
-          <div className="mt-[150px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
+          <div className="mt-[150px] bg-[white] py-[50px] pb-[250px] items-center px-[20px] flex justify-center">
              <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
            </div>
         </ul>
         
-      ) : (
-       <div className="flex">Nothing to see here</div>
-      )}
+      ) : (<>
+      <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
+       <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red"/>
+       </div>
+       <div>Your personal cart is empty</div>
+       <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+       </div>
+      </>)}
         </div>
         </div>
+        
         </div>
 
     </Box>
