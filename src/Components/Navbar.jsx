@@ -357,6 +357,8 @@ function Navbar() {
           </div>
          </div>
 
+         
+
         </div>
 
         <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center">

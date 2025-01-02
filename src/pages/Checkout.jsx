@@ -15,6 +15,8 @@ import { PiHouseLineBold } from "react-icons/pi";
 import { FiPhone } from "react-icons/fi";
 import { GrLocation } from "react-icons/gr";
 import { PiMapPinArea } from "react-icons/pi";
+import { PiCity } from "react-icons/pi";
+import { BsQuestionCircle } from "react-icons/bs";
 // import { IoMdBicycle } from "react-icons/io";
 
 function Checkout() {
@@ -29,6 +31,16 @@ function Checkout() {
           : {}
         );
         const [showThirdDiv, setShowThirdDiv] = useState(false);
+        const [locations, setLocations] = useState([]);
+        const [selectedLocation, setSelectedLocation] = useState("");
+        const [country, setCountry] = useState("");
+        const [states, setStates] = useState("");
+
+        const handleCountryChange = (e) => {
+          setCountry(e.target.value);
+          setStates("");
+        };
+        
 
 
         const handleButtonClick = () => {
@@ -68,6 +80,26 @@ function Checkout() {
           console.error(error);
         });
     }, []);
+
+
+    useEffect(() => {
+          
+      fetch('https://apis.emarketpod.com/site/getLocations', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          
+        },
+      })
+      .then((response) => response.json())
+        .then((data) => {
+          setLocations(data.locations);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, []);
+
 
     const deleteProduct = (product) => {
         // const updatedCart = cart.filter((item) => item.id !== product.id);
@@ -119,19 +151,30 @@ function Checkout() {
 
   return (<>
   <Navbar/>
-    <div className="pt-[100px] pb-[50px] bg-[#F9F9F9] min-h-screen">
+    <div className="pt-[30px] pb-[50px] min-h-screen">
      
 <div className="flex flex-col lg:flex-row items-center">
- <div className="flex flex-col bg-[red]">
+
+ <div className="flex flex-col pt-[50px] pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max-h-72 no-scrollbar">
     <div className="flex justify-center pt-[px]">
             <div className="pt-[50px]">
-    
+
+
+    <div className="mb-[20px] flex justify-between items-center text-[12px]">
+      <div className="font-bold text-[25px]">Checkout</div>
+      <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
+        <div><GrBasket className="size-[14px]"/></div>
+        <div>Continue shopping</div>
+      </button>
+    </div>
+
+
             {Array.isArray(products) && products.length > 0 ? (
             <ul>
               {products.map((product) => (<>
                 <div className="" key={product.product_id}>
                   
-                <div className="bg-[] pt-[20px]">
+                <div className="bg-[] lg:pt-[30px]">
               <div className="font-bold ml-[10px]">Produce</div>
               <div className="flex">
                 
@@ -179,36 +222,144 @@ function Checkout() {
 
 
 
-<div className="second-or-third-div flex flex-col justify-center">
+<div className="second-or-third-div flex flex-col justify-center bg-[white] lg:px-[100px]">
         {!showThirdDiv ? (<>
         <div className="flex flex-col justify-center items-center">
+          
+<div className="flex flex-col gap-y-[10px] mt-[30px]">
+          <div className="text-[25px] font-bold">Delivery Details</div>
+           <div className="text-[14px]">Complete your order by providing your delivery address</div>
 
-          <div>Delivery Details</div>
-          <div>Complete your order by providing your delivery address</div>
-<div className="flex flex-col gap-y-[20px]">
           <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><GrLocation className="size-[20px]"/></div>
-          <div className=""><input className="border border-[grey]-300 py-4 pl-[50px] w-[300px] pr-[50px] rounded-[100px] w-[100%] focus:outline-none"></input></div>
+          <div className="">
+            
+          <select
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
+          id="location"
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+        >
+          <option value="">Select a location</option>
+          {locations.map((location) => (
+            <option key={location.id} value={location.id}>
+              {location.name}
+            </option>
+          ))}
+        </select>
+          
           </div>
-          <div className="flex flex-row items-center">
-            <div className="absolute ml-[20px]"><PiHouseLineBold className="size-[20px]"/></div>
-          <div><input className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[130%] focus:outline-none"></input></div>
+
           </div>
+
           <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><PiMapPinArea className="size-[20px]"/></div>
-          <div><input className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[130%] focus:outline-none"></input></div>
+          <div>
+            
+          <select 
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
+          onChange={handleCountryChange} value={country}>
+        <option className="text-[grey]" value="">Select a state</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="UK">UK</option>
+        </select>
+            
+            </div>
           </div>
-          </div>
-          </div>
-            <button onClick={handleButtonClick}>Go to Third Div</button>
-          
-        </>) : (
-          <div className="third-div">
-            <h2>This is the third div</h2>
-            <p>You have switched from the second div to the third div.</p>
-            <button onClick={handleButtonClick}>Go to Third Div</button>
-          </div>
+
+          <div className="flex flex-row items-center">
+            <div className="absolute ml-[20px]"><PiCity className="size-[20px]"/></div>
+          <div>
+
+          <select 
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
+          value={state} disabled={country === ""}>
+        <option value="">Select City</option>
+        {country === "India" && (
+          <><option key="Delhi">Delhi</option><option key="Punjab">Punjab</option><option key="Haryana">Haryana</option><option key="Goa">Goa</option></>
         )}
+        {country === "USA" && (
+          <><option key="California">California</option><option key="Texas">Texas</option><option key="New York">New York</option></>
+        )}
+        {country === "UK" && (
+          <><option key="London">London</option><option key="Manchester">Manchester</option><option key="Birmingham">Birmingham</option></>
+        )}
+      </select>
+
+
+            </div>
+          </div>
+
+          <div className="flex flex-row items-center">
+            <div className="absolute ml-[20px]"><PiMapPinArea className="size-[20px]"/></div>
+          <div>
+
+          <input
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Adress">
+      </input>
+
+
+            </div>
+          </div>
+
+          </div>
+          <div className="mt-[25px] px-[10px] py-[10px] bg-[#F9F9F9] w-[350px] rounded-[5px]">
+            <p className="font-bold">Tip</p>
+            <p>Can’t find your address? Use the nearest landmark, school, 
+            church, hospital etc or type out a description.</p>
+          </div>
+          <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Proceed</button></div>
+          
+          </div>
+          
+                   
+        </>) : (<>
+
+          <div className="flex flex-col justify-center items-center">
+          
+          <div className="flex flex-col gap-y-[10px] mt-[30px] lg:mt-[-50px]">
+                    <div className="text-[25px] font-bold">Order Details</div>
+                     <div className="text-[14px]">Confirm your order details before making payment.</div>
+          
+          
+                   <div className="flex flex-col gap-y-[30px] mt-[30px]">
+                    <div className="flex justify-between">
+                      <div>Order Value</div>
+                      <div className="font-bold">NGN 32500</div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>Delivery Fee</div>
+                      <div className="font-bold">NGN 32500</div>
+                    </div>
+                    
+                    <div className="">
+                    <div className="absolute right-[8px] lg:right-[80px]"><BsQuestionCircle className="size-[21px] text-[#31603D]"/></div>
+                    <div className="flex justify-between">
+                      <div>Service Charge</div>
+                      <div className="font-bold">NGN 32500</div>
+                    </div>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <div>VAT</div>
+                      <div className="font-bold">NGN 32500</div>
+                    </div>
+                    <hr></hr>
+                    <div className="flex justify-between">
+                      <div>Total</div>
+                      <div className="font-bold">NGN 32500</div>
+                    </div>
+                    <hr></hr>
+                   </div>
+          
+                    </div>
+                    
+                    <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Make Payment</button></div>
+                    
+                    </div>
+          
+        </>)}
       </div>
 
 
