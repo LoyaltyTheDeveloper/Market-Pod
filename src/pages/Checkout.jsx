@@ -35,6 +35,7 @@ function Checkout() {
         const [selectedLocation, setSelectedLocation] = useState("");
         const [country, setCountry] = useState("");
         const [states, setStates] = useState("");
+        const [refresh, setRefresh] = useState(false);
 
         const handleCountryChange = (e) => {
           setCountry(e.target.value);
@@ -74,12 +75,14 @@ function Checkout() {
       })
       .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setProducts(data);
         })
         .catch((error) => {
           console.error(error);
         });
-    }, []);
+        // setRefresh(!refresh);
+    }, [refresh]);
 
 
     useEffect(() => {
@@ -160,7 +163,7 @@ function Checkout() {
             <div className="pt-[50px]">
 
 
-    <div className="mb-[20px] flex justify-between items-center text-[12px]">
+    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px]">
       <div className="font-bold text-[25px]">Checkout</div>
       <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
@@ -209,7 +212,7 @@ function Checkout() {
             </ul>
             
           ) : (<>
-          <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
+          <div className="flex flex-col gap-y-[10px] mt-[100px] items-center">
            {/* <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red"/>
            </div> */}
            <div>No items here</div>

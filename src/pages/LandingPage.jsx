@@ -108,34 +108,32 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
           
 <div onMouseLeave={() => closeModal()} className="App">
       {/* Main Dropdown Display */}
-      <div className="h-[70px] flex flex-row px-[20px] justify-between whitespac-nowrap lg:space-x-[100p] mt-[130px] justify-center items-center">
+      <div className="h-[70px] flex flex-row gap-x-[30px] justify-evenly whitespace-nowra mt-[130px] justify-center">
         {dropdownData.dropdowns && dropdownData.dropdowns.length > 0 ? (
-          dropdownData.dropdowns.map((item) => (
+          dropdownData.dropdowns.map((item) => (<>
 
-          
+ <div  className="flex flex-col justify-center items-center hidden lg:flex">
             <div
               key={item.id}
-              className="hidden whitespace-nowrap justify-between lg:flex lg:flex-col color-[grey] size-[25px] text-[grey] flex flex-col items-center cursor-pointer"
+              className="hidden lg:flex lg:flex-col color-[grey] size-[25px] text-[grey]  items-center cursor-pointer"
               onMouseOver={() => openModal(item)}
-              // onMouseLeave={() => closeModal()}
+              
             >
            
               <img
                 src={item.image}
                 alt={item.name}
                 className="size-[20px]"
-                // onMouseEnter={() => openModal(item)}
-                // onMouseLeave={() => closeModal()} // closes modal on image leave
+                
               />
-          
-
-              <div>
-              <p className="text-[12px]">{item.name}</p>
-              </div>
-
 
             </div>
-          ))
+
+             <div className="cursor-pointer">
+             <p className="text-[12px]">{item.name}</p>
+             </div>
+         </div>
+          </>))
         ) : (
           <p></p>
         )}
@@ -145,7 +143,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
       {/* Modal */}
       {selectedDropdown && (
         
-          <div onMouseLeave={() => closeModal()} className="flex justify-center items-center bg-white w-[75%] z-50 absolute lg:w-[98%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
+          <div onMouseLeave={() => closeModal()} className="flex hidden lg:flex justify-center items-center bg-[white] w-[75%] z-50 absolute lg:w-[100%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
             
           >
 
@@ -179,7 +177,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
                   {/* Vertical line, except after the last category */}
                   {index < selectedDropdown.categories.length - 1 && (
-                    <div className="hidden lg:flex h-[200px] ml-[10px] mr-[10px] border-l border-gray-300 lg:flex justify-between px-[30px]"></div>
+                    <div className="hidden lg:flex h-[200px] border-l border-gray-300 lg:flex justify-between px-[30px]"></div>
                   )}
                 </div>
               ))}
@@ -242,6 +240,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
           <div className="flex gap-[20px] lg:flex-row justify-center lg:flex justify-start">
             {market.stores.map((store) => (
               <div
+                onClick ={() => navigate(`/site/getStore/${store.id}`)}
                 key={store.id}
                 className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
               >

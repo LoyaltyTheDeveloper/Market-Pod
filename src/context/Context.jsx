@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     if(tokenExists){
       dispatch({type: 'SIGN_IN', payload: tokenExists})
     }
-  })
+  },[]);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

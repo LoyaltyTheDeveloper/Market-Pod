@@ -277,7 +277,7 @@ function Navbar() {
              <hr className="mt-[10px] mx-[2%]"></hr>
           </>))}
           <div className="mt-[150px] bg-[white] py-[50px] pb-[250px] items-center px-[20px] flex justify-center">
-             <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
+             <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]"><Link to="/checkout">Proceed to Checkout</Link></button>
            </div>
         </ul>
         
