@@ -262,7 +262,7 @@ function ViewStore() {
       {[...new Set(products.map(product => product.category_name))].map(category => (
         
         <div key={category} ref={(el) => (refs.current[category] = el)} className="mb-4">
-          <h2 className="text-[24px] lg:text-[30px] font-bold">{category}</h2>
+          <h2 className="text-[24px] lg:text-[30px] font-bold px-2 lg:px-0">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)

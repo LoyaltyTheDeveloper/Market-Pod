@@ -237,7 +237,7 @@ function Navbar() {
     <Box sx={{ width: 400 }} role="presentation">
 
      <div className="bg-[#F9F9F9] min-h-screen">
-      <div className="bg-white z-50 fixed h-[50px] shadow-md overflow-x-hidden overflow-y-hidden w-full">
+      <div className="bg-[white] z-50 fixed h-[50px] w-[200%] overflow-x-hidden overflow-y-hidden w-full">
       
         <div className="flex items-center my-[10px] mx-[10px] gap-[260px]">
         <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({products.length})</div>
@@ -247,12 +247,12 @@ function Navbar() {
         </div>
 
         <div className="flex justify-center pt-[px]">
-        <div className="pt-[50px]">
+        <div className="pt-[50px] pb-[50px]">
 
         {Array.isArray(products) && products.length > 0 ? (
-        <ul>
+        <ul className="">
           {products.map((product) => (<>
-            <div className="" key={product.product_id}>
+            <div className="bg-[]" key={product.product_id}>
               
             <div className="bg-[] pt-[20px]">
           <div className="font-bold ml-[10px]">Produce</div>
@@ -275,9 +275,11 @@ function Navbar() {
         </div>
             </div>
              <hr className="mt-[10px] mx-[2%]"></hr>
-          </>))}
-          <div className="mt-[150px] bg-[white] py-[50px] pb-[250px] items-center px-[20px] flex justify-center">
-             <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]"><Link to="/checkout">Proceed to Checkout</Link></button>
+          </>
+
+        ))}
+          <div className="fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
+             <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap"><Link to="/checkout">Proceed to Checkout</Link></button>
            </div>
         </ul>
         
@@ -318,7 +320,7 @@ function Navbar() {
           </div>
          </div>
 
-         <div className="absolute right-[120px] flex flex-row items-center gap-x-[50px]">
+         <div className="absolute right-[170px] flex flex-row items-center gap-x-[50px]">
 
          <div className="flex flex-row items-center hidden lg:flex md:hidden">
          <RiSearchLine onClick={handleSearch} className="absolute ml-[20px] size-[15px]"/>
@@ -348,12 +350,13 @@ function Navbar() {
          </div>}
           
          
+         
          <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
-         {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[76px] top-[18px]"></div>}
+         {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[20px] top-[18px]"></div>}
           <div className="font-bold text-[13px]">Cart</div>
           <div className="flex flex-row items-center gap-[7px]">
             <div><GrBasket className="size-[20px]"/></div>
-            <div className="text-[13px] text-[#31603D] font-bold">{products.length} Item(s)</div>
+            <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{products.length} Item(s)</div>
           </div>
          </div>
 
