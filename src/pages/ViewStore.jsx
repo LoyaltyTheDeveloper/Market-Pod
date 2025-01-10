@@ -143,14 +143,14 @@ function ViewStore() {
    {/* Body */}
     <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px]">
 
-        <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-40px]">
+        <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-70px]">
         
 
 <div>
     {store && (
       <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px]">
         <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[10px] lg:px-[0px]">
-          <div className="h-[100px] w-[30%] lg:size-[150px] lg:w-[70%]">
+          <div className="h-[100px] w-[30%] lg:size-[150px] lg:w-[70%] lg:mt-[55px]">
             <img className="h-full object-cover rounded-[5px]" src={store.image}/>
           </div>
           <div className="w-[270px] flex flex-col gap-[5px]">
@@ -168,7 +168,7 @@ function ViewStore() {
         </div>
 
         <div className="hidden lg:flex">
-          <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[10px] lg:mb-[90px]">
             <div className="font-semibold">Browse Categories</div>
             {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
@@ -212,7 +212,7 @@ function ViewStore() {
 
 
 
-<div className="">
+{/* <div className="">
       {products && products.length > 0 ? (
         products.map((product) => (
           <div className="mb-[30px]" key={product.category_name} ref={(el) => (refs.current[product.category_name] = el)}>
@@ -252,7 +252,62 @@ function ViewStore() {
         <div className="flex inset-0">Loading products...</div>
       )}
     
-</div>
+</div> */}
+
+
+
+
+<div className="">
+      {/* Extract unique categories directly from mapped products */}
+      {[...new Set(products.map(product => product.category_name))].map(category => (
+        
+        <div key={category} ref={(el) => (refs.current[category] = el)} className="mb-4">
+          <h2 className="text-[24px] lg:text-[30px] font-bold">{category}</h2>
+          <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
+            {products
+              .filter(product => product.category_name === category)
+              .map(product => (
+                <div className="mt-[30px]" key={product.id}>
+            <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
+          <div
+            className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] bg-[white] rounded-[5px]"
+          >
+            <div className="flex justify-center px-[50px]">
+              <img
+                src={product.image}
+                className="w-24 h-24 object-cover flex justify-center"
+              />
+              <div onClick={()=> addToCart(product)} className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] border bg-[#31603D] rounded-full p-[7px] group">
+                <FaPlus className="text-[white]" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold">
+                {product.name}
+              </div>
+              <div className="text-[12px] w-[150px] lg:text-[13px]">{product.subtitle}</div>
+              <div className="flex absolte bttom-[180px] lg:botom-[380px]">
+                <div className="font-semibold text-[12px] lg:text-[16px]">
+                  NGN {product.price}
+                </div>
+                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
+                   {product.status === 1 ? "In-stock":"Unavailable"}
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+              ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+
+
+
+
                
 
                 </div>
