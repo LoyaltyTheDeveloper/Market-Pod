@@ -267,7 +267,7 @@ function ViewStore() {
             {products
               .filter(product => product.category_name === category)
               .map(product => (
-                <div className="mt-[30px]" key={product.id}>
+                <div className="mt-[30px]" key={product.id} onClick ={() => navigate(`/site/getProduct/${product.id}`)}>
             <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
             className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] bg-[white] rounded-[5px]"

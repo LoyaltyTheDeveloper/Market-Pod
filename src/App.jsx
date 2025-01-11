@@ -48,7 +48,7 @@ function App() {
         <Route path="/service" element={<ServiceCharge/>}/>
         <Route path="/aboutus" element={<AboutUs/>}/>
         <Route path="/site/getStore/:storeId" element={<ViewStore/>}/>
-        <Route path="/productdetail" element={<ProductDetail/>}/>
+        <Route path="/site/getProduct/:productId" element={<ProductDetail/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
         <Route path="/search" element={<Search/>}/>

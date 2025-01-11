@@ -36,7 +36,8 @@ function Search() {
         return response.json();
       })
       .then((data) => {
-        setSearchResults(data.results);
+        // setSearchResults(data.results);
+        console.log(data.results);
        
       })
       .catch((error) => {
