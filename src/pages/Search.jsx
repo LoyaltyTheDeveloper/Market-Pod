@@ -115,7 +115,7 @@ function Search() {
         {/* <div className="text-[15px]">{result.data.addr}</div> */}
         <div className="flex items-center gap-x-[5px] text-[#31603D]">
                             <div><LuClock5/></div>
-                            <div className="text-[15px]">
+                            <div className="text-[15px] whitespace-nowrap">
                              Opens {result.data.open_time} - Closes {result.data.close_time}
                             </div>
                           </div>
@@ -163,7 +163,7 @@ function Search() {
 
 
 
-<div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-x-[20px]">
+<div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[8px] lg:gap-x-[20px]">
               {result.data.products && result.data.products.length > 0 ? (
                 result.data.products.map((product) => (
                   <div className="mb-[30px]" key={product.id}>
