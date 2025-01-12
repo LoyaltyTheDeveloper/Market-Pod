@@ -13,8 +13,19 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { useRef } from "react";
 import { AuthContext } from '../context/Context.jsx';
 import { toast } from 'react-hot-toast';
+import { trio } from 'ldrs'
+
+
+
+// Default values shown
+
+
 
 function ViewStore() {
+
+  trio.register()
+
+   const [isLoading, setIsLoading] = useState(false);
    const { state } = useContext(AuthContext);
     const { storeId } = useParams();
     const { marketId } = useParams();
@@ -62,8 +73,8 @@ function ViewStore() {
 
     const addToCart = (product) => {
      
-
-      const isProductInCart = cart.some((item) => item.id === product.id);
+    setIsLoading(true);
+      // const isProductInCart = cart.some((item) => item.id === product.id);
       // if (isProductInCart) {
       //   toast.error("This product is already in your cart!");
       //   return;
@@ -82,12 +93,12 @@ function ViewStore() {
       })
       .then((response) => response.json())
         .then((data) => {
+          setIsLoading(false);
           toast.success(data.message);
-          // setCart((prevCart) => [...prevCart, product]);
-          // setStoreIdd(product.storeIdd);
           return;
         })
         .catch((error) => {
+          setIsLoading(false);
           console.error(error);
         });
     };
@@ -121,6 +132,7 @@ function ViewStore() {
 
   return (<>
     <Navbar/>
+    
     <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
 
      <div className="flex mt-[130px] justify-center">
@@ -182,6 +194,7 @@ function ViewStore() {
   </div>
 
 
+
     <div className="flex mt-[30px] justify-center  lg:justify-start">
         <div className="">
             <div className="flex flex-col">
@@ -206,9 +219,14 @@ function ViewStore() {
 
                 
 
+       
                 
 
-
+        {isLoading &&  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
 
 
 
@@ -267,13 +285,14 @@ function ViewStore() {
             {products
               .filter(product => product.category_name === category)
               .map(product => (
-                <div className="mt-[30px]" key={product.id} onClick ={() => navigate(`/site/getProduct/${product.id}`)}>
+                <div className="mt-[30px]" key={product.id}>
             <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
             className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] bg-[white] rounded-[5px]"
           >
             <div className="flex justify-center px-[50px]">
               <img
+                onClick ={() => navigate(`/site/getProduct/${product.id}`)}
                 src={product.image}
                 className="w-24 h-24 object-cover flex justify-center"
               />
@@ -281,7 +300,7 @@ function ViewStore() {
                 <FaPlus className="text-[white]" />
               </div>
             </div>
-            <div className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+            <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
               <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold">
                 {product.name}
               </div>

@@ -29,10 +29,12 @@ import { GoTrash } from "react-icons/go";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
+import { trio } from 'ldrs'
 
 
 function Navbar() {
-
+   trio.register()
+ const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState(""); 
     const [searchResults, setSearchResults] = useState([]);
     const [products, setProducts] = useState([]);
@@ -68,7 +70,9 @@ function Navbar() {
   //      };
 
 
+
   useEffect(() => {
+    setIsLoading(true);
         
     fetch('https://apis.emarketpod.com/user/cart', {
       method: "GET",
@@ -80,16 +84,18 @@ function Navbar() {
     })
     .then((response) => response.json())
       .then((data) => {
+        setIsLoading(false);
         setProducts(data);
       })
       .catch((error) => {
+        setIsLoading(false);
         console.error(error);
       });
   }, [refresh]);
    
        const deleteProduct = (product) => {
-        // const updatedCart = cart.filter((item) => item.id !== product.id);
-        // setCart(updatedCart);
+        setIsLoading(true);
+       
         fetch('https://apis.emarketpod.com/user/cart/remove', {
           method: "DELETE",
           headers: {
@@ -100,16 +106,19 @@ function Navbar() {
         })
         .then((response) => response.json())
           .then((data) => {
+            setIsLoading(false);
             toast.success(data.message);
             setRefresh(!refresh);
             return;
           })
           .catch((error) => {
+            setIsLoading(false);
             console.error(error);
           });
       };
 
       const updateQuantity = (productId, newQuantity) => {
+        setIsLoading(true);
         fetch('https://apis.emarketpod.com/user/cart/update-quantity', {
           method: "PATCH",
           headers: {
@@ -120,6 +129,7 @@ function Navbar() {
         })
         .then((response) => response.json())
           .then((data) => {
+            setIsLoading(false);
             toast.success(data.message);
             setRefresh(!refresh);
             setQuantity((prevQuantities) => ({
@@ -246,6 +256,12 @@ function Navbar() {
       
         </div>
 
+        {isLoading &&  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
+
         <div className="flex justify-center pt-[px]">
         <div className="pt-[50px] pb-[50px]">
 
@@ -288,7 +304,7 @@ function Navbar() {
        <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red"/>
        </div>
        <div>Your personal cart is empty</div>
-       <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+       <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
        </div>
       </>)}
         </div>

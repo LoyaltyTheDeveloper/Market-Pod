@@ -8,9 +8,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { dotPulse } from 'ldrs'
+
+dotPulse.register()
+
 
 
 function SignUp() {
+  dotPulse.register()
   const [email, setEmail] = useState('');
   const [pswd, setPassword] = useState('');
   const { dispatch } = useContext(AuthContext);
@@ -110,7 +115,11 @@ function SignUp() {
             disabled
               className="bg-[#31603D] opacity-[80%] text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
             >
-              Loading...
+              <l-dot-pulse
+  size="40"
+  speed="1.3" 
+  color="white" 
+></l-dot-pulse>
             </button>
           </div>}
 

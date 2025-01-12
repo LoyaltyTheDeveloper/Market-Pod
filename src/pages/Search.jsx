@@ -5,15 +5,18 @@ import { FaPlus } from "react-icons/fa";
 import Footer from '../Components/Footer';
 import { RiSearchLine } from "react-icons/ri";
 import { toast } from 'react-hot-toast';
+import { trio } from 'ldrs'
 
 function Search() {
-
+  const [isLoading, setIsLoading] = useState(false);
+     trio.register()
     const handleKeyDown = (event) => {
       if (event.key === "Enter") {
         handleSearch();
       }
     };
 
+    
     const location = useLocation();
   const navigate = useNavigate();
   const { searchQuery: initialQuery, searchResults: initialResults } = location.state || { searchQuery: "", searchResults: [] };
@@ -23,7 +26,7 @@ function Search() {
 
 
   const handleSearch = () => {
-  
+  setIsLoading(true);
     if(!searchQuery){
       toast.error('Please search a stall or product');
     }
@@ -31,12 +34,14 @@ function Search() {
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
       .then((response) => {
         if (!response.ok) {
+          setIsLoading(false);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // setSearchResults(data.results);
+        setIsLoading(false);
+        setSearchResults(data.results);
         console.log(data.results);
        
       })
@@ -74,6 +79,12 @@ function Search() {
           />
              </div>
         </div>
+
+        {isLoading &&  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
 
 <div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px]">Search Results</div>
 <div className="mt-4 flex flex-col lg:flex-row lg:flex-wrap gap-x-[20px] gap-y-[30px]">

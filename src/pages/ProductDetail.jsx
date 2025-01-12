@@ -88,7 +88,7 @@ function ProductDetail() {
     <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] mt-[30px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[300px]">
     <div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
 
-    <div className="lg:px-4 lg:py-3 lg:pb-6 lg:flex lg:flex-col lg:gap-y-2">
+    <div className="flex flex-col lg:px-4 lg:py-3 lg:pb-6 lg:flex lg:flex-col gap-y-2">
         <div className="text-[20px] font-bold">Share the experience</div>
         <div className="lg:hidden">Invite friends sha</div>
         <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
@@ -96,7 +96,7 @@ function ProductDetail() {
 
         <div onClick={copy} className="flex items-center gap-x-[5px] cursor-pointer">
             <div className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
-        <div className="underline">Copy Link</div>
+        <button className="underline">Copy Link</button>
         </div>
 
         </div>
