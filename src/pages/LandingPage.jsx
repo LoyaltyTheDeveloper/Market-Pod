@@ -21,10 +21,12 @@ import landing5 from '/assets/landing5.svg'
 import landing7 from '/assets/landing7.svg'
 import { FaPlus } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
+import { trio } from 'ldrs'
 
 
 function LandingPage({ markets }) {
-
+   trio.register()
+   const [isLoading, setIsLoading] = useState(false);
   const [marketss, setMarketss] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDropdown, setSelectedCategory] = useState(null);
@@ -35,7 +37,7 @@ function LandingPage({ markets }) {
 
 
   const handleSearch = () => {
-
+   setIsLoading(true);
     if(!searchQuery){
       toast.error('Please search a stall or product');
     }
@@ -43,15 +45,18 @@ function LandingPage({ markets }) {
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
       .then((response) => {
         if (!response.ok) {
+          setIsLoading(false);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
+        setIsLoading(false);
         navigate("/search", { state: { searchQuery, searchResults: data.results } });
        
       })
       .catch((error) => {
+        setIsLoading(false);
         console.error("Error fetching search results:", error);
       })
       .finally(() => {
@@ -103,7 +108,6 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
   return (<>
   <Navbar/>
-  
  <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
           
 <div onMouseLeave={() => closeModal()} className="App">
@@ -139,6 +143,11 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         )}
       </div>
 
+      {isLoading &&  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
 
       {/* Modal */}
       {selectedDropdown && (
@@ -279,6 +288,8 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                     ))}
                     
                   </div>
+
+                  
                 </div>
               </div>
             ))}
