@@ -265,7 +265,7 @@ function Navbar() {
         <div className="flex justify-center pt-[px]">
 
 
-      {!isLoading &&<div className="pt-[50px] pb-[50px]">
+      <div className="pt-[50px] pb-[50px]">
 
         {Array.isArray(products) && products.length > 0 ? (
         <ul className="">
@@ -311,7 +311,7 @@ function Navbar() {
        </div>}
 
       </>)}
-        </div>}
+        </div>
 
 
         </div>
