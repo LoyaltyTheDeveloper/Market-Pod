@@ -24,7 +24,6 @@ function SignIn() {
   const [isPending, setIsPending] = useState(false);
 
   const handleSignin = (e) => {
-
     setIsPending(true);
     e.preventDefault();
     if (email === '' || pswd === '') {
@@ -48,10 +47,10 @@ function SignIn() {
   .then((response) => response.json())
         .then((data) => {
           if (data.status === true) {
-            localStorage.setItem('user', JSON.stringify(data))
+            // localStorage.setItem('user', JSON.stringify(data))
             dispatch({
               type: 'SIGN_IN',
-              payload: { token: data.token },
+              payload: { token: data.token ,user:data.user},
             });
             toast.success(data.message);
             setIsPending(false);
