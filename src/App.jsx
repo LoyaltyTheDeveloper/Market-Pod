@@ -24,6 +24,7 @@ import Scroll from './Components/Scroll';
 import Search from './pages/Search';
 import { Toaster } from 'react-hot-toast';
 import Checkout from './pages/Checkout';
+import UserDetails from './pages/UserDetails';
 
 
 
@@ -53,6 +54,7 @@ function App() {
         <Route path="/site/getStores/:marketId/:marketName/:marketAddr" element={<StoreList/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        <Route path="/details" element={<UserDetails/>}/>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Router>
