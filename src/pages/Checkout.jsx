@@ -33,16 +33,18 @@ function Checkout() {
         const [showThirdDiv, setShowThirdDiv] = useState(false);
         const [locations, setLocations] = useState([]);
         const [selectedLocation, setSelectedLocation] = useState("");
-        const [country, setCountry] = useState("");
+        const [city, setCity] = useState("");
         const [states, setStates] = useState("");
         const [refresh, setRefresh] = useState(false);
 
-        const handleCountryChange = (e) => {
-          setCountry(e.target.value);
+        const handleCityChange = (e) => {
+          setCity(e.target.value);
+          setCity("");
+        };
+        const handleStatesChange = (e) => {
+          setStates(e.target.value);
           setStates("");
         };
-        
-
 
         const handleButtonClick = () => {
             setShowThirdDiv(!showThirdDiv);
@@ -261,7 +263,7 @@ function Checkout() {
             
           <select 
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
-          onChange={handleCountryChange} value={country}>
+          onChange={handleStatesChange}>
         <option className="text-[grey]" value="">Select a state</option>
         <option value="India">India</option>
         <option value="USA">USA</option>
@@ -275,17 +277,18 @@ function Checkout() {
             <div className="absolute ml-[20px]"><PiCity className="size-[20px]"/></div>
           <div>
 
-          <select 
+          <select
+          onChange={handleCityChange}
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
-          value={state} disabled={country === ""}>
-        <option value="">Select City</option>
-        {country === "India" && (
+          disabled={city === ""}>
+        <option value="">Select a city</option>
+        {states === "Ondo" && (
           <><option key="Delhi">Delhi</option><option key="Punjab">Punjab</option><option key="Haryana">Haryana</option><option key="Goa">Goa</option></>
         )}
-        {country === "USA" && (
+        {states === "USA" && (
           <><option key="California">California</option><option key="Texas">Texas</option><option key="New York">New York</option></>
         )}
-        {country === "UK" && (
+        {states === "UK" && (
           <><option key="London">London</option><option key="Manchester">Manchester</option><option key="Birmingham">Birmingham</option></>
         )}
       </select>
@@ -309,8 +312,8 @@ function Checkout() {
           </div>
           <div className="mt-[25px] px-[10px] py-[10px] bg-[#F9F9F9] w-[350px] rounded-[5px]">
             <p className="font-bold">Tip</p>
-            <p>Can’t find your address? Use the nearest landmark, school, 
-            church, hospital etc or type out a description.</p>
+            <p>For the best experience, make use of the nearest 
+            landmark, school, church, etc in your description.</p>
           </div>
           <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Proceed</button></div>
           
@@ -337,7 +340,7 @@ function Checkout() {
                     </div>
                     
                     <div className="">
-                    <div className="absolute right-[8px] lg:right-[80px]"><BsQuestionCircle className="size-[21px] text-[#31603D]"/></div>
+                    <div className="absolute right-[8px] lg:right-[80px]"><Link to="/service"><BsQuestionCircle className="size-[21px] text-[#31603D]"/></Link></div>
                     <div className="flex justify-between">
                       <div>Service Charge</div>
                       <div className="font-bold">NGN 32500</div>

@@ -41,7 +41,6 @@ function LandingPage({ markets }) {
     if(!searchQuery){
       toast.error('Please search a stall or product');
     }
-
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
       .then((response) => {
         if (!response.ok) {
@@ -53,7 +52,6 @@ function LandingPage({ markets }) {
       .then((data) => {
         setIsLoading(false);
         navigate("/search", { state: { searchQuery, searchResults: data.results } });
-       
       })
       .catch((error) => {
         setIsLoading(false);
@@ -63,8 +61,6 @@ function LandingPage({ markets }) {
       
       });
   };
-
-  
 
  const addToCart = () => {
   alert();

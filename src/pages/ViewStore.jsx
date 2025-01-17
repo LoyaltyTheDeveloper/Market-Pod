@@ -180,7 +180,7 @@ function ViewStore() {
         </div>
 
         <div className="hidden lg:flex">
-          <div className="flex flex-col gap-[10px] lg:mb-[90px]">
+          <div className="flex flex-col gap-[10px] lg:mb-[500px]">
             <div className="font-semibold">Browse Categories</div>
             {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
@@ -275,11 +275,12 @@ function ViewStore() {
 
 
 
-<div className="">
+<div className="lg:min-h-screen lg:overflow-y-auto lg:max-h-72 no-scrollbar">
       {/* Extract unique categories directly from mapped products */}
       {[...new Set(products.map(product => product.category_name))].map(category => (
         
-        <div key={category} ref={(el) => (refs.current[category] = el)} className="mb-4">
+        <div
+        key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
           <h2 className="text-[24px] lg:text-[30px] font-bold px-2 lg:px-0">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
             {products

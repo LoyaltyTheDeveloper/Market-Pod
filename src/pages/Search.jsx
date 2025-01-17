@@ -60,9 +60,37 @@ function Search() {
   }
 
 
-  const addToCart = () => {
-    alert()
-  }
+   const addToCart = (product) => {
+       
+      setIsLoading(true);
+        // const isProductInCart = cart.some((item) => item.id === product.id);
+        // if (isProductInCart) {
+        //   toast.error("This product is already in your cart!");
+        //   return;
+        // }
+        // if (cart.length > 0 && product.storeIdd !== product.store_id) {
+        //   alert("You can only add products from the same store!");
+        //   return;
+        // }
+        fetch('https://apis.emarketpod.com/user/cart/add', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: state.token,
+          },
+          body: JSON.stringify({ product_id: product.id }),
+        })
+        .then((response) => response.json())
+          .then((data) => {
+            setIsLoading(false);
+            toast.success(data.message);
+            return;
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            console.error(error);
+          });
+      };
 
   return (<>
     <Navbar onClick={handleSearch}/>
@@ -173,6 +201,7 @@ function Search() {
                   >
                     <div className="flex justify-center px-[50px]">
                       <img
+                      onClick ={() => navigate(`/site/getProduct/${product.id}`)}
                         src={product.image}
                         className="w-24 h-24 object-cover flex justify-center"
                       />
@@ -180,7 +209,9 @@ function Search() {
                         <FaPlus className="text-[white]" />
                       </div>
                     </div>
-                    <div className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+                    <div 
+                    onClick ={() => navigate(`/site/getProduct/${product.id}`)}
+                    className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
                       <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold">
                         {product.name}
                       </div>

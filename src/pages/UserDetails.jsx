@@ -17,11 +17,11 @@ function UserDetails() {
     const [isLoading, setIsLoading] = useState(false);
     const { state } = useContext(AuthContext);
   const [formOne, setFormOne] = useState({
-    field1: "",
-    field2: "",
+    first_name: "",
+    last_name: "",
   });
 
-  const isFormOne = formOne.field1.trim() !== "" && formOne.field2.trim() !== "";
+  const isFormOne = formOne.first_name.trim() !== "" && formOne.last_name.trim() !== "";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +29,8 @@ function UserDetails() {
       ...prevData,
       [name]: value,
     }));
-
-    
   };
+
 
   const submitFormOne = (e) => {
     e.preventDefault();
@@ -67,11 +66,11 @@ setIsLoading(true);
   // Form two
 
   const [formTwo, setFormTwo] = useState({
-    field1: "",
-    field2: "",
+    phone_number: "",
+    phone_number2: "",
   });
 
-  const isFormTwo = formTwo.field1.trim() !== "" && formTwo.field2.trim() !== "";
+  const isFormTwo = formTwo.phone_number.trim() !== "" && formTwo.phone_number2.trim() !== "";
 
   const handleChange2 = (e) => {
     const { name, value } = e.target;
@@ -212,8 +211,8 @@ className="flex flex-col gap-y-[25px]">
                     <input
                      type="text"
                      id="field1"
-                     name="field1"
-                     value={formOne.field1}
+                     name="first_name"
+                     value={formOne.first_name}
                      onChange={handleChange}
                      required
                     className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="First Name">
@@ -230,8 +229,8 @@ className="flex flex-col gap-y-[25px]">
                     <input
                      type="text"
                      id="field2"
-                     name="field2"
-                     value={formOne.field2}
+                     name="last_name"
+                     value={formOne.last_name}
                      onChange={handleChange}
                      required
                     className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Last Name">
@@ -264,8 +263,8 @@ className="flex flex-col gap-y-[25px]">
                      type="number"
                      min="0"
                      id="field1"
-                     name="field1"
-                     value={formTwo.field1}
+                     name="phone_number"
+                     value={formTwo.phone_number}
                      onChange={handleChange2}
                      required
                     className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Phone">
@@ -282,8 +281,8 @@ className="flex flex-col gap-y-[25px]">
                     <input
                      type="number"
                      id="field2"
-                     name="field2"
-                     value={formTwo.field2}
+                     name="phone_number2"
+                     value={formTwo.phone_number2}
                      onChange={handleChange2}
                      required
                     className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Alternate Phone">
