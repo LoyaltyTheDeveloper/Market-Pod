@@ -79,7 +79,6 @@ function Navbar() {
       headers: {
         "Content-Type": "application/json",
         Authorization: state.token,
-
       },
     })
       .then((response) => response.json())

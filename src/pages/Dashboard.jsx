@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Navbar from '../Components/Navbar.jsx'
 import { BsCardText } from "react-icons/bs";
 import { PiNotepadBold } from "react-icons/pi";
@@ -10,12 +10,14 @@ import { trio } from 'ldrs'
 import { AuthContext, setProfileData } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
 import { FiPhone } from "react-icons/fi";
+import {Link} from "react-router-dom";
 
 
 function UserDetails() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { state , dispatch} = useContext(AuthContext);
+  const [orders, setOrders] = useState([]);
   const [formOne, setFormOne] = useState({
     first_name: "",
     last_name: "",
@@ -29,8 +31,6 @@ function UserDetails() {
       ...prevData,
       [name]: value,
     }));
-
-    
   };
 
 
@@ -110,7 +110,6 @@ function UserDetails() {
         console.error('Error:', error);
         setIsLoading(false);
       });
-
   };
 
 
@@ -121,8 +120,37 @@ function UserDetails() {
     dispatch({ type: 'LOG_OUT', payload: { token: null } })
   }
 
+
+
+
+useEffect(() => {
+  setIsLoading(true);
+    fetch('https://apis.emarketpod.com/user/orders',
+      {
+        method: "GET",
+        headers: {
+          "Content-Type":"application/json",
+          Authorization: state.token,
+        }
+      }
+    )
+    .then((response) => response.json())
+    .then((data) => {
+      setIsLoading(false);
+      setOrders(data.data)
+    }
+    )
+    .catch((error) => {
+      setIsLoading(false);
+      console.error(error)})
+}, [])
+
+
+
+
   const [activeButton, setActiveButton] = useState('button1');
   const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
+
   return (<>
     <Navbar />
     {isLoading && <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
@@ -306,13 +334,13 @@ function UserDetails() {
 
 
 
-          {activeButton === 'button2' && <div className="flex flex-col items-center lg:items-start lg:px-14">
+          {activeButton === 'button2' && <div className="flex flex-col">
 
             <div className="">
-              <div className="font-bold text-[30px] pb-[30px]">History</div>
+             
 
 
-              <div className="flex flex-row gap-[10px] lg:gap-[20px] lg:items-center">
+              {/* <div className="flex flex-row gap-[10px] lg:gap-[20px] lg:items-center">
                 <div><PiNotepadBold className="size-[27px]" /></div>
 
                 <div className="flex flex-row gap-x-[px] lg:gap-x-[50px]">
@@ -333,23 +361,145 @@ function UserDetails() {
                     <div className="whitespace-nowrap flex justify-end text-[15px]">Tap to view</div>
                   </div>
                 </div>
+              </div> */}
+
+            {/* {!isLoading &&<div className="">
+            
+                        {Array.isArray(orders) && orders.length > 0 ? (<>
+                           <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
+                          <div className="flex flex-col gap-y-[30px] items-center lg:items-start">
+                            {orders.map((order) => (<>
+                              <div className="" key={order.order_id}>
+                                <div className="font-bold pb-[30px] lg:px-14">{new Intl.DateTimeFormat('en-GB').format(new Date(order.created_at))}</div>
+                              <div className="flex flex-row gap-[10px] lg:gap-[20px] lg:items-center lg:px-14">
+                <div><PiNotepadBold className="size-[27px]" /></div>
+
+                <div className="flex flex-row gap-x-[px] lg:gap-x-[50px]">
+                  <div className="flex flex-col gap-y-[20px] lg:flex-row lg:gap-x-[50px]">
+                    <div className="flex flex-col">
+                      <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap">Order ID #0988</div>
+                      <div className="flex items-center gap-x-[5px] text-[12px]">
+                        <div>Icon</div>
+                        <div className="whitespace-nowrap">Awaiting Pick-up</div>
+                      </div>
+                    </div>
+
+                    <div className="w-[250px] truncate text-[15px] lg:text-[17px]">{order.location_name}, {order.address}, {order.city}, {order.state}</div>
+                  </div>
+
+                  <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
+                    <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap flex justify-end">NGN {order.product_amount}</div>
+                    <div className="whitespace-nowrap flex justify-end text-[15px]">Tap to view</div>
+                  </div>
+                  
+                </div>
+                
               </div>
+              <hr className="mt-[20px] items-center mx-4 lg:mx-14"></hr>
+
+
+
+
+                                </div>
+                            </>
+            
+                            ))}
+                          </div>
+            
+                        </>) : (<>
+            
+                          {!isLoading && <div className="flex flex-col mt-[50%] lg:whitespace-nowrap lg:mt-[100%] lg:pl-[200%] items-center justify-center">
+                            <div>You don't have past orders</div>
+                            <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+                          </div>}
+            
+                        </>)}
+                      </div>} */}
+
+
+
+                      {!isLoading && (
+  <div className="">
+    {Array.isArray(orders) && orders.length > 0 ? (
+      <>
+        <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
+        <div className="flex flex-col gap-y-[30px] items-center lg:items-start">
+          {/* Group orders by date */}
+          {Object.entries(
+            orders.reduce((grouped, order) => {
+              const formattedDate = new Intl.DateTimeFormat('en-GB').format(new Date(order.created_at));
+              if (!grouped[formattedDate]) {
+                grouped[formattedDate] = [];
+              }
+              grouped[formattedDate].push(order);
+              return grouped;
+            }, {})
+          ).map(([date, ordersForDate]) => (
+            <div className="flex flex-col gap-y-[30px]" key={date}>
+              {/* Display the date */}
+              <div className="font-bold lg:px-14">{date}</div>
+              {ordersForDate.map((order) => (<>
+                <div className="flex flex-row gap-[10px] lg:gap-[20px] lg:items-center lg:px-14" key={order.order_id}>
+                  <div>
+                    <PiNotepadBold className="size-[27px]" />
+                  </div>
+                  <div className="flex flex-row gap-x-[px] lg:gap-x-[50px]">
+                    <div className="flex flex-col gap-y-[20px] lg:flex-row lg:gap-x-[50px]">
+                      <div className="flex flex-col">
+                        <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap">
+                          Order ID #{order.order_id}
+                        </div>
+                        <div className="flex items-center gap-x-[5px] text-[12px]">
+                          <div>Icon</div>
+                          <div className="whitespace-nowrap">Awaiting Pick-up</div>
+                        </div>
+                      </div>
+                      <div className="w-[250px] truncate text-[15px] lg:text-[17px]">
+                        {order.location_name}, {order.address}, {order.city}, {order.state}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
+                      <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap flex justify-end">
+                        NGN {order.product_amount}
+                      </div>
+                      <div className="whitespace-nowrap flex justify-end text-[15px]">Tap to view</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <hr className="items-center mx-2 lg:mx-12"></hr>
+                </>
+              ))}
+              
+            </div>
+          ))}
+        </div>
+      </>
+    ) : (
+      <>
+        {!isLoading && (
+          <div className="flex flex-col mt-[50%] lg:whitespace-nowrap lg:mt-[100%] lg:pl-[200%] items-center justify-center">
+            <div>You don't have past orders</div>
+            <div className="underline font-semibold text-[#31603D]">
+              <Link to="/">Shop Now</Link>
+            </div>
+          </div>
+        )}
+      </>
+    )}
+  </div>
+)}
+
+
+
+
+
+             
+                
 
             </div>
-
-
-
           </div>}
-
-
         </div>
-
-
-
-
-
-
-
       </div>
     </div>
     <Footer />
