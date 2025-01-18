@@ -15,7 +15,6 @@ export const setProfileData = (data) => {
   }
 }
 
-
 export const setCartCount = (cart) => {
   return {
     type: "SET_CART_COUNT",
@@ -33,6 +32,7 @@ const authReducer = (state, action) => {
         token: action.payload.token,
         user: action.payload.user,
         isAuthenticated: true,
+        email: action.payload.email
       };
 
     case 'SET_CART_COUNT':

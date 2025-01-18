@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
-import Navbar from '../Components/Navbar'
+import Navbar from '../Components/Navbar.jsx'
 import { BsCardText } from "react-icons/bs";
 import { PiNotepadBold } from "react-icons/pi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { TbUserEdit } from "react-icons/tb";
-import Footer from '../Components/Footer';
+import Footer from '../Components/Footer.jsx';
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
 import { AuthContext, setProfileData } from '../context/Context.jsx';
@@ -137,6 +137,7 @@ function UserDetails() {
           <div className="flex flex-col gap-y-[20px] pb-[30px]">
             <div className="px-4">
               <h1 className="font-bold text-[24px]">Hello, {displayName}</h1>
+              <h1>{state.email}</h1>
             </div>
             <div>
               <button

@@ -50,7 +50,7 @@ function SignIn() {
             // localStorage.setItem('user', JSON.stringify(data))
             dispatch({
               type: 'SIGN_IN',
-              payload: { token: data.token ,user:data.user},
+              payload: { token: data.token ,user:data.user, email:email},
             });
             toast.success(data.message);
             setIsPending(false);

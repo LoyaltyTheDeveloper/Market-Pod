@@ -10,7 +10,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 import produce from '../assets/Vector.svg';
 import meat from '../assets/meat.svg';
 import milk from '../assets/milk.svg';
-import spice from '../assets/spice.svg';
+import spice from '../assets/herbs.svg';
 import oil from '../assets/oil.svg';
 import bread from '../assets/bread.svg';
 import plastic from '../assets/plastic bottle.svg';
@@ -275,10 +275,10 @@ function Navbar() {
                     <div className="bg-[] pt-[20px]">
                       <div className="font-bold ml-[10px]">Produce</div>
                       <div className="flex">
-                        <div><img src={product} className="size-[90px]" /></div>
+                        <div><img src={product.image} className="size-[90px]" /></div>
                         <div className="flex flex-col gap-[10px]">
-                          <div>{product.name} - {product.weight}KG</div>
-                          <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
+                          <div>{product.name} - {product.weight}</div>
+                          <div className="text-[grey] text-[15px]">Subtitle</div>
                           <div className="flex items-center gap-[15px]">
                             <div onClick={() => deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
                             <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
@@ -324,7 +324,7 @@ function Navbar() {
   const Profile = () => {
     const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
     return (
-      <button onClick={() => navigate("/details")}>
+      <button className="font-semibold text-[#31603D]" onClick={() => navigate("/dashboard")}>
         {displayName}
       </button>
     )
@@ -477,7 +477,7 @@ function Navbar() {
 
 
                 <div className="p-4">
-                  <div className="flex flex-col gap-y-[20px]">
+                  <div className="flex flex-col gap-y-[25px]">
                     {categories.map((category) => (
                       <div key={category.id} className="flex flex-col gap-y-2">
                         <div
@@ -492,7 +492,7 @@ function Navbar() {
                           />
                         </div>
                         {expandedCategory === category.id && (
-                          <div className="pl-[50px]">
+                          <div className="pl-[50px] flex flex-col gap-y-[10px]">
                             {category.items.map((item, index) => (
                               <p key={index} className="text-[14px] text-gray-600">
                                 <div className="flex flex-row gap-x-[10px]">

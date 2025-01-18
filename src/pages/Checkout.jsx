@@ -17,9 +17,13 @@ import { GrLocation } from "react-icons/gr";
 import { PiMapPinArea } from "react-icons/pi";
 import { PiCity } from "react-icons/pi";
 import { BsQuestionCircle } from "react-icons/bs";
+import { BiHomeAlt2 } from "react-icons/bi";
+import { trio } from 'ldrs';
 // import { IoMdBicycle } from "react-icons/io";
 
 function Checkout() {
+  const navigate = useNavigate();
+   trio.register()
      const { state } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(
@@ -36,14 +40,18 @@ function Checkout() {
         const [city, setCity] = useState("");
         const [states, setStates] = useState("");
         const [refresh, setRefresh] = useState(false);
+       const [isLoading, setIsLoading] = useState(false);
+       const [address, setAddress] = useState("");
+
+
 
         const handleCityChange = (e) => {
           setCity(e.target.value);
-          setCity("");
+          
         };
         const handleStatesChange = (e) => {
           setStates(e.target.value);
-          setStates("");
+          setCity("");
         };
 
         const handleButtonClick = () => {
@@ -154,8 +162,54 @@ function Checkout() {
           });
       };
 
+      const order ={
+         location_id:selectedLocation,
+         address:address,
+         city:city,
+         state:states
+      }
+
+      const makePayment = () => {
+        console.log(order)
+        setIsLoading(true);
+        fetch('https://apis.emarketpod.com/user/order/create', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: state.token,
+          },
+          body: JSON.stringify(order),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === true) {
+            toast.success(data.message);
+            setIsLoading(false);
+            navigate('/dashboard');
+          }
+          else {
+            toast.error(data.message);
+            setIsLoading(false);
+            return;
+          }}
+        )
+          .catch((error) => {
+            console.error(error);
+          });
+      };
+
+      const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
+      const displayPhone = `${state.user.phone_number ? (state.user.phone_number == '' ? 'User' : state.user.phone_number) : "User"}, ${state.user.phone_number2 ?? ''}`;
+
   return (<>
   <Navbar/>
+
+  {isLoading &&  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
+
     <div className="pt-[30px] pb-[50px] min-h-screen">
      
 <div className="flex flex-col lg:flex-row items-center">
@@ -165,7 +219,7 @@ function Checkout() {
             <div className="pt-[50px]">
 
 
-    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px]">
+    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[-30px]">
       <div className="font-bold text-[25px]">Checkout</div>
       <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
@@ -229,11 +283,42 @@ function Checkout() {
 
 <div className="second-or-third-div flex flex-col justify-center bg-[white] lg:px-[100px]">
         {!showThirdDiv ? (<>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center lg:py-16">
           
 <div className="flex flex-col gap-y-[10px] mt-[30px]">
           <div className="text-[25px] font-bold">Delivery Details</div>
            <div className="text-[14px]">Complete your order by providing your delivery address</div>
+
+           <div className="flex flex-row items-center">
+            <div className="absolute ml-[20px]"><FiPhone className="size-[20px]"/></div>
+          <div>
+
+          <input
+          value={displayName}
+          disabled
+          name="phone"
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="phone">
+      </input>
+
+
+            </div>
+          </div>
+
+
+           <div className="flex flex-row items-center">
+            <div className="absolute ml-[20px]"><FiPhone className="size-[20px]"/></div>
+          <div>
+
+          <input
+          value={displayPhone}
+          disabled
+          name="phone"
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="phone">
+      </input>
+
+
+            </div>
+          </div>
 
           <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><GrLocation className="size-[20px]"/></div>
@@ -245,7 +330,7 @@ function Checkout() {
           value={selectedLocation}
           onChange={(e) => setSelectedLocation(e.target.value)}
         >
-          <option value="">Select a location</option>
+          <option className ="text-[grey]" value="">Select a location</option>
           {locations.map((location) => (
             <option key={location.id} value={location.id}>
               {location.name}
@@ -262,12 +347,13 @@ function Checkout() {
           <div>
             
           <select 
+         value={states}
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
           onChange={handleStatesChange}>
         <option className="text-[grey]" value="">Select a state</option>
-        <option value="India">India</option>
-        <option value="USA">USA</option>
-        <option value="UK">UK</option>
+        <option value="Kwara State">Kwara State</option>
+        {/* <option value="USA">USA</option> */}
+        {/* <option value="UK">UK</option> */}
         </select>
             
             </div>
@@ -277,20 +363,19 @@ function Checkout() {
             <div className="absolute ml-[20px]"><PiCity className="size-[20px]"/></div>
           <div>
 
-          <select
+          <select value={city}
           onChange={handleCityChange}
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
-          disabled={city === ""}>
-        <option value="">Select a city</option>
-        {states === "Ondo" && (
-          <><option key="Delhi">Delhi</option><option key="Punjab">Punjab</option><option key="Haryana">Haryana</option><option key="Goa">Goa</option></>
-        )}
-        {states === "USA" && (
-          <><option key="California">California</option><option key="Texas">Texas</option><option key="New York">New York</option></>
-        )}
-        {states === "UK" && (
-          <><option key="London">London</option><option key="Manchester">Manchester</option><option key="Birmingham">Birmingham</option></>
-        )}
+          disabled={states === ""}>
+        <option className="text-[grey]" value="">Select a city</option>
+        {states === "Kwara State" && (
+        <>
+          <option key="Ilorin">Ilorin</option>
+          {/* <option key="Punjab">Punjab</option>
+          <option key="Haryana">Haryana</option>
+          <option key="Goa">Goa</option> */}
+        </>
+      )}
       </select>
 
 
@@ -298,16 +383,21 @@ function Checkout() {
           </div>
 
           <div className="flex flex-row items-center">
-            <div className="absolute ml-[20px]"><PiMapPinArea className="size-[20px]"/></div>
+            <div className="absolute ml-[20px]"><BiHomeAlt2 className="size-[20px]"/></div>
           <div>
 
           <input
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          name="address"
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Adress">
       </input>
 
 
             </div>
           </div>
+
+         
 
           </div>
           <div className="mt-[25px] px-[10px] py-[10px] bg-[#F9F9F9] w-[350px] rounded-[5px]">
@@ -318,6 +408,11 @@ function Checkout() {
           <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Proceed</button></div>
           
           </div>
+
+
+
+        
+
           
                    
         </>) : (<>
@@ -361,7 +456,7 @@ function Checkout() {
           
                     </div>
                     
-                    <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Make Payment</button></div>
+                    <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={makePayment}>Make Payment</button></div>
                     
                     </div>
           
