@@ -324,9 +324,9 @@ function Navbar() {
   const Profile = () => {
     const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
     return (
-      <div onClick={() => navigate("/details")}>
+      <button onClick={() => navigate("/details")}>
         {displayName}
-      </div>
+      </button>
     )
   }
 
