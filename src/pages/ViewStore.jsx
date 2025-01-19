@@ -222,7 +222,7 @@ function ViewStore() {
        
                 
 
-        {isLoading &&  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+        {isLoading &&  <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
   size="70"
   speed="1.3" 
   color="#4ade80" 

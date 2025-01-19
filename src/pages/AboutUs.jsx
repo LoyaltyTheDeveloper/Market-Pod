@@ -1,5 +1,5 @@
 import React from 'react'
-import AboutImage from '../assets/Rectangle 4484.svg'
+import AboutImage from '../assets/newabout.svg'
 import AboutImage2 from '../assets/Rectangle 4540.svg'
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';

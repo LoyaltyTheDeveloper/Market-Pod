@@ -296,7 +296,7 @@ function Navbar() {
 
                 ))}
                 <div className="fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
-                  <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap"><Link to="/checkout">Proceed to Checkout</Link></button>
+                <Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link>
                 </div>
               </ul>
 
