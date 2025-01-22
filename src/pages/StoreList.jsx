@@ -70,7 +70,7 @@ function StoreList() {
 
         </div>
 
-        <div className="mt-[5px] pt-[20px] flex lg:flex justify-start">
+        <div className="flex lg:flex justify-start">
 
         <div className="flex justify-center whitespace-nowrap space-x-4 p-4 lg:flex lg:justify-start">
           <div className="flex flex-col gap-[20px] lg:flex-row justify-center">
@@ -128,10 +128,20 @@ function StoreList() {
           .fill("")
           .map((_, index) => (
             <div key={index} className="flex mb-[30px] justify-center">
-              <div className="flex items-center">
-              <div className="flex">
+              <div className="flex flex-col">
+              <div className="flex flex-col">
+                    <Skeleton width={200} height={30} className="lg:ml-[20px]"/>
+                    <Skeleton width={150} height={20} className="mt-[10px] lg:ml-[20px]" />
+                </div>
+              <div className="flex flex-col lg:flex-row">
               <div className="mt-[20px] lg:ml-[20px]">
-                <Skeleton height={150} width={360}/>
+                <Skeleton height={170} width={360}/>
+              </div>
+              <div className="mt-[20px] lg:ml-[20px]">
+                <Skeleton height={170} width={360}/>
+              </div>
+              <div className="mt-[20px] lg:ml-[20px]">
+                <Skeleton height={170} width={360}/>
               </div>
               </div>
               </div>

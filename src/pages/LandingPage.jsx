@@ -112,14 +112,11 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         {dropdownData.dropdowns && dropdownData.dropdowns.length > 0 ? (
           dropdownData.dropdowns.map((item) => (<>
 
- <div  className="flex flex-col justify-center items-center hidden lg:flex">
+ <div onMouseOver={() => openModal(item)}  className="flex flex-col justify-center items-center hidden lg:flex">
             <div
               key={item.id}
               className="hidden lg:flex lg:flex-col color-[grey] size-[25px] text-[grey]  items-center cursor-pointer"
-              onMouseOver={() => openModal(item)}
-              
             >
-           
               <img
                 src={item.image}
                 alt={item.name}
@@ -149,9 +146,8 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
       {selectedDropdown && (
         
           <div onMouseLeave={() => closeModal()} className="flex hidden lg:flex justify-center items-center bg-[white] w-[75%] z-50 absolute lg:w-[100%] lg:h-[300px] p-6 rounded-lg overflow-y-auto flex items-center justify-center"
-            
-          >
 
+          >
             {/* Display categories in modal */}
             <div className="flex flex-col justify-center lg:flex-row">
               {selectedDropdown.categories.map((category, index) => (
@@ -161,16 +157,15 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
                     {/* Display items in two columns */}
                    
-                    <div className="grid grid-cols-2 gap-y-4 lg:gap-x-[10px] mb-4">
+                    <div className="gap-y-8 lg:gap-x-[10px] grid grid-rows-5 grid-flow-col auto-rows-max grid-cols-1 mb-4 h-[100px] w-[250px]">
                       {category.items.map((item, itemIndex) => (
-                        <span key={itemIndex} className="text-gray-700 text-[15px] whitepsace-nowrap">
+                        <div key={itemIndex} className="whitespace-nowrap text-gray-700 text-[15px] grid grid-row-1 grid-flow-row auto-rows-max flex-wrap whitepsace-nowrap h-[10px">
                           {item}
-                        </span>
+                        </div>
                       ))}
                     </div>
-                   
-
                   </div>
+
 
                   {/* Category image */}
                   <div>
@@ -239,10 +234,10 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         </div>
          
          
-        <div className="mt-[5px] pt-[20px] flex lg:flex justify-start">
+        <div className="mt-[5px] pt-[20px flex lg:flex justify-start">
 
         <div className="flex overflow-x-scroll scrollbar-hide whitespace-nowrap space-x-4 p-4 lg:flex justify-start">
-          <div className="flex gap-[20px] lg:flex-row justify-center lg:flex justify-start">
+          <div className="flex gap-x-[20px] lg:flex-row justify-center lg:flex justify-start">
             {market.stores.map((store) => (
               <div
                 onClick ={() => navigate(`/site/getStore/${store.id}`)}
@@ -292,6 +287,9 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
           </div>
         </div>
         </div>
+
+
+   <> {/*   <div>
         {index === 1 && (<>
         
         {!state.token &&
@@ -327,7 +325,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 <div className="flex flex-col lg:flex-row px-4 gap-x-[100px] gap-y-[20px]">
                   <div className="flex flex-col gap-y-[10px]">
                     <div className="w-[70%] lg:w-[450px] text-[30px] lg:text-[40px] font-bold">Back to School Food Bundle For 50k !</div>
-                    {/* <div className="lg:w-[518px]">New customers get DeliveryPass perks on us for 60 days, including unlimited free delivery, timeslot reservations, and exclusive savings.</div> */}
+                    {/* <div className="lg:w-[518px]">New customers get DeliveryPass perks on us for 60 days, including unlimited free delivery, timeslot reservations, and exclusive savings.</div> 
                     <ul className="list-disc pl-8 text-[14px]">
                       <div className="flex gap-x-[50px]">
                       <div className="space-y-2">
@@ -353,16 +351,19 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 </div>
                 
               </>)}
+</div> */} </>
+
+
 
       {index === marketss.length -1 && (
         <div className="mt-[20px] mb-[60px] flex justify-center">
         <div className="flex flex-col lg:flex-row px-[15px]">
           <div className="bg-[#31603D] rounded-tl-[5px] rounded-tr-[5px] lg:rounded-tr-[0px] lg:rounded-tl-[10px] lg:rounded-bl-[10px] text-[white] lg:px-[80px] flex flex-col justify-center text-center p-6">
           <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold">There's more to explore</div>
-          <div className="text-[12px]">There are 106 stores (and counting) available in</div>
+          <div className="text-[12px]">There are {} stores (and counting) available in</div>
           <div className="text-[12px]"><span className="underline">Ilorin, Kwara State.</span> <span>Explore them all with</span></div>
           <div className="text-[12px]">Market Pod today !</div>
-          <div><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
+          <div onClick={() => navigate(`/site/getStores/${1}/${market.name}/${market.addr}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
           </div>
           <div className="hidden lg:flex w-[350px] h-[300p]"><img className="object-cover" src={landing3}/></div>
           <div className="lg:hidden w-[full]"><img className="object-cover w-[100%]" src={landing4}/></div>
@@ -379,27 +380,33 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
             <div key={index} className="flex flex-col mb-[30px] justify-center">
               <div className="flex items-center">
               <div className="flex flex-col">
-              <div className="flex items-center ">
+              <div className="flex items-center">
                 <div>
                   <Skeleton width={200} height={30} className="ml-[20px]"/>
                   <Skeleton width={150} height={20} className="mt-[10px] ml-[20px]" />
                 </div>
               </div>
               <div className="mt-[20px] ml-[20px]">
-                <Skeleton height={150} width={360}/>
+                <Skeleton height={170} width={360}/>
               </div>
               </div>
 
               <div className="flex flex-col">
               
               <div className="mt-[80px] ml-[20px]">
-                <Skeleton height={150} width={360}/>
+                <Skeleton height={170} width={360}/>
               </div>
               </div>
               <div className="flex flex-col">
               
               <div className="mt-[80px] ml-[20px]">
-                <Skeleton height={150} width={360}/>
+                <Skeleton height={170} width={360}/>
+              </div>
+              </div>
+              <div className="flex flex-col">
+              
+              <div className="mt-[80px] ml-[20px]">
+                <Skeleton height={170} width={360}/>
               </div>
               </div>
               </div>

@@ -145,7 +145,7 @@ function ViewStore() {
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           className="w-[360px] pl-[50px] py-[10px] pr-[20px] rounded-[100px] bg-[white] focus:outline-none text-[13px]"
-          placeholder="Search Stalls & products"
+          placeholder="Search Stalls & Products"
       />
          </div>
     </div>
@@ -153,17 +153,17 @@ function ViewStore() {
 
 
    {/* Body */}
-    <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px]">
+    <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px">
 
         <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-70px]">
         
 
 <div>
     {store && (
-      <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px]">
-        <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[10px] lg:px-[0px]">
-          <div className="h-[100px] w-[30%] lg:size-[150px] lg:w-[70%] lg:mt-[55px]">
-            <img className="h-full object-cover rounded-[5px]" src={store.image}/>
+      <div className="lg:border lg:border-transparent lg:bg-[white] flex justify-center lg:flex-col lg:px-[10px] lg:pb-[320px]">
+        <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[10px] lg:px-[0px] lg:flex lg:pl-[5%]">
+          <div className="h-[100px] w-[30%] lg:size-[150px] lg:w-full lg:mt-[55px]">
+            <img className="h-[100px] w-[230px] object-cover rounded-[5px] lg:w-[250px] lg:h-[160px]" src={store.image}/>
           </div>
           <div className="w-[270px] flex flex-col gap-[5px]">
             <div>
@@ -174,13 +174,13 @@ function ViewStore() {
           </div>
         </div>
 
-        <div className="flex my-3 hidden lg:flex py-[5px]">
+        <div className="flex my-3 hidden lg:flex py-[5px] lg:pl-[5%]">
           <hr className="w-[45%] border-t border-gray-300" />
           <hr className="w-[45%] border-t border-gray-300" />
         </div>
 
-        <div className="hidden lg:flex">
-          <div className="flex flex-col gap-[10px] lg:mb-[500px]">
+        <div className="hidden lg:flex lg:pl-[5%]">
+          <div className="flex flex-col gap-[10px] lg:mb-[500px">
             <div className="font-semibold">Browse Categories</div>
             {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
