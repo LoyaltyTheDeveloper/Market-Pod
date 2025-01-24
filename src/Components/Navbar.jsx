@@ -176,12 +176,12 @@ function Navbar() {
   };
 
   const handleIncrease = (productId) => {
-    const currentQuantity = quantity[productId] || 0;
+    const currentQuantity = quantity[productId] || 1;
     const newQuantity = currentQuantity + 1;
     updateQuantity(productId, newQuantity);
   }
   const handleDecrease = (productId) => {
-    const currentQuantity = quantity[productId] || 0;
+    const currentQuantity = quantity[productId] || 1;
     if (currentQuantity > 1) {
       const newQuantity = currentQuantity - 1;
       updateQuantity(productId, newQuantity);
@@ -242,7 +242,10 @@ function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+
+  
   const DrawerList = (
+    
     <Box sx={{ width: 400 }} role="presentation">
 
       <div className="bg-[#F9F9F9] min-h-screen">
@@ -285,7 +288,7 @@ function Navbar() {
                               <div className="text-[18px]">{product.quantity}</div>
                               <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
                             </div>
-                            <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price}</div>
+                            <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
                           </div>
                         </div>
                       </div>
@@ -295,8 +298,8 @@ function Navbar() {
                 </>
 
                 ))}
-                <div className="fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px] flex justify-center">
-                <Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link>
+                <div className="fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center pl-[200px pr-[200px]">
+                <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
                 </div>
               </ul>
 

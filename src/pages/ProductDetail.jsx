@@ -55,20 +55,20 @@ function ProductDetail() {
 
 {product && (<>
     <div className="px-[20px] mt-[20px] mb-[50px]">
-    <div className="flex gap-[10px] text-[15px]">
+    <div className="flex gap-x-[10px] text-[15px]">
         <div>Happiness Goods & Stores</div>
         /
         <div className="font-semibold">{product.data.category_name}</div>
     </div>
 
     <div className="lg:flex flex-row-reverse gap-[100px] lg:items-center pt-[30px]">
-    <div className="lg:pl-[100%] flex justify-center lg:justify-normal"><img className="object-cover w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] lg:mr-[500px]" src={product.data.image}></img></div>
+    <div className="lg:pl-[100%] flex justify-center lg:justify-normal pb-[30px]"><img className="object-cover w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] lg:mr-[500px]" src={product.data.image}></img></div>
     
     <div className="lg:pr-[200p] lg:absolute left-6">
-    <div className="flex flex-col gap-[10px]">
-       <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[300px] pt-[30px]">{product.data.name} - {product.data.weight}kg</div>
+    <div className="flex flex-col gap-y-[10px]">
+       <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[350px] lg:pt-[30px">{product.data.name} - {product.data.weight}kg</div>
        <div>{product.data.subtitle}</div>
-       <div className="lg:pr-[800px]">{product.data.description}</div>
+       <div className="lg:pr-[800px] h-[50px]">{product.data.description}</div>
     </div>
 
     <div className="flex flex-col gap-[20px]">

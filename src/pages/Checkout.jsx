@@ -60,12 +60,12 @@ function Checkout() {
 
 
         const handleIncrease = (productId) => {
-            const currentQuantity = quantity[productId] || 0;
+            const currentQuantity = quantity[productId] || 1;
             const newQuantity = currentQuantity + 1;
             updateQuantity(productId, newQuantity);
           }
           const handleDecrease = (productId) => {
-            const currentQuantity = quantity[productId] || 0;
+            const currentQuantity = quantity[productId] || 1;
             if(currentQuantity > 1){
               const newQuantity = currentQuantity - 1;
               updateQuantity(productId, newQuantity);
@@ -219,7 +219,7 @@ function Checkout() {
             <div className="pt-[50px]">
 
 
-    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[-30px]">
+    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[-30px] justify-between">
       <div className="font-bold text-[25px]">Checkout</div>
       <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
@@ -231,7 +231,7 @@ function Checkout() {
             {Array.isArray(products) && products.length > 0 ? (
             <ul>
               {products.map((product) => (<>
-                <div className="" key={product.product_id}>
+                <div className="relative" key={product.product_id}>
                   
                 <div className="bg-[] lg:pt-[30px]">
               <div className="font-bold ml-[10px]">Produce</div>
@@ -239,21 +239,21 @@ function Checkout() {
                 
                 <div><img src={product} className="size-[90px]"/></div>
             
-                <div className="flex flex-col lg:flex-row gap-[10px]">
+                <div className="flex flex-col lg:flex-row gap-[10px] lg:gap-[0px]">
 
-                    <div>
+                    <div className="lg:w-[300px]">
                   <div>{product.name} - {product.weight}KG</div>
                   <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
                  </div>
 
-                  <div className="flex items-center gap-[15px]">
+                  <div className="flex items-center gap-[15px]   ">
                    <div onClick={()=> deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
                    <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
                     <div onClick={()=> handleDecrease (product.product_id)}className="text"><FaMinus className="size-[12px]"/></div>
                     <div className="text-[18px]">{product.quantity}</div>
                     <div onClick={()=> handleIncrease(product.product_id)}className="text"><FaPlus className="size-[12px]"/></div>
                    </div>
-                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price}</div>
+                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
                   </div>
 
                   </div>

@@ -419,7 +419,7 @@ useEffect(() => {
 
 
                       {!isLoading && (
-  <div className="">
+  <div className="lg:mx-[-30px]">
     {Array.isArray(orders) && orders.length > 0 ? (
       <>
         <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
@@ -459,7 +459,7 @@ useEffect(() => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
-                      <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-end">
+                      <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-end lg:w-[150px]">
                         NGN {order.product_amount}
                       </div>
                       <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>

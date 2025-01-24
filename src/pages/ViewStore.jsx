@@ -167,7 +167,7 @@ function ViewStore() {
           </div>
           <div className="w-[270px] flex flex-col gap-[5px]">
             <div>
-              <div className="font-semibold text-[20px]">{store.name}</div>
+              <div className="font-semibold text-[20px] truncate">{store.name}</div>
               <div className="text-[15px]">{store.status}</div>
               <div className="text-[15px]">{store.addr}</div>
             </div>
@@ -282,7 +282,7 @@ function ViewStore() {
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
           <h2 className="text-[24px] lg:text-[30px] font-bold px-2 lg:px-0">{category}</h2>
-          <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
+          <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
               .map(product => (
@@ -302,12 +302,12 @@ function ViewStore() {
               </div>
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
-              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold">
+              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[40px]">
                 {product.name}
               </div>
-              <div className="text-[12px] w-[150px] lg:text-[13px]">{product.subtitle}</div>
+              <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
-                <div className="font-semibold text-[12px] lg:text-[16px]">
+                <div className="font-semibold text-[12px] lg:text-[16px] h-[10px] lg:h-[30px]">
                   NGN {product.price}
                 </div>
                 <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
