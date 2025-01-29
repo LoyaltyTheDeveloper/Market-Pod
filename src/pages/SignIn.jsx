@@ -74,7 +74,7 @@ function SignIn() {
   <div className="flex justify-center pt-[40px]">
   <div className="bg-white p-8 rounded-[20px] shadow-lg w-[90%] lg:w-[40%]">
     <div className="flex justify-center">
-        <img src={pod}/>
+        <img src={pod} onClick={() => navigate("/")}/>
     </div>
         <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back !</h2>
         <h3 className="mb-6 text-center">We are glad to have you back with us</h3>

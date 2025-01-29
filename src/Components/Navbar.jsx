@@ -396,7 +396,7 @@ function Navbar() {
                 <div className="font-bold text-[13px]">Cart</div>
                 <div className="flex flex-row items-center gap-[7px]">
                   <div><GrBasket className="size-[20px]" /></div>
-                  <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{products.length} Item(s)</div>
+                  <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{(products.length) || 0} Item(s)</div>
                 </div>
               </div>
 
