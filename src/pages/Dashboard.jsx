@@ -11,9 +11,13 @@ import { AuthContext, setProfileData } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
 import { FiPhone } from "react-icons/fi";
 import {Link} from "react-router-dom";
+import { GrLocation } from "react-icons/gr";
+import { LiaKeySolid } from "react-icons/lia";
 
 
 function UserDetails() {
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { state , dispatch} = useContext(AuthContext);
@@ -65,6 +69,7 @@ function UserDetails() {
 
   };
 
+
   // Form two
 
   const [formTwo, setFormTwo] = useState({
@@ -113,6 +118,102 @@ function UserDetails() {
   };
 
 
+
+  //Form three
+
+   const [formThree, setFormThree] = useState({
+    selectedLocation: "",
+    delivery_address: "",
+  });
+
+  const isFormThree = formThree.selectedLocation.trim() !== "" && formThree.delivery_address.trim() !== "";
+
+  const handleChange3 = (e) => {
+    const { name, value } = e.target;
+    setFormThree((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const submitFormThree = (e) => {
+    console.log(formThree);
+    e.preventDefault();
+    setIsLoading(true);
+    fetch('https://apis.emarketpod.com/user/updateProfile', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: state.token,
+      },
+      body: JSON.stringify(formThree),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === true) {
+          toast.success(data.message);
+          setIsLoading(false);
+
+        } else {
+          toast.error(data.message);
+          setIsLoading(false);
+          return;
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setIsLoading(false);
+      });
+  };
+
+  const [formFour, setFormFour] = useState({
+    current_psw: "",
+    new_psw: "",
+  });
+
+  const isFormFour = formFour.current_psw.trim() !== "" && formFour.new_psw.trim() !== "";
+
+  const handleChange4 = (e) => {
+    const { name, value } = e.target;
+    setFormFour((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
+  const submitFormFour = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    fetch('https://apis.emarketpod.com/user/updateProfile', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: state.token,
+      },
+      body: JSON.stringify(formFour),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === true) {
+          toast.success(data.message);
+          setIsLoading(false);
+
+        } else {
+          toast.error(data.message);
+          setIsLoading(false);
+          return;
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setIsLoading(false);
+      });
+
+  };
+
+
+
   const Logout = () => {
     localStorage.removeItem('user');
     navigate('/signin');
@@ -144,6 +245,24 @@ useEffect(() => {
       setIsLoading(false);
       console.error(error)})
 }, [])
+
+
+useEffect(() => {
+          
+      fetch('https://apis.emarketpod.com/site/getLocations', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => response.json())
+        .then((data) => {
+          setLocations(data.locations);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, []);
 
 
 
@@ -227,7 +346,7 @@ useEffect(() => {
 
 
 
-            <div className="flex flex-col gap-y-[20px]">
+            <div className="flex flex-col gap-y-[60px] mb-[100px]">
 
               <form
                 className="flex flex-col gap-y-[25px]">
@@ -263,7 +382,7 @@ useEffect(() => {
                      required
                     className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Last Name">
                 </input>
-          
+
                       </div>
                     </div>
 
@@ -276,8 +395,6 @@ useEffect(() => {
                   Update Changes
                 </button>
               </form>
-
-
 
               <form
                 className="flex flex-col gap-y-[25px]">
@@ -322,6 +439,116 @@ useEffect(() => {
                   onClick={submitFormTwo}
                   disabled={!isFormTwo}
                   className={`w-full py-4 px-4 rounded-[100px] text-white font-bold ${isFormTwo ? "bg-[#31603D]" : "bg-[#31603D] opacity-60 cursor-not-allowed"
+                    }`}
+                >
+                  Update Changes
+                </button>
+              </form>
+
+              <form
+                className="flex flex-col gap-y-[25px]">
+                <h1 className="font-bold text-[24px]">Delivery Address</h1>
+                <div className="relative flex flex-row items-center">
+                  <div className="absolute ml-[20px]"><GrLocation className="size-[20px]" /></div>
+
+                  <div>
+                  <select
+          name="selectedLocation"
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none"
+          id="location"
+          value={formThree.selectedLocation}
+          onChange={handleChange3}
+          required
+        >
+          <option className ="text-[grey]" value="">General Area</option>
+          {locations.map((location) => (
+            <option key={location.id} value={location.id}>
+              {location.name}
+            </option>
+          ))}
+        </select>
+                      </div>
+
+                </div>
+
+
+                <div className="relative flex flex-row items-center">
+                  <div className="absolute ml-[20px]"><GrLocation className="size-[20px]" /></div>
+                  <div>
+
+                    <input
+                     type="text"
+                     id="field2"
+                     name="delivery_address"
+                     value={formThree.delivery_address}
+                     onChange={handleChange3}
+                     required
+                    className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" 
+                    placeholder="Delivery Address">
+                </input>
+          
+                      </div>
+                    </div>
+
+                    <div className="mt-[px] px-[10px] py-[10px] bg-[#F9F9F9] w-[350px] rounded-[5px]">
+            <p className="font-bold">Tip</p>
+            <p>For the best experience, make use of the nearest 
+            landmark, school, church, etc in your description.</p>
+          </div>
+
+                <button
+                  onClick={submitFormThree}
+                  disabled={!isFormThree}
+                  className={`w-full py-4 px-4 rounded-[100px] text-white font-bold ${isFormThree ? "bg-[#31603D]" : "bg-[#31603D] opacity-60 cursor-not-allowed"
+                    }`}
+                >
+                  Update Changes
+                </button>
+              </form>
+
+
+              <form
+                className="flex flex-col gap-y-[25px]">
+                <h1 className="font-bold text-[24px]">Change Password</h1>
+                <div className="relative flex flex-row items-center">
+                  <div className="absolute ml-[20px]"><LiaKeySolid className="size-[20px]" /></div>
+
+                  <div>
+                    <input
+                     type="text"
+                     id="field1"
+                     name="current_psw"
+                     value={formFour.current_psw}
+                     onChange={handleChange4}
+                     required
+                    className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Enter Current Password">
+                </input>
+                      </div>
+
+                </div>
+
+
+                <div className="relative flex flex-row items-center">
+                  <div className="absolute ml-[20px]"><LiaKeySolid className="size-[20px]" /></div>
+                  <div>
+
+                    <input
+                     type="text"
+                     id="field2"
+                     name="new_psw"
+                     value={formFour.new_psw}
+                     onChange={handleChange4}
+                     required
+                    className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Enter New Password">
+                </input>
+
+                      </div>
+                    </div>
+
+                <button
+                  onClick={submitFormFour}
+                  disabled={!isFormFour}
+                  className={`w-full py-4 px-4 rounded-[100px] text-white font-bold ${isFormFour ? "bg-[#31603D]" : "bg-[#31603D] opacity-60 cursor-not-allowed"
                     }`}
                 >
                   Update Changes
@@ -479,7 +706,7 @@ useEffect(() => {
     ) : (
       <>
         {!isLoading && (
-          <div className="flex flex-col mt-[50%] lg:whitespace-nowrap lg:mt-[100%] lg:pl-[200%] items-center justify-center">
+          <div className="flex flex-col mt-[50%] lg:whitespace-nowrap lg:mt-[100%] lg:pl-[160%] items-center justify-center">
             <div>You don't have past orders</div>
             <div className="underline font-semibold text-[#31603D]">
               <Link to="/">Shop Now</Link>

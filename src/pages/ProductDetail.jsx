@@ -74,9 +74,9 @@ function ProductDetail() {
     <div className="flex flex-col gap-[20px]">
     <div className="text-[20px] font-semibold mt-[40px]">NGN {product.data.price}</div>
     <div className="flex gap-[10px]">
-        <button><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[12px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
+        <button><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
         <div>
-        <button><div className="text-[white] bg-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[12px] lg:px-[10px] lg:px-[50px] flex gap-[5px] items-center">Add To Cart <div className="hidden lg:flex lg:text-[px]">+</div></div></button>
+        <button><div className="text-[white] bg-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px] flex gap-[5px] items-center">Add To Cart <div className="hidden lg:flex lg:text-[px]">+</div></div></button>
         </div>
     </div>
     </div>

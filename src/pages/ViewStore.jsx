@@ -297,9 +297,14 @@ function ViewStore() {
                 src={product.image}
                 className="w-24 h-24 object-cover flex justify-center"
               />
-              <div onClick={()=> addToCart(product)} className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] border bg-[#31603D] rounded-full p-[7px] group">
+
+              <div onClick={()=> addToCart(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
                 <FaPlus className="text-[white]" />
               </div>
+
+
+
+
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
               <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[40px]">

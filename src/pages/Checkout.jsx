@@ -101,7 +101,6 @@ function Checkout() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          
         },
       })
       .then((response) => response.json())
