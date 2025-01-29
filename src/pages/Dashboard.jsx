@@ -137,7 +137,6 @@ function UserDetails() {
   };
 
   const submitFormThree = (e) => {
-    console.log(formThree);
     e.preventDefault();
     setIsLoading(true);
     fetch('https://apis.emarketpod.com/user/updateProfile', {

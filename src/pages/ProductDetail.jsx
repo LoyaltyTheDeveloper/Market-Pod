@@ -71,7 +71,7 @@ function ProductDetail() {
        <div className="lg:pr-[800px] h-[50px]">{product.data.description}</div>
     </div>
 
-    <div className="flex flex-col gap-[20px]">
+    <div className="flex flex-col gap-[20px] pt-[30px]">
     <div className="text-[20px] font-semibold mt-[40px]">NGN {product.data.price}</div>
     <div className="flex gap-[10px]">
         <button><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
@@ -83,7 +83,7 @@ function ProductDetail() {
     </div>
     </div>
 
-<div className="flex justify-center lg:justify-end">
+<div className="flex justify-cente lg:justify-end">
     
     <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] mt-[30px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[300px]">
     <div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
@@ -94,9 +94,9 @@ function ProductDetail() {
         <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
 
 
-        <div onClick={copy} className="flex items-center gap-x-[5px] cursor-pointer">
-            <div className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
-        <button className="underline">Copy Link</button>
+        <div className="flex items-center gap-x-[5px] cursor-pointer">
+            <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
+        <button onClick={copy} className="underline">Copy Link</button>
         </div>
 
         </div>

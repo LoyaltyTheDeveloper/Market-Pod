@@ -126,7 +126,7 @@ function Search() {
             <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[10px]">
               <div className="h-[100px] lg:size-[150px] flex flex-row gap-x-[20px]">
                 <img
-                  className="h-full w-full object-cover object-contain rounded-[5px]"
+                  className="h-full w-[150px] lg:w-[200px] object-cover object-contain rounded-[5px]"
                   src={result.data.image}
                 />
                 <div
@@ -197,8 +197,8 @@ function Search() {
           {result.data.products && result.data.products.length > 0 ? (
             result.data.products.slice(0, 4).map((product) => (
               <div className="mb-[30px]" key={product.id}>
-                <div className="flex flex-row justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
-                  <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] rounded-[5px]">
+                <div className="flex flex-row justify-center lg:flex lg:flex-wrap gap-[8px lg:justify-start">
+                  <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
                     <div className="flex justify-center px-[50px]">
                       <img
                         onClick={() =>
@@ -220,10 +220,10 @@ function Search() {
                       }
                       className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]"
                     >
-                      <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold">
+                      <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[30px]">
                         {product.name}
                       </div>
-                      <div className="text-[12px] w-[150px] lg:text-[13px]">
+                      <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">
                         {product.subtitle}
                       </div>
                     </div>

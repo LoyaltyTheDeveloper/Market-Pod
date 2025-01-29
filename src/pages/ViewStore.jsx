@@ -303,8 +303,6 @@ function ViewStore() {
               </div>
 
 
-
-
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
               <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[40px]">
@@ -329,12 +327,7 @@ function ViewStore() {
       ))}
     </div>
 
-
-
-
-
                
-
                 </div>
                 </div>
                 </div>
