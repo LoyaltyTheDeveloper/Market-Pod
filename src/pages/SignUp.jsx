@@ -17,6 +17,8 @@ function SignUp() {
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
+  const emailData = {userEmail: email};
+
 
   const handleSignup = (e) => {
     setIsPending(true);
@@ -48,7 +50,7 @@ function SignUp() {
           // });
           toast.success(data.message);
           setIsPending(false);
-          navigate('/confirmemail');
+          navigate('/confirmemail', {state: emailData});
         } else {
           toast.error(data.message);
           setIsPending(false);

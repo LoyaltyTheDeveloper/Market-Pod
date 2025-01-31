@@ -8,11 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import { dotPulse } from 'ldrs'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
+import { trio } from 'ldrs'
+
 
 function ConfirmEmail() {
-  dotPulse.register()
+    dotPulse.register()
+    trio.register()
+    const location = useLocation();
+    const emailData = location.state;
     const navigate = useNavigate();
     const [isPending, setIsPending] = useState();
+    const [isLoading, setIsLoading] = useState();
     const length = 6;
     const [otp, setOtp] = useState(new Array(length).fill(""));
     const inputRefs = useRef([]);
@@ -28,7 +35,6 @@ function ConfirmEmail() {
           }
         }
       };
-
       const handleKeyDown = (e, index) => {
         if (e.key === "Backspace" && otp[index] === "") {
           if (index > 0) {
@@ -36,7 +42,6 @@ function ConfirmEmail() {
           }
         }
       };
-
 
       const handleVerify = (e) => {
         setIsPending(true);
@@ -46,29 +51,30 @@ function ConfirmEmail() {
             setIsPending(false);
             return;
         }
-
-        // const otpData {
-
-        // }
-    
+        const otpData = {
+              email: emailData.userEmail,
+              otp: otp
+        }
         fetch('https://apis.emarketpod.com/user/verifyOtp', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(otp),
+          body: JSON.stringify(otpData),
         })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === true) {
-              toast.success(data.message);
+          .then((response) => {
+            if(response.status === 200){
+              toast.success("OTP verified successfully");
               setIsPending(false);
-              navigate('/');
-            } else {
-              toast.error(data.message);
-              setIsPending(false);
-                return;
+              navigate("/");
             }
+            if (!response.ok){
+              setIsPending(false);
+            }
+           return response.json();
+          })
+          .then((data) => {
+            toast.success(data.message);
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -76,14 +82,50 @@ function ConfirmEmail() {
           });
     
       }
+
+      const resendOtp = (e) => {
+        
+        setIsLoading(true);
+        e.preventDefault();
+        
+        fetch('https://apis.emarketpod.com/user/resendOtp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(emailData.userEmail),
+        })
+          .then((response) => {
+            if(response.status === 200){
+              setIsLoading(false);
+              toast.success("OTP resent successfully");
+            }
+            if (!response.ok){
+              setIsLoading(false);
+              toast.error("There was an error resending the OTP");
+            }
+            response.json()})
+          .then((data) => {
+            if (data.status === true) {
+              toast.success(data.message);
+            } else {
+              toast.error(data.message);
+                return;
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            setIsLoading(false);
+          });
     
-
-
-
-
-
+      }
 
   return (<>
+   {isLoading &&  <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
    <div className="h-screen bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url(${background})`, height: "800px"}}>
   <div className="flex justify-center pt-[40px]">
   <div className="lg:pb-[70px] bg-white p-8 rounded-[20px] shadow-lg w-[90%] lg:w-[40%]">
@@ -103,31 +145,10 @@ function ConfirmEmail() {
           onChange={(e) => handleChange(e, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           ref={(el) => (inputRefs.current[index] = el)}
-          className="w-[60px] h-[60px] border border-gray-300 rounded-lg text-center text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border border-gray-300 rounded-lg text-center text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       ))}
     </div>
-          {/* <div className="mb-4 items-center flex flex-row">
-          <PiEnvelopeSimpleLight className="absolute ml-[20px] size-[20px]"/>
-            <input
-              type="email"
-              id="email"
-              className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-              required
-            />
-          </div> */}
-        
-          {/* <div className="flex items-center justify-between">
-            <button
-            onClick={handleVerify}
-              type="submit"
-              className="bg-[#31603D] hover:bg-[green] text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
-            >
-              Proceed
-            </button>
-          </div> */}
-
 
 
 {!isPending &&<div className="flex items-center justify-between">
@@ -164,10 +185,10 @@ function ConfirmEmail() {
             <p>Didn't get a code?</p>
           </div>
           <div className="mt-[30px] flex flex-row gap-[5px] justify-center font-bold text-[#31603D]">
-            <p>Resend Code</p>
+            <button onClick={resendOtp}>Resend Code</button>
           </div>
           <div className="mt-[100px] flex flex-row justify-center gap-[5px]">
-            <p>You have an account?</p><p className="text-[#31603D] underline">Login</p>
+           <p>You have an account?</p><p className="text-[#31603D] underline"><Link to = "/signin">Login</Link></p>
           </div>
       </div>
       </div>
