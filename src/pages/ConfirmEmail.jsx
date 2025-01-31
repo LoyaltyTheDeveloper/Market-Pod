@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import pod from '../assets/Podlogo.svg';
 import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import { trio } from 'ldrs'
+import { GrConsole } from 'react-icons/gr';
 
 
 function ConfirmEmail() {
@@ -36,12 +37,27 @@ function ConfirmEmail() {
         }
       };
       const handleKeyDown = (e, index) => {
-        if (e.key === "Backspace" && otp[index] === "") {
-          if (index > 0) {
+        if (e.key === "Backspace") {
+          const newOtp = [...otp];
+      
+          if (newOtp[index]) {
+          
+            newOtp[index] = "";
+          } else if (index > 0) {
+           
+            newOtp[index - 1] = "";
             inputRefs.current[index - 1].focus();
           }
+      
+          setOtp(newOtp);
         }
       };
+
+      useEffect(()=> {
+        if (!emailData){
+          navigate("/signin");
+        }
+      }, [])
 
       const handleVerify = (e) => {
         setIsPending(true);
@@ -96,6 +112,7 @@ function ConfirmEmail() {
           body: JSON.stringify(emailData.userEmail),
         })
           .then((response) => {
+            console.log(response.status);
             if(response.status === 200){
               setIsLoading(false);
               toast.success("OTP resent successfully");

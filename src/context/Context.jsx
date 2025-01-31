@@ -23,7 +23,6 @@ export const setCartCount = (cart) => {
 }
 
 const authReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case 'SIGN_UP':
     case 'SIGN_IN':
