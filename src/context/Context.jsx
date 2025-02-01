@@ -15,13 +15,6 @@ export const setProfileData = (data) => {
   }
 }
 
-export const setCartCount = (cart) => {
-  return {
-    type: "SET_CART_COUNT",
-    cart
-  }
-}
-
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'SIGN_UP':
@@ -34,11 +27,7 @@ const authReducer = (state, action) => {
         email: action.payload.email
       };
 
-    case 'SET_CART_COUNT':
-      return {
-        ...state,
-        cartCount: action.cart
-      };
+   
     case 'SET_USER':
       return {
         ...state,

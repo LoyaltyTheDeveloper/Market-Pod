@@ -30,6 +30,7 @@ import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
+import { CartContext } from '../context/CartContext.jsx';
 
 
 function Navbar() {
@@ -48,6 +49,7 @@ function Navbar() {
       }, {})
       : {}
   );
+  const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useContext(CartContext);
 
 
   //  const getProducts = () => {
@@ -242,7 +244,13 @@ function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
+const isCartEmpty =()=> {
+  return(<>
+     <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
+      <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+      </div>
+  </>)
+}
   
   const DrawerList = (
     
@@ -252,7 +260,8 @@ function Navbar() {
         <div className="bg-[white] z-50 fixed h-[50px] w-[200%] overflow-x-hidden overflow-y-hidden w-full">
 
           <div className="flex items-center my-[10px] mx-[10px] gap-[260px]">
-            <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({products.length})</div>
+           {state.token && <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({products.length || 0})</div>}
+           {!state.token && <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({cartOne.length || 0})</div>}
             <div onClick={toggleDrawer(false)} className=""><LiaTimesSolid className="size-[25px] text-[#31603D]" /></div>
           </div>
 
@@ -264,8 +273,9 @@ function Navbar() {
           color="#4ade80"
         ></l-trio>    </div>}
 
-        <div className="flex justify-center pt-[px]">
+       {state.token && <div className="flex justify-center pt-[px]">
 
+      
 
           <div className="pt-[50px] pb-[50px]">
 
@@ -294,8 +304,11 @@ function Navbar() {
                       </div>
                     </div>
                   </div>
+
+                  
                   <hr className="mt-[10px] mx-[2%]"></hr>
                 </>
+                
 
                 ))}
                 <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
@@ -316,7 +329,72 @@ function Navbar() {
           </div>
 
 
+        </div>}
+
+
+
+
+        {!state.token && <div className="flex justify-center pt-[px]">
+
+
+<div className="pt-[50px] pb-[50px]">
+  
+
+  {Array.isArray(cartOne) && cartOne.length > 0 ? (
+    <ul className="">
+      {cartOne.map((product) => (<>
+        
+        <div className="bg-[]" key={product.product_id}>
+
+          <div className="bg-[] pt-[20px]">
+            <div className="font-bold ml-[10px]">Produce</div>
+            <div className="flex">
+              <div><img src={product.image} className="size-[90px]" /></div>
+              <div className="flex flex-col gap-[10px]">
+                <div>{product.name} - {product.weight}</div>
+                <div className="text-[grey] text-[15px]">Subtitle</div>
+                <div className="flex items-center gap-[15px]">
+                  <div onClick={() => removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+                  <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+                    <div onClick={() => decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px]" /></div>
+                    <div className="text-[18px]">{product.quantity}</div>
+                    <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
+                  </div>
+                  <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
+        <hr className="mt-[10px] mx-[2%]"></hr>
+      </>
+
+      ))}
+      
+      <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
+      <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+      </div>
+    </ul>
+  ) : (<>
+
+    {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
+      <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
+      </div>
+      <div>Your personal cart is empty</div>
+      <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+    </div>}
+
+  </>)}
+</div>
+
+
+</div>}
+
+
+
+
+
 
       </div>
 
@@ -391,14 +469,24 @@ function Navbar() {
 
 
 
-              <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
+             {state.token && <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
                 {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[20px] top-[18px]"></div>}
                 <div className="font-bold text-[13px]">Cart</div>
                 <div className="flex flex-row items-center gap-[7px]">
                   <div><GrBasket className="size-[20px]" /></div>
                   <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{(products.length) || 0} Item(s)</div>
                 </div>
-              </div>
+              </div>}
+
+              {!state.token && <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
+                {cartOne.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[20px] top-[18px]"></div>}
+                <div className="font-bold text-[13px]">Cart</div>
+                <div className="flex flex-row items-center gap-[7px]">
+                  <div><GrBasket className="size-[20px]" /></div>
+                  <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{(cartOne.length) || 0} Item(s)</div>
+                </div>
+              </div>}
+
 
 
 
@@ -410,10 +498,15 @@ function Navbar() {
               </div>}
 
 
-              <div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
+              {state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
                 {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
                 <div><GrBasket className="size-[20px]" /></div>
-              </div>
+              </div>}
+
+              {!state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
+                {cartOne.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
+                <div><GrBasket className="size-[20px]" /></div>
+              </div>}
 
               <button onClick={toggleSidebar}>
                 <div className="grid grid-cols-2 gap-[1px] lg:hidden">
