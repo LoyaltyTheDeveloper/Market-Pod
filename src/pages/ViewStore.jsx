@@ -89,6 +89,7 @@ function ViewStore() {
       .then((response) => response.json())
         .then((data) => {
           setIsLoading(false);
+        
           toast.success(data.message);
           return;
         })
@@ -194,13 +195,26 @@ function ViewStore() {
             .map((_, index) => (
               <div key={index} className="flex flex-col mb-[30px] justify-center lg:hidden">
                 <div className="flex items-center">
-                <div className="flex flex-col">
-                <div className="flex items-center">
+                <div className="flex flex-col gap-y-[30px]">
+                <div className="flex flex-col items-center">
                   <div className="flex flex-row gap-x-2 items-center mx-4">
                     <Skeleton width={100} height={100} className=""/>
                     <Skeleton width={250} height={30} className=""/>
                   </div>
+                  
                 </div>
+                <div className="flex flex-row gap-x-2 items-center mx-4">
+                    <Skeleton width={180} height={210} className=""/>
+                    <Skeleton width={180} height={210} className=""/>
+                  </div>
+                  <div className="flex flex-row gap-x-2 items-center mx-4">
+                    <Skeleton width={180} height={210} className=""/>
+                    <Skeleton width={180} height={210} className=""/>
+                  </div>
+                  <div className="flex flex-row gap-x-2 items-center mx-4">
+                    <Skeleton width={180} height={210} className=""/>
+                    <Skeleton width={180} height={210} className=""/>
+                  </div>
                 </div>
                 </div>
               </div>
@@ -236,6 +250,7 @@ function ViewStore() {
                     <Skeleton width={220} height={250} className="ml-[-10px]"/>
                     </div>
                     </div>
+                    
                   </div>
                 </div>
                 </div>
@@ -386,7 +401,7 @@ function ViewStore() {
       ))}
     </div>}
 
-    {!store &&  Array(3)
+    {/* {!products &&  Array(3)
             .fill("")
             .map((_, index) => (
               <div key={index} className="flex flex-col mb-[30px] justify-center lg:hidden">
@@ -401,7 +416,7 @@ function ViewStore() {
                 </div>
                 </div>
               </div>
-            ))}
+            ))} */}
 
                
                 </div>

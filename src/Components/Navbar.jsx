@@ -34,6 +34,7 @@ import { CartContext } from '../context/CartContext.jsx';
 
 
 function Navbar() {
+  
   trio.register()
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -72,6 +73,8 @@ function Navbar() {
   //      };
 
 
+  // reload cart
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -93,6 +96,34 @@ function Navbar() {
         console.error(error);
       });
   }, [refresh]);
+
+
+  // const reloadCart = () => {
+  //   useEffect(() => {
+  //     setIsLoading(true);
+  
+  //     fetch('https://apis.emarketpod.com/user/cart', {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: state.token,
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setIsLoading(false);
+  //         setProducts(data);
+  //       })
+  //       .catch((error) => {
+  //         setIsLoading(false);
+  //         console.error(error);
+  //       });
+  //   }, [refresh]);
+  // }
+
+ 
+
+
 
   const deleteProduct = (product) => {
     setIsLoading(true);

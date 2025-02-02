@@ -360,7 +360,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         <div className="flex flex-col lg:flex-row px-[15px]">
           <div className="bg-[#31603D] rounded-tl-[5px] rounded-tr-[5px] lg:rounded-tr-[0px] lg:rounded-tl-[10px] lg:rounded-bl-[10px] text-[white] lg:px-[80px] flex flex-col justify-center text-center p-6">
           <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold">There's more to explore</div>
-          <div className="text-[12px]">There are {} stores (and counting) available in</div>
+          <div className="text-[12px]">There are {marketss?.stores?.length} stores (and counting) available in</div>
           <div className="text-[12px]"><span className="underline">Ilorin, Kwara State.</span> <span>Explore them all with</span></div>
           <div className="text-[12px]">Market Pod today !</div>
           <div onClick={() => navigate(`/site/getStores/${1}/${market.name}/${market.addr}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
