@@ -20,6 +20,7 @@ import { BsQuestionCircle } from "react-icons/bs";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { trio } from 'ldrs';
 // import { IoMdBicycle } from "react-icons/io";
+import { CartContext } from '../context/CartContext.jsx';
 
 function Checkout() {
   const navigate = useNavigate();
@@ -200,6 +201,8 @@ function Checkout() {
       const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
       const displayPhone = `${state.user.phone_number ? (state.user.phone_number == '' ? 'User' : state.user.phone_number) : "User"}, ${state.user.phone_number2 ?? ''}`;
 
+       const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useContext(CartContext);
+
   return (<>
   <Navbar/>
 
@@ -227,6 +230,7 @@ function Checkout() {
     </div>
 
 
+     {state.token && <div>
             {Array.isArray(products) && products.length > 0 ? (
             <ul>
               {products.map((product) => (<>
@@ -274,6 +278,65 @@ function Checkout() {
            {/* <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div> */}
            </div>
           </>)}
+
+          </div>}
+
+
+          {!state.token && <div>
+            {Array.isArray(cartOne) && cartOne.length > 0 ? (
+            <ul>
+              {cartOne.map((product) => (<>
+                <div className="relative" key={product.product_id}>
+                  
+                <div className="bg-[] lg:pt-[30px]">
+              <div className="font-bold ml-[10px]">Produce</div>
+              <div className="flex">
+                
+                <div><img src={product} className="size-[90px]"/></div>
+            
+                <div className="flex flex-col lg:flex-row gap-[10px] lg:gap-[0px]">
+
+                    <div className="lg:w-[300px]">
+                  <div>{product.name} - {product.weight}KG</div>
+                  <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
+                 </div>
+
+                  <div className="flex items-center gap-[15px]   ">
+                   <div onClick={()=> removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
+                   <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+                    <div onClick={()=> decreaseQuantity(product.id)}className="text"><FaMinus className="size-[12px]"/></div>
+                    <div className="text-[18px]">{product.quantity}</div>
+                    <div onClick={()=> increaseQuantity(product.id)}className="text"><FaPlus className="size-[12px]"/></div>
+                   </div>
+                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                  </div>
+
+                  </div>
+              </div>
+            </div>
+                </div>
+                 <hr className="mt-[10px] mx-[2%]"></hr>
+              </>))}
+              {/* <div className="mt-[150px] bg-[white] py-[50px] pb-[250px] items-center px-[20px] flex justify-center">
+                 <button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px]">Proceed to Checkout</button>
+               </div> */}
+            </ul>
+            
+          ) : (<>
+          <div className="flex flex-col gap-y-[10px] mt-[100px] items-center">
+           {/* <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red"/>
+           </div> */}
+           <div>No items here</div>
+           {/* <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div> */}
+           </div>
+          </>)}
+
+          </div>}
+
+
+
+
+
             </div>
             </div>
 </div>

@@ -311,8 +311,9 @@ const isCartEmpty =()=> {
                 
 
                 ))}
-                <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
+                <div className="flex flex-col gap-y-[10px] w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
                 <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+                <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
                 </div>
               </ul>
 
@@ -372,8 +373,9 @@ const isCartEmpty =()=> {
 
       ))}
       
-      <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
+      <div className="flex flex-col gap-y-[10px] w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
       <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+      <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
       </div>
     </ul>
   ) : (<>

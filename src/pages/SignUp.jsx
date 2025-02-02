@@ -9,6 +9,7 @@ import { AuthContext } from '../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { dotPulse } from 'ldrs'
+import { CartContext } from '../context/CartContext.jsx';
 
 function SignUp() {
   dotPulse.register()
@@ -18,9 +19,11 @@ function SignUp() {
   const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
   const emailData = {userEmail: email};
+  const { state } = useContext(AuthContext);
 
+ const { clearCart } = useContext(CartContext);
 
-  const handleSignup = (e) => {
+  const handleSignup = (e, product_id) => {
     setIsPending(true);
     e.preventDefault();
     if (email === '' || pswd === '') {
@@ -29,10 +32,40 @@ function SignUp() {
         return;
     }
 
+    const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const updatedCart = localCart.map((item) => ({
+      product_id: item.id,
+      quantity: item.quantity,
+    }));
+
     const formData = {
       email,
-      pswd
+      pswd,
+      cart: updatedCart
     };
+
+    const updateCart =() => {
+
+      fetch('https://apis.emarketpod.com/user/cart/add', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: state.token,
+        },
+        body: JSON.stringify(product_id),
+      })
+      .then((response) => response.json())
+        .then((data) => {console.log(data)
+          return;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    
+    }   
+
+    // const signupData = { ...formData, cart: updatedCart };
 
     fetch('https://apis.emarketpod.com/user/signup', {
       method: 'POST',
@@ -45,11 +78,11 @@ function SignUp() {
       .then((data) => {
         if (data.status === true) {
           // dispatch({
-          //   type: 'SIGN_UP',
-          //   payload: { user: data.user },
+          //   type: 'SIGN_UP'
           // });
           toast.success(data.message);
           setIsPending(false);
+          updateCart();
           navigate('/confirmemail', {state: emailData});
         } else {
           toast.error(data.message);
@@ -61,6 +94,13 @@ function SignUp() {
         console.error('Error:', error);
         setIsPending(false);
       });
+
+      console.log("signupData", formData);
+
+
+   
+
+    //  clearCart();
 
   }
 
