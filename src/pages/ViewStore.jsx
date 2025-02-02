@@ -189,6 +189,60 @@ function ViewStore() {
   </div>
 
 
+  {!store &&  Array(1)
+            .fill("")
+            .map((_, index) => (
+              <div key={index} className="flex flex-col mb-[30px] justify-center lg:hidden">
+                <div className="flex items-center">
+                <div className="flex flex-col">
+                <div className="flex items-center">
+                  <div className="flex flex-row gap-x-2 items-center mx-4">
+                    <Skeleton width={100} height={100} className=""/>
+                    <Skeleton width={250} height={30} className=""/>
+                  </div>
+                </div>
+                </div>
+                </div>
+              </div>
+            ))}
+
+{!store &&  Array(1)
+            .fill("")
+            .map((_, index) => (
+              <div key={index} className="flex flex-col mb-[30px justify-cente mt-[60px] hidden lg:flex ">
+                <div className="flex items-center">
+                <div className="flex flex-col">
+                <div className="flex items-center">
+                  <div className="flex flex-row gap-x-[70px] items-cente mx-">
+                    <Skeleton width={250} height={170} className="ml-[-10px]"/>
+
+                   <div className="flex flex-col gap-y-[50px]">
+                    <div className="flex flex-row gap-x-[20px] mt-[30px]">
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    </div>
+                    <div className="flex flex-row gap-x-[20px] mt-[30px]">
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    </div>
+                    <div className="flex flex-row gap-x-[20px] mt-[30px]">
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    <Skeleton width={220} height={250} className="ml-[-10px]"/>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </div>
+              </div>
+            ))}
+
 
     <div className="flex mt-[30px] justify-center  lg:justify-start">
         <div className="">
@@ -227,7 +281,7 @@ function ViewStore() {
 
 {state.token && <div className="lg:min-h-screen lg:overflow-y-auto lg:max-h-72 no-scrollbar">
       {/* Extract unique categories directly from mapped products */}
-      {[...new Set(products.map(product => product.category_name))].map(category => (
+      {[...new Set(products?.map(product => product.category_name))].map(category => (
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
@@ -331,6 +385,23 @@ function ViewStore() {
         </div>
       ))}
     </div>}
+
+    {!store &&  Array(3)
+            .fill("")
+            .map((_, index) => (
+              <div key={index} className="flex flex-col mb-[30px] justify-center lg:hidden">
+                <div className="flex items-center">
+                <div className="flex flex-col">
+                <div className="flex items-center">
+                  <div className="flex flex-row gap-x-2 items-center mx-4">
+                    <Skeleton width={180} height={210} className=""/>
+                    <Skeleton width={180} height={210} className=""/>
+                  </div>
+                </div>
+                </div>
+                </div>
+              </div>
+            ))}
 
                
                 </div>

@@ -65,7 +65,7 @@ function SignUp() {
     
     }   
 
-    // const signupData = { ...formData, cart: updatedCart };
+    
 
     fetch('https://apis.emarketpod.com/user/signup', {
       method: 'POST',
