@@ -31,10 +31,14 @@ import { FaPlus } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
 import { CartContext } from '../context/CartContext.jsx';
-
+import { AiOutlineClose } from "react-icons/ai";
 
 function Navbar() {
-  
+
+
+
+
+
   trio.register()
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -202,6 +206,26 @@ function Navbar() {
       });
   };
 
+  const handleSearch2 = (item) => {
+
+    fetch(`https://apis.emarketpod.com/site/search?query=${item}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        navigate("/search", { state: { item, searchResults: data.results } });
+
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      })
+      .finally(() => {
+      });
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSearch();
@@ -285,15 +309,15 @@ const isCartEmpty =()=> {
   
   const DrawerList = (
     
-    <Box sx={{ width: 400 }} role="presentation">
+    <Box s={{ width: 400 }} className="w-[400px] lg:w-[700px" role="presentation">
 
       <div className="bg-[#F9F9F9] min-h-screen">
         <div className="bg-[white] z-50 fixed h-[50px] w-[200%] overflow-x-hidden overflow-y-hidden w-full">
 
-          <div className="flex items-center my-[10px] mx-[10px] gap-[260px]">
+          <div className="flex items-center my-[10px] mx-[10px] gap-[260px justify-between">
            {state.token && <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({products.length || 0})</div>}
            {!state.token && <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({cartOne.length || 0})</div>}
-            <div onClick={toggleDrawer(false)} className=""><LiaTimesSolid className="size-[25px] text-[#31603D]" /></div>
+            <div onClick={toggleDrawer(false)} className="mr-[200px]"><LiaTimesSolid className="size-[25px] text-[#31603D]" /></div>
           </div>
 
         </div>
@@ -442,6 +466,7 @@ const isCartEmpty =()=> {
       </button>
     )
   }
+ 
 
 
   return (<>
@@ -451,7 +476,7 @@ const isCartEmpty =()=> {
           <div className="flex items-center">
 
             <div className="ml-[-20px] flex justify-center lg:ml-[-10px]">
-              <img src={pod} onClick={() => navigate("/")} className="size-[150px]" />
+              <img src={pod} onClick={() => navigate("/")} className="size-[150px] cursor-pointer" />
             </div>
             <div className="h-[50px] ml-[25px] hidden border-l border-gray-300 lg:flex justify-between"></div>
 
@@ -459,7 +484,7 @@ const isCartEmpty =()=> {
               <div className="font-bold text-[13px]">Location</div>
               <div className="flex flex-row items-center gap-[7px]">
                 <div><GrLocation className="size-[16px]" /></div>
-                <div className="text-[13px] text-[#31603D] font-bold">...</div>
+                <div className="text-[13px] text-[#31603D] font-bold">Ilorin, Kwara State</div>
                 <div><IoIosArrowDown onClick={openModal} className="size-[16px]" /></div>
               </div>
             </div>
@@ -625,9 +650,8 @@ const isCartEmpty =()=> {
                           <div className="pl-[50px] flex flex-col gap-y-[10px]">
                             {category.items.map((item, index) => (
                               <p key={index} className="text-[14px] text-gray-600">
-                                <div className="flex flex-row gap-x-[10px]">
+                                <div onClick={()=>handleSearch2(item)}className="flex flex-row gap-x-[10px] cursor-pointer">
                                   {item}
-
                                 </div>
                               </p>
                             ))}

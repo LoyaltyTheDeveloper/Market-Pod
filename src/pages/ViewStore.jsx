@@ -75,7 +75,9 @@ function ViewStore() {
 }, [storeId])
 
     const addToCart = (product) => {
-     
+    if (store.isOpen !== true){
+      return toast.success("This store is closed");
+     }
     setIsLoading(true);
      
       fetch('https://apis.emarketpod.com/user/cart/add', {
@@ -161,9 +163,11 @@ function ViewStore() {
           <div className="h-[100px] w-[30%] lg:size-[150px] lg:w-full lg:mt-[55px]">
             <img className="h-[100px] w-[230px] object-cover rounded-[5px] lg:w-[250px] lg:h-[160px]" src={store.image}/>
           </div>
-          <div className="w-[270px] flex flex-col gap-[5px]">
+          <div className="w-[270px] flex flex-col gap-y-[5px]">
             <div>
               <div className="font-semibold text-[20px] truncate">{store.name}</div>
+              {store.isOpen === true && <div className="text-[#31603D] text-[14px]">Opened</div>}
+              {store.isOpen !== true && <div className="text-[#D23D23] text-[14px]">Closed</div>}
               <div className="text-[15px]">{store.status}</div>
               <div className="text-[15px]">{store.addr}</div>
             </div>

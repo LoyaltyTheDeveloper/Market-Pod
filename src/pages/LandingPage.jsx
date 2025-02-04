@@ -62,6 +62,31 @@ function LandingPage({ markets }) {
       });
   };
 
+
+  const handleSearch2 = (item) => {
+    setIsLoading(true);
+    
+     fetch(`https://apis.emarketpod.com/site/search?query=${item}`)
+       .then((response) => {
+         if (!response.ok) {
+           setIsLoading(false);
+           throw new Error("Network response was not ok");
+         }
+         return response.json();
+       })
+       .then((data) => {
+         setIsLoading(false);
+         navigate("/search", { state: { item, searchResults: data.results } });
+       })
+       .catch((error) => {
+         setIsLoading(false);
+         console.error("Error fetching search results:", error);
+       })
+       .finally(() => {
+       
+       });
+   };
+
  const addToCart = () => {
   alert();
  }
@@ -159,7 +184,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                    
                     <div className="gap-y-8 lg:gap-x-[10px] grid grid-rows-5 grid-flow-col auto-rows-max grid-cols-1 mb-4 h-[100px] w-[250px]">
                       {category.items.map((item, itemIndex) => (
-                        <div key={itemIndex} className="whitespace-nowrap text-gray-700 text-[15px] grid grid-row-1 grid-flow-row auto-rows-max flex-wrap whitepsace-nowrap h-[10px">
+                        <div key={itemIndex} onClick={()=>handleSearch2(item)} className="cursor-pointer whitespace-nowrap text-gray-700 text-[15px] grid grid-row-1 grid-flow-row auto-rows-max flex-wrap whitepsace-nowrap h-[10px">
                           {item}
                         </div>
                       ))}

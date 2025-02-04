@@ -55,11 +55,11 @@ function ConfirmEmail() {
 
       const joinOtp = otp.join("");
 
-      // useEffect(()=> {
-      //   if (!emailData || !otpToken){
-      //     navigate("/signin");
-      //   }
-      // }, [])
+      useEffect(()=> {
+        if (!emailData || !otpToken){
+          navigate("/");
+        }
+      }, [])
 
       const handleVerify = (e) => {
      
@@ -86,7 +86,7 @@ function ConfirmEmail() {
           .then((response) => {
             if(response.status === 200){
               setIsPending(false);
-              navigate("/signin");
+              navigate("/");
             }
             if (!response.ok){
               setIsPending(false);
@@ -108,8 +108,7 @@ function ConfirmEmail() {
         setIsLoading(true);
         e.preventDefault();
 
-        const email = emailData.userEmail;
-        console.log(email);
+        const email = {email: emailData.userEmail}
         
         fetch('https://apis.emarketpod.com/user/resendOtp', {
           method: 'POST',
@@ -119,10 +118,8 @@ function ConfirmEmail() {
           body: JSON.stringify(email),
         })
           .then((response) => {
-            console.log(response.status);
             if(response.status === 200){
               setIsLoading(false);
-              toast.success("OTP resent successfully");
             }
             if (!response.ok){
               setIsLoading(false);
@@ -156,7 +153,7 @@ function ConfirmEmail() {
   <div className="flex justify-center pt-[40px]">
   <div className="lg:pb-[70px] bg-white p-8 rounded-[20px] shadow-lg w-[90%] lg:w-[40%]">
     <div className="flex justify-center">
-        <img src={pod} onClick={() => navigate("/")}/>
+        <img src={pod} onClick={() => navigate("/")} className="cursor-pointer"/>
     </div>
         <h2 className="text-2xl font-bold mb-6 text-center lg:text-[35px]">Email Confirmation</h2>
         <h3 className="mb-6 text-center">We sent a one time password to your email address, please enter it into the field below.</h3>

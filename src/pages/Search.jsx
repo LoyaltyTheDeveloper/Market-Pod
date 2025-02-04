@@ -9,6 +9,7 @@ import { trio } from 'ldrs'
 import { LuClock5 } from "react-icons/lu";
 import { AuthContext } from '../context/Context.jsx';
 import { useEffect, useContext, } from 'react';
+import { LuClipboard } from "react-icons/lu";
 
 function Search() {
   const [isLoading, setIsLoading] = useState(false);
@@ -238,7 +239,11 @@ function Search() {
       </div>
     ))
   ) : (
-    <p className="flex justify-center">No results found</p>
+    <div className="flex flex-col gap-y-2 justify-center items-center text-center">
+      <div className="bg-[white] p-2 lg:p-6 rounded-full">< LuClipboard className="size-[25px] lg:size-[50px]"/></div>
+      <div className="font-bold text-[14px] lg:text-[16px] text-[#31603D]">Oops !</div>
+      <div className="text-[14px] lg:text-[16px]">Sorry, the product you're looking for is currently unavailable.</div>
+    </div>
   )}
 </div>
 

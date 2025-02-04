@@ -645,10 +645,13 @@ useEffect(() => {
 
 
                       {!isLoading && (
-  <div className="lg:mx-[-30px]">
+ 
+ 
+ <div className="lg:mx-[-30px]">
+   <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
     {Array.isArray(orders) && orders.length > 0 ? (
       <>
-        <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
+        {/* <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div> */}
         <div className="flex flex-col gap-y-[30px] items-center lg:items-start">
           {/* Group orders by date */}
           {Object.entries(

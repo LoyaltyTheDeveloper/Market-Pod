@@ -163,7 +163,7 @@ function StoreList() {
 
       <div className="flex absolute right-[27px] lg:right-[50px] items-center">
         <div className="flex items-center">
-      <div onClick ={handleNextMarket} className="text-[12px] lg:text-[15px]"><button> Next Market </button></div>
+      <div className="text-[12px] lg:text-[15px]"><button> Next Market </button></div>
       <div className="lg:flex"><MdOutlineArrowForwardIos className="size-[19px] lg:size-[30px]"/></div>
       </div>
       </div>

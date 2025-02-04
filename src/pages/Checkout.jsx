@@ -19,8 +19,9 @@ import { PiCity } from "react-icons/pi";
 import { BsQuestionCircle } from "react-icons/bs";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { trio } from 'ldrs';
-// import { IoMdBicycle } from "react-icons/io";
+import { IoMdBicycle } from "react-icons/io";
 import { CartContext } from '../context/CartContext.jsx';
+import { TbUserEdit } from "react-icons/tb";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -198,8 +199,8 @@ function Checkout() {
           });
       };
 
-      const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
-      const displayPhone = `${state.user.phone_number ? (state.user.phone_number == '' ? 'User' : state.user.phone_number) : "User"}, ${state.user.phone_number2 ?? ''}`;
+      const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'Full name' : state.user.last_name) : "Full name"} ${state.user.first_name ?? ''}`;
+      const displayPhone = `${state.user.phone_number ? (state.user.phone_number == '' ? 'Phone Number' : state.user.phone_number) : "Phone Number"} ${state.user.phone_number2 ?? ''}`;
 
        const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useContext(CartContext);
 
@@ -352,7 +353,7 @@ function Checkout() {
            <div className="text-[14px]">Complete your order by providing your delivery address</div>
 
            <div className="flex flex-row items-center">
-            <div className="absolute ml-[20px]"><FiPhone className="size-[20px]"/></div>
+            <div className="absolute ml-[20px]"><TbUserEdit className="size-[20px]"/></div>
           <div>
 
           <input
@@ -392,7 +393,7 @@ function Checkout() {
           value={selectedLocation}
           onChange={(e) => setSelectedLocation(e.target.value)}
         >
-          <option className ="text-[grey]" value="">Select a location</option>
+          <option className ="text-[grey]" value="">General Area</option>
           {locations.map((location) => (
             <option key={location.id} value={location.id}>
               {location.name}
@@ -404,8 +405,9 @@ function Checkout() {
 
           </div>
 
-          <div className="flex flex-row items-center">
-            <div className="absolute ml-[20px]"><PiMapPinArea className="size-[20px]"/></div>
+
+        {/* <div className="flex flex-row items-center">
+          <div className="absolute ml-[20px]"><PiMapPinArea className="size-[20px]"/></div>
           <div>
             
           <select 
@@ -414,14 +416,16 @@ function Checkout() {
           onChange={handleStatesChange}>
         <option className="text-[grey]" value="">Select a state</option>
         <option value="Kwara State">Kwara State</option>
-        {/* <option value="USA">USA</option> */}
-        {/* <option value="UK">UK</option> */}
+       
         </select>
             
             </div>
-          </div>
+          </div>  */}
 
-          <div className="flex flex-row items-center">
+
+
+
+          {/* <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><PiCity className="size-[20px]"/></div>
           <div>
 
@@ -433,16 +437,15 @@ function Checkout() {
         {states === "Kwara State" && (
         <>
           <option key="Ilorin">Ilorin</option>
-          {/* <option key="Punjab">Punjab</option>
-          <option key="Haryana">Haryana</option>
-          <option key="Goa">Goa</option> */}
         </>
       )}
       </select>
 
 
             </div>
-          </div>
+          </div> */}
+
+
 
           <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><BiHomeAlt2 className="size-[20px]"/></div>
@@ -467,6 +470,24 @@ function Checkout() {
             <p>For the best experience, make use of the nearest 
             landmark, school, church, etc in your description.</p>
           </div>
+
+
+          <div className="flex flex-row items-center mt-[25px]">
+            <div className="absolute ml-[20px]"><IoMdBicycle className="size-[20px]"/></div>
+          <div>
+
+          <input
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          name="address"
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Riders Instruction (Optional)">
+      </input>
+
+
+            </div>
+          </div>
+
+
           <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Proceed</button></div>
           
           </div>
