@@ -13,16 +13,15 @@ function PrivacyPolicy() {
 
       <div className="font-bold font-sans">1. Information We Collect</div>
       <div className="font-sans">1.1 Personal Information<br></br>
-We collect information you provide directly to us, such as:<br></br>
-Account Details: When you create an account or make a purchase, we collect your name, email, phone number, and payment information.
-Vendor Information:
-If you’re a vendor, we gather business details, such as business name, address, contact information, and verification documents.<br></br>
+ We collect information you provide directly to us, such as:<br></br>
+Account Details: When you create an account or make a purchase, we collect your name, email, phone number, and payment information.<br></br>
+Vendor Information: If you’re a vendor, we gather business details, such as business name, address, contact information, and verification documents.<br></br>
 We may collect your information in various ways:<br></br>
 When you purchase a product or service.<br></br>
-When you register for a service, subscribe to newsletters, or participate in surveys or promotions.
+When you register for a service, subscribe to newsletters, or participate in surveys or promotions.<br></br>
 When you contact us with questions or requests.<br></br>
 Additionally, with your consent or as legally permitted, we may obtain information from other sources, including fraud prevention or credit reference agencies.<br></br>
-1.2 Usage Data
+1.2 Usage Data<br></br>
 We gather data on your interactions with our platform:<br></br>
 Browsing Information: IP address, browser type, and operating system.<br></br>
 Interaction Data: Pages viewed, features used, and time spent on our site.<br></br>
@@ -64,7 +63,8 @@ In the event of a merger or sale, your data may be transferred to the involved t
 
 
 <div className="font-bold font-sans">4. Data Security</div>
-<div className="font-sans">We use industry-standard security practices to protect your data, including:<br></br>
+<div className="font-sans">
+We use industry-standard security practices to protect your data, including:<br></br>
 Encryption: SSL encryption secures your data during transmission.<br></br>
 Access Controls: Access to personal data is restricted by role.<br></br>
 Regular Audits: We conduct regular security audits and monitoring.<br></br>
@@ -73,7 +73,7 @@ Please note that no system is completely secure, and we encourage you to protect
 
 <div className="font-bold font-sans">5. Your Privacy Choices and Rights</div>
 <div className="font-sans">5.1 Access and Correction<br></br>
-You can view, update, or correct your personal information in your account settings. For help, contact us at [support@marketpod.com].<br></br>
+You can view, update, or correct your personal information in your account settings. For help, contact us at [support@emarketpod.com].<br></br>
 5.2 Marketing Preferences<br></br>
 You can unsubscribe from marketing emails or texts by following the instructions provided or contacting us directly.<br></br>
 5.3 Do Not Track Signals<br></br>

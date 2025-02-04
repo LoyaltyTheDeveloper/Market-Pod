@@ -12,11 +12,11 @@ function TermsOfUse() {
       <div className="font-sans">Welcome to Marketpod! The following Terms of Use ("Terms") outline the rules and regulations for accessing and utilizing our website and services. By using Marketpod, you confirm your agreement to comply with these Terms. Please read them carefully.</div>
 
 <div className="font-bold font-sans">1. Acceptance of Terms</div>
-<div className="font-sans">By accessing or using Marketpod’s platform, you confirm that you accept and agree to these Terms, as well as our Privacy Policy. Any violation of these Terms may result in the restriction, suspension, or termination of your access to our services. If you do not agree, please discontinue use of our platform immediately</div>
+<div className="font-sans">By accessing or using Marketpod’s platform, you confirm that you accept and agree to these Terms, as well as our Privacy Policy. Any violation of these Terms may result in the restriction, suspension, or termination of your access to our services. If you do not agree, please discontinue use of our platform immediately.</div>
 
 <div className="font-bold font-sans">2. Membership and Registration</div>
 <div className="font-sans">Our services are intended for individuals who are at least 18 years old and legally capable of entering into binding agreements. By registering, you affirm that you meet these requirements and that the information you provide is complete and accurate.<br></br>
-Account Creation: To create an account, users must provide their full name, email address, phone number, and delivery address. A one-time password will be sent upon registration, and users must agree to our Terms of Use and Privacy Policy by checking a confirmation box.<br></br>
+Account Creation: To create an account, users must provide their email address. A one-time password will be sent upon registration, and users must agree to our Terms of Use and Privacy Policy by checking a confirmation box.<br></br>
 Account Termination: You may delete your account at any time, and upon deletion, your details will be removed from the platform.</div>
 
 <div className="font-bold font-sans">3. User Accounts</div>
@@ -27,20 +27,20 @@ Responsibility: All activities that occur under your account are your responsibi
 <div className="font-bold font-sans">4. Use of Services</div>
 <div className="font-sans">Permitted Activities: Marketpod is provided to facilitate the purchase of market produce from verified vendors and allow authorized vendors to list their produce.<br></br>
 Prohibited Activities: You agree not to misrepresent any information, engage in any activity that may compromise the security of the platform, or use the platform for fraudulent or illegal purposes.<br></br>
-Marketpod offers access to multiple vendors, including restaurants, grocery stores, and pharmacies, where you can place orders for food, groceries, and over-the-counter items. Marketpod does not control or guarantee the availability, quality, or accuracy of vendor listings or the safety of any products. We are not responsible for the accuracy of vendor offers or their ability to fulfill orders.</div>
+Marketpod offers access to multiple vendors, including market stalls, grocery stores, and food depots, where you can place orders for food items, groceries, and over-the-counter items. Marketpod does not control or guarantee the availability, quality, or accuracy of vendor listings or the safety of any products. We are not responsible for the accuracy of vendor offers or their ability to fulfill orders.</div>
 
 <div className="font-bold font-sans">5. Orders and Payment</div>
-<div className="font-sans">Payment Processing: Payments made on our platform are handled by a third-party processor, which ensures secure online transactions. Users can pay via several methods, including electronic wallets, debit cards, bank transfers, QR codes, or other methods available on the platform.
-Pricing and Availability: Prices and availability are displayed in Naira and include applicable taxes, if any. Delivery fees are displayed at checkout, and total payment is due at the time of order placement. All sales are final unless otherwise specified by our Refund Policy.
+<div className="font-sans">Payment Processing: Payments made on our platform are handled by a third-party processor, which ensures secure online transactions. Users can pay via several methods, including electronic wallets, debit cards, bank transfers, QR codes, or other methods available on the platform.<br></br>
+Pricing and Availability: Prices and availability are displayed in Naira and include applicable taxes, if any. Delivery fees are displayed at checkout, and total payment is due at the time of order placement.<br></br>
 By creating an account, you agree to be bound by these terms regarding payment.</div>
 
 <div className="font-bold font-sans">6. Vendor Obligations</div>
-<div className="font-sans">Vendors must accurately represent their products, including descriptions, prices, and availability. Vendors are also responsible for ensuring orders are ready for delivery or pickup promptly and agree to comply with all relevant laws and regulations.</div>
+<div className="font-sans">Vendors must provide accurate and up-to-date information about their products, including detailed descriptions, pricing, and availability. They are also responsible for ensuring that orders are prepared promptly and ready for pickup by the delivery agents or riders, while adhering to all applicable laws and regulations.</div>
 
 
 <div className="font-bold font-sans">7. User Responsibilities</div>
 <div className="font-sans">Respectful Conduct: Users are expected to conduct themselves respectfully with all vendors, including Marketpod’s delivery riders.<br></br>
-Order Changes and Cancellations: Orders may be modified or canceled according to time limits specified on the platform. Please review our order cancellation policy before making changes.<br></br>
+Order Cancellations: Orders may be canceled according to the time limits specified on the platform. However, please note that 50% of the service charge fee will be deducted as the cancellation fee.<br></br>
 Content Submission: By submitting reviews or feedback, you grant Marketpod permission to use this content to enhance our services.</div>
 
 
@@ -48,7 +48,7 @@ Content Submission: By submitting reviews or feedback, you grant Marketpod permi
 <div className="font-bold font-sans">8. Disclaimers and Limitation of Liability</div>
 <div className="font-sans">Marketpod endeavors to provide uninterrupted service but does not guarantee constant availability. We are not liable for damages arising from your use of the platform, including but not limited to service interruptions, errors, or unauthorized access.<br></br>
 No Liability for Unauthorized Use: Marketpod is not responsible for damages resulting from unauthorized access to or use of your account.<br></br>
-Platform Limitations: Marketpod is not liable for losses or damages resulting from delays, inability to use our services, account suspension, errors in data provided to us, or damage caused by viruses or other harmful materials encountered on our platform</div>
+Platform Limitations: Marketpod is not liable for losses or damages resulting from delays, inability to use our services, account suspension, errors in data provided to us, or damage caused by viruses or other harmful materials encountered on our platform.</div>
 
 
 <div className="font-bold font-sans">9. Termination</div>

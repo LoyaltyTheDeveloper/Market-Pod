@@ -480,12 +480,12 @@ const isCartEmpty =()=> {
             </div>
             <div className="h-[50px] ml-[25px] hidden border-l border-gray-300 lg:flex justify-between"></div>
 
-            <div className="ml-[30px] hidden lg:flex flex-col">
+            <div onClick={openModal} className="ml-[30px] hidden lg:flex flex-col cursor-pointer">
               <div className="font-bold text-[13px]">Location</div>
               <div className="flex flex-row items-center gap-[7px]">
                 <div><GrLocation className="size-[16px]" /></div>
                 <div className="text-[13px] text-[#31603D] font-bold">Ilorin, Kwara State</div>
-                <div><IoIosArrowDown onClick={openModal} className="size-[16px]" /></div>
+                <div><IoIosArrowDown className="size-[16px]" /></div>
               </div>
             </div>
 
