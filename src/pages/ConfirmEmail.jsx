@@ -17,7 +17,7 @@ function ConfirmEmail() {
     dotPulse.register()
     trio.register()
     const location = useLocation();
-    const emailData = location.state;
+    const {emailData, otpToken} = location.state || {};
     const navigate = useNavigate();
     const [isPending, setIsPending] = useState();
     const [isLoading, setIsLoading] = useState();
@@ -53,13 +53,16 @@ function ConfirmEmail() {
         }
       };
 
-      useEffect(()=> {
-        if (!emailData){
-          navigate("/signin");
-        }
-      }, [])
+      const joinOtp = otp.join("");
+
+      // useEffect(()=> {
+      //   if (!emailData || !otpToken){
+      //     navigate("/signin");
+      //   }
+      // }, [])
 
       const handleVerify = (e) => {
+     
         setIsPending(true);
         e.preventDefault();
         if (otp.includes("")) {
@@ -69,8 +72,10 @@ function ConfirmEmail() {
         }
         const otpData = {
               email: emailData.userEmail,
-              otp: otp
+              otp: joinOtp,
+              otpToken: otpToken
         }
+       
         fetch('https://apis.emarketpod.com/user/verifyOtp', {
           method: 'POST',
           headers: {
@@ -80,9 +85,8 @@ function ConfirmEmail() {
         })
           .then((response) => {
             if(response.status === 200){
-              toast.success("OTP verified successfully");
               setIsPending(false);
-              navigate("/");
+              navigate("/signin");
             }
             if (!response.ok){
               setIsPending(false);
@@ -103,13 +107,16 @@ function ConfirmEmail() {
         
         setIsLoading(true);
         e.preventDefault();
+
+        const email = emailData.userEmail;
+        console.log(email);
         
         fetch('https://apis.emarketpod.com/user/resendOtp', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify(emailData.userEmail),
+          body: JSON.stringify(email),
         })
           .then((response) => {
             console.log(response.status);
@@ -121,12 +128,14 @@ function ConfirmEmail() {
               setIsLoading(false);
               toast.error("There was an error resending the OTP");
             }
-            response.json()})
+           return response.json()})
           .then((data) => {
             if (data.status === true) {
               toast.success(data.message);
+              setIsLoading(false);
             } else {
               toast.error(data.message);
+              setIsLoading(false);
                 return;
             }
           })

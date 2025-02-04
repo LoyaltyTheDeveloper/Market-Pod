@@ -503,22 +503,24 @@ const isCartEmpty =()=> {
 
 
              {state.token && <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
-                {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[20px] top-[18px]"></div>}
+                {products.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[249px] top-[45px]"></div>}
                 <div className="font-bold text-[13px]">Cart</div>
-                <div className="flex flex-row items-center gap-[7px]">
-                  <div><GrBasket className="size-[20px]" /></div>
-                  <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{(products.length) || 0} Item(s)</div>
+                <div className="flex flex-row items-center gap-[10px]">
+                  <div className="w-[20px"><GrBasket className="size-[20px]" /></div>
+                  <div className="fixe absolut w-[55px] right-[8% text-[13px] text-[#31603D] font-bold whitespace-nowrap">{(products.length) || 0} Item(s)</div>
                 </div>
               </div>}
 
               {!state.token && <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
-                {cartOne.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[20px] top-[18px]"></div>}
+                {cartOne.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[249px] top-[45px]"></div>}
                 <div className="font-bold text-[13px]">Cart</div>
-                <div className="flex flex-row items-center gap-[7px]">
-                  <div><GrBasket className="size-[20px]" /></div>
-                  <div className="fixed right-[8%] text-[13px] text-[#31603D] font-bold">{(cartOne.length) || 0} Item(s)</div>
+                <div className="flex flex-row items-center gap-[10px]">
+                  <div className="w-[20px"><GrBasket className="size-[20px]" /></div>
+                  <div className="fixe absolut w-[55px] right-[8% text-[13px] text-[#31603D] font-bold whitespace-nowrap">{(cartOne.length) || 0} Item(s)</div>
                 </div>
               </div>}
+
+            
 
 
 
@@ -532,12 +534,12 @@ const isCartEmpty =()=> {
 
 
               {state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
-                {products.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
+                {products.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
                 <div><GrBasket className="size-[20px]" /></div>
               </div>}
 
               {!state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
-                {cartOne.length > 0 && <div className="border border-[#F5C065] size-[16px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
+                {cartOne.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
                 <div><GrBasket className="size-[20px]" /></div>
               </div>}
 

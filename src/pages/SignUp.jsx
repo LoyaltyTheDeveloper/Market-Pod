@@ -65,6 +65,7 @@ function SignUp() {
     
     }   
 
+   
     
 
     fetch('https://apis.emarketpod.com/user/signup', {
@@ -77,13 +78,17 @@ function SignUp() {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === true) {
+          const otpToken = data.otpToken
+          const otpPageData = {emailData, otpToken}
+          console.log(otpPageData);
           // dispatch({
           //   type: 'SIGN_UP'
           // });
+         
           toast.success(data.message);
           setIsPending(false);
           updateCart();
-          navigate('/confirmemail', {state: emailData});
+          navigate('/confirmemail', {state: otpPageData});
         } else {
           toast.error(data.message);
           setIsPending(false);
