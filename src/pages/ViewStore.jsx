@@ -15,14 +15,37 @@ import { AuthContext } from '../context/Context.jsx';
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
 import { CartContext } from "../context/CartContext";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 
 
 
-// Default values shown
 
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="left" ref={ref} {...props}
+  timeout={{enter: 1500, exit:1000 }}
+  
+  
+  />;
+});
 
 function ViewStore() {
+
+  const [isDialog, setIsDialog] = React.useState(true);
+
+  const handleOpen = () => {
+    setIsDialog(true);
+  };
+
+  const handleClose = () => {
+    setIsDialog(false);
+  };
+
 
   trio.register()
 
@@ -155,6 +178,48 @@ function ViewStore() {
 
         <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-70px]">
         
+
+
+        <React.Fragment>
+      {/* <Button variant="outlined" onClick={handleOpen}>
+        Slide in alert dialog
+      </Button> */}
+      <Dialog
+      PaperProps={{
+        sx: {
+          position: "absolute",
+          top: "5%", 
+          right: "2%", 
+          width: { xs: "80%", sm: "60%", md: "60%", lg: "25%" }, 
+          height: { xs: "25vh", sm: "30vh", md: "30vh", lg: "30vh" }, 
+          maxHeight: "90vh", 
+          overflow: "auto", 
+        },
+      }}
+        open={isDialog}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle><div className="flex items-center justify-between">
+        <p className="text-[13px]"> An item has been added to your cart </p>
+        <div>x</div>
+          </div>
+          </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {/* Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running. */}
+          </DialogContentText>
+        </DialogContent>
+        {/* <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>Agree</Button>
+        </DialogActions> */}
+      </Dialog>
+    </React.Fragment>
+
 
 <div>
     {store && (

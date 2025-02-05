@@ -43,6 +43,7 @@ function Checkout() {
         const [states, setStates] = useState("");
         const [refresh, setRefresh] = useState(false);
        const [isLoading, setIsLoading] = useState(false);
+       const [isLoading2, setIsLoading2] = useState(false);
        const [address, setAddress] = useState("");
 
 
@@ -76,6 +77,7 @@ function Checkout() {
           } 
 
   useEffect(() => {
+    setIsLoading2(true);
           
       fetch('https://apis.emarketpod.com/user/cart', {
         method: "GET",
@@ -89,6 +91,7 @@ function Checkout() {
         .then((data) => {
           console.log(data);
           setProducts(data);
+          setIsLoading2(false);
         })
         .catch((error) => {
           console.error(error);
@@ -275,7 +278,11 @@ function Checkout() {
           <div className="flex flex-col gap-y-[10px] mt-[100px] items-center">
            {/* <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red"/>
            </div> */}
-           <div>No items here</div>
+           <div> {isLoading2 &&<div className="flex justify-center lg:absolute mt-[-50px] lg:mt-[40px]"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}</div>
            {/* <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div> */}
            </div>
           </>)}

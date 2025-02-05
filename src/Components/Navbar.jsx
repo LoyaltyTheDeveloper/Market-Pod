@@ -32,11 +32,11 @@ import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
 import { CartContext } from '../context/CartContext.jsx';
 import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 function Navbar() {
 
-
-
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
 
   trio.register()
@@ -249,7 +249,7 @@ function Navbar() {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
+    setIsCartOpen(newOpen);
     // getProducts();
     setRefresh(!refresh);
   };
@@ -299,164 +299,173 @@ function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-const isCartEmpty =()=> {
-  return(<>
-     <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
-      <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-      </div>
-  </>)
-}
+// const isCartEmpty =()=> {
+//   return(<>
+//      <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
+//       <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+//       </div>
+//   </>)
+// }
   
-  const DrawerList = (
+//   const DrawerList = (
     
-    <Box s={{ width: 400 }} className="w-[400px] lg:w-[700px" role="presentation">
+//     <Box s={{ width: 400 }} className="w-[400px] fixed top-0 right-0 h-full w-80 z-50 lg:w-[700px" role="presentation">
 
-      <div className="bg-[#F9F9F9] min-h-screen">
-        <div className="bg-[white] z-50 fixed h-[50px] w-[200%] overflow-x-hidden overflow-y-hidden w-full">
+//       <div className="bg-[#F9F9F9] min-h-screen">
+//         <div className="bg-[white] z-50 fixed h-[50px] w-[200%] overflow-x-hidden overflow-y-hidden w-full">
 
-          <div className="flex items-center my-[10px] mx-[10px] gap-[260px justify-between">
-           {state.token && <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({products.length || 0})</div>}
-           {!state.token && <div className="text-[20px] ml-[20px] text-[#31603D] font-semibold">Cart({cartOne.length || 0})</div>}
-            <div onClick={toggleDrawer(false)} className="mr-[200px]"><LiaTimesSolid className="size-[25px] text-[#31603D]" /></div>
-          </div>
+//           <div className="flex items-center my-[10px] mx-[10px] gap-[260px justify-between">
+          
+//             <div onClick={toggleDrawer(false)} className="mr-[200px]"><LiaTimesSolid className="size-[25px] text-[#31603D]" /></div>
+//           </div>
 
-        </div>
+//         </div>
 
-        {isLoading && <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
-          size="70"
-          speed="1.3"
-          color="#4ade80"
-        ></l-trio>    </div>}
+//         {isLoading && <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+//           size="70"
+//           speed="1.3"
+//           color="#4ade80"
+//         ></l-trio>    </div>}
 
-       {state.token && <div className="flex justify-center pt-[px]">
+//        {state.token && <div className="flex justify-center pt-[px]">
 
       
 
-          <div className="pt-[50px] pb-[50px]">
+//           <div className="pt-[50px] pb-[50px]">
 
-            {Array.isArray(products) && products.length > 0 ? (
-              <ul className="">
-                {products.map((product) => (<>
-                  <div className="bg-[]" key={product.product_id}>
+//             {Array.isArray(products) && products.length > 0 ? (
+//               <ul className="">
+//                 {products.map((product) => (<>
+//                   <div className="bg-[]" key={product.product_id}>
 
-                    <div className="bg-[] pt-[20px]">
-                      <div className="font-bold ml-[10px]">Produce</div>
-                      <div className="flex">
-                        <div><img src={product.image} className="size-[90px]" /></div>
-                        <div className="flex flex-col gap-[10px]">
-                          <div>{product.name} - {product.weight}</div>
-                          <div className="text-[grey] text-[15px]">Subtitle</div>
-                          <div className="flex items-center gap-[15px]">
-                            <div onClick={() => deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
-                            <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-                              <div onClick={() => handleDecrease(product.product_id)} className="text"><FaMinus className="size-[12px]" /></div>
-                              <div className="text-[18px]">{product.quantity}</div>
-                              <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
-                            </div>
-                            <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+//                     <div className="bg-[] pt-[20px]">
+//                       <div className="font-bold ml-[10px]">Produce</div>
+//                       <div className="flex">
+//                         <div><img src={product.image} className="size-[90px]" /></div>
+//                         <div className="flex flex-col gap-[10px]">
+//                           <div>{product.name} - {product.weight}</div>
+//                           <div className="text-[grey] text-[15px]">Subtitle</div>
+//                           <div className="flex items-center gap-[15px]">
+//                             <div onClick={() => deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+//                             <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+//                               <div onClick={() => handleDecrease(product.product_id)} className="text"><FaMinus className="size-[12px]" /></div>
+//                               <div className="text-[18px]">{product.quantity}</div>
+//                               <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
+//                             </div>
+//                             <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+//                           </div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
 
                   
-                  <hr className="mt-[10px] mx-[2%]"></hr>
-                </>
+//                   <hr className="mt-[10px] mx-[2%]"></hr>
+//                 </>
                 
 
-                ))}
-                <div className="flex flex-col gap-y-[10px] w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
-                <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-                <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
-                </div>
-              </ul>
+//                 ))}
+//                 <div className="flex flex-col gap-y-[10px] w-[500px w-full md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px pr-[18% md:pr-[50%] lg:pr-[69%]">
+//                 <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+//                 <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+//                 </div>
+//               </ul>
 
-            ) : (<>
+//             ) : (<>
 
-              {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
-                <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
-                </div>
-                <div>Your personal cart is empty</div>
-                <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
-              </div>}
+//               {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
+//                 <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
+//                 </div>
+//                 <div>Your personal cart is empty</div>
+//                 <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+//               </div>}
 
-            </>)}
-          </div>
-
-
-        </div>}
+//             </>)}
+//           </div>
 
 
+//         </div>}
 
 
-        {!state.token && <div className="flex justify-center pt-[px]">
 
 
-<div className="pt-[50px] pb-[50px]">
+//         {!state.token && <div className="flex justify-center pt-[px]">
+
+
+// <div className="pt-[50px] pb-[50px]">
   
 
-  {Array.isArray(cartOne) && cartOne.length > 0 ? (
-    <ul className="">
-      {cartOne.map((product) => (<>
+//   {Array.isArray(cartOne) && cartOne.length > 0 ? (
+//     <ul className="">
+//       {cartOne.map((product) => (<>
         
-        <div className="bg-[]" key={product.product_id}>
+//         <div className="bg-[]" key={product.product_id}>
 
-          <div className="bg-[] pt-[20px]">
-            <div className="font-bold ml-[10px]">Produce</div>
-            <div className="flex">
-              <div><img src={product.image} className="size-[90px]" /></div>
-              <div className="flex flex-col gap-[10px]">
-                <div>{product.name} - {product.weight}</div>
-                <div className="text-[grey] text-[15px]">Subtitle</div>
-                <div className="flex items-center gap-[15px]">
-                  <div onClick={() => removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
-                  <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-                    <div onClick={() => decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px]" /></div>
-                    <div className="text-[18px]">{product.quantity}</div>
-                    <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
-                  </div>
-                  <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+//           <div className="bg-[] pt-[20px]">
+//             <div className="font-bold ml-[10px]">Produce</div>
+//             <div className="flex">
+//               <div><img src={product.image} className="size-[90px]" /></div>
+//               <div className="flex flex-col gap-[10px]">
+//                 <div>{product.name} - {product.weight}</div>
+//                 <div className="text-[grey] text-[15px]">Subtitle</div>
+//                 <div className="flex items-center gap-[15px]">
+//                   <div onClick={() => removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+//                   <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+//                     <div onClick={() => decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px]" /></div>
+//                     <div className="text-[18px]">{product.quantity}</div>
+//                     <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
+//                   </div>
+//                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
         
-        <hr className="mt-[10px] mx-[2%]"></hr>
-      </>
+//         <hr className="mt-[10px] mx-[2%]"></hr>
+//       </>
 
-      ))}
+//       ))}
       
-      <div className="flex flex-col gap-y-[10px] w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
-      <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-      <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
-      </div>
-    </ul>
-  ) : (<>
+//       <div className="flex flex-col gap-y-[10px] w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
+//       <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+//       <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+//       </div>
+//     </ul>
+//   ) : (<>
 
-    {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
-      <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
-      </div>
-      <div>Your personal cart is empty</div>
-      <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
-    </div>}
+//     {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
+//       <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
+//       </div>
+//       <div>Your personal cart is empty</div>
+//       <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+//     </div>}
 
-  </>)}
-</div>
-
-
-</div>}
+//   </>)}
+// </div>
 
 
+// </div>}
 
 
 
 
-      </div>
 
-    </Box>
-  );
+
+//       </div>
+
+//     </Box>
+//   );
+
+
+
+
+
+
+
+
+
+
 
   const Profile = () => {
     const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
@@ -470,10 +479,17 @@ const isCartEmpty =()=> {
 
 
   return (<>
+
+
+  
+
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
       <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px]">
         <div className="flex justify-between h-[70px]">
           <div className="flex items-center">
+            
+
+         
 
             <div className="ml-[-20px] flex justify-center lg:ml-[-10px]">
               <img src={pod} onClick={() => navigate("/")} className="size-[150px] cursor-pointer" />
@@ -520,6 +536,10 @@ const isCartEmpty =()=> {
                 </div>
               </div>
 
+              {isCartOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
+              )}
+
               {state.token && <div className="flex flex-col items-center hidden lg:flex flex-col">
                 <div className="font-bold text-[13px]">Orders</div>
                 <div><PiNotepadBold className="size-[20px]" /></div>
@@ -544,12 +564,6 @@ const isCartEmpty =()=> {
                   <div className="fixe absolut w-[55px] right-[8% text-[13px] text-[#31603D] font-bold whitespace-nowrap">{(cartOne.length) || 0} Item(s)</div>
                 </div>
               </div>}
-
-            
-
-
-
-
             </div>
 
             <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center">
@@ -585,6 +599,9 @@ const isCartEmpty =()=> {
                   className="fixed inset-0 bg-black bg-opacity-20 z-10 flex"
                   onClick={closeModal}
                 ></div>
+
+
+           
 
 
                 <div className="fixed mt-[300px] left-1/2 transform -translate-x-1/2 justify-center z-50 flex items-center w-[300px] h-[300px]">
@@ -685,19 +702,161 @@ const isCartEmpty =()=> {
 
             </div>
 
-
-
-
           </div>
         </div>
       </div>
       <div>
         {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button> */}
-        <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+
+
+        {/* <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
-        </Drawer>
+        </Drawer> */}
       </div>
     </nav>
+
+
+
+
+    <div>
+      <div className={`fixed top-0 right-0 w-[100%] md:w-[50%] lg:w-[400px] h-full bg-white shadow-lg transition-transform transform ${isCartOpen ? "translate-x-0" : "translate-x-full"} z-50 flex flex-col`}>
+
+        <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">
+        {state.token && <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Cart({products.length || 0})</div>}
+        {!state.token && <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Cart({cartOne.length || 0})</div>}
+          <button onClick={() => setIsCartOpen(false)} className="text-gray-600 hover:text-red-500">
+            <AiOutlineClose size={24} className="text-[#31603D]"/>
+          </button>
+        </div>
+
+        {isLoading && <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+          size="70"
+          speed="1.3"
+          color="#4ade80"
+        ></l-trio>    </div>}
+
+        
+      {state.token &&  <div className="flex-1 overflow-y-auto p-4 bg-[#F9F9F9]">
+          
+        {Array.isArray(products) && products.length > 0 ? (
+            <div className="pt-[20px] flex flex-col items-center justify-center">
+          {products.map((product) => (<>
+                  <div className="bg-[] border-b pb-[20px]" key={product.product_id}>
+
+                    <div className="bg-[] pt-[20px">
+                      <div className="font-bold ml-[10px]">Produce</div>
+                      <div className="flex">
+                        <div><img src={product.image} className="size-[90px]" /></div>
+                        <div className="flex flex-col gap-[10px]">
+                          <div>{product.name} - {product.weight}</div>
+                          <div className="text-[grey] text-[15px]">Subtitle</div>
+                          <div className="flex items-center gap-[15px]">
+                            <div onClick={() => deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+                            <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+                              <div onClick={() => handleDecrease(product.product_id)} className="text"><FaMinus className="size-[12px]" /></div>
+                              <div className="text-[18px]">{product.quantity}</div>
+                              <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
+                            </div>
+                            <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <hr className="mt-[10px] mx-[2%]"></hr>
+                </>
+                
+
+                ))}
+         
+            </div>
+          ) : (<>
+           {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[50%] items-center">
+            <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
+            </div>
+            <div>Your personal cart is empty</div>
+            <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+          </div>}
+          </>)}
+
+        </div>}
+
+
+
+        {!state.token &&  <div className="flex-1 overflow-y-auto p-4 bg-[#F9F9F9]">
+          
+          {Array.isArray(cartOne) && cartOne.length > 0 ? (
+              <div className="pt-[20px] flex flex-col items-center justify-center">
+            {cartOne.map((product) => (<>
+                    <div className="bg-[] border-b pb-[20px]" key={product.product_id}>
+  
+                      <div className="bg-[] pt-[20px">
+                        <div className="font-bold ml-[10px]">Produce</div>
+                        <div className="flex">
+                          <div><img src={product.image} className="size-[90px]" /></div>
+                          <div className="flex flex-col gap-[10px]">
+                            <div>{product.name} - {product.weight}</div>
+                            <div className="text-[grey] text-[15px]">Subtitle</div>
+                            <div className="flex items-center gap-[15px]">
+                              <div onClick={() => removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+                              <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
+                                <div onClick={() =>  decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px]" /></div>
+                                <div className="text-[18px]">{product.quantity}</div>
+                                <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
+                              </div>
+                              <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    
+                    <hr className="mt-[10px] mx-[2%]"></hr>
+                  </>
+                  
+  
+                  ))}
+           
+              </div>
+            ) : (<>
+             {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[50%] items-center">
+              <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
+              </div>
+              <div>Your personal cart is empty</div>
+              <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
+            </div>}
+            </>)}
+  
+          </div>}
+
+        {/* Cart Footer */}
+
+       {products.length > 0 && <div className="p- bg-white h-[2 pb-[100px] pt-[20px] flex flex-col justify-center items-center">
+        <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+        </div>}
+
+        {cartOne.length > 0 && <div className="p- bg-white h-[25%] flex flex-col justify-center items-center">
+        <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+        </div>}
+      </div>
+
+      {/* Overlay when cart is open */}
+      {/* {isCartOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
+      )} */}
+      
+    </div>
+  
+
+   
+
+   
+
   </>
   )
 }
