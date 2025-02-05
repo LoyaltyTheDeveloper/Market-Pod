@@ -36,7 +36,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function ViewStore() {
 
-  const [isDialog, setIsDialog] = React.useState(true);
+  const [isDialog, setIsDialog] = React.useState(false);
 
   const handleOpen = () => {
     setIsDialog(true);

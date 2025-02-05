@@ -834,14 +834,18 @@ function Navbar() {
 
         {/* Cart Footer */}
 
+{state.token &&<div>
        {products.length > 0 && <div className="p- bg-white h-[2 pb-[100px] pt-[20px] flex flex-col justify-center items-center">
         <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
         <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
         </div>}
+        </div>}
 
-        {cartOne.length > 0 && <div className="p- bg-white h-[25%] flex flex-col justify-center items-center">
+{!state.token && <div>
+        {cartOne.length > 0 && <div className="p- bg-white h-[25% pb-[100px] pt-[20px] flex flex-col justify-center items-center">
         <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
         <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+        </div>}
         </div>}
       </div>
 
