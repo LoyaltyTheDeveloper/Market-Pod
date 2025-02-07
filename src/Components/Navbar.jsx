@@ -40,6 +40,7 @@ function Navbar() {
 
 
   trio.register()
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -182,7 +183,7 @@ function Navbar() {
 
 
   const handleSearch = () => {
-
+    setIsSearchLoading(true);
     if (!searchQuery) {
       toast.error('Please search a stall or product');
     }
@@ -190,16 +191,19 @@ function Navbar() {
     fetch(`https://apis.emarketpod.com/site/search?query=${searchQuery}`)
       .then((response) => {
         if (!response.ok) {
+          setIsSearchLoading(false);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
         navigate("/search", { state: { searchQuery, searchResults: data.results } });
+        setIsSearchLoading(false);
 
       })
       .catch((error) => {
         console.error("Error fetching search results:", error);
+        setIsSearchLoading(false);
       })
       .finally(() => {
 
@@ -207,20 +211,22 @@ function Navbar() {
   };
 
   const handleSearch2 = (item) => {
-
+    setIsSearchLoading(true);
     fetch(`https://apis.emarketpod.com/site/search?query=${item}`)
       .then((response) => {
         if (!response.ok) {
+          setIsSearchLoading(false);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
         navigate("/search", { state: { item, searchResults: data.results } });
-
+        setIsSearchLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching search results:", error);
+        setIsSearchLoading(false);
       })
       .finally(() => {
       });
@@ -475,20 +481,25 @@ function Navbar() {
       </button>
     )
   }
- 
 
-
-  return (<>
-
+  const formatNumber = (num) => {
+    return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   
 
+
+  return (<>
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
       <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px]">
         <div className="flex justify-between h-[70px]">
           <div className="flex items-center">
             
-
+          {isSearchLoading && <div className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+          size="70"
+          speed="1.3"
+          color="#4ade80"
+        ></l-trio>    </div>}
          
 
             <div className="ml-[-20px] flex justify-center lg:ml-[-10px]">
@@ -719,7 +730,7 @@ function Navbar() {
 
 
     <div>
-      <div className={`fixed top-0 right-0 w-[100%] md:w-[50%] lg:w-[400px] h-full bg-white shadow-lg transition-transform transform ${isCartOpen ? "translate-x-0" : "translate-x-full"} z-50 flex flex-col`}>
+      <div className={`fixed top-0 right-0 w-[100%] md:w-[55%] lg:w-[400px] h-full bg-white shadow-lg transition-transform transform ${isCartOpen ? "translate-x-0" : "translate-x-full"} z-50 flex flex-col`}>
 
         <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">
         {state.token && <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Cart({products.length || 0})</div>}
@@ -744,8 +755,8 @@ function Navbar() {
                   <div className="bg-[] border-b pb-[20px]" key={product.product_id}>
 
                     <div className="bg-[] pt-[20px">
-                      <div className="font-bold ml-[10px]">Produce</div>
-                      <div className="flex">
+                      <div className="font-bold ml-[10px]">Produce {product.category_name}</div>
+                      <div className="flex flex-row gap-x-[9px]">
                         <div><img src={product.image} className="size-[90px]" /></div>
                         <div className="flex flex-col gap-[10px]">
                           <div>{product.name} - {product.weight}</div>
@@ -757,7 +768,7 @@ function Navbar() {
                               <div className="text-[18px]">{product.quantity}</div>
                               <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
                             </div>
-                            <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                            <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                           </div>
                         </div>
                       </div>
@@ -794,7 +805,7 @@ function Navbar() {
   
                       <div className="bg-[] pt-[20px">
                         <div className="font-bold ml-[10px]">Produce</div>
-                        <div className="flex">
+                        <div className="flex flex-row gap-x-[9px]">
                           <div><img src={product.image} className="size-[90px]" /></div>
                           <div className="flex flex-col gap-[10px]">
                             <div>{product.name} - {product.weight}</div>
@@ -806,7 +817,7 @@ function Navbar() {
                                 <div className="text-[18px]">{product.quantity}</div>
                                 <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
                               </div>
-                              <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                              <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                             </div>
                           </div>
                         </div>

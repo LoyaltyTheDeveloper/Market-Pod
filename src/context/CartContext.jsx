@@ -15,9 +15,16 @@ export const CartContext = createContext();
       }, [cartOne]);
 
       const addToCartOne = (productOne) => {
+        let isItemAdded = true;
         setCartOne((prevCart) => {
+
+          if (!Array.isArray(prevCart)) {
+            return [{ ...productOne, quantity: 1 }];
+          }
+
           const existingProduct = prevCart.find((item) => item.id === productOne.id);
           if(existingProduct){
+            let isItemAdded = false;
             toast.error("Product already in cart");
           }
           if (existingProduct) {
@@ -28,7 +35,7 @@ export const CartContext = createContext();
           if(!existingProduct){
             toast.success("Product added to cart");
           }
-          return [...prevCart, { ...productOne, quantity: 1 }];
+          return [...prevCart, { ...productOne, quantity: 1 }], isItemAdded;
         });
       };
 

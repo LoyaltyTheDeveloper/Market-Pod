@@ -364,10 +364,10 @@ function Checkout() {
           <div>
 
           <input
-          value={displayName}
-          disabled
+         
+          // disabled
           name="phone"
-          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="phone">
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Full Name">
       </input>
 
 
@@ -380,10 +380,10 @@ function Checkout() {
           <div>
 
           <input
-          value={displayPhone}
-          disabled
+      
+          // disabled
           name="phone"
-          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="phone">
+          className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Phone Number">
       </input>
 
 

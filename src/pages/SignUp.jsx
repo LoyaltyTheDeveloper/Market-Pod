@@ -45,25 +45,25 @@ function SignUp() {
       cart: updatedCart
     };
 
-    const updateCart =() => {
+    // const updateCart =() => {
 
-      fetch('https://apis.emarketpod.com/user/cart/add', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: state.token,
-        },
-        body: JSON.stringify(product_id),
-      })
-      .then((response) => response.json())
-        .then((data) => {console.log(data)
-          return;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    //   fetch('https://apis.emarketpod.com/user/cart/add', {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: state.token,
+    //     },
+    //     body: JSON.stringify(product_id),
+    //   })
+    //   .then((response) => response.json())
+    //     .then((data) => {console.log(data)
+    //       return;
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
     
-    }   
+    // }   
 
    
     

@@ -22,7 +22,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-
+import { LiaTimesSolid } from "react-icons/lia";
+import { GrBasket } from "react-icons/gr";
 
 
 
@@ -37,6 +38,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function ViewStore() {
 
   const [isDialog, setIsDialog] = React.useState(false);
+  const [isDialog2, setIsDialog2] = React.useState(false);
 
   const handleOpen = () => {
     setIsDialog(true);
@@ -44,6 +46,14 @@ function ViewStore() {
 
   const handleClose = () => {
     setIsDialog(false);
+  };
+
+  const handleOpen2 = () => {
+    setIsDialog2(true);
+  };
+
+  const handleClose2 = () => {
+    setIsDialog2(false);
   };
 
 
@@ -58,9 +68,11 @@ function ViewStore() {
     const [cats, setCats] = useState([]);
     const navigate = useNavigate();
     const refs = useRef({});
-    const [searchQuery, setSearchQuery] = useState(""); // For user input
+    const [searchQuery, setSearchQuery] = useState(""); 
       const [searchResults, setSearchResults] = useState([]);
       const { addToCartOne } = useContext(CartContext);
+      const [modalProduct, setModalProduct] = useState(null);
+      const [modalProduct2, setModalProduct2] = useState(null);
 
       const [cart, setCart] = useState(() => {
         {
@@ -114,13 +126,15 @@ function ViewStore() {
       .then((response) => response.json())
         .then((data) => {
           setIsLoading(false);
-        
+          setModalProduct(product);
+          handleOpen();
           toast.success(data.message);
           return;
         })
         .catch((error) => {
           setIsLoading(false);
           console.error(error);
+          return;
         });
     };
     const handleKeyDown = (event) => {
@@ -151,6 +165,23 @@ function ViewStore() {
         });
     };
 
+    const handleSecondAdd = (product) => {
+      if (store.isOpen !== true){
+        return toast.error("This store is closed");
+       }
+       else {
+        handleOpen2();
+        addToCartOne(product);
+        setModalProduct2(product);
+       }
+    }
+
+    const formatNumber = (num) => {
+      return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+    const formattedPrice = formatNumber(modalProduct?.price);
+    const formattedPrice2 = formatNumber(modalProduct2?.price);
+
   return (<>
     <Navbar/>
     
@@ -173,7 +204,7 @@ function ViewStore() {
     </div>
 
 
-   {/* Body */}
+  
     <div className="flex justify-center lg:justify-start mt-[30px] mb-[30px">
 
         <div className="flex flex-col lg:flex-row lg:gap-[50px] lg:mt-[-70px]">
@@ -181,18 +212,15 @@ function ViewStore() {
 
 
         <React.Fragment>
-      {/* <Button variant="outlined" onClick={handleOpen}>
-        Slide in alert dialog
-      </Button> */}
       <Dialog
       PaperProps={{
         sx: {
           position: "absolute",
           top: "5%", 
           right: "2%", 
-          width: { xs: "80%", sm: "60%", md: "60%", lg: "25%" }, 
-          height: { xs: "25vh", sm: "30vh", md: "30vh", lg: "30vh" }, 
-          maxHeight: "90vh", 
+          width: { xs: "55%", sm: "55%", md: "60%", lg: "30%" }, 
+          height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
+          maxHeight: "vh", 
           overflow: "auto", 
         },
       }}
@@ -202,22 +230,76 @@ function ViewStore() {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle><div className="flex items-center justify-between">
-        <p className="text-[13px]"> An item has been added to your cart </p>
-        <div>x</div>
+        <DialogTitle><div className="flex items-center lg:justify-between justify-end">
+        <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
+        <div onClick={handleClose} className='flex'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
           </div>
           </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            {/* Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running. */}
+           <div className="flex flex-row gap-x-[20px] lg:justify-center">
+            <div className=""><img className="size-[50px] lg:size-[90px]" src={modalProduct?.image}/></div>
+            <div>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-semibold'>{modalProduct?.name}</p>
+              <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct?.subtitle}</p>
+              <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice}</p>
+              <div className="flex flex-row items-center gap-x-3 mt-[10px]">
+                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div onClick ={() => navigate(`/site/getProduct/${modalProduct.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
+              </div>
+            </div>
+           </div>
           </DialogContentText>
         </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
-        </DialogActions> */}
+    
       </Dialog>
+
+
+     {/* Dialog 2 */}
+
+     <Dialog
+      PaperProps={{
+        sx: {
+          position: "absolute",
+          top: "5%", 
+          right: "2%", 
+          width: { xs: "55%", sm: "55%", md: "60%", lg: "30%" }, 
+          height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
+          maxHeight: "vh", 
+          overflow: "auto", 
+        },
+      }}
+        open={isDialog2}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose2}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle><div className="flex items-center lg:justify-between justify-end">
+        <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
+        <div onClick={handleClose2} className='flex'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+          </div>
+          </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           <div className="flex flex-row gap-x-[20px] lg:justify-center">
+            <div className=""><img className="size-[50px] lg:size-[90px]" src={modalProduct2?.image}/></div>
+            <div>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-semibold'>{modalProduct2?.name}</p>
+              <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct2?.subtitle}</p>
+              <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice2}</p>
+              <div className="flex flex-row items-center gap-x-3 mt-[10px]">
+                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div onClick ={() => navigate(`/site/getProduct/${modalProduct2.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
+              </div>
+            </div>
+           </div>
+          </DialogContentText>
+        </DialogContent>
+    
+      </Dialog>
+
+
     </React.Fragment>
 
 
@@ -340,7 +422,7 @@ function ViewStore() {
   </div>
 ))} */}
 
-                <div className="flex items-center gap-x-[20px] absolute right-[30px]">
+                {/* <div className="flex items-center gap-x-[20px] absolute right-[30px]">
 
         <button className="hidden lg:flex" onClick ={() => navigate("/")}>
           <div className="flex items-center gap-[5px] border rounded-[20px] py-[4px] px-[13px] border-[#31603D]">
@@ -348,7 +430,7 @@ function ViewStore() {
           <div className="text-[14px] text-[#31603D]">Home</div>
           </div>
         </button>
-        </div>
+        </div> */}
 
                 
 
@@ -369,7 +451,7 @@ function ViewStore() {
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
-          <h2 className="text-[24px] lg:text-[30px] font-bold px-2 lg:px-0">{category}</h2>
+          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
@@ -392,14 +474,14 @@ function ViewStore() {
 
 
             </div>
-            <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+            <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
               <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[40px]">
                 {product.name}
               </div>
               <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
                 <div className="font-semibold text-[12px] lg:text-[16px] h-[10px] lg:h-[30px]">
-                  NGN {product.price}
+                ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
                 <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
                    {product.status === 1 ? "In-stock":"Unavailable"}
@@ -424,7 +506,7 @@ function ViewStore() {
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
-          <h2 className="text-[24px] lg:text-[30px] font-bold px-2 lg:px-0">{category}</h2>
+          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
@@ -441,7 +523,7 @@ function ViewStore() {
                 className="w-24 h-24 object-cover flex justify-center"
               />
 
-              <div onClick={()=> addToCartOne(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
+              <div onClick={()=> handleSecondAdd(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
                 <FaPlus className="text-[white]" />
               </div>
 
@@ -454,7 +536,7 @@ function ViewStore() {
               <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
                 <div className="font-semibold text-[12px] lg:text-[16px] h-[10px] lg:h-[30px]">
-                  NGN {product.price}
+                ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
                 <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
                    {product.status === 1 ? "In-stock":"Unavailable"}

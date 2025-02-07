@@ -72,7 +72,7 @@ function ProductDetail() {
     </div>
 
     <div className="flex flex-col gap-[20px] pt-[30px]">
-    <div className="text-[20px] font-semibold mt-[40px]">NGN {product.data.price}</div>
+    <div className="text-[20px] font-semibold mt-[40px]">₦ {product.data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
     <div className="flex gap-[10px]">
         <button><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
         <div>
