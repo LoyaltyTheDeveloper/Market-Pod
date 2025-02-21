@@ -35,7 +35,7 @@ export const CartContext = createContext();
           if(!existingProduct){
             toast.success("Product added to cart");
           }
-          return [...prevCart, { ...productOne, quantity: 1 }], isItemAdded;
+          return [...prevCart, { ...productOne, quantity: 1 }];
         });
       };
 

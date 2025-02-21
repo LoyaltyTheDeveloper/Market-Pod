@@ -37,6 +37,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function ViewStore() {
 
+  const [hovered, setHovered] = useState(null);
+
   const [isDialog, setIsDialog] = React.useState(false);
   const [isDialog2, setIsDialog2] = React.useState(false);
 
@@ -312,7 +314,7 @@ function ViewStore() {
           </div>
           <div className="w-[270px] flex flex-col gap-y-[5px]">
             <div>
-              <div className="font-semibold text-[20px] truncate">{store.name}</div>
+              <div className="font-semibold text-[20px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px]">{store.name}</div>
               {store.isOpen === true && <div className="text-[#31603D] text-[14px]">Opened</div>}
               {store.isOpen !== true && <div className="text-[#D23D23] text-[14px]">Closed</div>}
               <div className="text-[15px]">{store.status}</div>
@@ -445,7 +447,7 @@ function ViewStore() {
 
 
 
-{state.token && <div className="lg:min-h-screen lg:overflow-y-auto lg:max-h-72 no-scrollbar">
+{state.token && <div className="lg:min-h-screen lg:overflow-y-auto lg:max-h-72 no-scrollbar relative">
       {/* Extract unique categories directly from mapped products */}
       {[...new Set(products?.map(product => product.category_name))].map(category => (
         
@@ -456,7 +458,8 @@ function ViewStore() {
             {products
               .filter(product => product.category_name === category)
               .map(product => (
-                <div className="mt-[30px]" key={product.id}>
+                <div className="mt-[30px] relative cursor-pointer" key={product.id} onMouseEnter={() => setHovered(product.id)}
+      onMouseLeave={() => setHovered(null)}>
             <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
             className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] bg-[white] rounded-[5px]"
@@ -468,9 +471,22 @@ function ViewStore() {
                 className="w-24 h-24 object-cover flex justify-center"
               />
 
-              <div onClick={()=> addToCart(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
+              {/* <div onClick={()=> addToCart(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
                 <FaPlus className="text-[white]" />
-              </div>
+              </div> */}
+
+
+              <div
+              onClick={()=> addToCart(product)}
+        className={`absolute cursor-pointer top-6 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
+          hovered === product.id ? "px-2 py-1 gap-x-1" : "p-2"
+        }`}
+      >
+        <span className={`text-sm font-medium transition-opacity duration-[2000ms transition-transform duration-[2000ms] ease-in-out ${hovered === product.id ? "opacity-100 w-aut0 py-[4px] translate-x-0 transition-transform duration-[2000ms]" : "opacity-0 w-0 h-0 translate-x-5"}`}>
+          Add To Cart
+        </span>
+        <div className=""><FaPlus className="w-5 h-5 ml- text-white" /></div>
+      </div>
 
 
             </div>
@@ -511,7 +527,8 @@ function ViewStore() {
             {products
               .filter(product => product.category_name === category)
               .map(product => (
-                <div className="mt-[30px]" key={product.id}>
+                <div className="mt-[30px] relative cursor-pointer" key={product.id} onMouseEnter={() => setHovered(product.id)}
+      onMouseLeave={() => setHovered(null)}>
             <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
             className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] bg-[white] rounded-[5px]"
@@ -523,9 +540,21 @@ function ViewStore() {
                 className="w-24 h-24 object-cover flex justify-center"
               />
 
-              <div onClick={()=> handleSecondAdd(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
+              {/* <div onClick={()=> handleSecondAdd(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
                 <FaPlus className="text-[white]" />
-              </div>
+              </div> */}
+
+                     <div
+              onClick={()=> handleSecondAdd(product)}
+        className={`absolute cursor-pointer top-6 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
+          hovered === product.id ? "px-2 py-1 gap-x-1" : "p-2"
+        }`}
+      >
+        <span className={`text-sm font-medium transition-opacity duration-[2000ms transition-transform duration-[2000ms] ease-in-out ${hovered === product.id ? "opacity-100 w-aut0 py-[4px] translate-x-0 transition-transform duration-[2000ms]" : "opacity-0 w-0 h-0 translate-x-5"}`}>
+          Add To Cart
+        </span>
+        <div className=""><FaPlus className="w-5 h-5 ml- text-white" /></div>
+      </div>
 
 
             </div>
@@ -568,6 +597,26 @@ function ViewStore() {
                 </div>
               </div>
             ))} */}
+
+
+{/* <div
+      className="relative w-64 h-80 bg-blue-500 rounded-2xl shadow-lg p-4 overflow-hidden"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <h2 className="text-white text-xl font-semibold">Product Name</h2>
+      <p className="text-white mt-2">This is a short description of the product.</p>
+      <div
+        className={`absolute top-4 right-4 flex items-center bg-white text-blue-500 rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
+          hovered ? "px-2 py-1 gap-x-1" : "p-2"
+        }`}
+      >
+        <span className={`text-sm font-medium transition-opacity duration-[2000ms transition-transform duration-[2000ms] ease-in-out ${hovered ? "opacity-100 w-aut0 py-[4px] translate-x-0 transition-transform duration-[2000ms]" : "opacity-0 w-0 h-0 translate-x-5"}`}>
+          Add to Cart
+        </span>
+        <FaPlus className="w-5 h-5 ml-" />
+      </div>
+    </div> */}
 
                
                 </div>

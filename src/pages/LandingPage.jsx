@@ -281,7 +281,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 </div>
 
                 <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
-                  <div className="text-[19px] font-bold whitespace-nowrap">
+                  <div className="text-[19px] font-bold whitespace-nowrap truncate">
                     {store.name || <Skeleton width={200} />}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
@@ -293,7 +293,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
                  
                   <div className="flex flex-wrap items-center mb-[15px]">
-                    {store.categories.map((category, index) => (
+                    {store.categories.slice(0, 4).map((category, index) => (
                       <div className="flex items-center" key={index}>
                         {category}
                         {index < store.categories.length - 1 && (

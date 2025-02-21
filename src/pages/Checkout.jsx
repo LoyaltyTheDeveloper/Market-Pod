@@ -207,6 +207,10 @@ function Checkout() {
 
        const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useContext(CartContext);
 
+       const formatNumber = (num) => {
+        return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      };
+
   return (<>
   <Navbar/>
 
@@ -260,7 +264,7 @@ function Checkout() {
                     <div className="text-[18px]">{product.quantity}</div>
                     <div onClick={()=> handleIncrease(product.product_id)}className="text"><FaPlus className="size-[12px]"/></div>
                    </div>
-                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                   </div>
 
                   </div>
@@ -316,7 +320,7 @@ function Checkout() {
                     <div className="text-[18px]">{product.quantity}</div>
                     <div onClick={()=> increaseQuantity(product.id)}className="text"><FaPlus className="size-[12px]"/></div>
                    </div>
-                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
+                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                   </div>
 
                   </div>
