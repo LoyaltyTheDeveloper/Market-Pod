@@ -85,12 +85,20 @@ function StoreList() {
               >
             
                 <div>
-                  <div className="h-[150px]">
+                  <div className="h-[150px] relative">
                   <img
                     src={store.image}
                     alt={store.name}
-                    className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
+                    // className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
+                    className={`w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px] ${
+                      store.isOpen ? "" : ""
+                    }`}
                   />
+                  {store.isOpen && (
+                   <div className="absolute inset-0 flex rounded-tl-[10px] rounded-tr-[10px] items-center justify-center bg-black bg-opacity-50 text-white text-lg ">
+                      Opens at {store.open_time}
+                  </div>
+                     )}
                   </div>
                 </div>
 

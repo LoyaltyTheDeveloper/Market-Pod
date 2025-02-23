@@ -271,12 +271,22 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
               >
             
                 <div>
-                  <div className="h-[150px]">
+                  <div className="h-[150px] relative">
                   <img
                     src={store.image}
                     
-                    className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
+                    // className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
+                    className={`w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px] ${
+                      store.isOpen ? "" : ""
+                    }`}
                   />
+
+                  {store.isOpen && (
+                   <div className="absolute inset-0 flex rounded-tl-[10px] rounded-tr-[10px] items-center justify-center bg-black bg-opacity-50 text-white text-lg ">
+                      Opens at {store.open_time}
+                  </div>
+                     )}
+
                   </div>
                 </div>
 
@@ -309,6 +319,58 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 </div>
               </div>
             ))}
+
+{/* {market.stores.map((store) => (
+  <div
+    onClick={() => navigate(`/site/getStore/${store.id}`)}
+    key={store.id}
+    className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
+  >
+    <div className="relative h-[150px]">
+
+    
+      <img
+        src={store.image}
+        className={`w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px] ${
+          store.isOpen ? "opacity-50" : ""
+        }`}
+      />
+
+
+      {store.isOpen && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
+          Opens at {store.open_time}
+        </div>
+      )}
+    </div>
+
+    <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
+      <div className="text-[19px] font-bold whitespace-nowrap truncate">
+        {store.name || <Skeleton width={200} />}
+      </div>
+      <div className="flex items-center gap-x-[5px] text-[#31603D]">
+        <div>
+          <LuClock5 />
+        </div>
+        <div className="text-[15px]">
+          {store.open_time && store.close_time ? `Opens ${store.open_time} - Closes ${store.close_time}` : <Skeleton width={150} />}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center mb-[15px]">
+        {store.categories.slice(0, 4).map((category, index) => (
+          <div className="flex items-center" key={index}>
+            {category}
+            {index < store.categories.length - 1 && (
+              <div className="h-[20px] ml-[10px] mr-[10px] border-l border-gray-300 lg:flex justify-between"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+))} */}
+
           </div>
         </div>
         </div>

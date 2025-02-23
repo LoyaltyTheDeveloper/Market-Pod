@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { dotPulse } from 'ldrs'
 import { CartContext } from '../context/CartContext.jsx';
+import Gmail from '../Components/GmailIcon.jsx';
 
 function SignUp() {
   dotPulse.register()
@@ -181,9 +182,10 @@ function SignUp() {
     <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-[#F9F9F9] hover:bg-[grey] font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
+              className="bg-[#F9F9F9] font-bold flex justify-center items-center gap-x-3 py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
             >
               Continue with google
+           <Gmail/>
             </button>
           </div>
           <div className="mt-[10px] flex flex-row justify-center gap-[5px]">
