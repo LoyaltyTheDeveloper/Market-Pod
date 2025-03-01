@@ -244,8 +244,8 @@ function Checkout() {
               {products.map((product) => (<>
                 <div className="relative" key={product.product_id}>
                   
-                <div className="bg-[] lg:pt-[30px]">
-              <div className="font-bold ml-[10px]">Produce</div>
+                <div className="bg-[] pt-[10px] lg:pt-[30px]">
+              {/* <div className="font-bold ml-[10px]">Produce</div> */}
               <div className="flex">
                 
                 <div><img src={product} className="size-[90px]"/></div>
@@ -301,8 +301,8 @@ function Checkout() {
               {cartOne.map((product) => (<>
                 <div className="relative" key={product.product_id}>
                   
-                <div className="bg-[] lg:pt-[30px]">
-              <div className="font-bold ml-[10px]">Produce</div>
+                <div className="bg-[] pt-[10px] lg:pt-[30px]">
+              {/* <div className="font-bold ml-[10px]">Produce</div> */}
               <div className="flex">
                 
                 <div><img src={product} className="size-[90px]"/></div>

@@ -34,6 +34,8 @@ function LandingPage({ markets }) {
   const [searchQuery, setSearchQuery] = useState(""); 
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
+  const [stores, setStores] = useState([]);
+  const [totalStores, setTotalStores] = useState(0);
 
 
   const handleSearch = () => {
@@ -119,10 +121,31 @@ function LandingPage({ markets }) {
   useEffect(() => {
     fetch('https://apis.emarketpod.com/site/getData')
     .then((response) => response.json())
-    .then((data) => setMarketss(data.markets))
+    .then((data) =>  setMarketss(data.markets))
     .catch((error) => console.error(error))
-}, [])
+}, []);
 
+// useEffect(() => {
+//   fetch('https://apis.emarketpod.com/site/getData')
+//   .then((response) => response.json())
+//   .then((data) => setStores(data.markets))
+//   .catch((error) => console.error(error))
+// }, [])
+
+
+useEffect(() => {
+  fetch("https://apis.emarketpod.com/site/getData")
+    .then((response) => response.json())
+    .then((data) => {
+      const marketData = data.markets || [];
+      setStores(marketData);
+
+      // Sum the total number of stores from all markets
+      const total = marketData.reduce((sum, market) => sum + (market.stores?.length || 0), 0);
+      setTotalStores(total);
+    })
+    .catch((error) => console.error(error));
+}, []);
 
 const marketsss = Array.isArray(searchResults) ? searchResults.filter((result) => result.type === "market") : [];
 const products = Array.isArray(searchResults) ? searchResults.filter((result) => result.type === "product") : [];
@@ -447,10 +470,35 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         <div className="flex flex-col lg:flex-row px-[15px]">
           <div className="bg-[#31603D] rounded-tl-[5px] rounded-tr-[5px] lg:rounded-tr-[0px] lg:rounded-tl-[10px] lg:rounded-bl-[10px] text-[white] lg:px-[80px] flex flex-col justify-center text-center p-6">
           <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold">There's more to explore</div>
-          <div className="text-[12px]">There are {marketss?.stores?.length} stores (and counting) available in</div>
+          <div className="text-[12px]">There are stores {totalStores} (and counting) available in</div>
+         
+
           <div className="text-[12px]"><span className="underline">Ilorin, Kwara State.</span> <span>Explore them all with</span></div>
           <div className="text-[12px]">Market Pod today !</div>
-          <div onClick={() => navigate(`/site/getStores/${1}/${market.name}/${market.addr}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
+          {/* <div onClick={() => navigate(`/site/getStores/${1}/${market.name}/${market.addr}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div> */}
+          <div onClick={() => navigate(`/site/getStores/${1}/${"Yoruba Road"}/${"No 34 off GRA, Adelewola Akinwuyi Road, Ilorin, Kwara State."}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
+
+
+
+
+
+
+
+          {/* <button 
+  className="text-[]" o
+  onClick={() => {
+    if (market.length > 0) {
+      navigate(`/site/getStores/${market[0].id}/${market[0].name}/${market[0].addr}`);
+    }
+  }}
+> 
+  View First Store
+</button> */}
+
+
+
+
+
           </div>
           <div className="hidden lg:flex w-[350px] h-[300p]"><img className="object-cover" src={landing3}/></div>
           <div className="lg:hidden w-[full]"><img className="object-cover w-[100%]" src={landing4}/></div>

@@ -55,21 +55,21 @@ function ProductDetail() {
 
 {product && (<>
     <div className="px-[20px] mt-[20px] mb-[50px]">
-    <div className="flex gap-x-[10px] text-[15px] cursor-pointer">
-        <div>Happiness Goods & Stores</div>
+    <div className="flex gap-x-[10px] text-[15px]">
+        <div className='cursor-pointer'>Happiness Goods & Stores</div>
         /
         <div className="font-semibold">{product.data.category_name}</div>
     </div>
 
-    <div className="lg:flex flex-row-reverse gap-[100px] lg:items-center pt-[30px]">
-    <div className="lg:ml-[100%] flex justify-center lg:justify-normal pb-[30px]"><img className="object-cover bg-[white] p-6 lg:p-16 w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] lg:mr-[500px]" src={product.data.image}></img></div>
+    <div className="lg:flex lg:justify-between lg:flex-row-reverse gap-x-[100px lg:items-center pt-[30px]">
+    <div className="lg:pl-[100% lg:py-8 lg:px-[12%] flex py-6 mx-14 bg-[white] flex justify-center lg:justify-norma pb-[30px"><img className="object-cover w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
 
     
-    <div className="lg:pr-[200p] lg:absolute left-6">
+    <div className="lg:pr-[200p] lg:absolut left-6 lg:w-[50%]">
     <div className="flex flex-col gap-y-[10px]">
        <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[350px] lg:pt-[30px">{product.data.name} - {product.data.weight}kg</div>
        <div>{product.data.subtitle}</div>
-       <div className="lg:pr-[800px] h-[50px]">{product.data.description}</div>
+       <div className="lg: h-[50px]">{product.data.description}</div>
     </div>
 
     <div className="flex flex-col gap-[20px] pt-[30px]">
@@ -86,7 +86,7 @@ function ProductDetail() {
 
 <div className="flex justify-cente lg:justify-end">
     
-    <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] mt-[30px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[300px]">
+    <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] mt-[30px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[270px]">
     <div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
 
     <div className="flex flex-col lg:px-4 lg:py-3 lg:pb-6 lg:flex lg:flex-col gap-y-2">
