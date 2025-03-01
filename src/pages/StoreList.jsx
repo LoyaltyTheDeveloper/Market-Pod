@@ -60,7 +60,7 @@ function StoreList() {
         </div>
         </div>
 
-        <div className="flex items-center gap-x-[20px] absolute right-[30px]">
+        {/* <div className="flex items-center gap-x-[20px] absolute right-[30px]">
 
         <button className="hidden lg:flex" onClick ={() => navigate("/")}>
           <div className="flex items-center gap-[5px] border rounded-[20px] py-[4px] px-[13px] border-[#31603D]">
@@ -68,7 +68,8 @@ function StoreList() {
           <div className="text-[14px] text-[#31603D]">Home</div>
           </div>
         </button>
-        </div>
+        </div> */}
+
         </div>
 
         </div>

@@ -224,7 +224,7 @@ function Checkout() {
      
 <div className="flex flex-col lg:flex-row items-center">
 
- <div className="flex flex-col pt-[50px] pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max-h-72 no-scrollbar">
+ <div className="flex flex-col pt-[50px] lg:pt-[70px] pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max-h-72 no-scrollbar">
     <div className="flex justify-center pt-[px]">
             <div className="pt-[50px]">
 
@@ -287,6 +287,7 @@ function Checkout() {
   speed="1.3" 
   color="#4ade80" 
 ></l-trio>    </div>}</div>
+<div> {!isLoading2 &&<div className="flex justify-center lg:absolute mt-[-50px] lg:mt-[40px]"> No items here  </div>}</div>
            {/* <div className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div> */}
            </div>
           </>)}

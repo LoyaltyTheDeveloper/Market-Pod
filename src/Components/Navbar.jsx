@@ -558,7 +558,7 @@ function Navbar() {
 
 
 
-             {state.token && <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
+             {state.token && <div onClick={toggleDrawer(true)} className="hidden cursor-pointer lg:flex flex-col">
                 {products.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[249px] top-[45px]"></div>}
                 <div className="font-bold text-[13px]">Cart</div>
                 <div className="flex flex-row items-center gap-[10px]">
@@ -567,7 +567,7 @@ function Navbar() {
                 </div>
               </div>}
 
-              {!state.token && <div onClick={toggleDrawer(true)} className="hidden lg:flex flex-col">
+              {!state.token && <div onClick={toggleDrawer(true)} className="hidden cursor-pointer lg:flex flex-col">
                 {cartOne.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[249px] top-[45px]"></div>}
                 <div className="font-bold text-[13px]">Cart</div>
                 <div className="flex flex-row items-center gap-[10px]">
@@ -583,12 +583,12 @@ function Navbar() {
               </div>}
 
 
-              {state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
+              {state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col cursor-pointer lg:hidden">
                 {products.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
                 <div><GrBasket className="size-[20px]" /></div>
               </div>}
 
-              {!state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col lg:hidden">
+              {!state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col cursor-pointer lg:hidden">
                 {cartOne.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[63px] top-[-4px]"></div>}
                 <div><GrBasket className="size-[20px]" /></div>
               </div>}
@@ -755,18 +755,18 @@ function Navbar() {
                   <div className="bg-[] border-b pb-[20px]" key={product.product_id}>
 
                     <div className="bg-[] pt-[20px">
-                      <div className="font-bold ml-[10px]">Produce {product.category_name}</div>
+                      {/* <div className="font-bold ml-[10px]">Produce {product.category_name}</div> */}
                       <div className="flex flex-row gap-x-[9px]">
                         <div><img src={product.image} className="size-[90px]" /></div>
                         <div className="flex flex-col gap-[10px]">
                           <div>{product.name} - {product.weight}</div>
                           <div className="text-[grey] text-[15px]">Subtitle</div>
                           <div className="flex items-center gap-[15px]">
-                            <div onClick={() => deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+                            <div onClick={() => deleteProduct(product)} className="cursor-pointer bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
                             <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-                              <div onClick={() => handleDecrease(product.product_id)} className="text"><FaMinus className="size-[12px]" /></div>
+                              <div onClick={() => handleDecrease(product.product_id)} className="text"><FaMinus className="size-[12px] cursor-pointer" /></div>
                               <div className="text-[18px]">{product.quantity}</div>
-                              <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
+                              <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px] cursor-pointer" /></div>
                             </div>
                             <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                           </div>
@@ -804,18 +804,18 @@ function Navbar() {
                     <div className="bg-[] border-b pb-[20px]" key={product.product_id}>
   
                       <div className="bg-[] pt-[20px">
-                        <div className="font-bold ml-[10px]">Produce</div>
+                        {/* <div className="font-bold ml-[10px]">Produce</div> */}
                         <div className="flex flex-row gap-x-[9px]">
                           <div><img src={product.image} className="size-[90px]" /></div>
                           <div className="flex flex-col gap-[10px]">
                             <div>{product.name} - {product.weight}</div>
                             <div className="text-[grey] text-[15px]">Subtitle</div>
                             <div className="flex items-center gap-[15px]">
-                              <div onClick={() => removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
+                              <div onClick={() => removeFromCart(product.id)} className="cursor-pointer bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
                               <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-                                <div onClick={() =>  decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px]" /></div>
+                                <div onClick={() =>  decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px] cursor-pointer" /></div>
                                 <div className="text-[18px]">{product.quantity}</div>
-                                <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
+                                <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px] cursor-pointer" /></div>
                               </div>
                               <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                             </div>

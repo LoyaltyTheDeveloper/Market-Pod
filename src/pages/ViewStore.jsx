@@ -187,7 +187,7 @@ function ViewStore() {
   return (<>
     <Navbar/>
     
-    <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
+    <div className="min-h-scree pb-[10% bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
 
      <div className="flex mt-[130px] justify-center">
       <div className="flex justify-center lg:hidden">
@@ -447,7 +447,7 @@ function ViewStore() {
 
 
 
-{state.token && <div className="lg:min-h-screen lg:overflow-y-auto lg:max-h-72 no-scrollbar relative">
+{state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative">
       {/* Extract unique categories directly from mapped products */}
       {[...new Set(products?.map(product => product.category_name))].map(category => (
         
@@ -458,7 +458,7 @@ function ViewStore() {
             {products
               .filter(product => product.category_name === category)
               .map(product => (
-                <div className="mt-[30px] relative cursor-pointer" key={product.id} onMouseEnter={() => setHovered(product.id)}
+                <div className="mt-[10px] relative cursor-pointer" key={product.id} onMouseEnter={() => setHovered(product.id)}
       onMouseLeave={() => setHovered(null)}>
             <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
@@ -468,7 +468,7 @@ function ViewStore() {
               <img
                 onClick ={() => navigate(`/site/getProduct/${product.id}`)}
                 src={product.image}
-                className="w-24 h-24 object-cover flex justify-center"
+                className="w-24 h-24 object-cover flex justify-center bg-[white] p-4"
               />
 
               {/* <div onClick={()=> addToCart(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
@@ -491,17 +491,19 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
-              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[40px]">
+              <div className="w-[120px] lg:w-[150px] text-[14px] lg:text-[15px] font-semibold h-[40px]">
                 {product.name}
               </div>
-              <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
+              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
-                <div className="font-semibold text-[12px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                <div className="font-semibold text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
-                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
-                   {product.status === 1 ? "In-stock":"Unavailable"}
-                </div>
+                 {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold"> 
+                </div> */}
+                 {product.status === 1 && <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">In-stock</div>}
+                 {product.status !== 1 && <div className="absolute whitespace-nowra ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">Out of stock</div>}
+
               </div>
             </div>
           </div>
@@ -516,7 +518,7 @@ function ViewStore() {
 
 
 
-    {!state.token && <div className="lg:min-h-screen lg:overflow-y-auto lg:max-h-72 no-scrollbar">
+    {!state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative">
       {/* Extract unique categories directly from mapped products */}
       {[...new Set(products.map(product => product.category_name))].map(category => (
         
@@ -527,7 +529,7 @@ function ViewStore() {
             {products
               .filter(product => product.category_name === category)
               .map(product => (
-                <div className="mt-[30px] relative cursor-pointer" key={product.id} onMouseEnter={() => setHovered(product.id)}
+                <div className="mt-[10px] relative cursor-pointer" key={product.id} onMouseEnter={() => setHovered(product.id)}
       onMouseLeave={() => setHovered(null)}>
             <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
           <div
@@ -537,7 +539,7 @@ function ViewStore() {
               <img
                 onClick ={() => navigate(`/site/getProduct/${product.id}`)}
                 src={product.image}
-                className="w-24 h-24 object-cover flex justify-center"
+                className="w-24 h-24 object-cover flex justify-center bg-[white] p-4"
               />
 
               {/* <div onClick={()=> handleSecondAdd(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
@@ -559,17 +561,19 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
-              <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[40px]">
+              <div className="w-[120px] lg:w-[150px] text-[14px] lg:text-[15px] font-semibold h-[40px]">
                 {product.name}
               </div>
-              <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
+              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
-                <div className="font-semibold text-[12px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                <div className="font-semibold text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
-                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
+                {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
                    {product.status === 1 ? "In-stock":"Unavailable"}
-                </div>
+                </div> */}
+                {product.status === 1 && <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">In-stock</div>}
+                {product.status !== 1 && <div className="absolute whitespace-nowra ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">Out of stock</div>}
               </div>
             </div>
           </div>

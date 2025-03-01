@@ -31,7 +31,7 @@ function LandingPage({ markets }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDropdown, setSelectedCategory] = useState(null);
   const { state } = useContext(AuthContext);
-  const [searchQuery, setSearchQuery] = useState(""); // For user input
+  const [searchQuery, setSearchQuery] = useState(""); 
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
 
@@ -262,7 +262,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         <div className="mt-[5px] pt-[20px flex lg:flex justify-start">
 
         <div className="flex overflow-x-scroll scrollbar-hide whitespace-nowrap space-x-4 p-4 lg:flex justify-start">
-          <div className="flex gap-x-[20px] lg:flex-row justify-center lg:flex justify-start">
+          <div className="flex gap-x-[20px] cursor-pointer lg:flex-row justify-center lg:flex justify-start">
             {market.stores.map((store) => (
               <div
                 onClick ={() => navigate(`/site/getStore/${store.id}`)}
