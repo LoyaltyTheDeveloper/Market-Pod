@@ -4,14 +4,63 @@ import Footer from '../Components/Footer';
 import { RiSearchLine } from "react-icons/ri";
 import pod from '../assets/Podlogo.svg';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import productdetail from '../assets/productdetail.svg';
 import { MdOutlineContentCopy } from "react-icons/md";
 import { toast } from 'react-hot-toast';
+import { trio } from 'ldrs'
+import { AuthContext } from '../context/Context.jsx';
+
 
 function ProductDetail() {
+ const [isLoading, setIsLoading] = useState(false);
+   const { state } = useContext(AuthContext);
+   const navigate = useNavigate();
+
+
+
+
+ 
+
+ const addToCart = (id) => {
+  // if (!isStoreOpen(item.market_id)) {
+  //   return toast.error("The store is closed");
+  // }
+    setIsLoading(true);
+     
+      fetch('https://apis.emarketpod.com/user/cart/add', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: state.token,
+        },
+        body: JSON.stringify({ product_id: product.data.id }),
+      })
+      .then((response) => response.json())
+        .then((data) => {
+          setIsLoading(false);
+          // handleOpen();
+          toast.success(data.message);
+          return;
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.error(error);
+          return;
+        });
+    };
+
+
+  const buyNow = (id) => {
+    addToCart(id);
+    navigate('/checkout');
+  }
+
+
+
+
 
 
     const copy = () => {
@@ -53,6 +102,14 @@ function ProductDetail() {
     </div>
     </div>
 
+    {isLoading &&  <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
+
+
+
 {product && (<>
     <div className="px-[20px] mt-[20px] mb-[50px]">
     <div className="flex gap-x-[10px] text-[15px]">
@@ -75,9 +132,9 @@ function ProductDetail() {
     <div className="flex flex-col gap-[20px] pt-[30px]">
     <div className="text-[20px] font-semibold mt-[40px]">₦ {product.data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
     <div className="flex gap-[10px]">
-        <button><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
+        <button onClick={buyNow}><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
         <div>
-        <button><div className="text-[white] bg-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px] flex gap-[5px] items-center">Add To Cart <div className="hidden lg:flex lg:text-[px]">+</div></div></button>
+        <button onClick={()=> addToCart(product.data.id)}><div className="text-[white] bg-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px] flex gap-[5px] items-center">Add To Cart <div className="hidden lg:flex lg:text-[px]">+</div></div></button>
         </div>
     </div>
     </div>

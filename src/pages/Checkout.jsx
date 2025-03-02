@@ -89,7 +89,7 @@ function Checkout() {
       })
       .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+        
           setProducts(data);
           setIsLoading2(false);
         })
