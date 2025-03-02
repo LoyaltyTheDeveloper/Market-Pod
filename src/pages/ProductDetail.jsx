@@ -126,7 +126,7 @@ function ProductDetail() {
     <div className="flex flex-col gap-y-[10px]">
        <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[350px] lg:pt-[30px">{product.data.name} - {product.data.weight}kg</div>
        <div>{product.data.subtitle}</div>
-       <div className="lg: h-[50px]">{product.data.description}</div>
+       <div className="lg: h-[40px]">{product.data.description}</div>
     </div>
 
     <div className="flex flex-col gap-[20px] pt-[30px]">
