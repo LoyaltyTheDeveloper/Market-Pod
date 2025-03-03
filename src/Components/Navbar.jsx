@@ -158,7 +158,7 @@ function Navbar() {
 
    const locationChange = () => {
 
-   if (!locations){
+   if (locations === ""){
     toast.error("Please select a location.");
    }
    else {

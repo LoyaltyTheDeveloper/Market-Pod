@@ -12,22 +12,22 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
 import { AuthContext } from '../context/Context.jsx';
+import { useLocation } from "react-router-dom";
 
 
 function ProductDetail() {
+  const location = useLocation();
+  const isOpen = location.state?.isOpen;
+
  const [isLoading, setIsLoading] = useState(false);
    const { state } = useContext(AuthContext);
    const navigate = useNavigate();
 
 
-
-
- 
-
  const addToCart = (id) => {
-  // if (!isStoreOpen(item.market_id)) {
-  //   return toast.error("The store is closed");
-  // }
+  if (!isOpen) {
+    return toast.error("The store for this product is closed");
+  }
     setIsLoading(true);
      
       fetch('https://apis.emarketpod.com/user/cart/add', {
@@ -54,7 +54,32 @@ function ProductDetail() {
 
 
   const buyNow = (id) => {
-    addToCart(id);
+    // addToCart(id);
+    if (!isOpen) {
+      return toast.error("The store for this product is closed");
+    }
+      setIsLoading(true);
+       
+        fetch('https://apis.emarketpod.com/user/cart/add', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: state.token,
+          },
+          body: JSON.stringify({ product_id: product.data.id }),
+        })
+        .then((response) => response.json())
+          .then((data) => {
+            setIsLoading(false);
+            // handleOpen();
+            toast.success(data.message);
+            return;
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            console.error(error);
+            return;
+          });
     navigate('/checkout');
   }
 
@@ -119,7 +144,7 @@ function ProductDetail() {
     </div>
 
     <div className="lg:flex lg:justify-between lg:flex-row-reverse gap-x-[100px lg:items-center pt-[30px]">
-    <div className="lg:pl-[100% lg:py-8 lg:px-[12%] flex py-6 mx-14 bg-[white] flex justify-center lg:justify-norma pb-[30px"><img className="object-cover w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
+    <div className="lg:mt-[-4%] lg:py-10 rounded-[10px] lg:px-[12%] flex py-6 mx-14 bg-[white] flex justify-center lg:justify-norma pb-[30px"><img className="object-cover w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
 
     
     <div className="lg:pr-[200p] lg:absolut left-6 lg:w-[50%]">
