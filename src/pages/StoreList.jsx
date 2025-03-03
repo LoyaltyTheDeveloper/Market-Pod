@@ -82,7 +82,7 @@ function StoreList() {
               <div
                 key={store.id}
                 onClick ={() => navigate(`/site/getStore/${store.id}`)}
-                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[310px] h-[auto] rounded-[10px] lg:flex justify-start"
+                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[360px h-[auto] rounded-[10px] lg:flex justify-start"
               >
             
                 <div>
@@ -115,7 +115,7 @@ function StoreList() {
                   </div>
 
                   <div className="flex flex-wrap items-center mb-[15px]">
-                    {store.categories.map((category, index) => (
+                    {store.categories.slice(0, 4).map((category, index) => (
                       <div className="flex items-center" key={index}>
                         {category}
                         {index < store.categories.length - 1 && (

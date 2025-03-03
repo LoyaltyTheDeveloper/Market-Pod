@@ -615,7 +615,7 @@ function Navbar() {
            
 
 
-                <div className="fixed mt-[300px] left-1/2 transform -translate-x-1/2 justify-center z-50 flex items-center w-[300px] h-[300px]">
+                <div className="fixed mt-[300px top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 justify-center z-50 flex items-center w-[300px] h-[300px]">
                   <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full pb-[40px]">
                     <div className="flex flex-row">
                       <h2 className="text-[15px] font-bold mb-4 text-[#31603D]">Select Location</h2>

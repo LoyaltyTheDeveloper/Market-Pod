@@ -130,7 +130,7 @@ function ViewStore() {
           setIsLoading(false);
           setModalProduct(product);
           handleOpen();
-          toast.success(data.message);
+          // toast.success(data.message);
           return;
         })
         .catch((error) => {
@@ -139,6 +139,28 @@ function ViewStore() {
           return;
         });
     };
+
+    useEffect(() => {
+      if (isDialog) {
+        const timer = setTimeout(() => {
+          handleClose(); 
+        }, 3000);
+    
+        return () => clearTimeout(timer); 
+      }
+    }, [isDialog]);
+
+    useEffect(() => {
+      if (isDialog2) {
+        const timer = setTimeout(() => {
+          handleClose2(); 
+        }, 3000);
+    
+        return () => clearTimeout(timer);
+      }
+    }, [isDialog2]);
+
+
     const handleKeyDown = (event) => {
       if (event.key === "Enter") {
         handleSearch();
@@ -215,15 +237,19 @@ function ViewStore() {
 
         <React.Fragment>
       <Dialog
+      BackdropProps={{
+  sx: { backgroundColor: "transparent" }, // Removes the dark overlay
+}}
       PaperProps={{
         sx: {
           position: "absolute",
+          // boxShadow: "none", 
           top: "5%", 
           right: "2%", 
           width: { xs: "55%", sm: "55%", md: "60%", lg: "30%" }, 
           height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
           maxHeight: "vh", 
-          overflow: "auto", 
+          overflow: "auto",
         },
       }}
         open={isDialog}
@@ -260,9 +286,13 @@ function ViewStore() {
      {/* Dialog 2 */}
 
      <Dialog
+    BackdropProps={{
+    sx: { backgroundColor: "transparent" }, // Removes the dark overlay
+}}
       PaperProps={{
         sx: {
           position: "absolute",
+          // boxShadow: "none", 
           top: "5%", 
           right: "2%", 
           width: { xs: "55%", sm: "55%", md: "60%", lg: "30%" }, 
@@ -314,11 +344,11 @@ function ViewStore() {
           </div>
           <div className="w-[270px] flex flex-col gap-y-[5px]">
             <div>
-              <div className="font-semibold text-[20px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px]">{store.name}</div>
-              {store.isOpen === true && <div className="text-[#31603D] text-[14px]">Opened</div>}
-              {store.isOpen !== true && <div className="text-[#D23D23] text-[14px]">Closed</div>}
-              <div className="text-[15px]">{store.status}</div>
-              <div className="text-[15px]">{store.addr}</div>
+              <div className="font-semibold text-[21px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px] font-bitter">{store.name}</div>
+              {store.isOpen === true && <div className="text-[#31603D] font-sans text-[14px]">Opened</div>}
+              {store.isOpen !== true && <div className="text-[#D23D23] font-sans text-[14px]">Closed</div>}
+              <div className="text-[15px] font-sans">{store.status}</div>
+              <div className="text-[15px] font-sans">{store.addr}</div>
             </div>
           </div>
         </div>
@@ -330,10 +360,10 @@ function ViewStore() {
 
         <div className="hidden lg:flex lg:pl-[5%]">
           <div className="flex flex-col gap-[10px] lg:mb-[500px">
-            <div className="font-semibold">Browse Categories</div>
+            <div className="font-semibold font-bitter text-[20px]">Browse Categories</div>
             {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
-                <div className="cursor-pointer">{category}</div>
+                <div className="cursor-pointer font-sans">{category}</div>
               </div>
             ))}
           </div>
@@ -447,13 +477,14 @@ function ViewStore() {
 
 
 
-{state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative">
-      {/* Extract unique categories directly from mapped products */}
+{state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-col gap-y-8">
+    
+
       {[...new Set(products?.map(product => product.category_name))].map(category => (
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
-          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0">{category}</h2>
+          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0 font-bitter lg:mt-4">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
@@ -491,12 +522,12 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
-              <div className="w-[120px] lg:w-[150px] text-[14px] lg:text-[15px] font-semibold h-[40px]">
+              <div className="w-[120px] font-bitter lg:w-[150px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
                 {product.name}
               </div>
-              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
+              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
-                <div className="font-semibold text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
                  {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold"> 
@@ -518,13 +549,14 @@ function ViewStore() {
 
 
 
-    {!state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative">
-      {/* Extract unique categories directly from mapped products */}
+    {!state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-col gap-y-8">
+   
+
       {[...new Set(products.map(product => product.category_name))].map(category => (
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
-          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0">{category}</h2>
+          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0 font-bitter lg:mt-4">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
@@ -561,12 +593,12 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`)} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
-              <div className="w-[120px] lg:w-[150px] text-[14px] lg:text-[15px] font-semibold h-[40px]">
+              <div className="w-[120px] lg:w-[150px] text-[16px] lg:text-[18px] font-semibold h-[40px] font-bitter">
                 {product.name}
               </div>
-              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px]">{product.subtitle}</div>
+              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>
               <div className="flex absolte bttom-[180px] lg:botom-[380px]">
-                <div className="font-semibold text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
                 {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">

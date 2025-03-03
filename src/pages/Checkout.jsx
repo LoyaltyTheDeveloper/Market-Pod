@@ -45,6 +45,7 @@ function Checkout() {
        const [isLoading, setIsLoading] = useState(false);
        const [isLoading2, setIsLoading2] = useState(false);
        const [address, setAddress] = useState("");
+       const [rider, setRider] = useState("");
 
 
 
@@ -59,7 +60,12 @@ function Checkout() {
 
         const handleButtonClick = () => {
             setShowThirdDiv(!showThirdDiv);
+            scroll();
           };
+
+          const scroll = () => {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+          }
 
 
         const handleIncrease = (productId) => {
@@ -214,28 +220,28 @@ function Checkout() {
   return (<>
   <Navbar/>
 
-  {isLoading &&  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
-  size="70"
-  speed="1.3" 
-  color="#4ade80" 
-></l-trio>    </div>}
-
     <div className="pt-[30px] pb-[50px] min-h-screen">
      
-<div className="flex flex-col lg:flex-row items-center">
+<div className="flex flex-col lg:flex-row items-center pt-[30px]">
 
  <div className="flex flex-col pt-[50px] lg:pt-[70px] pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max-h-72 no-scrollbar">
     <div className="flex justify-center pt-[px]">
-            <div className="pt-[50px]">
+            <div className="pt-[50px">
 
 
-    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[-30px] justify-between">
+    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[-30px justify-between">
       <div className="font-bold text-[25px]">Checkout</div>
       <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
         <div>Continue shopping</div>
       </button>
     </div>
+    
+    {isLoading &&  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
 
 
      {state.token && <div>
@@ -489,9 +495,9 @@ function Checkout() {
           <div>
 
           <input
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          name="address"
+          value={rider}
+          onChange={(e) => setRider(e.target.value)}
+          name="rider"
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Riders Instruction (Optional)">
       </input>
 
