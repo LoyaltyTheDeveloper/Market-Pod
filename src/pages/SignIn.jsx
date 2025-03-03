@@ -109,7 +109,7 @@ function SignIn() {
             <button
               type="submit"
               onClick={handleSignin}
-              className="bg-[#31603D] hover:bg-[green] text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
+              className="bg-[#31603D] hover:bg-green-700 text-white font-bold py-5 px-4 rounded-[100px] focus:outline-none focus:shadow-outline w-full"
             >
               Proceed
             </button>

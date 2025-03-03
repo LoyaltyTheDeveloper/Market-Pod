@@ -34,11 +34,19 @@ import { CartContext } from '../context/CartContext.jsx';
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { styled, lighten, darken } from '@mui/system';
+
+
+
+
+
+
 function Navbar() {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-
+  const [locations, setSelectedLocation] = useState('');
   trio.register()
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -80,6 +88,84 @@ function Navbar() {
 
   // reload cart
 
+
+
+  const GroupHeader = styled('div')(({ theme }) => ({
+    position: 'sticky',
+    top: '-8px',
+    padding: '4px 10px',
+    color: theme.palette.primary.main,
+    backgroundColor: lighten(theme.palette.primary.light, 0.85),
+    ...theme.applyStyles('dark', {
+      backgroundColor: darken(theme.palette.primary.main, 0.8),
+    }),
+  }));
+  
+  const GroupItems = styled('ul')({
+    padding: 0,
+  });
+
+  const stateAndCapital = [
+    { location: "Abakaliki, Ebonyi State" },
+    { location: "Abeokuta, Ogun State" },
+    { location: "Abuja, FCT" },
+    { location: "Ado-Ekiti, Ekiti State" },
+    { location: "Akure, Ondo State" },
+    { location: "Asaba, Delta State" },
+    { location: "Awka, Anambra State" },
+    { location: "Bauchi, Bauchi State" },
+    { location: "Benin City, Edo State" },
+    { location: "Birnin Kebbi, Kebbi State" },
+    { location: "Calabar, Cross River State" },
+    { location: "Damaturu, Yobe State" },
+    { location: "Dutse, Jigawa State" },
+    { location: "Enugu, Enugu State" },
+    { location: "Gombe, Gombe State" },
+    { location: "Gusau, Zamfara State" },
+    { location: "Ibadan, Oyo State" },
+    { location: "Ikeja, Lagos State" },
+    { location: "Ilorin, Kwara State" },
+    { location: "Jalingo, Taraba State" },
+    { location: "Jos, Plateau State" },
+    { location: "Kaduna, Kaduna State" },
+    { location: "Kano, Kano State" },
+    { location: "Katsina, Katsina State" },
+    { location: "Lafia, Nasarawa State" },
+    { location: "Lokoja, Kogi State" },
+    { location: "Maiduguri, Borno State" },
+    { location: "Makurdi, Benue State" },
+    { location: "Minna, Niger State" },
+    { location: "Osogbo, Osun State" },
+    { location: "Owerri, Imo State" },
+    { location: "Port Harcourt, Rivers State" },
+    { location: "Sokoto, Sokoto State" },
+    { location: "Umuahia, Abia State" },
+    { location: "Uyo, Akwa Ibom State" },
+    { location: "Yenagoa, Bayelsa State" },
+    { location: "Yola, Adamawa State" },
+    { location: "Zaria, Kaduna State" }
+  ];
+  
+
+  const options = stateAndCapital.map((option) => {
+    const firstLetter = option.location[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+      ...option,
+    };
+  }
+  );
+
+   const locationChange = () => {
+
+   if (!locations){
+    toast.error("Please select a location.");
+   }
+   else {
+    toast.error("Out of service area.");
+   }
+   return;
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -304,6 +390,8 @@ function Navbar() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+
 
 // const isCartEmpty =()=> {
 //   return(<>
@@ -621,16 +709,43 @@ function Navbar() {
                       <h2 className="text-[15px] font-bold mb-4 text-[#31603D]">Select Location</h2>
                       <div className="absolute right-[30px] font-bold" onClick={closeModal}><LiaTimesSolid className="size-[20px] text-[#31603D]" /></div>
                     </div>
-                    <div className="flex flex-row items-center mb-[10px]">
+                    {/* <div className="flex flex-row items-center mb-[10px]">
                       <GrLocation className="absolute ml-[20px] size-[15px]" />
                       <input
                         type="text"
                         className="w-full border border-gray-300 pl-[50px] py-[10px] pr-[20px] rounded-[100px] focus:outline-none text-[13px]"
                       />
-                    </div>
+                    </div> */}
 
-                    <button
-                      className="font-bold text-[15px] w-full bg-[#31603D] py-[10px] pr-[20px] text-white rounded-[100px]"
+                    <div className="flex flex-row items-center mb-[10px]">
+                    <GrLocation className="absolute ml-[20px] size-[15px]" />
+                    <Autocomplete className=""
+      options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+      groupBy={(option) => option.firstLetter}
+      getOptionLabel={(option) => option.location}
+      onChange={(event, value) => setSelectedLocation(value?.location || '')}
+      sx={{
+        "& .MuiOutlinedInput-root": {
+         borderRadius: "30px"
+       }, 
+       width: {xs:"100%", lg:"100%"}
+     }}
+      renderInput={(params) => <TextField {...params} label="" placeholder="Select Location"
+      InputProps={{
+        ...params.InputProps,
+        style: { paddingLeft: "40px" }, 
+      }}
+/>}
+      renderGroup={(params) => (
+        <li key={params.key}>
+          <GroupHeader>{params.group}</GroupHeader>
+          <GroupItems>{params.children}</GroupItems>
+        </li>
+      )}
+    />
+    </div>
+                <button onClick={locationChange}
+                      className="font-bold hover:bg-green-700 text-[15px] w-full bg-[#31603D] py-[10px] pr-[20px] text-white rounded-[100px]"
                     >
                       Proceed
                     </button>
