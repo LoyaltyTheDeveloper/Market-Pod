@@ -507,17 +507,36 @@ function ViewStore() {
               </div> */}
 
 
-              <div
+    {/* Add to cart button */}
+
+              {/* <div
               onClick={()=> addToCart(product)}
         className={`absolute cursor-pointer top-6 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
           hovered === product.id ? "px-2 py-1 gap-x-1" : "p-2"
         }`}
       >
-        <span className={`text-sm font-medium transition-opacity duration-[2000ms transition-transform duration-[2000ms] ease-in-out ${hovered === product.id ? "opacity-100 w-aut0 py-[4px] translate-x-0 transition-transform duration-[2000ms]" : "opacity-0 w-0 h-0 translate-x-5"}`}>
+        <span className={`text-sm font-medium transition-[width] duration-700 ease-in-out ${hovered === product.id ? "opacity-100 w-auto py-[4px] animate-expand-width" : "opacity-0 w-0 h-0"}`}>
           Add To Cart
         </span>
-        <div className=""><FaPlus className="w-5 h-5 ml- text-white" /></div>
-      </div>
+        <div className=""><FaPlus className="w-5 h-5 ml- text-white"/></div>
+      </div> */}
+
+
+<div className='absolute top-6 right-2'>
+<div className={`text-sm text-[white] font-medium ${hovered === product.id ? "opacity-100 w-auto py-[8px] mt-[px] pr-[15px] pl-[15px] rounded-tl-full rounded-bl-full rounded-tr-[300px] rounded-br-lg mr-[30px] lg:mr-[39px] border border-[#31603D] bg-[#31603D] animate-fade": "opacity-0 w-0 h-0 pr-[20px]"}`}>
+          Add To Cart
+        </div>
+<div
+              onClick={()=> addToCart(product)}
+        className={`absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full ${
+          hovered === product.id ? "px-2 py-2 gap-x-1" : "p-2 "
+        }`}
+      >
+        <div className=""><FaPlus className="w-5 h-5 ml- text-white"/></div>
+      </div>    
+    </div>  
+
+      
 
 
             </div>
@@ -578,7 +597,7 @@ function ViewStore() {
                 <FaPlus className="text-[white]" />
               </div> */}
 
-                     <div
+                     {/* <div
               onClick={()=> handleSecondAdd(product)}
         className={`absolute cursor-pointer top-6 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
           hovered === product.id ? "px-2 py-1 gap-x-1" : "p-2"
@@ -588,7 +607,23 @@ function ViewStore() {
           Add To Cart
         </span>
         <div className=""><FaPlus className="w-5 h-5 ml- text-white" /></div>
-      </div>
+      </div> */}
+
+
+      <div className='absolute top-6 right-2'>
+<div className={`text-sm text-[white] font-medium ${hovered === product.id ? "opacity-100 w-auto py-[8px] mt-[px] pr-[15px] pl-[15px] rounded-tl-full rounded-bl-full rounded-tr-[300px] rounded-br-lg mr-[30px] lg:mr-[39px] border border-[#31603D] bg-[#31603D] animate-fade": "opacity-0 w-0 h-0 pr-[20px]"}`}>
+          Add To Cart
+        </div>
+<div
+              onClick={()=> handleSecondAdd(product)}
+        className={`absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full ${
+          hovered === product.id ? "px-2 py-2 gap-x-1" : "p-2 "
+        }`}
+      >
+        <div className=""><FaPlus className="w-5 h-5 ml- text-white"/></div>
+      </div>    
+    </div>  
+
 
 
             </div>
@@ -616,6 +651,8 @@ function ViewStore() {
         </div>
       ))}
     </div>}
+
+   
 
     {/* {!products &&  Array(3)
             .fill("")

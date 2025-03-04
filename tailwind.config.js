@@ -1,10 +1,22 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindcssAnimated from "tailwindcss-animated";
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    extend: {
+      keyframes: {
+        expandWidth: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
+      },
+      animation: {
+        "expand-width": "expandWidth 0.6s ease-in-out forwards",
+      },
+    },
     extend: {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
@@ -28,6 +40,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssAnimated],
 }
 
