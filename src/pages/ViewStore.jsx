@@ -24,6 +24,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { LiaTimesSolid } from "react-icons/lia";
 import { GrBasket } from "react-icons/gr";
+import produce from "../assets/Vector.svg";
+import milk from '../assets/milk.svg';
+import spice from '../assets/herbs.svg';
+import oil from '../assets/oil.svg';
+import bread from '../assets/bread.svg';
+import plastic from '../assets/plastic bottle.svg';
+import laundry from '../assets/laundry.svg';
+import beauty from '../assets/beauty.svg';
+import toy from '../assets/toy.svg';
+import stationery from '../assets/stationery.svg';
+import meat from '../assets/meat.svg';
 
 
 
@@ -41,6 +52,20 @@ function ViewStore() {
 
   const [isDialog, setIsDialog] = React.useState(false);
   const [isDialog2, setIsDialog2] = React.useState(false);
+
+  const categoryImages = [
+    { name: "Produce", image: produce },
+    { name: "Meat & Seafood", image: meat },
+    { name: "Diary & Eggs", image: milk },
+    { name: "Herbs & Spice", image: spice },
+    { name: "Oil & Vinegar", image: oil },
+    { name: "Beverage & Packed Foods", image: bread },
+    { name: "Plasticware & Bags", image: plastic },
+    { name: "Laundry", image: laundry },
+    { name: "Health & Beauty", image: beauty },
+    { name: "Baby & Kids", image: toy },
+    { name: "Stationery", image: stationery },
+  ];
 
   const handleOpen = () => {
     setIsDialog(true);
@@ -361,16 +386,32 @@ function ViewStore() {
         <div className="hidden lg:flex lg:pl-[5%]">
           <div className="flex flex-col gap-[10px] lg:mb-[500px">
             <div className="font-semibold font-bitter text-[20px]">Browse Categories</div>
-            {store.categories && store.categories.map((category) => (
+
+            {/* {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
                 <div className="cursor-pointer font-sans">{category}</div>
               </div>
-            ))}
+            ))} */}
+<div className='flex flex-col gap-y-3'>
+{store.categories &&
+  store.categories.map((category) => {
+    const categoryImage = categoryImages.find((c) => c.name === category)?.image;
+    return (
+      <div key={category.id} onClick={() => scroll(category)} className="text-[15px] flex items-center space-x-3">
+        {categoryImage && (<>
+          <img src={categoryImage} className="w-6 h-6 rounded-md object-cover" /> 
+      </>  )} 
+        <div className="cursor-pointer font-sans">{category}</div>
+      </div>
+    );
+  })}
+  </div>
           </div>
         </div>
       </div>
     )}
   </div>
+  
 
 
   {!store &&  Array(1)
@@ -593,9 +634,7 @@ function ViewStore() {
                 className="w-24 h-24 object-cover flex justify-center bg-[white] p-4"
               />
 
-              {/* <div onClick={()=> handleSecondAdd(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
-                <FaPlus className="text-[white]" />
-              </div> */}
+             
 
                      {/* <div
               onClick={()=> handleSecondAdd(product)}
