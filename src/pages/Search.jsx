@@ -160,7 +160,7 @@ function Search() {
                   <div className="hidden lg:flex flex flex-wrap items-center mb-[15px]">
                     {result.data.categories &&
                     result.data.categories.length > 0 ? (
-                      result.data.categories.map((category, index) => (
+                      result.data.categories.slice(0, 4).map((category, index) => (
                         <div
                           className="flex items-center"
                           key={index}

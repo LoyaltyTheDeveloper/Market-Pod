@@ -144,11 +144,11 @@ function ProductDetail() {
     </div>
 
     <div className="lg:flex lg:justify-between lg:flex-row-reverse gap-x-[100px lg:items-center pt-[30px]">
-    <div className="lg:mt-[-4%] lg:py-10 rounded-[10px] lg:px-[12%] flex py-6 mx-14 bg-[white] flex justify-center lg:justify-norma pb-[30px"><img className="object-cover w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
+    <div className="lg:mt-[-4%] lg:py-10 rounded-[10px] lg:px-[12%] flex py-6 mx-14 bg-[white] flex justify-center lg:justify-norma pb-[30px"><img className="object-cove object-contain w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
 
     
     <div className="lg:pr-[200p] lg:absolut left-6 lg:w-[50%]">
-    <div className="flex flex-col gap-y-[10px]">
+    <div className="flex flex-col gap-y-[10px] pt-[50px] lg:pt-[-200px]">
        <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[350px] lg:pt-[30px">{product.data.name} - {product.data.weight}kg</div>
        <div>{product.data.subtitle}</div>
        <div className="lg: h-[40px]">{product.data.description}</div>
@@ -157,9 +157,9 @@ function ProductDetail() {
     <div className="flex flex-col gap-[20px] pt-[30px]">
     <div className="text-[20px] font-semibold mt-[40px]">₦ {product.data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
     <div className="flex gap-[10px]">
-        <button onClick={buyNow}><div className="text-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
+        <button onClick={buyNow}><div className="text-[#31603D] text-[14px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px]">Buy Now</div></button>
         <div>
-        <button onClick={()=> addToCart(product.data.id)}><div className="text-[white] bg-[#31603D] text-[10px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px] flex gap-[5px] items-center">Add To Cart <div className="hidden lg:flex lg:text-[px]">+</div></div></button>
+        <button onClick={()=> addToCart(product.data.id)}><div className="text-[white] bg-[#31603D] text-[14px] border border-[#31603D] py-[8px] px-[24px] rounded-[20px] lg:text-[16px] lg:px-[10px] lg:px-[50px] flex gap-[5px] items-center">Add To Cart <div className="hidden lg:flex lg:text-[px]">+</div></div></button>
         </div>
     </div>
     </div>

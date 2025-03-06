@@ -219,7 +219,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                   <div>
                     <img
                       src={category.image}
-                      className="w-12 h-12 object-cover"
+                      className="w- 12 h- 12 object-cove object-contain"
                     />
                   </div>
 

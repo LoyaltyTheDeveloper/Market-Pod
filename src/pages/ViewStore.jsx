@@ -56,7 +56,7 @@ function ViewStore() {
   const categoryImages = [
     { name: "Produce", image: produce },
     { name: "Meat & Seafood", image: meat },
-    { name: "Diary & Eggs", image: milk },
+    { name: "Dairy & Eggs", image: milk },
     { name: "Herbs & Spice", image: spice },
     { name: "Oil & Vinegar", image: oil },
     { name: "Beverage & Packed Foods", image: bread },
@@ -399,7 +399,7 @@ function ViewStore() {
     return (
       <div key={category.id} onClick={() => scroll(category)} className="text-[15px] flex items-center space-x-3">
         {categoryImage && (<>
-          <img src={categoryImage} className="w-6 h-6 rounded-md object-cover" /> 
+          <img src={categoryImage} className="w-6 h-6 rounded-md object-cove object-contain" /> 
       </>  )} 
         <div className="cursor-pointer font-sans">{category}</div>
       </div>
@@ -540,7 +540,7 @@ function ViewStore() {
               <img
                 onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })}
                 src={product.image}
-                className="w-24 h-24 object-cover flex justify-center bg-[white] p-4"
+                className="w-24 h-24 w- [100px] h- [100px] object-cove object-contain flex justify-center bg-[white] p-4"
               />
 
               {/* <div onClick={()=> addToCart(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
@@ -631,7 +631,7 @@ function ViewStore() {
               <img
                 onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })}
                 src={product.image}
-                className="w-24 h-24 object-cover flex justify-center bg-[white] p-4"
+                className="w-24 h-24 object-cove object-contain flex justify-center bg-[white] p-4"
               />
 
              

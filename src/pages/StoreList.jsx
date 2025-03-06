@@ -77,7 +77,7 @@ function StoreList() {
         <div className="flex lg:flex justify-start">
 
         <div className="flex justify-center whitespace-nowrap space-x-4 p-4 lg:flex lg:justify-start">
-          <div className="flex flex-col gap-[20px] lg:flex-row justify-center">
+          <div className="flex flex-wrap gap-[20px] lg:flex lg:flex-wrap justify-center lg:justify-normal">
             {market.stores.map((store) => (
               <div
                 key={store.id}
