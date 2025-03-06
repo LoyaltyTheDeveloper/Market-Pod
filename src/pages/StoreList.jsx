@@ -82,7 +82,7 @@ function StoreList() {
               <div
                 key={store.id}
                 onClick ={() => navigate(`/site/getStore/${store.id}`)}
-                className="flex flex-col bg-[white] border border-[transparent] w-[360px] lg:w-[360px h-[auto] rounded-[10px] lg:flex justify-start"
+                className="flex flex-col bg-[white] cursor-pointer border border-[transparent] w-[360px] lg:w-[360px h-[auto] rounded-[10px] lg:flex justify-start"
               >
             
                 <div>

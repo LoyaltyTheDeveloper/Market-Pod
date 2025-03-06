@@ -25,7 +25,7 @@ import Search from './pages/Search';
 import { Toaster } from 'react-hot-toast';
 import Checkout from './pages/Checkout';
 import Dashboard from './pages/Dashboard';
-
+import Location from './pages/Location';
 
 
 
@@ -58,6 +58,7 @@ function App() {
         <Route path="/search" element={<Search/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/location" element={<Location/>}/>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Router>

@@ -33,14 +33,9 @@ import { trio } from 'ldrs'
 import { CartContext } from '../context/CartContext.jsx';
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { styled, lighten, darken } from '@mui/system';
-
-
-
-
 
 
 function Navbar() {
@@ -162,7 +157,7 @@ function Navbar() {
     toast.error("Please select a location.");
    }
    else {
-    toast.error("Out of service area.");
+    navigate('/location');
    }
    return;
   }
@@ -765,7 +760,7 @@ function Navbar() {
                     <div className='cursor-pointer' onClick={openModal}><GrLocation className="size-[20px]" /></div>
                   </div>
 
-                  <LiaTimesSolid className="hover:bg-[grey] size-[25px] absolute right-[45px] text-[#31603D]" onClick={toggleSidebar} />
+                  <LiaTimesSolid className="hover:bg-[grey] size-[25px] absolute right-[45px] text-[#31603D] cursor-pointer" onClick={toggleSidebar} />
                 </div>
 
                 <div className="flex lg:mt-[-100px] items-center justify-center my-3">

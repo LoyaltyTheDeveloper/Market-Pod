@@ -518,7 +518,7 @@ function Checkout() {
                    
         </>) : (<>
 
-          <div className="flex flex-col justify-center items-center py-20">
+          <div className="flex flex-col justify-center items-center py- 20">
           
           <div className="flex flex-col gap-y-[10px] mt-[40px] lg:mt-[0px]">
                     <div className="text-[25px] font-bold">Order Details</div>
