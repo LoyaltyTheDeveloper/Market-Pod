@@ -36,6 +36,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { styled, lighten, darken } from '@mui/system';
+import dropdownData from '../index.json'
 
 
 function Navbar() {
@@ -356,8 +357,18 @@ function Navbar() {
 
   const [expandedCategory, setExpandedCategory] = useState(null);
 
-  const toggleCategory = (category) => {
-    setExpandedCategory(expandedCategory === category ? null : category);
+  // const toggleCategory = (category) => {
+  //   setExpandedCategory(expandedCategory === category ? null : category);
+  // };
+
+  // const toggleExpandedDropdown = (dropdown) => {
+  //   setExpandedDropdown(expandedDropdown === dropdown ? null : dropdown);
+  // };
+
+  const [expandedDropdown, setExpandedDropdown] = useState(null);
+
+  const toggleCategory = (id) => {
+    setExpandedDropdown(expandedDropdown === id ? null : id);
   };
 
   const categories = [
@@ -769,7 +780,7 @@ function Navbar() {
                 </div>
 
 
-                <div className="p-4">
+                {/* <div className="p-4">
                   <div className="flex flex-col gap-y-[25px]">
                     {categories.map((category) => (
                       <div key={category.id} className="flex flex-col gap-y-2">
@@ -798,7 +809,67 @@ function Navbar() {
                       </div>
                     ))}
                   </div>
+                </div> */}
+
+
+
+<div className="p-4">
+      <div className="flex flex-col gap-y-[25px]">
+        {dropdownData.dropdowns.map((dropdown) => {
+          // Pick a random category image
+          const randomCategory =
+            dropdown.categories[
+              Math.floor(Math.random() * dropdown.categories.length)
+            ];
+
+          return (
+            <div key={dropdown.id} className="flex flex-col gap-y-2">
+              <div
+                className="flex items-center gap-x-3 cursor-pointer"
+                onClick={() => toggleCategory(dropdown.id)}
+              >
+                <img
+                  src={dropdown.image}
+                  alt={dropdown.name}
+                  className="w-6 h-6"
+                />
+                <span className="text-[16px]">{dropdown.name}</span>
+                <IoIosArrowDown
+                  className={`transition-transform ${
+                    expandedDropdown === dropdown.id ? "rotate-0" : "rotate-0"
+                  }`}
+                />
+              </div>
+
+              {expandedDropdown === dropdown.id && (
+                <div className="pl-[50px] flex items-center gap-x-4">
+                  {/* List of categories */}
+                  <div className="flex flex-col gap-y-[10px]">
+                    {dropdown.categories.map((category) => (
+                      <span
+                      onClick={()=>handleSearch2(category)}
+                        key={category.id}
+                        className="cursor-pointer text-[14px] text-gray-600"
+                      >
+                        {category.category}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Random Category Image (Now on the right) */}
+                  <img
+                    src={randomCategory.image}
+                    alt={randomCategory.category}
+                    className="w-12 h-12"
+                  />
                 </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
 
                 <div className="flex items-center justify-center mt-[10px]">
                   <hr className="w-[50%] border-t border-gray-300" />
