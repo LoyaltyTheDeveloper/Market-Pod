@@ -25,7 +25,7 @@ export const CartContext = createContext();
           const existingProduct = prevCart.find((item) => item.id === productOne.id);
           if(existingProduct){
             let isItemAdded = false;
-            toast.error("Product already in cart");
+            // toast.error("Product already in cart");
           }
           if (existingProduct) {
             return prevCart.map((item) =>
@@ -33,7 +33,7 @@ export const CartContext = createContext();
             );
           }
           if(!existingProduct){
-            toast.success("Product added to cart");
+            // toast.success("Product added to cart");
           }
           return [...prevCart, { ...productOne, quantity: 1 }];
         });

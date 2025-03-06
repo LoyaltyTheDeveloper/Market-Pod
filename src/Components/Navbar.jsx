@@ -695,7 +695,7 @@ function Navbar() {
               <>
 
                 <div
-                  className="fixed inset-0 bg-black bg-opacity-20 z-10 flex"
+                  className="fixed inset-0 bg-black bg-opacity-20 z-50 flex"
                   onClick={closeModal}
                 ></div>
 
@@ -762,7 +762,7 @@ function Navbar() {
                 <div className="flex ml-[20px] mt-[15px] gap-x-[200px]">
 
                   <div>
-                    <div><GrLocation className="size-[20px]" /></div>
+                    <div className='cursor-pointer' onClick={openModal}><GrLocation className="size-[20px]" /></div>
                   </div>
 
                   <LiaTimesSolid className="hover:bg-[grey] size-[25px] absolute right-[45px] text-[#31603D]" onClick={toggleSidebar} />
@@ -872,7 +872,7 @@ function Navbar() {
                     <div className="bg-[] pt-[20px">
                       {/* <div className="font-bold ml-[10px]">Produce {product.category_name}</div> */}
                       <div className="flex flex-row gap-x-[9px]">
-                        <div><img src={product.image} className="size-[90px]" /></div>
+                        <div><img src={product.image} className="size-[90px w-24 h-20" /></div>
                         <div className="flex flex-col gap-[10px]">
                           <div>{product.name} - {product.weight}</div>
                           <div className="text-[grey] text-[15px]">Subtitle</div>
@@ -921,7 +921,7 @@ function Navbar() {
                       <div className="bg-[] pt-[20px">
                         {/* <div className="font-bold ml-[10px]">Produce</div> */}
                         <div className="flex flex-row gap-x-[9px]">
-                          <div><img src={product.image} className="size-[90px]" /></div>
+                          <div><img src={product.image} className="size-[100px w-24 h-20 object-cove"/></div>
                           <div className="flex flex-col gap-[10px]">
                             <div>{product.name} - {product.weight}</div>
                             <div className="text-[grey] text-[15px]">Subtitle</div>

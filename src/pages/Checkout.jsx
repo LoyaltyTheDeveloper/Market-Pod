@@ -220,16 +220,16 @@ function Checkout() {
   return (<>
   <Navbar/>
 
-    <div className="pt-[30px] pb-[50px] min-h-screen">
+    <div className="pt-[30px pb-[50px] min-h-scree">
      
-<div className="flex flex-col lg:flex-row items-center pt-[30px]">
+<div className="flex flex-col lg:flex-row items-center pt-[30px">
 
- <div className="flex flex-col pt-[50px] lg:pt-[70px] pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max-h-72 no-scrollbar">
-    <div className="flex justify-center pt-[px]">
-            <div className="pt-[50px">
+ <div className="flex flex-col pt-[50px lg:mt-[700px pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max -h-72 h-[600px h-[500px no-scrollbar">
+    <div className="flex justify-center lg:mt-[120px]">
+            <div className="pt-[500px h-[350px] lg:h-[750px]">
 
 
-    <div className="mb-[20px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[-30px justify-between">
+    <div className="mb-[20px] mt-[120px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[0px] justify-between">
       <div className="font-bold text-[25px]">Checkout</div>
       <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
@@ -364,9 +364,9 @@ function Checkout() {
 
 <div className="second-or-third-div flex flex-col justify-center bg-[white] lg:px-[100px]">
         {!showThirdDiv ? (<>
-        <div className="flex flex-col justify-center items-center lg:py-16">
+        <div className="flex flex-col justify-center items-center my20 lg:py- 16">
           
-<div className="flex flex-col gap-y-[10px] mt-[30px]">
+<div className="flex flex-col gap-y-[10px] mt-[40px] lg:mt-[0px]">
           <div className="text-[25px] font-bold">Delivery Details</div>
            <div className="text-[14px]">Complete your order by providing your delivery address</div>
 
@@ -518,9 +518,9 @@ function Checkout() {
                    
         </>) : (<>
 
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center py-20">
           
-          <div className="flex flex-col gap-y-[10px] mt-[30px] lg:mt-[-50px]">
+          <div className="flex flex-col gap-y-[10px] mt-[40px] lg:mt-[0px]">
                     <div className="text-[25px] font-bold">Order Details</div>
                      <div className="text-[14px]">Confirm your order details before making payment.</div>
           

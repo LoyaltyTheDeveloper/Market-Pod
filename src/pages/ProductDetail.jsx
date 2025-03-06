@@ -144,11 +144,11 @@ function ProductDetail() {
     </div>
 
     <div className="lg:flex lg:justify-between lg:flex-row-reverse gap-x-[100px lg:items-center pt-[30px]">
-    <div className="lg:mt-[-4%] lg:py-10 rounded-[10px] lg:px-[12%] flex py-6 mx-14 bg-[white] flex justify-center lg:justify-norma pb-[30px"><img className="object-cove object-contain w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
+    <div className="lg:mt-[-4%] lg:py-10 rounded-[10px] lg:px-[12%] flex py-6 mx-2 bg-[white] flex justify-center lg:justify-norma pb-[30px mb-[40px]"><img className="object-cove object-contain w-[200px h-[200px] lg:w-[350px] lg:h-[350px] lg:mr-[500px" src={product.data.image}></img></div>
 
     
     <div className="lg:pr-[200p] lg:absolut left-6 lg:w-[50%]">
-    <div className="flex flex-col gap-y-[10px] pt-[50px] lg:pt-[-200px]">
+    <div className="flex flex-col gap-y-[10px] pt-[50px lg:mt-[-500px">
        <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[350px] lg:pt-[30px">{product.data.name} - {product.data.weight}kg</div>
        <div>{product.data.subtitle}</div>
        <div className="lg: h-[40px]">{product.data.description}</div>
