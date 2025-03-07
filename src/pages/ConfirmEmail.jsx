@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import pod from '../assets/Podlogo.svg';
 import background from '../assets/Rectangle 49.svg';
 import { PiEnvelopeSimpleLight } from "react-icons/pi";
@@ -11,12 +11,14 @@ import { toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import { trio } from 'ldrs'
 import { GrConsole } from 'react-icons/gr';
+import { AuthContext } from '../context/Context.jsx';
 
 
 function ConfirmEmail() {
     dotPulse.register()
     trio.register()
     const location = useLocation();
+    const { dispatch } = useContext(AuthContext);
     const {emailData, otpToken} = location.state || {};
     const navigate = useNavigate();
     const [isPending, setIsPending] = useState();
@@ -86,7 +88,7 @@ function ConfirmEmail() {
           .then((response) => {
             if(response.status === 200){
               setIsPending(false);
-              navigate("/");
+              navigate("/signin");
             }
             if (!response.ok){
               setIsPending(false);
@@ -94,13 +96,20 @@ function ConfirmEmail() {
            return response.json();
           })
           .then((data) => {
-            toast.success(data.message);
+            if (data.status === true){
+              dispatch({
+                type: 'SIGN_IN',
+                payload: { token: data.token ,user:data.user, email:email},
+              });
+              toast.success(data.message);
+            }
+           
           })
           .catch((error) => {
             console.error('Error:', error);
             setIsPending(false);
           });
-    
+      
       }
 
       const resendOtp = (e) => {

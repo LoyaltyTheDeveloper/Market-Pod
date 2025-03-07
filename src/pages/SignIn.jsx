@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { dotPulse } from 'ldrs'
 import Gmail from '../Components/GmailIcon.jsx';
+import { Dialog, DialogContent, Button } from "@mui/material";
+import { trio } from 'ldrs'
 
 dotPulse.register()
 
@@ -17,12 +19,25 @@ dotPulse.register()
 
 
 function SignIn() {
+   trio.register()
   dotPulse.register()
   const [email, setEmail] = useState('');
   const [pswd, setPassword] = useState('');
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
+   const [isLoading, setIsLoading] = useState();
+   const emailData = {userEmail: email};
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSignin = (e) => {
     setIsPending(true);
@@ -45,10 +60,15 @@ function SignIn() {
     },
     body: JSON.stringify(formData),
   })
-  .then((response) => response.json())
+  .then((response) =>  response.json() )
         .then((data) => {
+          if(data.redirect === 'verification'){
+            toast.error('Your account is not verified.');
+            setIsPending(false);
+            handleClickOpen();
+            return;
+          }
           if (data.status === true) {
-            // localStorage.setItem('user', JSON.stringify(data))
             dispatch({
               type: 'SIGN_IN',
               payload: { token: data.token ,user:data.user, email:email},
@@ -57,6 +77,7 @@ function SignIn() {
             setIsPending(false);
             navigate('/');
           } else {
+          
             toast.error(data.message);
             setIsPending(false);
             return;
@@ -66,8 +87,47 @@ function SignIn() {
           console.error('Error:', error);
           setIsPending(false);
           });
-
   }
+       const verifyAccount = (e) => {
+
+          setIsLoading(true);
+                  e.preventDefault();
+                  
+                  fetch('https://apis.emarketpod.com/user/resendOtp', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({email}),
+                  })
+                    .then((response) => {
+                      if(response.status === 200){
+                        setIsLoading(false);
+                      }
+                      if (!response.ok){
+                        setIsLoading(false);
+                        toast.error("There was an error resending the OTP");
+                      }
+                     return response.json()})
+                    .then((data) => {
+                      if (data.status === true) {
+                        const otpToken = data.otpToken
+                        const otpPageData = {emailData, otpToken}
+                        navigate('/confirmemail', {state: otpPageData});
+                        // toast.success(data.message);
+                        setIsLoading(false);
+                      } else {
+                        toast.error(data.message);
+                        setIsLoading(false);
+                          return;
+                      }
+                    })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                      setIsLoading(false);
+                    });
+              
+       }
   
 
   return (<>
@@ -151,7 +211,29 @@ function SignIn() {
           </div>
       </div>
       </div>
+      <div className="flex justify-center items-center h-screen">
+      {open && (
+        <div className="fixed inset-0 top-0 left-0 w-full h-full flex justify-center items-center z- 10">
+          <div className="absolute bg-black opacity-50 w-full h-full" onClick={handleClose}></div>
+
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[350px] lg:w-[400px] relative z- 50 text-center">
+            <p className="text-lg">Do you want to proceed to verify your account?</p>
+            {isLoading &&  <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+  size="70"
+  speed="1.3" 
+  color="#4ade80" 
+></l-trio>    </div>}
+            <div className='mt-4'>
+            <div className=''>
+              <button onClick={verifyAccount} className='border border-[#31603D] bg-[#31603D] text-[white] font-semibold px-10 py-2 rounded-full hover:bg-green-700'>Proceed</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   </div>
+    
   <Footer/>
   </>)
 }

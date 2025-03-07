@@ -81,15 +81,11 @@ function SignUp() {
         if (data.status === true) {
           const otpToken = data.otpToken
           const otpPageData = {emailData, otpToken}
-          console.log(otpPageData);
-          // dispatch({
-          //   type: 'SIGN_UP'
-          // });
-         
-          toast.success(data.message);
+          navigate('/confirmemail', {state: otpPageData});
+          toast.success('User signed up successfully. Please verify account.');
+          console.log(data.message);
           setIsPending(false);
           updateCart();
-          navigate('/confirmemail', {state: otpPageData});
         } else {
           toast.error(data.message);
           setIsPending(false);
@@ -100,12 +96,6 @@ function SignUp() {
         console.error('Error:', error);
         setIsPending(false);
       });
-
-      console.log("signupData", formData);
-
-
-   
-
     //  clearCart();
 
   }

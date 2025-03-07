@@ -14,13 +14,13 @@
           {
             "id": "2",
             "category": "Fruit",
-            "items": ["Apples", "Oranges", "Bananas", "Watermelons", "Coconuts", "Strawberry", "Avocados", "Grapes"],
+            "items": ["Apple", "Orange", "Banana", "Watermelon", "Coconut", "Strawberry", "Avocado", "Grape"],
             "image": "/dropdown/Rectangle 45.svg"
           },
           {
             "id": "3",
             "category": "Vegetable",
-            "items": ["Carrots", "Cabbage", "Cucumber", "Pepper", "Spinach", "Tomatoes", "Okro", "Lettuce"],
+            "items": ["Carrot", "Cabbage", "Cucumber", "Pepper", "Spinach", "Tomato", "Okro", "Lettuce"],
             "image": "/dropdown/tomato.svg"
           }
         ]
@@ -65,7 +65,7 @@
           {
             "id": "2",
             "category": "Eggs",
-            "items": ["Brown Eggs", "White Eggs", "Egg Alternative"],
+            "items": ["Brown Egg", "White Egg", "Egg Alternative"],
             "image": "/dropdown/eggs.svg"
           },
           {
@@ -84,7 +84,7 @@
           {
             "id": "1",
             "category": "Fresh & Dried Herbs",
-            "items": ["Bitter Leaf", "Ewedu", "Scent Leaf", "Basil", "Dried Thyme", "Bay Leaves"],
+            "items": ["Bitter Leaf", "Ewedu", "Scent Leaf", "Basil", "Dried Thyme", "Bay Leaf"],
             "image": "/dropdown/vegetable.svg"
           },
           {
@@ -96,7 +96,7 @@
           {
             "id": "3",
             "category": "Seasoning & Blends",
-            "items": ["Suya Spice Mix", "Yaji Spice", "Onion Powder", "Local Curry Powder", "Locust Beans", "Sea Salt", "Seasoning Cubes"],
+            "items": ["Suya Spice Mix", "Yaji Spice", "Onion Powder", "Local Curry Powder", "Locust Beans", "Sea Salt", "Seasoning Cube"],
             "image": "/dropdown/seasoning.svg"
           }
         ]
@@ -134,19 +134,19 @@
           {
             "id": "1",
             "category": "Beverage",
-            "items": ["Soft Drinks", "Fruit Juices", "Cereals", "Bottled Water", "Ginger Drink", "Malt Drinks"],
+            "items": ["Soft Drink", "Fruit Juice", "Cereal", "Bottled Water", "Ginger Drink", "Malt Drink"],
             "image": "/dropdown/cornflakes.svg"
           },
           {
             "id": "2",
             "category": "Packaged Foods",
-            "items": ["Pasta", "Noodles", "Dried Crayfish", "Dried Stockfish", "Tomato Paste", "Canned Sardines", "Canned Tomatoes"],
+            "items": ["Pasta", "Noodle", "Dried Crayfish", "Dried Stockfish", "Tomato Paste", "Canned Sardine", "Canned Tomato"],
             "image": "/dropdown/noodles.svg"
           },
           {
             "id": "3",
             "category": "Snacks",
-            "items": ["Biscuit", "Cookies", "Chin-Chin", "Plantain Chips", "Peanuts", "Kilishi"],
+            "items": ["Biscuit", "Cookie", "Chin-Chin", "Plantain Chips", "Peanut", "Kilishi"],
             "image": "/dropdown/biscuit.svg"
           }
         ]
@@ -159,19 +159,19 @@
           {
             "id": "1",
             "category": "Plasticware",
-            "items": ["Plastic Jars", "Plastic Plates", "Plastic Cutlery", "Plastic Lunch Boxes", "Plastic Basins", "Plastic Buckets"],
+            "items": ["Plastic Jar", "Plastic Plate", "Plastic Cutlery", "Plastic Lunch Box", "Plastic Basin", "Plastic Bucket"],
             "image": "/dropdown/bucket.svg"
           },
           {
             "id": "2",
             "category": "Plastic Bags",
-            "items": ["Nylon Bags", "Plastic Carrier Bags", "Ziploc Bgas", "Garbage", "Bags Alternative"],
+            "items": ["Nylon Bag", "Plastic Carrier Bag", "Ziploc Bag", "Garbage", "Bag Alternative"],
             "image": "/dropdown/plasticbag.svg"
           },
           {
             "id": "3",
             "category": "Special Plasticware",
-            "items": ["Takeaway Food Containers", "Plastic Wraps(Cling Film)"],
+            "items": ["Takeaway Food Container", "Plastic Wrap(Cling Film)"],
             "image": "/dropdown/plasticware.svg"
           }
         ]
@@ -184,19 +184,19 @@
           {
             "id": "1",
             "category": "Detergents & Soaps",
-            "items": ["Bar Soaps", "Liquid Detergents", "Powder Detergents", "Local Soap"],
+            "items": ["Bar Soap", "Liquid Detergent", "Powder Detergent", "Local Soap"],
             "image": "/dropdown/detergent.svg"
           },
           {
             "id": "2",
             "category": "Fabric Care Products",
-            "items": ["Fabric Softners", "Fabric Freshners", "Bleaches & Stain Removers"],
+            "items": ["Fabric Softner", "Fabric Freshner", "Bleach & Stain Remover"],
             "image": "/dropdown/bleaches.svg"
           },
           {
             "id": "3",
             "category": "Laundry Accessories",
-            "items": ["Plastic Laundry Baskets", "Woven Laundry Baskets", "Cloth Pegs/Clips", "Portable Drying Racks"],
+            "items": ["Plastic Laundry Basket", "Woven Laundry Basket", "Cloth Pegs/Clip", "Portable Drying Rack"],
             "image": "/dropdown/pegs.svg"
           }
         ]
@@ -209,19 +209,19 @@
           {
             "id": "1",
             "category": "Personal Care & Hygiene",
-            "items": ["Body Soaps & Washes", "Deodorants & Antiperspirants", "Oral Care", "Sanitary Products"],
+            "items": ["Body Soap & Wash", "Deodorant & Antiperspirant", "Oral Care", "Sanitary Product"],
             "image": "/dropdown/toothpaste.svg"
           },
           {
             "id": "2",
             "category": "Hair Care",
-            "items": ["Shampoos & Conditioners", "Hair Oils & Treatments", "Styling Products", "Hair Extensions & Wigs"],
+            "items": ["Shampoo & Conditioner", "Hair Oil & Treatment", "Styling Product", "Hair Extension & Wig"],
             "image": "/dropdown/shampoo.svg"
           },
           {
             "id": "3",
             "category": "Skin Care & Beauty",
-            "items": ["Body Lotions & Creams", "Facial Care", "Makeup & Beauty Products", "Fragrances"],
+            "items": ["Body Lotion & Cream", "Facial Care", "Makeup & Beauty Product", "Fragrance"],
             "image": "/dropdown/niveacream.svg"
           }
         ]
@@ -234,19 +234,19 @@
           {
             "id": "1",
             "category": "Baby Care Essentials",
-            "items": ["Diapers & Wipes", "Baby Lotions & Creams", "Baby Bath & Skincare"],
+            "items": ["Diaper & Wipe", "Baby Lotion & Cream", "Baby Bath & Skincare"],
             "image": "/dropdown/diapers.svg"
           },
           {
             "id": "2",
             "category": "Baby Food & Feeding",
-            "items": ["Infant Formula", "Baby Cereal & Snacks", "Feeding Accessories"],
+            "items": ["Infant Formula", "Baby Cereal & Snack", "Feeding Accessory"],
             "image": "/dropdown/babyfood.svg"
           },
           {
             "id": "3",
             "category": "Kids' Clothing & Accessories",
-            "items": ["Baby Clothes", "Footwear & Accessories", "Kids' Toys & Educational items"],
+            "items": ["Baby Cloth", "Footwear & Accessory", "Kids' Toy & Educational item"],
             "image": "/dropdown/babyclothes.svg"
           }
         ]
@@ -259,19 +259,19 @@
           {
             "id": "1",
             "category": "Writing & Drawing Tools",
-            "items": ["Pens & Pencils", "Markers & Highlighters", "Erasers & Sharpeners"],
+            "items": ["Pen & Pencil", "Marker & Highlighter", "Eraser & Sharpener"],
             "image": "/dropdown/pen.svg"
           },
           {
             "id": "2",
             "category": "Paper Products & Notebooks",
-            "items": ["Notebooks & Exercise Books", "Sticky Notes & Pads", "Paper Products"],
+            "items": ["Notebook & Exercise Book", "Sticky Note & Pad", "Paper Product"],
             "image": "/dropdown/note.svg"
           },
           {
             "id": "3",
             "category": "Office Suppliers & Organizers",
-            "items": ["Binders & Folders", "Staplers & Punches", "Desk Accessories", "Calenders & Planners"],
+            "items": ["Binder & Folder", "Stapler & Punch", "Desk Accessory", "Calender & Planner"],
             "image": "/dropdown/stapler.svg"
           }
         ]
