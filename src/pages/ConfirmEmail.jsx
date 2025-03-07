@@ -88,7 +88,7 @@ function ConfirmEmail() {
           .then((response) => {
             if(response.status === 200){
               setIsPending(false);
-              navigate("/signin");
+              navigate("/");
             }
             if (!response.ok){
               setIsPending(false);
