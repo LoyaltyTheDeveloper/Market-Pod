@@ -582,7 +582,7 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
-              <div className="w-[120px] font-bitter lg:w-[150px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
+              <div className="w-[120px] truncate font-bitter lg:w-[150px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
                 {product.name}
               </div>
               <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>

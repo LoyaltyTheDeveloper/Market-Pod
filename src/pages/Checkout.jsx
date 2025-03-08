@@ -22,6 +22,8 @@ import { trio } from 'ldrs';
 import { IoMdBicycle } from "react-icons/io";
 import { CartContext } from '../context/CartContext.jsx';
 import { TbUserEdit } from "react-icons/tb";
+import { Button, Rating } from "@mui/material";
+import { LiaTimesSolid } from "react-icons/lia";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -46,7 +48,11 @@ function Checkout() {
        const [isLoading2, setIsLoading2] = useState(false);
        const [address, setAddress] = useState("");
        const [rider, setRider] = useState("");
-
+       const [name, setName] = useState("");
+       const [phone, setPhone] = useState("");
+       const [open, setOpen] = useState(false);
+       const [open2, setOpen2] = useState(false);
+       const [rating, setRating] = useState(0);
 
 
         const handleCityChange = (e) => {
@@ -59,8 +65,13 @@ function Checkout() {
         };
 
         const handleButtonClick = () => {
+          if(!name || !phone || !address || !selectedLocation){
+            return toast.error("Please fill in all details.")
+          }
+          else{
             setShowThirdDiv(!showThirdDiv);
             scroll();
+          } 
           };
 
           const scroll = () => {
@@ -137,7 +148,8 @@ function Checkout() {
         })
         .then((response) => response.json())
           .then((data) => {
-            toast.success(data.message);
+            // toast.success(data.message);
+            toast.success('Product removed');
             setRefresh(!refresh);
             return;
           })
@@ -370,14 +382,17 @@ function Checkout() {
           <div className="text-[25px] font-bold">Delivery Details</div>
            <div className="text-[14px]">Complete your order by providing your delivery address</div>
 
+
+          {/* FullName */}
            <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><TbUserEdit className="size-[20px]"/></div>
           <div>
 
           <input
-         
+          value = {name}
+          onChange={(e) => setName(e.target.value)}
           // disabled
-          name="phone"
+          name="name"
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Full Name">
       </input>
 
@@ -385,15 +400,17 @@ function Checkout() {
             </div>
           </div>
 
-
+           {/* Phone Number */}
            <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><FiPhone className="size-[20px]"/></div>
           <div>
 
           <input
-      
+          value = {phone}
+          onChange={(e) => setPhone(e.target.value)}
           // disabled
           name="phone"
+          type='number'
           className="border border-[grey]-300 py-4 pl-[50px] rounded-[100px] w-[350px] focus:outline-none" placeholder="Phone Number">
       </input>
 
@@ -401,6 +418,7 @@ function Checkout() {
             </div>
           </div>
 
+{/* Selected Location */}
           <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><GrLocation className="size-[20px]"/></div>
           <div className="">
@@ -464,7 +482,7 @@ function Checkout() {
           </div> */}
 
 
-
+{/* Address */}
           <div className="flex flex-row items-center">
             <div className="absolute ml-[20px]"><BiHomeAlt2 className="size-[20px]"/></div>
           <div>
@@ -505,9 +523,82 @@ function Checkout() {
             </div>
           </div>
 
+          
+
 
           <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Proceed</button></div>
+
+       
+
+         {/* Order overlay */}
+
+     <div className="flex justify-center items-center h-scree">
+      {/* Open Overlay Button */}
+      {/* <Button variant="contained" onClick={() => setOpen(true)}>
+        Open Overlay
+      </Button> */}
+
+      {/* Overlay */}
+      {open && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+            <h1 className='font-bold text-[22px] mb-2'>Payment Successful</h1>
+            <p className="text-[15px] mb-4">Your payment for Order ID #0988 has been confirmed.
+Please keep your device close as the delivery rider
+would request your Order ID for confirmation</p>
+            <button 
+              onClick={() => setOpen(false)} 
+              variant="contained" 
+              className="rounded-full px-20 py-2 border border-[#31603D] text-[white] bg-[#31603D]"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Reviews overlay */}
+
+    <div className="flex justify-center items-center h-scree">
+      {/* Open Overlay Button */}
+      {/* <Button variant="contained" onClick={() => setOpen2(true)}>
+        Open Overlay
+      </Button> */}
+
+      {/* Overlay */}
+      {open2 && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+            <div className='flex justify-between justify-center items-center'>
+              <p>Reviews</p>
+              <div className='cursor-pointer'><LiaTimesSolid className='size-[25px]'/></div>
+            </div>
+            <hr className='mt-2'></hr>
+            <Rating
+              value={rating}
+              onChange={(event, newValue) => setRating(newValue)}
+              sx={{ fontSize: "2rem", marginTop:'10px' }} 
+            />
+            <div className='mt-2'>
+              <textarea className='border w-full px-2 focus:outline-none pb-[100px]' placeholder='How was your experience?'>
+
+              </textarea>
+            </div>
+            <button 
+              onClick={() => setOpen2(false)} 
+              variant="contained" 
+              className="rounded-full px-24 mt-2 py-2 border border-[#31603D] text-[white] bg-[#31603D]"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+
           
+    
           </div>
 
 
@@ -543,10 +634,11 @@ function Checkout() {
                     </div>
                     </div>
 
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between">
                       <div>VAT</div>
                       <div className="font-bold">NGN 32500</div>
-                    </div>
+                    </div> */}
+
                     <hr></hr>
                     <div className="flex justify-between">
                       <div>Total</div>
@@ -560,10 +652,10 @@ function Checkout() {
                     <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={makePayment}>Make Payment</button></div>
                     
                     </div>
+
           
         </>)}
       </div>
-
 
       </div>
     </div>
