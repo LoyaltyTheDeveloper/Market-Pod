@@ -8,7 +8,7 @@ import Footer from '../Components/Footer.jsx';
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
 import { AuthContext, setProfileData } from '../context/Context.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FiPhone } from "react-icons/fi";
 import {Link} from "react-router-dom";
 import { GrLocation } from "react-icons/gr";
@@ -16,12 +16,24 @@ import { LiaKeySolid } from "react-icons/lia";
 
 
 function UserDetails() {
+  const location = useLocation();
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { state , dispatch} = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    if (location.state?.showOrders) {
+      setActiveButton('button2');
+    }
+  }, [location]);
+
+
+
+
+
   const [formOne, setFormOne] = useState({
     first_name: "",
     last_name: "",
@@ -719,14 +731,6 @@ useEffect(() => {
     )}
   </div>
 )}
-
-
-
-
-
-             
-                
-
             </div>
           </div>}
         </div>

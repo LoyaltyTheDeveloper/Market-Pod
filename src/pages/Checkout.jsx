@@ -220,6 +220,10 @@ function Checkout() {
           });
       };
 
+      const goToDashboard = () => {
+        navigate("/dashboard", { state: { showOrders: true } });
+      }
+
       const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'Full name' : state.user.last_name) : "Full name"} ${state.user.first_name ?? ''}`;
       const displayPhone = `${state.user.phone_number ? (state.user.phone_number == '' ? 'Phone Number' : state.user.phone_number) : "Phone Number"} ${state.user.phone_number2 ?? ''}`;
 
@@ -547,9 +551,9 @@ function Checkout() {
 Please keep your device close as the delivery rider
 would request your Order ID for confirmation</p>
             <button 
-              onClick={() => setOpen(false)} 
+              onClick={goToDashboard} 
               variant="contained" 
-              className="rounded-full px-20 py-2 border border-[#31603D] text-[white] bg-[#31603D]"
+              className="rounded-full px-20 py-2 border border-[#31603D] text-[white] bg-[#31603D] hover:bg-green-700"
             >
               Continue
             </button>
@@ -569,7 +573,7 @@ would request your Order ID for confirmation</p>
       {/* Overlay */}
       {open2 && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center w- 80 w-[350px]">
             <div className='flex justify-between justify-center items-center'>
               <p>Reviews</p>
               <div className='cursor-pointer'><LiaTimesSolid className='size-[25px]'/></div>
@@ -578,7 +582,7 @@ would request your Order ID for confirmation</p>
             <Rating
               value={rating}
               onChange={(event, newValue) => setRating(newValue)}
-              sx={{ fontSize: "2rem", marginTop:'10px' }} 
+              sx={{ fontSize: "2rem", marginTop:'10px'}} 
             />
             <div className='mt-2'>
               <textarea className='border w-full px-2 focus:outline-none pb-[100px]' placeholder='How was your experience?'>

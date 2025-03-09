@@ -170,10 +170,10 @@ function ViewStore() {
         const timer = setTimeout(() => {
           handleClose(); 
         }, 3000);
-    
         return () => clearTimeout(timer); 
       }
     }, [isDialog]);
+
 
     useEffect(() => {
       if (isDialog2) {
@@ -271,7 +271,7 @@ function ViewStore() {
           // boxShadow: "none", 
           top: "5%", 
           right: "2%", 
-          width: { xs: "55%", sm: "55%", md: "60%", lg: "30%" }, 
+          width: { xs: "60%", sm: "60%", md: "60%", lg: "30%" }, 
           height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
           maxHeight: "vh", 
           overflow: "auto",
@@ -290,8 +290,8 @@ function ViewStore() {
           </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-           <div className="flex flex-row gap-x-[20px] lg:justify-center">
-            <div className=""><img className="size-[50px] lg:size-[90px]" src={modalProduct?.image}/></div>
+           <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
+            <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct?.image}/></div>
             <div>
               <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-semibold'>{modalProduct?.name}</p>
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct?.subtitle}</p>
@@ -302,9 +302,17 @@ function ViewStore() {
               </div>
             </div>
            </div>
+
+           <div className='flex gap-x-2 items-center lg:hidden md:hidden'>
+           <div className=""><img className="size-[60px w-20 h-20 object-contain" src={modalProduct?.image}/></div>
+           <div className='flex flex-col'>
+           <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct?.name}</p>
+           <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct?.subtitle}</p>
+           </div>
+           </div>
+
           </DialogContentText>
         </DialogContent>
-    
       </Dialog>
 
 
@@ -320,7 +328,7 @@ function ViewStore() {
           // boxShadow: "none", 
           top: "5%", 
           right: "2%", 
-          width: { xs: "55%", sm: "55%", md: "60%", lg: "30%" }, 
+          width: { xs: "60%", sm: "60%", md: "60%", lg: "30%" }, 
           height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
           maxHeight: "vh", 
           overflow: "auto", 
@@ -339,8 +347,8 @@ function ViewStore() {
           </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-           <div className="flex flex-row gap-x-[20px] lg:justify-center">
-            <div className=""><img className="size-[50px] lg:size-[90px]" src={modalProduct2?.image}/></div>
+           <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
+            <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct2?.image}/></div>
             <div>
               <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-semibold'>{modalProduct2?.name}</p>
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct2?.subtitle}</p>
@@ -351,6 +359,15 @@ function ViewStore() {
               </div>
             </div>
            </div>
+
+           <div className='flex gap-x-2 items-center lg:hidden md:hidden'>
+           <div className=""><img className="size-[60px w-20 h-20 object-contain" src={modalProduct2?.image}/></div>
+           <div className='flex flex-col'>
+           <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct2?.name}</p>
+           <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct2?.subtitle}</p>
+           </div>
+           </div>
+
           </DialogContentText>
         </DialogContent>
     
@@ -582,7 +599,7 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
-              <div className="w-[120px] truncate font-bitter lg:w-[150px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
+              <div className="w-[180px] truncat font-bitter lg:w-[150 px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
                 {product.name}
               </div>
               <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>

@@ -15,6 +15,9 @@ export const CartContext = createContext();
       }, [cartOne]);
 
       const addToCartOne = (productOne) => {
+
+        
+
         let isItemAdded = true;
         setCartOne((prevCart) => {
 

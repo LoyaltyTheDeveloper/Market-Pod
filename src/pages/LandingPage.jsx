@@ -276,8 +276,8 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
         <div className="flex items-center gap-x-[20px] absolute right-[30px]">
          <button className="text-[#31603D]" onClick ={() => navigate(`/site/getStores/${market.id}/${market.name}/${market.addr}`)}> View all</button>
-        <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[30px]"/></div>
-        <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[30px]"/></div>
+        <div className="hidden lg:flex"><MdOutlineArrowBackIos className="text-[grey] size-[20px]"/></div>
+        <div className="hidden lg:flex"><MdOutlineArrowForwardIos className="size-[20px]"/></div>
         </div>
         </div>
          
