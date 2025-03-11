@@ -53,6 +53,7 @@ function Checkout() {
        const [open, setOpen] = useState(false);
        const [open2, setOpen2] = useState(false);
        const [rating, setRating] = useState(0);
+       const [orderData, setOrderdata] = useState(null);
 
 
         const handleCityChange = (e) => {
@@ -64,15 +65,16 @@ function Checkout() {
           setCity("");
         };
 
-        const handleButtonClick = () => {
-          if(!name || !phone || !address || !selectedLocation){
-            return toast.error("Please fill in all details.")
-          }
-          else{
-            setShowThirdDiv(!showThirdDiv);
-            scroll();
-          } 
-          };
+        // const createOrder = () => {
+        //   if(!name || !phone || !address || !selectedLocation){
+        //     return toast.error("Please fill in all details.")
+        //   }
+        //   else{
+        //     orderFunction();
+        //     setShowThirdDiv(!showThirdDiv);
+        //     scroll();
+        //   } 
+        //   };
 
           const scroll = () => {
             window.scrollTo({ top: 0, behavior: "smooth" })
@@ -184,15 +186,14 @@ function Checkout() {
           });
       };
 
-      const order ={
+      const order = {
          location_id:selectedLocation,
          address:address,
-         city:city,
-         state:states
+         full_name: name,
+         phone_number: phone
       }
 
-      const makePayment = () => {
-        console.log(order)
+      const orderFunction = () => {
         setIsLoading(true);
         fetch('https://apis.emarketpod.com/user/order/create', {
           method: "POST",
@@ -207,7 +208,8 @@ function Checkout() {
           if (data.status === true) {
             toast.success(data.message);
             setIsLoading(false);
-            navigate('/dashboard');
+            setShowThirdDiv(!showThirdDiv);
+            setOrderdata(data.data);
           }
           else {
             toast.error(data.message);
@@ -219,6 +221,20 @@ function Checkout() {
             console.error(error);
           });
       };
+
+      const createOrder = () => {
+        if(!name || !phone || !address || !selectedLocation){
+          return toast.error("Please fill in all details.")
+        }
+        else{
+          orderFunction();
+          // setOpen(true);
+          // setShowThirdDiv(!showThirdDiv);
+          scroll();
+        } 
+        };
+
+      
 
       const goToDashboard = () => {
         navigate("/dashboard", { state: { showOrders: true } });
@@ -233,11 +249,43 @@ function Checkout() {
         return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       };
 
+      const orderValue = products.reduce((acc, product) => {
+        const price = Number(product.price) || 0;
+        const quantity = Number(product.quantity) || 0;
+        return acc + price * quantity;
+      }, 0);
+
   return (<>
   <Navbar/>
 
     <div className="pt-[30px pb-[50px] min-h-scree">
      
+    <div className="flex justify-center items-center h-scree">
+  
+  <Button variant="contained" onClick={() => setOpen(true)}>
+    Open Overlay
+  </Button>
+
+ 
+  {open && (
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+        <h1 className='font-bold text-[22px] mb-2'>Payment Successful</h1>
+        <p className="text-[15px] mb-4">Your payment for Order ID  has been confirmed.
+Please keep your device close as the delivery rider
+would request your Order ID for confirmation</p>
+        <button 
+          onClick={goToDashboard} 
+          variant="contained" 
+          className="rounded-full px-20 py-2 border border-[#31603D] text-[white] bg-[#31603D] hover:bg-green-700"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+
 <div className="flex flex-col lg:flex-row items-center pt-[30px">
 
  <div className="flex flex-col pt-[50px lg:mt-[700px pb-[30px] bg-[#F9F9F9] w-full lg:min-h-screen overflow-y-auto max -h-72 h-[600px h-[500px no-scrollbar">
@@ -530,24 +578,24 @@ function Checkout() {
           
 
 
-          <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={handleButtonClick}>Proceed</button></div>
+          <div className="mt-[25px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px] hover:bg-green-700" onClick={createOrder}>Proceed</button></div>
 
        
 
          {/* Order overlay */}
 
-     <div className="flex justify-center items-center h-scree">
-      {/* Open Overlay Button */}
-      {/* <Button variant="contained" onClick={() => setOpen(true)}>
+     {/* <div className="flex justify-center items-center h-scree">
+  
+      <Button variant="contained" onClick={() => setOpen(true)}>
         Open Overlay
-      </Button> */}
+      </Button>
 
-      {/* Overlay */}
+     
       {open && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
             <h1 className='font-bold text-[22px] mb-2'>Payment Successful</h1>
-            <p className="text-[15px] mb-4">Your payment for Order ID #0988 has been confirmed.
+            <p className="text-[15px] mb-4">Your payment for Order ID  has been confirmed.
 Please keep your device close as the delivery rider
 would request your Order ID for confirmation</p>
             <button 
@@ -560,7 +608,7 @@ would request your Order ID for confirmation</p>
           </div>
         </div>
       )}
-    </div>
+    </div> */}
 
     {/* Reviews overlay */}
 
@@ -620,21 +668,22 @@ would request your Order ID for confirmation</p>
                      <div className="text-[14px]">Confirm your order details before making payment.</div>
           
           
+                 {orderData && (
                    <div className="flex flex-col gap-y-[30px] mt-[30px]">
                     <div className="flex justify-between">
                       <div>Order Value</div>
-                      <div className="font-bold">NGN 32500</div>
+                      <div className="font-bold">₦ {formatNumber(orderValue)}</div>
                     </div>
                     <div className="flex justify-between">
                       <div>Delivery Fee</div>
-                      <div className="font-bold">NGN 32500</div>
+                      <div className="font-bold">₦ {formatNumber(Number(orderData?.delivery_fee))}</div>
                     </div>
                     
                     <div className="">
                     <div className="absolute right-[8px] lg:right-[80px]"><Link to="/service"><BsQuestionCircle className="size-[21px] text-[#31603D]"/></Link></div>
                     <div className="flex justify-between">
                       <div>Service Charge</div>
-                      <div className="font-bold">NGN 32500</div>
+                      <div className="font-bold">₦ {formatNumber(Number(orderData?.service_charge))}</div>
                     </div>
                     </div>
 
@@ -646,14 +695,41 @@ would request your Order ID for confirmation</p>
                     <hr></hr>
                     <div className="flex justify-between">
                       <div>Total</div>
-                      <div className="font-bold">NGN 32500</div>
+                      <div className="font-bold">₦ {formatNumber(Number(orderData?.total_pay))}</div>
                     </div>
                     <hr></hr>
-                   </div>
+                   </div>)}
           
                     </div>
                     
-                    <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px]" onClick={makePayment}>Make Payment</button></div>
+                    <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px] hover:bg-green-700">Make Payment</button></div>
+
+                    {/* <div className="flex justify-center items-center h-scree">
+  
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        Open Overlay
+      </Button>
+
+     
+      {open && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+            <h1 className='font-bold text-[22px] mb-2'>Payment Successful</h1>
+            <p className="text-[15px] mb-4">Your payment for Order ID  has been confirmed.
+Please keep your device close as the delivery rider
+would request your Order ID for confirmation</p>
+            <button 
+              onClick={goToDashboard} 
+              variant="contained" 
+              className="rounded-full px-20 py-2 border border-[#31603D] text-[white] bg-[#31603D] hover:bg-green-700"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
+    </div> */}
+                   
                     
                     </div>
 

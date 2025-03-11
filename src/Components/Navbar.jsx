@@ -586,9 +586,13 @@ function Navbar() {
   const formatNumber = (num) => {
     return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+ 
 
-  
-
+  const subtotal = products.reduce((acc, product) => {
+    const price = Number(product.price) || 0;
+    const quantity = Number(product.quantity) || 0;
+    return acc + price * quantity;
+  }, 0);
 
   return (<>
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
@@ -956,6 +960,7 @@ function Navbar() {
                               <div className="text-[18px]">{product.quantity}</div>
                               <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px] cursor-pointer" /></div>
                             </div>
+                            {/* <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div> */}
                             <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">₦ {formatNumber(Number(product.price * product.quantity))}</div>
                           </div>
                         </div>
@@ -1034,16 +1039,16 @@ function Navbar() {
         {/* Cart Footer */}
 
 {state.token &&<div>
-       {products.length > 0 && <div className="p- bg-white h-[2 pb-[100px] pt-[20px] flex flex-col justify-center items-center">
+       {products.length > 0 && <div className="p- bg-white h-[2 pb-[90px] pt-[20px] flex flex-col justify-center items-center gap-y-4">
         <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">₦ {formatNumber(subtotal)}</span></div>
         </div>}
         </div>}
 
 {!state.token && <div>
-        {cartOne.length > 0 && <div className="p- bg-white h-[25% pb-[100px] pt-[20px] flex flex-col justify-center items-center">
+        {cartOne.length > 0 && <div className="p- bg-white h-[25% pb-[90px] pt-[20px] flex flex-col justify-center items-center gap-y-4">
         <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
+        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">₦ {formatNumber(subtotal)}</span></div>
         </div>}
         </div>}
       </div>

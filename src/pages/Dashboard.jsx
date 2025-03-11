@@ -275,6 +275,9 @@ useEffect(() => {
         });
     }, []);
 
+    const formatNumber = (num) => {
+      return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
 
 
 
@@ -701,7 +704,7 @@ useEffect(() => {
                     </div>
                     <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
                       <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-end lg:w-[150px]">
-                        NGN {order.product_amount}
+                      ₦ {formatNumber(Number(order.product_amount))}
                       </div>
                       <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
                       <div className="hidden lg:flex"><button className="bg-[#31603D] border border-[#31603D] text-white px-8 rounded-[50px]">View</button></div>
