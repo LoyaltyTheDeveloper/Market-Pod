@@ -588,11 +588,11 @@ function Navbar() {
   };
  
 
-  const subtotal = products.reduce((acc, product) => {
+  const subtotal = Array.isArray(products) ? products.reduce((acc, product) => {
     const price = Number(product.price) || 0;
     const quantity = Number(product.quantity) || 0;
     return acc + price * quantity;
-  }, 0);
+  }, 0) :0;
 
   return (<>
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
