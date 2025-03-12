@@ -268,7 +268,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
       
       <div className="flex items-center">
         <div>
-        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px]">{market.name || <Skeleton width={200} />}</div>
+        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px] font-saeada">{market.name || <Skeleton width={200} />}</div>
         <div className="w-[270px] lg:w-[100%] md:w-[100%] text-[14px] lg:text-[16px] flex flex-wrap ml-[20px]">
           {market.addr || <Skeleton width={250} />}
         </div>
@@ -314,7 +314,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 </div>
 
                 <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
-                  <div className="text-[19px] font-bold whitespace-nowrap truncate">
+                  <div className="text-[19px] font-bold whitespace-nowrap truncate font-saeada">
                     {store.name || <Skeleton width={200} />}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
@@ -469,7 +469,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
         <div className="mt-[20px] mb-[60px] flex justify-center">
         <div className="flex flex-col lg:flex-row px-[15px]">
           <div className="bg-[#31603D] rounded-tl-[5px] rounded-tr-[5px] lg:rounded-tr-[0px] lg:rounded-tl-[10px] lg:rounded-bl-[10px] text-[white] lg:px-[80px] flex flex-col justify-center text-center p-6">
-          <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold">There's more to explore</div>
+          <div className="text-[21px] lg:text-[40px] whitespace-nowap font-bold font-saeada">There's more to explore</div>
           <div className="text-[12px]">There are stores {totalStores} (and counting) available in</div>
          
 

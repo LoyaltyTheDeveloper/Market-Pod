@@ -44,8 +44,8 @@ function StoreList() {
            <div className="flex items-center">
           <div className="flex items-center mb-[40px] mt-[40px]">
         <div className="flex flex-col absolute left-0">
-        <div className="font-bold text-[25px] text-[21px] lg:text-[30px] ml-[20px]">{marketName}</div>
-        <div className="w-[270px] lg:w-[100%] md:w-[100%] flex flex-wrap ml-[20px] text-[14px] lg:text-[16px]">
+        <div className="font-bold text-[25px] text-[21px] lg:text-[30px] ml-[20px] font-saeada">{marketName}</div>
+        <div className="w-[270px]lg:w-[100%] md:w-[100%] flex flex-wrap ml-[20px] text-[14px] lg:text-[16px]">
           {marketAddr}
         </div>
 
@@ -104,7 +104,7 @@ function StoreList() {
                 </div>
 
                 <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
-                  <div className="text-[19px] font-bold whitespace-nowrap">
+                  <div className="text-[19px] font-bold whitespace-nowrap font-saeada">
                     {store.name}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">

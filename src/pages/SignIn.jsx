@@ -137,7 +137,7 @@ function SignIn() {
     <div className="flex justify-center">
         <img src={pod} onClick={() => navigate("/")} className="cursor-pointer"/>
     </div>
-        <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back !</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center font-saeada">Welcome Back !</h2>
         <h3 className="mb-6 text-center">We are glad to have you back with us</h3>
         <form>
           <div className="mb-4 items-center flex flex-row">

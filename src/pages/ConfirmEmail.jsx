@@ -164,7 +164,7 @@ function ConfirmEmail() {
     <div className="flex justify-center">
         <img src={pod} onClick={() => navigate("/")} className="cursor-pointer"/>
     </div>
-        <h2 className="text-2xl font-bold mb-6 text-center lg:text-[35px]">Email Confirmation</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center lg:text-[35px] font-saeada">Email Confirmation</h2>
         <h3 className="mb-6 text-center">We sent a one time password to your email address, please enter it into the field below.</h3>
         <form>
         <div className="flex space-x-1 lg:space-x-5 justify-center mb-[10px]">

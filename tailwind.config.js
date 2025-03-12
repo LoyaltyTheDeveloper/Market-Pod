@@ -19,6 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
+        saeada: ['LT Saeada', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
         lobster: ['Lobster', 'cursive'],
         opensans: ['Open Sans', 'sans-serif'],

@@ -386,7 +386,7 @@ function ViewStore() {
           </div>
           <div className="w-[270px] flex flex-col gap-y-[5px]">
             <div>
-              <div className="font-semibold text-[21px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px] font-bitter">{store.name}</div>
+              <div className="font-semibold text-[21px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px] font-saeada">{store.name}</div>
               {store.isOpen === true && <div className="text-[#31603D] font-sans text-[14px]">Opened</div>}
               {store.isOpen !== true && <div className="text-[#D23D23] font-sans text-[14px]">Closed</div>}
               <div className="text-[15px] font-sans">{store.status}</div>
@@ -402,7 +402,7 @@ function ViewStore() {
 
         <div className="hidden lg:flex lg:pl-[5%]">
           <div className="flex flex-col gap-[10px] lg:mb-[500px">
-            <div className="font-semibold font-bitter text-[20px]">Browse Categories</div>
+            <div className="font-semibold font-saeada text-[20px]">Browse Categories</div>
 
             {/* {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
@@ -542,7 +542,7 @@ function ViewStore() {
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
-          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0 font-bitter lg:mt-4">{category}</h2>
+          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0 font-saeada lg:mt-4">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
@@ -599,7 +599,7 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
-              <div className="w-[180px] truncat font-bitter lg:w-[150 px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
+              <div className="w-[180px] truncat font-saeada lg:w-[150 px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
                 {product.name}
               </div>
               <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>
@@ -633,7 +633,7 @@ function ViewStore() {
         
         <div
         key={category} ref={(el) => (refs.current[category] = el)} className="relative mb-4">
-          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0 font-bitter lg:mt-4">{category}</h2>
+          <h2 className="text-[22px] lg:text-[25px] font-bold px-2 lg:px-0 font-saeada lg:mt-4">{category}</h2>
           <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
             {products
               .filter(product => product.category_name === category)
@@ -684,7 +684,7 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
-              <div className="w-[180px] lg:w-[150px text-[16px] lg:text-[18px] font-semibold h-[40px] font-bitter">
+              <div className="w-[180px] lg:w-[150px text-[16px] lg:text-[18px] font-semibold h-[40px] font-saeada">
                 {product.name}
               </div>
               <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>

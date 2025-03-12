@@ -107,7 +107,7 @@ function SignUp() {
     <div className="flex justify-center">
         <img src={pod} onClick={() => navigate("/")} className="cursor-pointer"/>
     </div>
-        <h2 className="text-2xl font-bold mb-6 text-center">Create An Account !</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center font-saeada">Create An Account !</h2>
         <h3 className="mb-6 text-center">Welcome to the MarketPod Family.</h3>
         <form>
           <div className="mb-4 items-center flex flex-row">

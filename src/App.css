@@ -1,3 +1,35 @@
+@font-face {
+  font-family: "LT Saeada";
+  src: url("/fonts/LT-Saeada-Regular.woff2") format("woff2"),
+       url("/fonts/LT-Saeada-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LT Saeada";
+  src: url("/fonts/LT-Saeada-Bold.woff2") format("woff2"),
+       url("/fonts/LT-Saeada-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LT Saeada";
+  src: url("/fonts/LT-Saeada-Italic.woff2") format("woff2"),
+       url("/fonts/LT-Saeada-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "LT Saeada";
+  src: url("/fonts/LT-Saeada-Light.woff2") format("woff2"),
+       url("/fonts/LT-Saeada-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
 
 /* #root {
   max-width: 1280px;

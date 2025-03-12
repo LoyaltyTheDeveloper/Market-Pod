@@ -594,6 +594,12 @@ function Navbar() {
     return acc + price * quantity;
   }, 0) :0;
 
+  const subtotal2 = Array.isArray(cartOne) ? cartOne.reduce((acc, product) => {
+    const price = Number(product.price) || 0;
+    const quantity = Number(product.quantity) || 0;
+    return acc + price * quantity;
+  }, 0) :0;
+
   return (<>
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
       <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px]">
@@ -1048,7 +1054,7 @@ function Navbar() {
 {!state.token && <div>
         {cartOne.length > 0 && <div className="p- bg-white h-[25% pb-[90px] pt-[20px] flex flex-col justify-center items-center gap-y-4">
         <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">₦ {formatNumber(subtotal)}</span></div>
+        <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">₦ {formatNumber(subtotal2)}</span></div>
         </div>}
         </div>}
       </div>

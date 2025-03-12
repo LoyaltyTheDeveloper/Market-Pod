@@ -249,11 +249,11 @@ function Checkout() {
         return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       };
 
-      const orderValue = products.reduce((acc, product) => {
+      const orderValue = Array.isArray(products) ? products.reduce((acc, product) => {
         const price = Number(product.price) || 0;
         const quantity = Number(product.quantity) || 0;
         return acc + price * quantity;
-      }, 0);
+      }, 0) :0;
 
   return (<>
   <Navbar/>
@@ -294,7 +294,7 @@ would request your Order ID for confirmation</p>
 
 
     <div className="mb-[20px] mt-[120px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[0px] justify-between">
-      <div className="font-bold text-[25px]">Checkout</div>
+      <div className="font-bold text-[25px] font-saeada">Checkout</div>
       <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
         <div>Continue shopping</div>
@@ -431,7 +431,7 @@ would request your Order ID for confirmation</p>
         <div className="flex flex-col justify-center items-center my20 lg:py- 16">
           
 <div className="flex flex-col gap-y-[10px] mt-[40px] lg:mt-[0px]">
-          <div className="text-[25px] font-bold">Delivery Details</div>
+          <div className="text-[25px] font-bold font-saeada">Delivery Details</div>
            <div className="text-[14px]">Complete your order by providing your delivery address</div>
 
 
@@ -664,7 +664,7 @@ would request your Order ID for confirmation</p>
           <div className="flex flex-col justify-center items-center py- 20">
           
           <div className="flex flex-col gap-y-[10px] mt-[40px] lg:mt-[0px]">
-                    <div className="text-[25px] font-bold">Order Details</div>
+                    <div className="text-[25px] font-bold font-saeada">Order Details</div>
                      <div className="text-[14px]">Confirm your order details before making payment.</div>
           
           

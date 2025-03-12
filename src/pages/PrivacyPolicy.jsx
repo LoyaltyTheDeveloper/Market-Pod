@@ -8,7 +8,7 @@ function PrivacyPolicy() {
   <div className="min-h-screen bg-[#F9F9F9]">
     <div className="pt-[120px] px-[5%] h-auto pb-[100px]">
     <div className="bg-[white] mt-[30px] flex flex-col gap-y-[20px] p-[30px] rounded-[10px]">
-      <div className="font-bold text-2xl font-bitter">Privacy Policy</div>
+      <div className="font-bold text-2xl font-saeada">Privacy Policy</div>
       <div className="font-sans">Welcome to Marketpod! Your privacy is important to us, and we’re committed to safeguarding your personal information. This Privacy Policy explains how we gather, use, share, and protect your information. Please review it carefully.</div>
 
       <div className="font-bold font-sans">1. Information We Collect</div>

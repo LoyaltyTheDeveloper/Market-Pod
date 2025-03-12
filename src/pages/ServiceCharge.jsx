@@ -8,7 +8,7 @@ function ServiceCharge() {
   <div className="min-h-screen bg-[#F9F9F9]">
     <div className="pt-[120px] px-[5%] h-auto pb-[100px]">
     <div className="bg-[white] mt-[30px] flex flex-col gap-y-[20px] p-[30px] rounded-[10px]">
-      <div className="font-bold text-2xl font-bitter">Service Charge</div>
+      <div className="font-bold text-2xl font-saeada">Service Charge</div>
 
       <div className="flex flex-col font-sans">
       <div className="font-bold">What is a Service Charge and Why Do We Charge It?</div>
