@@ -293,7 +293,7 @@ useEffect(() => {
     ></l-trio>    </div>}
     <div className="pt-[80px] min-h-screen">
       <div className="flex flex-col lg:flex-row">
-        <div className="flex flex-col pt-[50px] pb-[30px bg-[#F9F9F9] w-full">
+        <div className="flex flex-col pt-[50px] pb-[30px bg-[#F9F9F9] lg:w-[60%]">
 
           <div className="flex flex-col gap-y-[20px] pb-[30px]">
             <div className="px-4">
@@ -662,7 +662,7 @@ useEffect(() => {
                       {!isLoading && (
  
  
- <div className="lg:mx-[-30px]">
+ <div className="lg:mx-[-30px">
    <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
     {Array.isArray(orders) && orders.length > 0 ? (
       <>
@@ -703,7 +703,7 @@ useEffect(() => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
-                      <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-end lg:w-[150px]">
+                      <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-end lg:w-[150px lg:px-8">
                       ₦ {formatNumber(Number(order.product_amount))}
                       </div>
                       <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
