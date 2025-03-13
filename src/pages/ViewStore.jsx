@@ -293,7 +293,7 @@ function ViewStore() {
            <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
             <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct?.image}/></div>
             <div>
-              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-semibold'>{modalProduct?.name}</p>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-saeada font-semibold'>{modalProduct?.name}</p>
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
@@ -350,7 +350,7 @@ function ViewStore() {
            <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
             <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct2?.image}/></div>
             <div>
-              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-semibold'>{modalProduct2?.name}</p>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-saeada font-semibold'>{modalProduct2?.name}</p>
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct2?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice2}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
@@ -386,7 +386,7 @@ function ViewStore() {
           </div>
           <div className="w-[270px] flex flex-col gap-y-[5px]">
             <div>
-              <div className="font-semibold text-[21px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px] font-saeada">{store.name}</div>
+              <div className="text-[21px] whitespace-nowrap overflow-y-hidden no-scrollbar w-[250px] font-saeada font-semibold">{store.name}</div>
               {store.isOpen === true && <div className="text-[#31603D] font-sans text-[14px]">Opened</div>}
               {store.isOpen !== true && <div className="text-[#D23D23] font-sans text-[14px]">Closed</div>}
               <div className="text-[15px] font-sans">{store.status}</div>
@@ -402,7 +402,7 @@ function ViewStore() {
 
         <div className="hidden lg:flex lg:pl-[5%]">
           <div className="flex flex-col gap-[10px] lg:mb-[500px">
-            <div className="font-semibold font-saeada text-[20px]">Browse Categories</div>
+            <div className="font-saeada font-semibold text-[19px]">Browse Categories</div>
 
             {/* {store.categories && store.categories.map((category) => (
               <div key={category.id} onClick={() => scroll(category)} className="text-[15px]">
@@ -599,7 +599,7 @@ function ViewStore() {
 
             </div>
             <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
-              <div className="w-[180px] truncat font-saeada lg:w-[150 px] text-[16px] lg:text-[18px] font-semibold h-[40px]">
+              <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
                 {product.name}
               </div>
               <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>

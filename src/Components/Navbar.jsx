@@ -619,7 +619,7 @@ function Navbar() {
             <div className="h-[50px] ml-[25px] hidden border-l border-gray-300 lg:flex justify-between"></div>
 
             <div onClick={openModal} className="ml-[30px] hidden lg:flex flex-col cursor-pointer">
-              <div className="font-bold text-[13px]">Location</div>
+              <div className="font-saeada font-semibold text-[13px]">Location</div>
               <div className="flex flex-row items-center gap-[7px]">
                 <div><GrLocation className="size-[16px]" /></div>
                 <div className="text-[13px] text-[#31603D] font-bold">Ilorin, Kwara State</div>
@@ -642,7 +642,7 @@ function Navbar() {
               </div>
 
               <div className="hidden lg:flex flex-col">
-                <div className="font-bold text-[13px]">Account</div>
+                <div className="font-saeada font-semibold text-[13px]">Account</div>
                 <div className="flex flex-row items-center gap-[7px]">
                   <div><MdPersonOutline className="size-[20px]" /></div>
                   {
@@ -663,7 +663,7 @@ function Navbar() {
               )}
 
               {state.token && <div className="flex flex-col items-center hidden lg:flex flex-col">
-                <div className="font-bold text-[13px]">Orders</div>
+                <div className="font-saeada font-semibold text-[13px]">Orders</div>
                 <div><PiNotepadBold className="size-[20px]" /></div>
               </div>}
 
@@ -671,7 +671,7 @@ function Navbar() {
 
              {state.token && <div onClick={toggleDrawer(true)} className="hidden cursor-pointer lg:flex flex-col">
                 {products.length > 0 && <div className="border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[249px] top-[45px]"></div>}
-                <div className="font-bold text-[13px]">Cart</div>
+                <div className="font-saeada font-semibold text-[13px]">Cart</div>
                 <div className="flex flex-row items-center gap-[10px]">
                   <div className="w-[20px"><GrBasket className="size-[20px]" /></div>
                   <div className="fixe absolut w-[55px] right-[8% text-[13px] text-[#31603D] font-bold whitespace-nowrap">{(products.length) || 0} Item(s)</div>
@@ -957,7 +957,7 @@ function Navbar() {
                       <div className="flex flex-row gap-x-[9px]">
                         <div><img src={product.image} className="size-[90px w-24 h-20" /></div>
                         <div className="flex flex-col gap-[10px]">
-                          <div>{product.name} - {product.weight}</div>
+                          <div className='font-saeada font-semibold'>{product.name} - {product.weight}</div>
                           <div className="text-[grey] text-[15px]">Subtitle</div>
                           <div className="flex items-center gap-[15px]">
                             <div onClick={() => deleteProduct(product)} className="cursor-pointer bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
@@ -1007,7 +1007,7 @@ function Navbar() {
                         <div className="flex flex-row gap-x-[9px]">
                           <div><img src={product.image} className="size-[100px w-24 h-20 object-cove"/></div>
                           <div className="flex flex-col gap-[10px]">
-                            <div>{product.name} - {product.weight}</div>
+                            <div className='font-saeada font-semibold'>{product.name} - {product.weight}</div>
                             <div className="text-[grey] text-[15px]">Subtitle</div>
                             <div className="flex items-center gap-[15px]">
                               <div onClick={() => removeFromCart(product.id)} className="cursor-pointer bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>

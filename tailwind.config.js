@@ -39,6 +39,12 @@ export default {
         source: ['Source Code Pro', 'monospace'],
         bitter: ['Bitter', 'serif'],
       },
+      fontWeight: {
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+      },
     },
   },
   plugins: [tailwindcssAnimated],

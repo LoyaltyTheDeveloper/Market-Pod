@@ -201,7 +201,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
               {selectedDropdown.categories.map((category, index) => (
                 <div key={category.id} className="flex items-start gap-1 lg:gap-x-[50px]">
                   <div className="flex-1">
-                    <h3 className="text-[18px] font-semibold mb-4 whitespace-nowrap">{category.category}</h3>
+                    <h3 className="text-[18px] font-saeada font-semibold mb-4 whitespace-nowrap">{category.category}</h3>
 
                     {/* Display items in two columns */}
                    
@@ -314,7 +314,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 </div>
 
                 <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
-                  <div className="text-[19px] font-bold whitespace-nowrap truncate font-saeada">
+                  <div className="text-[19px] font-saeada font-semibold whitespace-nowrap truncate">
                     {store.name || <Skeleton width={200} />}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
