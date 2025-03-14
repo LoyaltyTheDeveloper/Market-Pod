@@ -6,7 +6,7 @@ import pod from '../assets/Podlogo.svg';
 import Footer from '../Components/Footer';
 import { BiHomeAlt2 } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState, useContext, } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -87,7 +87,7 @@ function ViewStore() {
   trio.register()
 
    const [isLoading, setIsLoading] = useState(false);
-   const { state } = useContext(AuthContext);
+   const { state, dispatch } = useContext(AuthContext);
     const { storeId } = useParams();
     const { marketId } = useParams();
     const [store, setStore] = useState(null);
@@ -150,7 +150,15 @@ function ViewStore() {
         },
         body: JSON.stringify({ product_id: product.id }),
       })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 403) {
+          toast.error("Your session has expired");
+          localStorage.removeItem('user');
+          navigate('/signin');
+          dispatch({ type: 'LOG_OUT', payload: { token: null } })
+        } 
+        return response.json()}
+      )
         .then((data) => {
           setIsLoading(false);
           setModalProduct(product);
@@ -555,7 +563,7 @@ function ViewStore() {
           >
             <div className="flex justify-center px-[50px]">
               <img
-                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })}
+                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })}
                 src={product.image}
                 className="w-24 h-24 w- [100px] h- [100px] object-cove object-contain flex justify-center bg-[white] p-4"
               />
@@ -598,7 +606,7 @@ function ViewStore() {
 
 
             </div>
-            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
+            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
               <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
                 {product.name}
               </div>
@@ -646,7 +654,7 @@ function ViewStore() {
           >
             <div className="flex justify-center px-[50px]">
               <img
-                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })}
+                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })}
                 src={product.image}
                 className="w-24 h-24 object-cove object-contain flex justify-center bg-[white] p-4"
               />
@@ -683,7 +691,7 @@ function ViewStore() {
 
 
             </div>
-            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
               <div className="w-[180px] lg:w-[150px text-[16px] lg:text-[18px] font-semibold h-[40px] font-saeada">
                 {product.name}
               </div>

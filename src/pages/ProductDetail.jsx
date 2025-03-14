@@ -27,18 +27,16 @@ import { GrBasket } from "react-icons/gr";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props}
   timeout={{enter: 1500, exit:1000 }}
-  
-  
   />;
 });
 
-
 function ProductDetail() {
   const location = useLocation();
+  // useAuthRequest("url","POST",{carId:3})
   const isOpen = location.state?.isOpen;
-
- const [isLoading, setIsLoading] = useState(false);
-   const { state } = useContext(AuthContext);
+  const productStore = location.state?.productStore;
+   const [isLoading, setIsLoading] = useState(false);
+   const { state, dispatch } = useContext(AuthContext);
    const navigate = useNavigate();
    const { addToCartOne } = useContext(CartContext);
    const [isDialog, setIsDialog] = React.useState(false);
@@ -61,7 +59,6 @@ function ProductDetail() {
   const handleClose2 = () => {
     setIsDialog2(false);
   };
-
 
  const addToCart = (id) => {
   if (!isOpen) {
@@ -108,7 +105,16 @@ function ProductDetail() {
           },
           body: JSON.stringify({ product_id: product.data.id }),
         })
-        .then((response) => response.json())
+        .then((response) => 
+        {
+                if (response.status === 403) {
+                  toast.error("Your session has expired");
+                  localStorage.removeItem('user');
+                  navigate('/signin');
+                  dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                } 
+                return response.json()}
+        )
           .then((data) => {
             setIsLoading(false);
             // handleOpen();
@@ -337,7 +343,7 @@ function ProductDetail() {
 {product && (<>
     <div className="px-[20px] mt-[20px] mb-[50px]">
     <div className="flex gap-x-[10px] text-[15px]">
-        <div className='cursor-pointer'>Happiness Goods & Stores</div>
+        <div className='cursor-pointer' onClick={() => navigate(-1)}>{productStore}</div>
         /
         <div className="font-semibold">{product.data.category_name}</div>
     </div>
@@ -350,7 +356,7 @@ function ProductDetail() {
     <div className="flex flex-col gap-y-[10px] pt-[50px lg:mt-[-500px">
        <div className="font-bold text-[20px] w-[200px] lg:text-[35px] lg:w-[350px] lg:pt-[30px font-saeada font-bold">{product.data.name} - {product.data.weight}kg</div>
        <div>{product.data.subtitle}</div>
-       <div className="lg: h-[40px]">{product.data.description}</div>
+       <div className="lg: h-[40px] w-[90%]">{product.data.description}</div>
     </div>
 
     <div className="flex flex-col gap-[20px] pt-[30px]">

@@ -30,10 +30,6 @@ function UserDetails() {
     }
   }, [location]);
 
-
-
-
-
   const [formOne, setFormOne] = useState({
     first_name: "",
     last_name: "",
@@ -698,7 +694,7 @@ useEffect(() => {
                           <div className="whitespace-nowrap">Awaiting Pick-up</div>
                         </div>
                       </div>
-                      <div className="w-[250px] truncate text-[15px] lg:text-[17px]">
+                      <div className="lg:w-[250px] w-[270px] truncate text-[15px] lg:text-[17px]">
                         {order.location_name}, {order.address}, {order.city}, {order.state}
                       </div>
                     </div>

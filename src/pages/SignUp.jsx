@@ -11,6 +11,7 @@ import { toast } from 'react-hot-toast';
 import { dotPulse } from 'ldrs'
 import { CartContext } from '../context/CartContext.jsx';
 import Gmail from '../Components/GmailIcon.jsx';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function SignUp() {
   dotPulse.register()
@@ -21,8 +22,8 @@ function SignUp() {
   const [isPending, setIsPending] = useState(false);
   const emailData = {userEmail: email};
   const { state } = useContext(AuthContext);
-
  const { clearCart } = useContext(CartContext);
+ const [showPassword, setShowPassword] = useState(false);
 
   const handleSignup = (e, product_id) => {
     setIsPending(true);
@@ -125,7 +126,7 @@ function SignUp() {
           <div className="mb-4 items-center flex flex-row">
           <LiaKeySolid className="absolute ml-[20px] size-[20px]"/>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               value={pswd}
               onChange={(e) => setPassword(e.target.value)}
@@ -133,6 +134,13 @@ function SignUp() {
               placeholder="Enter your password"
               required
             />
+            <button
+                    type="button"
+                    className="absolute ml-[330px]"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                  </button>
           </div>
           {!isPending &&<div className="flex items-center justify-between">
             <button

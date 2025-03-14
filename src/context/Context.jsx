@@ -69,3 +69,34 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+// Function to send requests with the stored token
+// export const useAuthRequest = () => {
+//   const { state } = useContext(AuthContext);
+
+//   const sendRequest = async (url, method = 'GET', body = null) => {
+//     try {
+//       const token = state.token;
+//       if (!token) {
+//         throw new Error('No authentication token found');
+//       }
+
+//       const response = await fetch(url, {
+//         method,
+//         headers: {
+//           'Content-Type': 'application/json',
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: body ? JSON.stringify(body) : null,
+//       });
+
+//       const data = await response.json();
+    
+//       return data;
+//     } catch (error) {
+//        return {status:false,message:"Error sending request"}
+//     }
+//   };
+
+//   return sendRequest;
+// };

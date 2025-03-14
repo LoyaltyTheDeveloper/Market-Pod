@@ -215,10 +215,6 @@ function Navbar() {
   //   }, [refresh]);
   // }
 
- 
-
-
-
   const deleteProduct = (product) => {
     setIsLoading(true);
 
@@ -230,7 +226,16 @@ function Navbar() {
       },
       body: JSON.stringify({ product_id: product.product_id }),
     })
-      .then((response) => response.json())
+      .then((response) => 
+      {
+              if (response.status === 403) {
+                toast.error("Your session has expired");
+                localStorage.removeItem('user');
+                navigate('/signin');
+                dispatch({ type: 'LOG_OUT', payload: { token: null } })
+              } 
+              return response.json()}
+      )
       .then((data) => {
         setIsLoading(false);
         toast.success(data.message);
@@ -253,7 +258,16 @@ function Navbar() {
       },
       body: JSON.stringify({ product_id: productId, quantity: newQuantity }),
     })
-      .then((response) => response.json())
+      .then((response) => 
+      {
+         if (response.status === 403) {
+              toast.error("Your session has expired");
+              localStorage.removeItem('user');
+              navigate('/signin');
+              dispatch({ type: 'LOG_OUT', payload: { token: null } })
+              } 
+              return response.json()}
+            )
       .then((data) => {
         setIsLoading(false);
         toast.success(data.message);
@@ -352,7 +366,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
 
 
   const openModal = () => setIsModal(true);

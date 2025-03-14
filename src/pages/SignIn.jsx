@@ -12,6 +12,7 @@ import { dotPulse } from 'ldrs'
 import Gmail from '../Components/GmailIcon.jsx';
 import { Dialog, DialogContent, Button } from "@mui/material";
 import { trio } from 'ldrs'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 dotPulse.register()
 
@@ -28,6 +29,7 @@ function SignIn() {
   const [isPending, setIsPending] = useState(false);
    const [isLoading, setIsLoading] = useState();
    const emailData = {userEmail: email};
+   const [showPassword, setShowPassword] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -152,17 +154,24 @@ function SignIn() {
               required
             />
           </div>
-          <div className="mb-4 items-center flex flex-row">
+          <div className="mb-4 relative items-center flex flex-row">
           <LiaKeySolid className="absolute ml-[20px] size-[20px]"/>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               value={pswd}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 pl-[50px] pr-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
               required
             />
+            <button
+        type="button"
+        className="absolute ml-[330px]"
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+      </button>
           </div>
 
           {!isPending &&<div className="flex items-center justify-between">

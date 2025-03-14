@@ -28,7 +28,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 function Checkout() {
   const navigate = useNavigate();
    trio.register()
-     const { state } = useContext(AuthContext);
+     const { state, dispatch } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(
           Array.isArray(products)
@@ -102,8 +102,7 @@ function Checkout() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: state.token,
-          
+          Authorization: state.token,     
         },
       })
       .then((response) => response.json())
@@ -148,7 +147,16 @@ function Checkout() {
           },
           body: JSON.stringify({ product_id: product.product_id }),
         })
-        .then((response) => response.json())
+        .then((response) => 
+        {
+                if (response.status === 403) {
+                  toast.error("Your session has expired");
+                  localStorage.removeItem('user');
+                  navigate('/signin');
+                  dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                } 
+                return response.json()}
+        )
           .then((data) => {
             // toast.success(data.message);
             toast.success('Product removed');
@@ -170,7 +178,16 @@ function Checkout() {
           },
           body: JSON.stringify({ product_id: productId, quantity: newQuantity}),
         })
-        .then((response) => response.json())
+        .then((response) => 
+        {
+                if (response.status === 403) {
+                  toast.error("Your session has expired");
+                  localStorage.removeItem('user');
+                  navigate('/signin');
+                  dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                } 
+                return response.json()}
+        )
           .then((data) => {
             toast.success(data.message);
             setRefresh(!refresh);
@@ -203,7 +220,16 @@ function Checkout() {
           },
           body: JSON.stringify(order),
         })
-        .then((response) => response.json())
+        .then((response) => 
+        {
+                if (response.status === 403) {
+                  toast.error("Your session has expired");
+                  localStorage.removeItem('user');
+                  navigate('/signin');
+                  dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                } 
+                return response.json()}
+        )
         .then((data) => {
           if (data.status === true) {
             toast.success(data.message);
@@ -262,10 +288,9 @@ function Checkout() {
      
     <div className="flex justify-center items-center h-scree">
   
-  <Button variant="contained" onClick={() => setOpen(true)}>
+  {/* <Button variant="contained" onClick={() => setOpen(true)}>
     Open Overlay
-  </Button>
-
+  </Button> */}
  
   {open && (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
