@@ -343,7 +343,7 @@ function ProductDetail() {
 {product && (<>
     <div className="px-[20px] mt-[20px] mb-[50px]">
     <div className="flex gap-x-[10px] text-[15px]">
-        <div className='cursor-pointer' onClick={() => navigate(-1)}>{productStore}</div>
+        <div className='cursor-pointer' onClick={() => navigate(-1)}>{product.data.store_name}</div>
         /
         <div className="font-semibold">{product.data.category_name}</div>
     </div>

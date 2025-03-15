@@ -563,7 +563,7 @@ function ViewStore() {
           >
             <div className="flex justify-center px-[50px]">
               <img
-                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })}
+                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })}
                 src={product.image}
                 className="w-24 h-24 w- [100px] h- [100px] object-cove object-contain flex justify-center bg-[white] p-4"
               />
@@ -606,7 +606,7 @@ function ViewStore() {
 
 
             </div>
-            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
+            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen} })} className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]">
               <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
                 {product.name}
               </div>
@@ -654,7 +654,7 @@ function ViewStore() {
           >
             <div className="flex justify-center px-[50px]">
               <img
-                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })}
+                onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen} })}
                 src={product.image}
                 className="w-24 h-24 object-cove object-contain flex justify-center bg-[white] p-4"
               />
@@ -691,7 +691,7 @@ function ViewStore() {
 
 
             </div>
-            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen, productStore: store.name } })} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
+            <div onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen} })} className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]">
               <div className="w-[180px] lg:w-[150px text-[16px] lg:text-[18px] font-semibold h-[40px] font-saeada">
                 {product.name}
               </div>

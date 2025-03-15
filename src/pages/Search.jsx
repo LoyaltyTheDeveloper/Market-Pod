@@ -394,14 +394,14 @@ function Search() {
         <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[8px] lg:gap-x-[20px] lg:w-[70%]">
           {result.data.products && result.data.products.length > 0 ? (
             result.data.products.slice(0, 4).map((product) => (
-              <div className="mb-[30px]" key={product.id}>
+              <div className="mb-[30px] cursor-pointer" key={product.id}>
                 <div className="flex flex-row justify-center lg:flex lg:flex-wrap gap-[8px lg:justify-start">
                   <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
                     <div className="flex justify-center px-[50px]">
                       <img
-                        // onClick={() =>
-                        //   navigate(`/site/getProduct/${product.id}`)
-                        // }
+                        onClick={() =>
+                          navigate(`/site/getProduct/${product.id}`)
+                        }
                         src={product.image}
                         className="w-24 h-24 object-contain flex justify-center"
                       />
@@ -419,9 +419,9 @@ function Search() {
                       </div>}
                     </div>
                     <div
-                      // onClick={() =>
-                      //   navigate(`/site/getProduct/${product.id}`)
-                      // }
+                      onClick={() =>
+                        navigate(`/site/getProduct/${product.id}`)
+                      }
                       className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]"
                     >
                       <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
