@@ -307,7 +307,7 @@ function Search() {
 
 
 
-<div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px]">Search Results</div>
+<div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px] font-saeada">Search Results</div>
 
 
 
@@ -341,7 +341,7 @@ function Search() {
 
               <div className="w-[300px] flex flex-col gap-[5px]">
                 <div>
-                  <div className="font-semibold text-[20px]">
+                  <div className="font-semibold text-[20px] font-saeada">
                     {result.data.name}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
@@ -391,12 +391,12 @@ function Search() {
         </div>
 
         {/* Products Section */}
-        <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[8px] lg:gap-x-[20px] lg:w-[70%]">
+        <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[40px] lg:gap-x-[20px] lg:w-[70%]">
           {result.data.products && result.data.products.length > 0 ? (
             result.data.products.slice(0, 4).map((product) => (
-              <div className="mb-[30px] cursor-pointer" key={product.id}>
-                <div className="flex flex-row justify-center lg:flex lg:flex-wrap gap-[8px lg:justify-start">
-                  <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
+              <div className="mb-[30px] cursor-pointer fle justify-cente gap-x-" key={product.id}>
+                <div className="flex flex-row justify-center lg:flex lg:flex-wrap lg:justify-start">
+                  <div className="flex flex-col gap-y-[10px]relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
                     <div className="flex justify-center px-[50px]">
                       <img
                         onClick={() =>

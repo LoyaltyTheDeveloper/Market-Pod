@@ -23,6 +23,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { LiaTimesSolid } from "react-icons/lia";
 import { GrBasket } from "react-icons/gr";
+import { FaPlus } from "react-icons/fa";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props}
@@ -41,8 +42,13 @@ function ProductDetail() {
    const { addToCartOne } = useContext(CartContext);
    const [isDialog, setIsDialog] = React.useState(false);
    const [isDialog2, setIsDialog2] = React.useState(false);
+   const [isDialog3, setIsDialog3] = React.useState(false);
+   const [isDialog4, setIsDialog4] = React.useState(false);
    const [modalProduct, setModalProduct] = useState(null);
    const [modalProduct2, setModalProduct2] = useState(null);
+   const [modalProduct3, setModalProduct3] = useState(null);
+   const [modalProduct4, setModalProduct4] = useState(null);
+   const [product2, setProduct2] = useState([]);
 
    const handleOpen = () => {
     setIsDialog(true);
@@ -58,6 +64,22 @@ function ProductDetail() {
 
   const handleClose2 = () => {
     setIsDialog2(false);
+  };
+
+  const handleOpen3 = () => {
+    setIsDialog3(true);
+  };
+
+  const handleClose3 = () => {
+    setIsDialog3(false);
+  };
+
+  const handleOpen4 = () => {
+    setIsDialog4(true);
+  };
+
+  const handleClose4 = () => {
+    setIsDialog4(false);
   };
 
  const addToCart = (id) => {
@@ -88,6 +110,35 @@ function ProductDetail() {
           return;
         });
     };
+
+    const addToCart2 = (product2) => {
+      if (!isOpen) {
+        return toast.error("The store for this product is closed");
+      }
+        setIsLoading(true);
+         
+          fetch('https://apis.emarketpod.com/user/cart/add', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: state.token,
+            },
+            body: JSON.stringify({ product_id: product2.id }),
+          })
+          .then((response) => response.json())
+            .then((data) => {
+              setIsLoading(false);
+              setModalProduct3(product2);
+              handleOpen3();
+              // toast.success(data.message);
+              return;
+            })
+            .catch((error) => {
+              setIsLoading(false);
+              console.error(error);
+              return;
+            });
+        };
 
 
   const buyNow = (id) => {
@@ -150,6 +201,16 @@ function ProductDetail() {
       setModalProduct2(product.data);
      }
   }
+  const handleSecondAdd2 = (product2) => {
+    if (!isOpen) {
+      return toast.error("The store for this product is closed");
+    }
+     else {
+      handleOpen4();
+      addToCartOne(product2);
+      setModalProduct4(product2);
+     }
+  }
 
   useEffect(() => {
     if (isDialog) {
@@ -171,6 +232,26 @@ function ProductDetail() {
     }
   }, [isDialog2]);
 
+  useEffect(() => {
+    if (isDialog3) {
+      const timer = setTimeout(() => {
+        handleClose3(); 
+      }, 3000);
+  
+      return () => clearTimeout(timer);
+    }
+  }, [isDialog3]);
+
+  useEffect(() => {
+    if (isDialog4) {
+      const timer = setTimeout(() => {
+        handleClose4(); 
+      }, 3000);
+  
+      return () => clearTimeout(timer);
+    }
+  }, [isDialog4]);
+
     const copy = () => {
         const currentUrl = window.location.href;
     
@@ -189,7 +270,7 @@ function ProductDetail() {
     useEffect(() => {
         fetch(`https://apis.emarketpod.com/site/getProduct/${productId}`)
         .then((response) => response.json())
-        .then((data) => setProduct(data))
+        .then((data) => {setProduct(data), setProduct2(data)})
         .catch((error) => console.error('Error fetching comments', error))
     }, [productId])
 
@@ -198,6 +279,8 @@ function ProductDetail() {
     };
     const formattedPrice = formatNumber(modalProduct?.price);
     const formattedPrice2 = formatNumber(modalProduct2?.price);
+    const formattedPrice3 = formatNumber(modalProduct3?.price);
+    const formattedPrice4 = formatNumber(modalProduct4?.price);
 
   return (<>
   <Navbar/>
@@ -228,7 +311,7 @@ function ProductDetail() {
       >
         <DialogTitle><div className="flex items-center lg:justify-between justify-end">
         <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
-        <div onClick={handleClose} className='flex'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+        <div onClick={handleClose} className='flex cursor-pointer'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
           </div>
           </DialogTitle>
         <DialogContent>
@@ -285,7 +368,7 @@ function ProductDetail() {
       >
         <DialogTitle><div className="flex items-center lg:justify-between justify-end">
         <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
-        <div onClick={handleClose2} className='flex'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+        <div onClick={handleClose2} className='flex cursor-pointer'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
           </div>
           </DialogTitle>
         <DialogContent>
@@ -308,6 +391,119 @@ function ProductDetail() {
            <div className='flex flex-col'>
            <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct2?.name}</p>
            <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct2?.subtitle}</p>
+           </div>
+           </div>
+
+          </DialogContentText>
+        </DialogContent>
+    
+      </Dialog>
+
+      {/* Dialog 3 */}
+
+      <Dialog
+    BackdropProps={{
+    sx: { backgroundColor: "transparent" }, // Removes the dark overlay
+}}
+      PaperProps={{
+        sx: {
+          position: "absolute",
+          // boxShadow: "none", 
+          top: "5%", 
+          right: "2%", 
+          width: { xs: "60%", sm: "60%", md: "60%", lg: "30%" }, 
+          height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
+          maxHeight: "vh", 
+          overflow: "auto", 
+        },
+      }}
+        open={isDialog3}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose3}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle><div className="flex items-center lg:justify-between justify-end">
+        <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
+        <div onClick={handleClose3} className='flex cursor-pointer'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+          </div>
+          </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
+            <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct3?.product_image}/></div>
+            <div>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-saeada font-semibold'>{modalProduct3?.name}</p>
+              <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct3?.subtitle}</p>
+              <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice3}</p>
+              <div className="flex flex-row items-center gap-x-3 mt-[10px]">
+                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div onClick ={() => navigate(`/site/getProduct/${modalProduct3.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
+              </div>
+            </div>
+           </div>
+
+           <div className='flex gap-x-2 items-center lg:hidden md:hidden'>
+           <div className=""><img className="size-[60px w-20 h-20 object-contain" src={modalProduct3?.product_image}/></div>
+           <div className='flex flex-col'>
+           <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct3?.name}</p>
+           <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct3?.subtitle}</p>
+           </div>
+           </div>
+
+          </DialogContentText>
+        </DialogContent>
+    
+      </Dialog>
+
+
+      <Dialog
+    BackdropProps={{
+    sx: { backgroundColor: "transparent" }, // Removes the dark overlay
+}}
+      PaperProps={{
+        sx: {
+          position: "absolute",
+          // boxShadow: "none", 
+          top: "5%", 
+          right: "2%", 
+          width: { xs: "60%", sm: "60%", md: "60%", lg: "30%" }, 
+          height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
+          maxHeight: "vh", 
+          overflow: "auto", 
+        },
+      }}
+        open={isDialog4}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose4}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle><div className="flex items-center lg:justify-between justify-end">
+        <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
+        <div onClick={handleClose4} className='flex cursor-pointer'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+          </div>
+          </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
+            <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct4?.product_image}/></div>
+            <div>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-saeada font-semibold'>{modalProduct4?.name}</p>
+              <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct4?.subtitle}</p>
+              <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice4}</p>
+              <div className="flex flex-row items-center gap-x-3 mt-[10px]">
+                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div onClick ={() => navigate(`/site/getProduct/${modalProduct4.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
+              </div>
+            </div>
+           </div>
+
+           <div className='flex gap-x-2 items-center lg:hidden md:hidden'>
+           <div className=""><img className="size-[60px w-20 h-20 object-contain" src={modalProduct4?.product_image}/></div>
+           <div className='flex flex-col'>
+           <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct4?.name}</p>
+           <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct4?.subtitle}</p>
            </div>
            </div>
 
@@ -380,6 +576,82 @@ function ProductDetail() {
     </div>
     </div>
 
+
+
+
+    {/* People also bought */}
+
+    <div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt-4'>People also bought !</div>
+
+    <div className='flex flex-col lg:flex-row lg:justify-between'>
+
+    
+
+   <div className='mt-4 grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[40px] lg:gap-x-[20px] lg:w-[70%]'>
+    {product2.peopleAlsoBought && product2.peopleAlsoBought.length > 0 ? (
+  product2.peopleAlsoBought.map((products2) => (
+    <div className="mb-[30px] cursor-pointer fle justify-cente gap-x-" key={products2.id}>
+      <div className="flex flex-row justify-center lg:flex lg:flex-wrap lg:justify-start">
+        <div className="flex flex-col gap-y-[10px] relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
+          <div className="flex justify-center px-[50px]">
+            <img
+              onClick={() => navigate(`/site/getProduct/${products2.id}`)}
+              src={products2.product_image} 
+              className="w-24 h-24 object-contain flex justify-center"
+            />
+            {state.token && (
+              <div
+                onClick={() => addToCart2(products2)}
+                className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+              >
+                <FaPlus className="text-[white]" />
+              </div>
+            )}
+            {!state.token && (
+              <div
+                onClick={() => handleSecondAdd2(products2)}
+                className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+              >
+                <FaPlus className="text-[white]" />
+              </div>
+            )}
+          </div>
+          <div
+            onClick={() => navigate(`/site/getProduct/${products2.id}`)}
+            className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]"
+          >
+            <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
+              {products2.name}
+            </div>
+            <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">
+              {products2.subtitle}
+            </div>
+            <div className="flex absolte bttom-[180px] lg:botom-[380px]">
+              <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                ₦ {products2.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </div>
+              {products2.status === 1 && (
+                <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
+                  In-stock
+                </div>
+              )}
+              {products2.status !== 1 && (
+                <div className="absolute whitespace-nowrap ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">
+                  Out of stock
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))
+) : (
+  <p></p>
+)}
+</div>
+
+
 <div className="flex justify-center lg:justify-end">
     
     <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] mt-[30px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[270px]">
@@ -399,6 +671,8 @@ function ProductDetail() {
         </div>
     </div>
     </div>
+
+</div>
 
     </div>
     </>)}
