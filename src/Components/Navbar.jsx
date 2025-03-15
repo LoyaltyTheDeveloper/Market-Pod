@@ -972,7 +972,7 @@ function Navbar() {
                         <div><img src={product.image} className="size-[90px w-24 h-20" /></div>
                         <div className="flex flex-col gap-[10px]">
                           <div className='font-saeada font-semibold'>{product.name} - {product.weight}</div>
-                          <div className="text-[grey] text-[15px]">Subtitle</div>
+                          <div className="text-[grey] text-[15px]">{product.subtitle}</div>
                           <div className="flex items-center gap-[15px]">
                             <div onClick={() => deleteProduct(product)} className="cursor-pointer bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
                             <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
@@ -1022,7 +1022,7 @@ function Navbar() {
                           <div><img src={product.image} className="size-[100px w-24 h-20 object-cove"/></div>
                           <div className="flex flex-col gap-[10px]">
                             <div className='font-saeada font-semibold'>{product.name} - {product.weight}</div>
-                            <div className="text-[grey] text-[15px]">Subtitle</div>
+                            <div className="text-[grey] text-[15px]">{product.subtitle}</div>
                             <div className="flex items-center gap-[15px]">
                               <div onClick={() => removeFromCart(product.id)} className="cursor-pointer bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
                               <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">

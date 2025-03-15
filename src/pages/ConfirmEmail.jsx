@@ -61,7 +61,7 @@ function ConfirmEmail() {
         if (!emailData || !otpToken){
           navigate("/");
         }
-      }, [])
+      }, []);
 
       const handleVerify = (e) => {
      

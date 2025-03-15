@@ -343,13 +343,13 @@ would request your Order ID for confirmation</p>
               {/* <div className="font-bold ml-[10px]">Produce</div> */}
               <div className="flex">
                 
-                <div><img src={product} className="size-[90px]"/></div>
+                <div><img src={product.image} className="size-[90px] object-contain mr-2"/></div>
             
-                <div className="flex flex-col lg:flex-row gap-[10px] lg:gap-[0px]">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-[10px]">
 
                     <div className="lg:w-[300px]">
                   <div>{product.name} - {product.weight}KG</div>
-                  <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
+                  <div className="text-[grey] text-[15px]">{product.subtitle}</div>
                  </div>
 
                   <div className="flex items-center gap-[15px]   ">
@@ -400,13 +400,13 @@ would request your Order ID for confirmation</p>
               {/* <div className="font-bold ml-[10px]">Produce</div> */}
               <div className="flex">
                 
-                <div><img src={product} className="size-[90px]"/></div>
+                <div><img src={product.image} className="size-[90px] object-contain mr-2"/></div>
             
-                <div className="flex flex-col lg:flex-row gap-[10px] lg:gap-[0px]">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-[10px]">
 
                     <div className="lg:w-[300px]">
                   <div>{product.name} - {product.weight}KG</div>
-                  <div className="text-[grey] text-[15px]">Long grain rice (1 Bag)</div>
+                  <div className="text-[grey] text-[15px]">{product.subtitle}</div>
                  </div>
 
                   <div className="flex items-center gap-[15px]   ">

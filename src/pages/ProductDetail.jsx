@@ -79,7 +79,7 @@ function ProductDetail() {
           setIsLoading(false);
           setModalProduct(product.data);
           handleOpen();
-          toast.success(data.message);
+          // toast.success(data.message);
           return;
         })
         .catch((error) => {
@@ -118,7 +118,7 @@ function ProductDetail() {
           .then((data) => {
             setIsLoading(false);
             // handleOpen();
-            toast.success(data.message);
+            // toast.success(data.message);
             return;
           })
           .catch((error) => {

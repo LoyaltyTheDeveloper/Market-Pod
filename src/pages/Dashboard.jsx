@@ -30,6 +30,12 @@ function UserDetails() {
     }
   }, [location]);
 
+  useEffect(()=> {
+          if (!state.token){
+            navigate("/");
+          }
+        }, []);
+
   const [formOne, setFormOne] = useState({
     first_name: "",
     last_name: "",

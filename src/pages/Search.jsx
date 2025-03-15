@@ -10,6 +10,21 @@ import { LuClock5 } from "react-icons/lu";
 import { AuthContext } from '../context/Context.jsx';
 import { useEffect, useContext, } from 'react';
 import { LuClipboard } from "react-icons/lu";
+import { CartContext } from "../context/CartContext";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import { LiaTimesSolid } from "react-icons/lia";
+import { GrBasket } from "react-icons/gr";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="left" ref={ref} {...props}
+  timeout={{enter: 1500, exit:1000 }}
+  />;
+});
 
 function Search() {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +35,9 @@ function Search() {
       }
     };
 
+
+    const [isDialog, setIsDialog] = React.useState(false);
+      const [isDialog2, setIsDialog2] = React.useState(false);
      const { state } = useContext(AuthContext);
     
     const location = useLocation();
@@ -28,7 +46,31 @@ function Search() {
 
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [searchResults, setSearchResults] = useState(initialResults); 
+  const { addToCartOne } = useContext(CartContext);
+  const [modalProduct, setModalProduct] = useState(null);
+  const [modalProduct2, setModalProduct2] = useState(null);
 
+
+  useEffect(() => {
+        if (isDialog) {
+          const timer = setTimeout(() => {
+            handleClose(); 
+          }, 3000);
+          return () => clearTimeout(timer); 
+        }
+      }, [isDialog]);
+  
+  
+      useEffect(() => {
+        if (isDialog2) {
+          const timer = setTimeout(() => {
+            handleClose2(); 
+          }, 3000);
+      
+          return () => clearTimeout(timer);
+        }
+      }, [isDialog2]);
+  
 
   const handleSearch = () => {
   setIsLoading(true);
@@ -78,7 +120,9 @@ function Search() {
         .then((response) => response.json())
           .then((data) => {
             setIsLoading(false);
-            toast.success(data.message);
+            setModalProduct(product);
+            handleOpen();
+            // toast.success(data.message);
             return;
           })
           .catch((error) => {
@@ -86,6 +130,34 @@ function Search() {
             console.error(error);
           });
       };
+
+      const handleOpen = () => {
+        setIsDialog(true);
+      };
+    
+      const handleClose = () => {
+        setIsDialog(false);
+      };
+    
+      const handleOpen2 = () => {
+        setIsDialog2(true);
+      };
+    
+      const handleClose2 = () => {
+        setIsDialog2(false);
+      };
+
+      const handleSecondAdd = (product) => {       
+              handleOpen2();
+              addToCartOne(product);
+              setModalProduct2(product);
+          }
+
+      const formatNumber = (num) => {
+        return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      };
+      const formattedPrice = formatNumber(modalProduct?.price);
+      const formattedPrice2 = formatNumber(modalProduct2?.price);
 
   return (<>
     <Navbar onClick={handleSearch}/>
@@ -109,6 +181,131 @@ function Search() {
   speed="1.3" 
   color="#4ade80" 
 ></l-trio>    </div>}
+
+
+
+
+<React.Fragment>
+      <Dialog
+      BackdropProps={{
+  sx: { backgroundColor: "transparent" }, // Removes the dark overlay
+}}
+      PaperProps={{
+        sx: {
+          position: "absolute",
+          // boxShadow: "none", 
+          top: "5%", 
+          right: "2%", 
+          width: { xs: "60%", sm: "60%", md: "60%", lg: "30%" }, 
+          height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
+          maxHeight: "vh", 
+          overflow: "auto",
+        },
+      }}
+        open={isDialog}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle><div className="flex items-center lg:justify-between justify-end">
+        <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
+        <div onClick={handleClose} className='flex'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+          </div>
+          </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
+            <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct?.image}/></div>
+            <div>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-saeada font-semibold'>{modalProduct?.name}</p>
+              <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct?.subtitle}</p>
+              <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice}</p>
+              <div className="flex flex-row items-center gap-x-3 mt-[10px]">
+                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div onClick ={() => navigate(`/site/getProduct/${modalProduct.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
+              </div>
+            </div>
+           </div>
+
+           <div className='flex gap-x-2 items-center lg:hidden md:hidden'>
+           <div className=""><img className="size-[60px w-20 h-20 object-contain" src={modalProduct?.image}/></div>
+           <div className='flex flex-col'>
+           <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct?.name}</p>
+           <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct?.subtitle}</p>
+           </div>
+           </div>
+
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+
+
+     {/* Dialog 2 */}
+
+     <Dialog
+    BackdropProps={{
+    sx: { backgroundColor: "transparent" }, // Removes the dark overlay
+}}
+      PaperProps={{
+        sx: {
+          position: "absolute",
+          // boxShadow: "none", 
+          top: "5%", 
+          right: "2%", 
+          width: { xs: "60%", sm: "60%", md: "60%", lg: "30%" }, 
+          height: { xs: "auto", sm: "30vh", md: "30vh", lg: "auto" }, 
+          maxHeight: "vh", 
+          overflow: "auto", 
+        },
+      }}
+        open={isDialog2}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose2}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle><div className="flex items-center lg:justify-between justify-end">
+        <p className="text-[12px] font-semibold lg:text-[14px] text-[#31603D] hidden lg:flex"> An item has been added to your cart </p>
+        <div onClick={handleClose2} className='flex'><LiaTimesSolid className="size-[24px] lg:size-[25px] text-[#31603D]"/></div>
+          </div>
+          </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           <div className="flex flex-row gap-x-[20px] lg:justify-center hidden lg:flex">
+            <div className=""><img className="size-[50px] lg:size-[90px] object-contain" src={modalProduct2?.image}/></div>
+            <div>
+              <p className='text-[black] w-[100px] lg:w-[152px] text-[13px] lg:text-[15px] h-[45px] font-saeada font-semibold'>{modalProduct2?.name}</p>
+              <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct2?.subtitle}</p>
+              <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice2}</p>
+              <div className="flex flex-row items-center gap-x-3 mt-[10px]">
+                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div onClick ={() => navigate(`/site/getProduct/${modalProduct2.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
+              </div>
+            </div>
+           </div>
+
+           <div className='flex gap-x-2 items-center lg:hidden md:hidden'>
+           <div className=""><img className="size-[60px w-20 h-20 object-contain" src={modalProduct2?.image}/></div>
+           <div className='flex flex-col'>
+           <p className='text-[black] w-[100px text-[15px] h-[30px font-semibold'>{modalProduct2?.name}</p>
+           <p className='h-[20px] text-[11px] text-[black] lg:flex'>{modalProduct2?.subtitle}</p>
+           </div>
+           </div>
+
+          </DialogContentText>
+        </DialogContent>
+    
+      </Dialog>
+
+
+    </React.Fragment>
+
+
+
+
+
+
 
 <div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px]">Search Results</div>
 
@@ -202,31 +399,45 @@ function Search() {
                   <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
                     <div className="flex justify-center px-[50px]">
                       <img
-                        onClick={() =>
-                          navigate(`/site/getProduct/${product.id}`)
-                        }
+                        // onClick={() =>
+                        //   navigate(`/site/getProduct/${product.id}`)
+                        // }
                         src={product.image}
-                        className="w-24 h-24 object-cover flex justify-center"
+                        className="w-24 h-24 object-contain flex justify-center"
                       />
-                      <div
+                     {state.token && <div
                         onClick={()=> addToCart(product)}
-                        className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] border bg-[#31603D] rounded-full p-[7px] group"
+                        className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
                       >
                         <FaPlus className="text-[white]" />
-                      </div>
+                      </div>}
+                      {!state.token && <div
+                       onClick={()=> handleSecondAdd(product)}
+                        className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+                      >
+                        <FaPlus className="text-[white]" />
+                      </div>}
                     </div>
                     <div
-                      onClick={() =>
-                        navigate(`/site/getProduct/${product.id}`)
-                      }
+                      // onClick={() =>
+                      //   navigate(`/site/getProduct/${product.id}`)
+                      // }
                       className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]"
                     >
-                      <div className="w-[120px] lg:w-[150px] text-[12px] lg:text-[15px] font-semibold h-[30px]">
-                        {product.name}
-                      </div>
-                      <div className="text-[12px] w-[150px] lg:text-[13px] h-[30px]">
-                        {product.subtitle}
-                      </div>
+                      <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
+                {product.name}
+              </div>
+              <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">{product.subtitle}</div>
+              <div className="flex absolte bttom-[180px] lg:botom-[380px]">
+                <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                </div>
+                 {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold"> 
+                </div> */}
+                 {product.status === 1 && <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">In-stock</div>}
+                 {product.status !== 1 && <div className="absolute whitespace-nowra ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">Out of stock</div>}
+
+              </div>
                     </div>
                   </div>
                 </div>

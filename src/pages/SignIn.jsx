@@ -167,7 +167,7 @@ function SignIn() {
             />
             <button
         type="button"
-        className="absolute ml-[330px]"
+        className="absolute ml-[330px] right-5"
         onClick={() => setShowPassword(!showPassword)}
       >
         {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}

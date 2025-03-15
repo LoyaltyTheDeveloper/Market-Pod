@@ -165,7 +165,7 @@ function StoreList() {
 
     </div>
 
-    <div className="flex mb-[20px] text-[white] lg:justify-center border border-[transparent] mx-[5%] lg:mx-[1%] bg-[#31603D] py-[15px] rounded-[5px]">
+    {/* <div className="flex mb-[20px] text-[white] lg:justify-center border border-[transparent] mx-[5%] lg:mx-[1%] bg-[#31603D] py-[15px] rounded-[5px]">
 
       <div className="flex items-center">
       <div className="flex lg:flex lg:justify-center text-[12px] lg:text-[15px] ml-[10px]">Didn’t Find What You’re looking for here ?</div>
@@ -178,7 +178,7 @@ function StoreList() {
       </div>
 
       </div>
-    </div>
+    </div> */}
 
   </div>
   <Footer/>

@@ -37,7 +37,6 @@ function LandingPage({ markets }) {
   const [stores, setStores] = useState([]);
   const [totalStores, setTotalStores] = useState(0);
 
-
   const handleSearch = () => {
    setIsLoading(true);
     if(!searchQuery){
@@ -268,9 +267,9 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
       
       <div className="flex items-center">
         <div>
-        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px] font-saeada">{market.name || <Skeleton width={200} />}</div>
+        <div className="font-bold text-[21px] lg:text-[30px] ml-[20px] font-saeada">{market.name}</div>
         <div className="w-[270px] lg:w-[100%] md:w-[100%] text-[14px] lg:text-[16px] flex flex-wrap ml-[20px]">
-          {market.addr || <Skeleton width={250} />}
+          {market.addr}
         </div>
         </div>
 
@@ -297,8 +296,6 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                   <div className="h-[150px] relative">
                   <img
                     src={store.image}
-                    
-                    // className="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]"
                     className={`w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px] ${
                       store.isOpen ? "" : ""
                     }`}
@@ -315,7 +312,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
 
                 <div className="pt-[5px] pl-[15px] flex flex-col gap-y-[10px]">
                   <div className="text-[19px] font-saeada font-semibold whitespace-nowrap truncate">
-                    {store.name || <Skeleton width={200} />}
+                    {store.name}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
                     <div><LuClock5/></div>
