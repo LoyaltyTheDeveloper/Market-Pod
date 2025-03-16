@@ -352,7 +352,7 @@ would request your Order ID for confirmation</p>
                   <div className="text-[grey] text-[15px]">{product.subtitle}</div>
                  </div>
 
-                  <div className="flex items-center gap-[15px]   ">
+                  <div className="flex items-center gap-[15px]">
                    <div onClick={()=> deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
                    <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
                     <div onClick={()=> handleDecrease (product.product_id)}className="text"><FaMinus className="size-[12px]"/></div>

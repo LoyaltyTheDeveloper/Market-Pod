@@ -656,17 +656,21 @@ function Navbar() {
                 />
               </div>
 
-              <div className="hidden lg:flex flex-col w-[100px]">
+              <div className="hidden lg:flex flex-col w-[100px">
                 <div className="font-saeada font-semibold text-[13px]">Account</div>
                 <div className="flex flex-row items-center gap-[7px]">
                   <div><MdPersonOutline className="size-[20px]" /></div>
                   {
                     state.isAuthenticated ? <>
-                     <div className='whitespace-nowrap truncate'><Profile/></div>
+                     <div className="font-semibold text-[#31603D] truncate cursor-pointer w-[80px]" onClick={() => navigate("/dashboard")}>
+                      {state.email}
+                     </div>
                     </> : <>
+                    <div className='flex gap-x-2 items-center'>
                       <Link to="/signin"><div className="text-[13px] text-[#31603D] font-bold underline">Login</div></Link>
                       <div>or</div>
                       <Link to="/signup"><div className="text-[13px] text-[#31603D] font-bold underline">Create Account</div></Link>
+                      </div>
                     </>
                   }
 

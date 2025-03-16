@@ -322,9 +322,9 @@ function Search() {
         <div className="lg:border lg:border-transparent flex flex-col justify-center lg:flex-col lg:px-[10px] lg:w-[30%]">
           <div className="flex justify-normal">
             <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[10px]">
-              <div className="h-[100px] lg:size-[150px] flex flex-row gap-x-[20px]">
+              <div className="h-[100px lg:size-[150px flex flex-row gap-x-[20px]">
                 <img
-                  className="h-full w-[150px] lg:w-[200px] object-cover object-contain rounded-[5px]"
+                  className="h-[100px] w-[150px] lg:w-[190px] lg:h-[160px] object-cover rounded-[5px]"
                   src={result.data.image}
                 />
                 <div
@@ -341,7 +341,7 @@ function Search() {
 
               <div className="w-[300px] flex flex-col gap-[5px]">
                 <div>
-                  <div className="font-semibold text-[20px] font-saeada">
+                  <div className="font-semibold text-[20px] font-saeada truncate w-[200px]">
                     {result.data.name}
                   </div>
                   <div className="flex items-center gap-x-[5px] text-[#31603D]">
@@ -394,7 +394,7 @@ function Search() {
         <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[40px] lg:gap-x-[20px] lg:w-[70%]">
           {result.data.products && result.data.products.length > 0 ? (
             result.data.products.slice(0, 4).map((product) => (
-              <div className="mb-[30px] cursor-pointer fle justify-cente gap-x-" key={product.id}>
+              <div className="mb-[30px] cursor-pointer fle justify-cente gap-x- relative" key={product.id}>
                 <div className="flex flex-row justify-center lg:flex lg:flex-wrap lg:justify-start">
                   <div className="flex flex-col gap-y-[10px]relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
                     <div className="flex justify-center px-[50px]">
@@ -407,15 +407,15 @@ function Search() {
                       />
                      {state.token && <div
                         onClick={()=> addToCart(product)}
-                        className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+                        className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
                       >
-                        <FaPlus className="text-[white]" />
+                        <FaPlus className="text-[white] w-5 h-5"/>
                       </div>}
                       {!state.token && <div
                        onClick={()=> handleSecondAdd(product)}
-                        className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+                        className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
                       >
-                        <FaPlus className="text-[white]" />
+                        <FaPlus className="text-[white] w-5 h-5" />
                       </div>}
                     </div>
                     <div

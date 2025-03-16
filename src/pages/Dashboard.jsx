@@ -13,7 +13,9 @@ import { FiPhone } from "react-icons/fi";
 import {Link} from "react-router-dom";
 import { GrLocation } from "react-icons/gr";
 import { LiaKeySolid } from "react-icons/lia";
-
+import { TbTruckDelivery } from "react-icons/tb";
+import { TfiPackage } from "react-icons/tfi";
+import { MdOutlineCancel } from "react-icons/md";
 
 function UserDetails() {
   const location = useLocation();
@@ -299,7 +301,7 @@ useEffect(() => {
 
           <div className="flex flex-col gap-y-[20px] pb-[30px]">
             <div className="px-4">
-              <h1 className="font-bold text-[24px]">Hello, {displayName}</h1>
+              <h1 className="font-bold text-[24px] font-saeada">Hello, {displayName}</h1>
               <h1>{state.email}</h1>
             </div>
             <div>
@@ -366,7 +368,7 @@ useEffect(() => {
 
               <form
                 className="flex flex-col gap-y-[25px]">
-                <h1 className="font-bold text-[24px]">Name</h1>
+                <h1 className="font-bold text-[24px] font">Name</h1>
                 <div className="relative flex flex-row items-center">
                   <div className="absolute ml-[20px]"><TbUserEdit className="size-[20px]" /></div>
 
@@ -665,7 +667,7 @@ useEffect(() => {
  
  
  <div className="lg:mx-[-30px">
-   <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div>
+   <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14 font-saeada">History</div>
     {Array.isArray(orders) && orders.length > 0 ? (
       <>
         {/* <div className="font-bold text-[30px] pb-[30px] px-4 lg:px-14">History</div> */}
@@ -692,12 +694,12 @@ useEffect(() => {
                   <div className="flex flex-row gap-x-[px] lg:gap-x-[50px]">
                     <div className="flex flex-col gap-y-[20px] lg:flex-row lg:gap-x-[50px]">
                       <div className="flex flex-col">
-                        <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap">
+                        <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap font-saeada">
                           Order ID #{order.order_id}
                         </div>
                         <div className="flex items-center gap-x-[5px] text-[12px]">
-                          <div>Icon</div>
-                          <div className="whitespace-nowrap">Awaiting Pick-up</div>
+                          <div><TfiPackage className='size-[15px]'/></div>
+                          <div className="whitespace-nowrap text-[15px]">Awaiting Pick-up</div>
                         </div>
                       </div>
                       <div className="lg:w-[250px] w-[270px] truncate text-[15px] lg:text-[17px]">

@@ -543,7 +543,9 @@ function ViewStore() {
 
 
 
-{state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-col gap-y-8">
+
+
+<div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-col gap-y-8">
     
 
       {[...new Set(products?.map(product => product.category_name))].map(category => (
@@ -588,19 +590,23 @@ function ViewStore() {
       </div> */}
 
 
-<div className='absolute top-6 right-2'>
-<div className={`text-sm text-[white] font-medium ${hovered === product.id ? "opacity-100 w-auto py-[8px] mt-[px] pr-[15px] pl-[15px] rounded-tl-full rounded-bl-full rounded-tr-[300px] rounded-br-lg mr-[30px] lg:mr-[39px] border border-[#31603D] bg-[#31603D] animate-fade": "opacity-0 w-0 h-0 pr-[20px]"}`}>
-          Add To Cart
-        </div>
+{state.token && <div className='absolute top-6 right-2'>
 <div
               onClick={()=> addToCart(product)}
-        className={`absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full ${
-          hovered === product.id ? "px-2 py-2 gap-x-1" : "p-2 "
-        }`}
+        className = 'absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2'
       >
         <div className=""><FaPlus className="w-5 h-5 ml- text-white"/></div>
       </div>    
-    </div>  
+    </div>  }
+
+    {!state.token && <div className='absolute top-6 right-2'>
+<div
+               onClick={()=> handleSecondAdd(product)}
+        className = 'absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2'
+      >
+        <div className=""><FaPlus className="w-5 h-5 ml- text-white"/></div>
+      </div>    
+    </div>  }
 
       
 
@@ -629,12 +635,12 @@ function ViewStore() {
           </div>
         </div>
       ))}
-    </div>}
+    </div>
 
 
 
 
-    {!state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-col gap-y-8">
+    {/* {!state.token && <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-col gap-y-8">
    
 
       {[...new Set(products.map(product => product.category_name))].map(category => (
@@ -659,20 +665,7 @@ function ViewStore() {
                 className="w-24 h-24 object-cove object-contain flex justify-center bg-[white] p-4"
               />
 
-             
-
-                     {/* <div
-              onClick={()=> handleSecondAdd(product)}
-        className={`absolute cursor-pointer top-6 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
-          hovered === product.id ? "px-2 py-1 gap-x-1" : "p-2"
-        }`}
-      >
-        <span className={`text-sm font-medium transition-opacity duration-[2000ms transition-transform duration-[2000ms] ease-in-out ${hovered === product.id ? "opacity-100 w-aut0 py-[4px] translate-x-0 transition-transform duration-[2000ms]" : "opacity-0 w-0 h-0 translate-x-5"}`}>
-          Add To Cart
-        </span>
-        <div className=""><FaPlus className="w-5 h-5 ml- text-white" /></div>
-      </div> */}
-
+      
 
       <div className='absolute top-6 right-2'>
 <div className={`text-sm text-[white] font-medium ${hovered === product.id ? "opacity-100 w-auto py-[8px] mt-[px] pr-[15px] pl-[15px] rounded-tl-full rounded-bl-full rounded-tr-[300px] rounded-br-lg mr-[30px] lg:mr-[39px] border border-[#31603D] bg-[#31603D] animate-fade": "opacity-0 w-0 h-0 pr-[20px]"}`}>
@@ -700,9 +693,7 @@ function ViewStore() {
                 <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
-                {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
-                   {product.status === 1 ? "In-stock":"Unavailable"}
-                </div> */}
+               
                 {product.status === 1 && <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">In-stock</div>}
                 {product.status !== 1 && <div className="absolute whitespace-nowra ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">Out of stock</div>}
               </div>
@@ -714,7 +705,7 @@ function ViewStore() {
           </div>
         </div>
       ))}
-    </div>}
+    </div>} */}
 
    
 
