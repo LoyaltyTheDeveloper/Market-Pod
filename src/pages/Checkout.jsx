@@ -24,10 +24,14 @@ import { CartContext } from '../context/CartContext.jsx';
 import { TbUserEdit } from "react-icons/tb";
 import { Button, Rating } from "@mui/material";
 import { LiaTimesSolid } from "react-icons/lia";
+import { AiOutlineClose } from "react-icons/ai";
+import ServiceCharge from './ServiceCharge.jsx';
 
 function Checkout() {
   const navigate = useNavigate();
    trio.register()
+   
+     const [isCartOpen, setIsCartOpen] = useState(false);
      const { state, dispatch } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(
@@ -64,6 +68,14 @@ function Checkout() {
           setStates(e.target.value);
           setCity("");
         };
+
+        const handleNumberChange = (e) => {
+          let phoneLimit = e.target.value;
+
+          if (/^\d*$/.test(phoneLimit) && phoneLimit.length <= 11) {
+            setPhone(phoneLimit);
+          }
+        }
 
         // const createOrder = () => {
         //   if(!name || !phone || !address || !selectedLocation){
@@ -309,6 +321,71 @@ would request your Order ID for confirmation</p>
       </div>
     </div>
   )}
+
+{isCartOpen && (
+                <div className="fixed inset-0 z-50 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
+              )}
+
+
+ <div className={`fixed top-0 right-0 w-[100%] md:w-[55%] lg:w-[400px] h-full bg-white shadow-lg transition-transform transform ${isCartOpen ? "translate-x-0" : "translate-x-full"} z-50 flex flex-col`}>
+ 
+         <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">
+         {state.token && <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Service Charge</div>}
+           <button onClick={() => setIsCartOpen(false)} className="text-gray-600 hover:text-red-500">
+             <AiOutlineClose size={24} className="text-[#31603D]"/>
+           </button>
+         </div>
+ 
+    <div className='flex-1 overflow-y-auto p-4'>
+   
+
+{/* Service Charge */}
+
+<div className='mx-6'>
+<div className="flex flex-col font-sans">
+      <div className="font-bold">What is a Service Charge and Why Do We Charge It?</div>
+      <div className="text-[15px]">At MarketPod, we pride ourselves on creating a seamless and reliable way for you to access fresh groceries and everyday essentials from trusted local markets. Behind the scenes, a lot goes into making this experience smooth, efficient, and enjoyable. To support these efforts, we include a small service charge in every order.</div>
+    </div>
+
+      <div className="flex flex-col font-sans">
+      <div className="font-bold">What is a Service Charge?</div>
+      <div className="text-[15px]">A service charge is a nominal fee added to your order to help cover the operational and logistical costs associated with running our platform. It’s an essential part of how we maintain the high-quality service you’ve come to expect from MarketPod.</div>
+    </div>
+   
+    <div className="flex flex-col font-sans">
+      <div className="font-bold">Why do we Charge it?</div>
+      <div className="text-[15px]">
+      We understand that transparency is important, so let us walk you through why this charge is necessary:<br></br>
+1. Operational Excellence. <br></br>
+<div className="pl-4">Running a platform like MarketPod involves various behind-the-scenes processes, from maintaining our app and website to ensuring secure payment systems and smooth user experiences. The service charge helps us keep these systems up-to-date and efficient so you can enjoy hassle-free shopping.</div>
+2. Maintaining Quality Standards <br></br>
+<div className="pl-4">From quality checks on products to ensuring proper packaging, we work tirelessly to guarantee that every item you receive meets our high standards. The service charge contributes to maintaining these rigorous processes.</div>
+3. Supporting Innovation and Growth <br></br>
+<div className="pl-4">It helps us add more features, expand into new locations, and bring more vendors on board to give you a broader range of products.</div>
+      </div>
+    </div>
+
+
+    <div className="flex flex-col font-sans">
+      <div className="font-bold">How does It Benefit You?</div>
+      <div className="text-[15px]">Think of the service charge as a small investment in the convenience, quality, and reliability that MarketPod offers. With this fee, you’re not just paying for groceries you’re paying for the time saved, the stress avoided, and the confidence of knowing your orders are in good hands.<br></br>
+Building a Sustainable Ecosystem<br></br>
+Your support through this charge doesn’t just benefit you. It creates a ripple effect by empowering local vendors, supporting delivery partners, and sustaining a system that works for everyone involved.<br></br>
+We are committed to keeping this fee as minimal as possible while continuing to deliver the exceptional service you deserve. Your trust and understanding mean the world to us, and we’re always here to answer any questions you may have.<br></br>
+Thank you for letting us bring the best of your local markets to your home!</div>
+    </div>
+</div>
+
+
+    </div>
+       </div>
+
+
+
+
+
+
+
 </div>
 
 <div className="flex flex-col lg:flex-row items-center pt-[30px">
@@ -484,7 +561,7 @@ would request your Order ID for confirmation</p>
 
           <input
           value = {phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={handleNumberChange}
           // disabled
           name="phone"
           type='number'
@@ -705,7 +782,7 @@ would request your Order ID for confirmation</p>
                     </div>
                     
                     <div className="">
-                    <div className="absolute right-[8px] lg:right-[80px]"><Link to="/service"><BsQuestionCircle className="size-[21px] text-[#31603D]"/></Link></div>
+                    <div onClick={() => setIsCartOpen(true)} className="absolute right-[8px] lg:right-[80px]"><BsQuestionCircle className="size-[21px] text-[#31603D]"/></div>
                     <div className="flex justify-between">
                       <div>Service Charge</div>
                       <div className="font-bold">₦ {formatNumber(Number(orderData?.service_charge))}</div>

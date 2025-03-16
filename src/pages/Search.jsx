@@ -307,7 +307,7 @@ function Search() {
 
 
 
-<div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px] font-saeada">Search Results</div>
+<div className="mt-[40px] mb-[40px] text-[22px] font-bold lg:mt-[140px] font-saeada px-3 md:px-5 lg:px-5">Search Results</div>
 
 
 

@@ -17,6 +17,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { TfiPackage } from "react-icons/tfi";
 import { MdOutlineCancel } from "react-icons/md";
 import { LiaLuggageCartSolid } from "react-icons/lia";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 function UserDetails() {
   const location = useLocation();
@@ -718,9 +719,14 @@ useEffect(() => {
                           <div><MdOutlineCancel className='size-[15px] text-[#D23D23]'/></div>
                           <div className="whitespace-nowrap text-[15px] text-[#D23D23]">Cancelled</div>
                         </div>)}
+                        
+                        {/* {order.payment_status === 0 && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                          <div><AiOutlineExclamationCircle className='size-[15px] text-[#EED202]'/></div>
+                          <div className="whitespace-nowrap text-[15px] text-[#EED202]">Pending Payment</div>
+                        </div>)} */}
 
                       </div>
-                      <div className="lg:w-[300px] w-[270px] truncate text-[15px] lg:text-[17px]">
+                      <div className="lg:w-[300px] w-[250px] truncate text-[15px] lg:text-[17px]">
                         {order.location_name}, {order.address}, {order.city}, {order.state}
                       </div>
                     </div>
