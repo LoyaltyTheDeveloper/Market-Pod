@@ -592,7 +592,8 @@ function Navbar() {
     const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
     return (
       <button className="font-semibold text-[#31603D]" onClick={() => navigate("/dashboard")}>
-        {displayName}
+        {/* {displayName} */}
+        {state.email}
       </button>
     )
   }
@@ -655,13 +656,13 @@ function Navbar() {
                 />
               </div>
 
-              <div className="hidden lg:flex flex-col">
+              <div className="hidden lg:flex flex-col w-[100px]">
                 <div className="font-saeada font-semibold text-[13px]">Account</div>
                 <div className="flex flex-row items-center gap-[7px]">
                   <div><MdPersonOutline className="size-[20px]" /></div>
                   {
                     state.isAuthenticated ? <>
-                      <Profile />
+                     <div className='whitespace-nowrap truncate'><Profile/></div>
                     </> : <>
                       <Link to="/signin"><div className="text-[13px] text-[#31603D] font-bold underline">Login</div></Link>
                       <div>or</div>
