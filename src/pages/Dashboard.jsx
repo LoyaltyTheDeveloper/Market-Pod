@@ -16,6 +16,7 @@ import { LiaKeySolid } from "react-icons/lia";
 import { TbTruckDelivery } from "react-icons/tb";
 import { TfiPackage } from "react-icons/tfi";
 import { MdOutlineCancel } from "react-icons/md";
+import { LiaLuggageCartSolid } from "react-icons/lia";
 
 function UserDetails() {
   const location = useLocation();
@@ -687,29 +688,48 @@ useEffect(() => {
               {/* Display the date */}
               <div className="font-bold px-4 lg:px-14">{date}</div>
               {ordersForDate.map((order) => (<>
-                <div className="flex flex-row lg:gap-[20px] lg:items-center lg:px-14" key={order.order_id}>
+                <div className="flex flex-row lg:gap-x-[20px] justify-between lg:items-center lg:px-14" key={order.order_id}>
                   <div>
                     <PiNotepadBold className="size-[27px]" />
                   </div>
                   <div className="flex flex-row gap-x-[px] lg:gap-x-[50px]">
                     <div className="flex flex-col gap-y-[20px] lg:flex-row lg:gap-x-[50px]">
-                      <div className="flex flex-col">
-                        <div className="font-bold text-[17px] lg:text-[20px] whitespace-nowrap font-saeada">
+                      <div className="flex flex-col bg-[]">
+                        <div className="font-bold text-[17px] lg:w-[180px] lg:text-[20px] whitespace-nowrap font-saeada">
                           Order ID #{order.order_id}
                         </div>
-                        <div className="flex items-center gap-x-[5px] text-[12px]">
-                          <div><TfiPackage className='size-[15px]'/></div>
-                          <div className="whitespace-nowrap text-[15px]">Awaiting Pick-up</div>
-                        </div>
+
+                        {order.status === "0" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                          <div><TfiPackage className='size-[15px] text-[#31603D]'/></div>
+                          <div className="whitespace-nowrap text-[15px] text-[#31603D]">Awaiting Pick-up</div>
+                        </div>)}
+
+                        {order.status === "1" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                          <div><TbTruckDelivery className='size-[15px] text-[#31603D]'/></div>
+                          <div className="whitespace-nowrap text-[15px] text-[#31603D]">In Transit</div>
+                        </div>)}
+
+                        {order.status === "2" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                          <div><LiaLuggageCartSolid className='size-[15px] text-[#31603D]'/></div>
+                          <div className="whitespace-nowrap text-[15px] text-[#31603D]">Delivered</div>
+                        </div>)}
+
+                        {order.status === "3" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                          <div><MdOutlineCancel className='size-[15px] text-[#D23D23]'/></div>
+                          <div className="whitespace-nowrap text-[15px] text-[#D23D23]">Cancelled</div>
+                        </div>)}
+
                       </div>
-                      <div className="lg:w-[250px] w-[270px] truncate text-[15px] lg:text-[17px]">
+                      <div className="lg:w-[300px] w-[270px] truncate text-[15px] lg:text-[17px]">
                         {order.location_name}, {order.address}, {order.city}, {order.state}
                       </div>
                     </div>
                     <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
-                      <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-end lg:w-[150px lg:px-8">
+
+                      <div className="font-bold text-[14px] lg:text-[20px] whitespace-nowrap flex justify-en w-[50px] lg:w-[100px] lg:px-">
                       ₦ {formatNumber(Number(order.product_amount))}
                       </div>
+
                       <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
                       <div className="hidden lg:flex"><button className="bg-[#31603D] border border-[#31603D] text-white px-8 rounded-[50px]">View</button></div>
                     </div>

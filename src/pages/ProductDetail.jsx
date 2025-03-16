@@ -587,10 +587,10 @@ function ProductDetail() {
 
     
 
-   <div className='mt-4 grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[40px] lg:gap-x-[20px] lg:w-[70%]'>
+   <div className='mt-4 fle grid grid-cols-2 items-center lg:flex lg:flex-wrap gap-x-16 gap-y-4 lg:justify-start'>
     {product2.peopleAlsoBought && product2.peopleAlsoBought.length > 0 ? (
   product2.peopleAlsoBought.map((products2) => (
-    <div className="mb-[30px] cursor-pointer fle justify-cente gap-x-" key={products2.id}>
+    <div className="mb-[30px cursor-pointer relative fle justify-cente relative gap-x-" key={products2.id}>
       <div className="flex flex-row justify-center lg:flex lg:flex-wrap lg:justify-start">
         <div className="flex flex-col gap-y-[10px] relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
           <div className="flex justify-center px-[50px]">
@@ -602,7 +602,7 @@ function ProductDetail() {
             {state.token && (
               <div
                 onClick={() => addToCart2(products2)}
-                className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+                className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
               >
                 <FaPlus className="text-[white]" />
               </div>
@@ -610,7 +610,7 @@ function ProductDetail() {
             {!state.token && (
               <div
                 onClick={() => handleSecondAdd2(products2)}
-                className="absolute group ml-[140px] lg:ml-[150px] mt-[5px] cursor-pointer border bg-[#31603D] rounded-full p-[7px] group"
+                className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
               >
                 <FaPlus className="text-[white]" />
               </div>
@@ -650,6 +650,9 @@ function ProductDetail() {
   <p></p>
 )}
 </div>
+
+
+
 
 
 <div className="flex justify-center lg:justify-end">

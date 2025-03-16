@@ -396,7 +396,7 @@ function Search() {
             result.data.products.slice(0, 4).map((product) => (
               <div className="mb-[30px] cursor-pointer fle justify-cente gap-x- relative" key={product.id}>
                 <div className="flex flex-row justify-center lg:flex lg:flex-wrap lg:justify-start">
-                  <div className="flex flex-col gap-y-[10px]relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
+                  <div className="flex flex-col gap-y-[10px] relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
                     <div className="flex justify-center px-[50px]">
                       <img
                         onClick={() =>
