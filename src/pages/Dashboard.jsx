@@ -700,30 +700,33 @@ useEffect(() => {
                           Order ID #{order.order_id}
                         </div>
 
-                        {order.status === "0" && (<div className="flex items-center gap-x-[5px] text-[12px]">
-                          <div><TfiPackage className='size-[15px] text-[#31603D]'/></div>
-                          <div className="whitespace-nowrap text-[15px] text-[#31603D]">Awaiting Pick-up</div>
-                        </div>)}
+                        {order.payment_status === 1 && (
+                          <>
+                          {order.status === "0" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><TfiPackage className='size-[15px] text-[#31603D]'/></div>
+                            <div className="whitespace-nowrap text-[15px] text-[#31603D]">Awaiting Pick-up</div>
+                          </div>)}
+  
+                          {order.status === "1" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><TbTruckDelivery className='size-[15px] text-[#31603D]'/></div>
+                            <div className="whitespace-nowrap text-[15px] text-[#31603D]">In Transit</div>
+                          </div>)}
+  
+                          {order.status === "2" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><LiaLuggageCartSolid className='size-[15px] text-[#31603D]'/></div>
+                            <div className="whitespace-nowrap text-[15px] text-[#31603D]">Delivered</div>
+                          </div>)}
+  
+                          {order.status === "3" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><MdOutlineCancel className='size-[15px] text-[#D23D23]'/></div>
+                            <div className="whitespace-nowrap text-[15px] text-[#D23D23]">Cancelled</div>
+                          </div>)}
+                       </> )}
 
-                        {order.status === "1" && (<div className="flex items-center gap-x-[5px] text-[12px]">
-                          <div><TbTruckDelivery className='size-[15px] text-[#31603D]'/></div>
-                          <div className="whitespace-nowrap text-[15px] text-[#31603D]">In Transit</div>
-                        </div>)}
-
-                        {order.status === "2" && (<div className="flex items-center gap-x-[5px] text-[12px]">
-                          <div><LiaLuggageCartSolid className='size-[15px] text-[#31603D]'/></div>
-                          <div className="whitespace-nowrap text-[15px] text-[#31603D]">Delivered</div>
-                        </div>)}
-
-                        {order.status === "3" && (<div className="flex items-center gap-x-[5px] text-[12px]">
-                          <div><MdOutlineCancel className='size-[15px] text-[#D23D23]'/></div>
-                          <div className="whitespace-nowrap text-[15px] text-[#D23D23]">Cancelled</div>
-                        </div>)}
-                        
-                        {/* {order.payment_status === 0 && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                        {order.payment_status === 0 && (<div className="flex items-center gap-x-[5px] text-[12px]">
                           <div><AiOutlineExclamationCircle className='size-[15px] text-[#EED202]'/></div>
                           <div className="whitespace-nowrap text-[15px] text-[#EED202]">Pending Payment</div>
-                        </div>)} */}
+                        </div>)}
 
                       </div>
                       <div className="lg:w-[300px] w-[250px] truncate text-[15px] lg:text-[17px]">
@@ -736,8 +739,16 @@ useEffect(() => {
                       ₦ {formatNumber(Number(order.product_amount))}
                       </div>
 
-                      <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
+                      {order.payment_status === 1 && ( <>
+                        <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
                       <div className="hidden lg:flex"><button className="bg-[#31603D] border border-[#31603D] text-white px-8 rounded-[50px]">View</button></div>
+                      </>)}
+
+                      {order.payment_status === 0 && ( <>
+                        <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to pay</div>
+                      <div className="hidden lg:flex"><button className="bg-[white] border border-[#31603D] border-[2px] text-[#31603D] px-8 rounded-[50px]">Pay</button></div>
+                      </>)}
+
                     </div>
                   </div>
                 </div>
