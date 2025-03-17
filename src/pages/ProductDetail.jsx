@@ -587,7 +587,7 @@ function ProductDetail() {
 
     
 
-   <div className='mt-4 fle grid grid-cols-2 items-center lg:flex lg:flex-wrap gap-x-16 gap-y-4 lg:justify-start'>
+   <div className='mt-4 fle grid grid-cols-2 items-center lg:flex lg:flex-wrap gap-x-16 lg:gap-x-6 gap-y-4 lg:justify-start'>
     {product2.peopleAlsoBought && product2.peopleAlsoBought.length > 0 ? (
   product2.peopleAlsoBought.map((products2) => (
     <div className="mb-[30px cursor-pointer relative fle justify-cente relative gap-x-" key={products2.id}>

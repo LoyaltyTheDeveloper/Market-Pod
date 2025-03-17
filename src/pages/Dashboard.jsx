@@ -27,6 +27,7 @@ function UserDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const { state , dispatch} = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (location.state?.showOrders) {
@@ -255,11 +256,13 @@ useEffect(() => {
     .then((response) => response.json())
     .then((data) => {
       setIsLoading(false);
-      setOrders(data.data)
+      setOrders(data.data);
+      setError(null);
     }
     )
     .catch((error) => {
       setIsLoading(false);
+      setError(error.message)
       console.error(error)})
 }, [])
 
@@ -763,6 +766,13 @@ useEffect(() => {
       </>
     ) : (
       <>
+      {error && (<>
+      <div className='flex flex-col mt-[50%] lg:whitespace-nowrap lg:mt-[100%] lg:pl-[160%] items-center justify-center'>
+        {error}
+      </div>
+      </>)}
+
+      {!error &&(<>
         {!isLoading && (
           <div className="flex flex-col mt-[50%] lg:whitespace-nowrap lg:mt-[100%] lg:pl-[160%] items-center justify-center">
             <div>You don't have past orders</div>
@@ -771,6 +781,8 @@ useEffect(() => {
             </div>
           </div>
         )}
+      </>)}
+        
       </>
     )}
   </div>
