@@ -391,7 +391,10 @@ function Search() {
         </div>
 
         {/* Products Section */}
-        <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[40px] lg:gap-x-[20px] lg:w-[70%]">
+
+
+
+        {/* <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-x-[40px] lg:gap-x-[20px] lg:w-[70%]">
           {result.data.products && result.data.products.length > 0 ? (
             result.data.products.slice(0, 4).map((product) => (
               <div className="mb-[30px] cursor-pointer fle justify-cente gap-x- relative" key={product.id}>
@@ -432,8 +435,7 @@ function Search() {
                 <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
-                 {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold"> 
-                </div> */}
+                
                  {product.status === 1 && <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">In-stock</div>}
                  {product.status !== 1 && <div className="absolute whitespace-nowra ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">Out of stock</div>}
 
@@ -446,7 +448,82 @@ function Search() {
           ) : (
             <p></p>
           )}
+        </div> */}
+
+        <div className="lg:min-h-scree lg:overflow-y-auto lg:max-h-[865px] no-scrollbar relative flex flex-co gap-y-8">
+  {result.data.products && result.data.products.length > 0 ? (
+    <div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
+      {result.data.products.slice(0, 4).map((product) => (
+        <div className="mt-[10px] relative cursor-pointer" key={product.id}>
+          <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
+            <div className="flex flex-col gap-y-[10px] bg-[white] px-[0px] lg:px-[15px] py-[20px] h-[auto] rounded-[5px]">
+              <div className="flex justify-center px-[50px]">
+                <img
+                  onClick={() => navigate(`/site/getProduct/${product.id}`)}
+                  src={product.image}
+                  className="w-24 h-24 object-contain flex justify-center bg-[white] p-4"
+                />
+                {state.token && (
+                  <div className="absolute top-6 right-2">
+                    <div
+                      onClick={() => addToCart(product)}
+                      className="absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
+                    >
+                      <FaPlus className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                )}
+                {!state.token && (
+                  <div className="absolute top-6 right-2">
+                    <div
+                      onClick={() => handleSecondAdd(product)}
+                      className="absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
+                    >
+                      <FaPlus className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div
+                onClick={() => navigate(`/site/getProduct/${product.id}`)}
+                className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]"
+              >
+                <div className="w-[180px] truncate font-saeada font-semibold lg:w-[150px] text-[16px] lg:text-[18px] h-[40px]">
+                  {product.name}
+                </div>
+                <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">
+                  {product.subtitle}
+                </div>
+                <div className="flex absolut bottom-[180px] lg:bottom-[380px]">
+                  <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
+                    ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  </div>
+                  {product.status === 1 && (
+                    <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
+                      In-stock
+                    </div>
+                  )}
+                  {product.status !== 1 && (
+                    <div className="absolute whitespace-nowrap ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">
+                      Out of stock
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      ))}
+    </div>
+  ) : (
+    <p></p>
+  )}
+</div>
+
+
+
+
+
       </div>
     ))
   ) : (

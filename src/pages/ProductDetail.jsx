@@ -579,54 +579,134 @@ function ProductDetail() {
 
 
 
-    {/* People also bought */}
+   
+    </div>
+    </>)}
 
-    <div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt-4'>People also bought !</div>
+     {/* People also bought */}
 
-    <div className='flex flex-col lg:flex-row lg:justify-between'>
+
+     <div className=''>
 
     
 
-   <div className='mt-4 fle grid grid-cols-2 items-center lg:flex lg:flex-wrap gap-x-16 lg:gap-x-6 gap-y-4 lg:justify-start'>
-    {product2.peopleAlsoBought && product2.peopleAlsoBought.length > 0 ? (
-  product2.peopleAlsoBought.map((products2) => (
-    <div className="mb-[30px cursor-pointer relative fle justify-cente relative gap-x-" key={products2.id}>
-      <div className="flex flex-row justify-center lg:flex lg:flex-wrap lg:justify-start">
-        <div className="flex flex-col gap-y-[10px] relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
+<div className='flex flex-col lg:flex-row lg:justify-between mb-8'>
+
+  <div className='lg:self-end'>
+<div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt- px-10 lg:px-6 lg:mb-20'>People also bought !</div>
+
+{/* <div className=''>
+<div className='mt-4 m-aut fle grid grid-cols-2 justify-center lg:flex lg:flex-wrap ga-x-16 lg:gap-x-6 gap-y-4 lg:justify-start'>
+{product2.peopleAlsoBought && product2.peopleAlsoBought.length > 0 ? (
+product2.peopleAlsoBought.map((products2) => (
+<div className="mb-[30px cursor-pointer relative fle justify-cente relative gap-x- flex" key={products2.id}>
+  <div className="fle flex-ro justify-center lg:flex lg:flex-wrap lg:justify-start">
+    <div className="flex flex-col gap-y-[10px] relative bg-[white] px-[0px] lg:px-[5px] py-[20px] h-[auto] rounded-[5px]">
+      <div className="flex justify-center px-[50px]">
+        <img
+          onClick={() => navigate(`/site/getProduct/${products2.id}`)}
+          src={products2.product_image} 
+          className="w-24 h-24 object-contain flex justify-center"
+        />
+        {state.token && (
+          <div
+            onClick={() => addToCart2(products2)}
+            className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
+          >
+            <FaPlus className="text-[white]" />
+          </div>
+        )}
+        {!state.token && (
+          <div
+            onClick={() => handleSecondAdd2(products2)}
+            className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
+          >
+            <FaPlus className="text-[white]" />
+          </div>
+        )}
+      </div>
+      <div
+        onClick={() => navigate(`/site/getProduct/${products2.id}`)}
+        className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]"
+      >
+        <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
+          {products2.name}
+        </div>
+        <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">
+          {products2.subtitle}
+        </div>
+        <div className="flex absolte bttom-[180px] lg:botom-[380px]">
+          <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
+            ₦ {products2.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </div>
+          {products2.status === 1 && (
+            <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">
+              In-stock
+            </div>
+          )}
+          {products2.status !== 1 && (
+            <div className="absolute whitespace-nowrap ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">
+              Out of stock
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+))
+) : (
+<p></p>
+)}
+</div>
+</div> */}
+
+
+<div className="lg:min-h-scree lg:overflow-y-aut lg:max-h-[865px] justify-center relative flex flex-co gap-y-8 lg:self-end">
+{product2.peopleAlsoBought && product2.peopleAlsoBought.length > 0 ? (
+<div className="grid grid-cols-2 justify-center lg:flex lg:flex-wrap gap-x-[8px] lg:justify-start">
+  {product2.peopleAlsoBought.map((products2) => (
+    <div className="mt-[10px] relative cursor-pointer" key={products2.id}>
+      <div className="justify-center lg:flex lg:flex-wrap gap-[8px] lg:justify-start">
+        <div className="flex flex-col gap-y-[10px] bg-[white] relative px-[0px] lg:px-[15px] py-[20px] h-[auto] rounded-[5px]">
           <div className="flex justify-center px-[50px]">
             <img
               onClick={() => navigate(`/site/getProduct/${products2.id}`)}
-              src={products2.product_image} 
-              className="w-24 h-24 object-contain flex justify-center"
+              src={products2.product_image}
+              className="w-24 h-24 object-contain flex justify-center bg-[white] p-4"
             />
             {state.token && (
-              <div
-                onClick={() => addToCart2(products2)}
-                className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
-              >
-                <FaPlus className="text-[white]" />
+              <div className="absolute top-6 right-2">
+                <div
+                  onClick={() => addToCart2(products2)}
+                  className="absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
+                >
+                  <FaPlus className="w-5 h-5 text-white" />
+                </div>
               </div>
             )}
             {!state.token && (
-              <div
-                onClick={() => handleSecondAdd2(products2)}
-                className="absolute cursor-pointer top-4 right-4 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
-              >
-                <FaPlus className="text-[white]" />
+              <div className="absolute top-6 right-2">
+                <div
+                  onClick={() => handleSecondAdd2(products2)}
+                  className="absolute cursor-pointer top-0 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full p-2"
+                >
+                  <FaPlus className="w-5 h-5 text-white" />
+                </div>
               </div>
             )}
           </div>
           <div
             onClick={() => navigate(`/site/getProduct/${products2.id}`)}
-            className="flex flex-col gap-x-[10px] gap-[10px] px-[10px]"
+            className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]"
           >
-            <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150 px] text-[16px] lg:text-[18px] h-[40px]">
+            <div className="w-[180px] truncate font-saeada font-semibold lg:w-[150px] text-[16px] lg:text-[18px] h-[40px]">
               {products2.name}
             </div>
             <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">
               {products2.subtitle}
             </div>
-            <div className="flex absolte bttom-[180px] lg:botom-[380px]">
+            <div className="flex absolut bottom-0 lg:bottom-[380px]">
               <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {products2.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </div>
@@ -645,40 +725,41 @@ function ProductDetail() {
         </div>
       </div>
     </div>
-  ))
+  ))}
+</div>
 ) : (
-  <p></p>
+<p></p>
 )}
 </div>
-
-
-
-
-
-<div className="flex justify-center lg:justify-end">
-    
-    <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] mt-[30px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[270px]">
-    <div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
-
-    <div className="flex flex-col lg:px-4 lg:py-3 lg:pb-6 lg:flex lg:flex-col gap-y-2">
-        <div className="text-[20px] font-bold">Share the experience</div>
-        <div className="lg:hidden">Invite friends sha</div>
-        <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
-
-
-        <div className="flex items-center gap-x-[5px] cursor-pointer">
-            <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
-        <button onClick={copy} className="underline">Copy Link</button>
-        </div>
-
-        </div>
-    </div>
-    </div>
-
 </div>
 
+
+
+
+
+
+<div className="flex justify-center lg:justify-end relative">
+
+<div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[270px]">
+<div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
+
+<div className="flex flex-col lg:px-4 lg:py-3 lg:pb-6 lg:flex lg:flex-col gap-y-2">
+    <div className="text-[20px] font-bold">Share the experience</div>
+    <div className="lg:hidden">Invite friends sha</div>
+    <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
+
+
+    <div className="flex items-center gap-x-[5px] cursor-pointer absolute bottom-0 lg:mb-4">
+        <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
+    <button onClick={copy} className="underline">Copy Link</button>
     </div>
-    </>)}
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
 
 
     </div>

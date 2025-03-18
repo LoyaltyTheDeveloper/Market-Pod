@@ -570,26 +570,6 @@ function ViewStore() {
                 className="w-24 h-24 w- [100px] h- [100px] object-cove object-contain flex justify-center bg-[white] p-4"
               />
 
-              {/* <div onClick={()=> addToCart(product)} className="flex items-center absolute group ml-[140px] lg:ml-[150px] mt-[5px] border border-[#31603D] bg-[#31603D] rounded-full p-[7px] group">
-                <FaPlus className="text-[white]" />
-              </div> */}
-
-
-    {/* Add to cart button */}
-
-              {/* <div
-              onClick={()=> addToCart(product)}
-        className={`absolute cursor-pointer top-6 right-2 lg:right-4 flex items-center border border-[#31603D] bg-[#31603D] text-white rounded-full shadow-md transition-opacity duration-[2000ms] ease-in-out ${
-          hovered === product.id ? "px-2 py-1 gap-x-1" : "p-2"
-        }`}
-      >
-        <span className={`text-sm font-medium transition-[width] duration-700 ease-in-out ${hovered === product.id ? "opacity-100 w-auto py-[4px] animate-expand-width" : "opacity-0 w-0 h-0"}`}>
-          Add To Cart
-        </span>
-        <div className=""><FaPlus className="w-5 h-5 ml- text-white"/></div>
-      </div> */}
-
-
 {state.token && <div className='absolute top-6 right-2'>
 <div
               onClick={()=> addToCart(product)}
@@ -621,8 +601,6 @@ function ViewStore() {
                 <div className="font-bold font-sans text-[14px] lg:text-[16px] h-[10px] lg:h-[30px]">
                 ₦ {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
-                 {/* <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold"> 
-                </div> */}
                  {product.status === 1 && <div className="absolute whitespace-nowrap ml-[140px] text-[#31603D] text-[10px] lg:text-[12px] font-semibold">In-stock</div>}
                  {product.status !== 1 && <div className="absolute whitespace-nowra ml-[140px] text-[#D23D23] text-[10px] lg:text-[12px] font-semibold">Out of stock</div>}
 
