@@ -797,7 +797,7 @@ product2.peopleAlsoBought.map((products2) => (
     <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
 
 
-    <div className="flex items-center gap-x-[5px] cursor-pointer absolute bottom-0 lg:mb-4">
+    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-0 lg:mb-4">
         <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
     <button onClick={copy} className="underline">Copy Link</button>
     </div>
