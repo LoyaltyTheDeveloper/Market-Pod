@@ -159,6 +159,11 @@ function ViewStore() {
           navigate('/signin');
           dispatch({ type: 'LOG_OUT', payload: { token: null } })
         } 
+          if(response.status === 400){
+           setSwitchStore(true);
+          throw new Error();
+          }
+         
         return response.json()}
       )
         .then((data) => {
@@ -242,8 +247,8 @@ function ViewStore() {
     // go to the landing page
     const goToLanding = () => {
       setCartError(false);
-      clearCart();
-      navigate('/');
+      setSwitchStore(false);
+      // navigate('/');
     }
 
     const closeSwitch = () => {

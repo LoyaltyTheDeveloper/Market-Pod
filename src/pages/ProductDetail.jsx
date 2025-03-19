@@ -97,7 +97,21 @@ function ProductDetail() {
         },
         body: JSON.stringify({ product_id: product.data.id }),
       })
-      .then((response) => response.json())
+      .then((response) =>{
+
+        if (response.status === 403) {
+                  toast.error("Your session has expired");
+                  localStorage.removeItem('user');
+                  navigate('/signin');
+                  dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                } 
+      
+        if(response.status === 400){
+        setSwitchStore(true);
+        throw new Error();
+        }
+      
+       return response.json()})
         .then((data) => {
           setIsLoading(false);
           setModalProduct(product.data);
@@ -126,7 +140,23 @@ function ProductDetail() {
             },
             body: JSON.stringify({ product_id: product2.id }),
           })
-          .then((response) => response.json())
+          .then((response) => 
+            {
+
+              if (response.status === 403) {
+                        toast.error("Your session has expired");
+                        localStorage.removeItem('user');
+                        navigate('/signin');
+                        dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                      } 
+      
+              if(response.status === 400){
+              setSwitchStore(true);
+              throw new Error();
+              }
+            
+             return response.json()}
+          )
             .then((data) => {
               setIsLoading(false);
               setModalProduct3(product2);
@@ -165,10 +195,17 @@ function ProductDetail() {
                   navigate('/signin');
                   dispatch({ type: 'LOG_OUT', payload: { token: null } })
                 } 
-                return response.json()}
+      
+                  if(response.status === 400){
+                  setSwitchStore(true);
+                  throw new Error();
+                  }    
+                return response.json();       
+              }
         )
           .then((data) => {
             setIsLoading(false);
+            navigate('/checkout');
             // handleOpen();
             // toast.success(data.message);
             return;
@@ -178,7 +215,6 @@ function ProductDetail() {
             console.error(error);
             return;
           });
-    navigate('/checkout');
   }
 
   const buyNow2 = (id) => {
@@ -289,8 +325,8 @@ function ProductDetail() {
 
     const goToLanding = () => {
       setCartError(false);
-      clearCart();
-      navigate('/');
+      // navigate('/');
+      setSwitchStore(false);
     }
 
     const closeSwitch = () => {

@@ -118,7 +118,23 @@ function Search() {
           },
           body: JSON.stringify({ product_id: product.id }),
         })
-        .then((response) => response.json())
+        .then((response) => 
+          {
+            if (response.status === 403) {
+                      toast.error("Your session has expired");
+                      localStorage.removeItem('user');
+                      navigate('/signin');
+                      dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                    } 
+                    
+            if(response.status === 400){
+            setSwitchStore(true);
+            throw new Error();
+            }
+          
+           return response.json()}
+        
+        )
           .then((data) => {
             setIsLoading(false);
             setModalProduct(product);
@@ -167,7 +183,7 @@ function Search() {
 
           const goToLanding = () => {
             setCartError(false);
-            clearCart();
+            setSwitchStore(false);
           }
 
       const formatNumber = (num) => {
