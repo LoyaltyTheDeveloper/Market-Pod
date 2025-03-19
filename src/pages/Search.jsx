@@ -46,9 +46,10 @@ function Search() {
 
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [searchResults, setSearchResults] = useState(initialResults); 
-  const { addToCartOne } = useContext(CartContext);
+  const { addToCartOne, cartError, setCartError, clearCart } = useContext(CartContext);
   const [modalProduct, setModalProduct] = useState(null);
   const [modalProduct2, setModalProduct2] = useState(null);
+  const [switchStore, setSwitchStore] = useState(false);
 
 
   useEffect(() => {
@@ -147,10 +148,26 @@ function Search() {
         setIsDialog2(false);
       };
 
-      const handleSecondAdd = (product) => {       
+      const handleSecondAdd = (product) => { 
+        if(cartError){
+          setSwitchStore(true);
+          return;
+         }      
+            else {  
               handleOpen2();
               addToCartOne(product);
               setModalProduct2(product);
+            }
+          }
+
+          const closeSwitch = () => {
+            setCartError(false);
+            setSwitchStore(false);
+          }
+
+          const goToLanding = () => {
+            setCartError(false);
+            clearCart();
           }
 
       const formatNumber = (num) => {
@@ -300,6 +317,30 @@ function Search() {
 
 
     </React.Fragment>
+
+    {switchStore && (
+  <div 
+    className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
+    onClick={closeSwitch} 
+  >
+    <div 
+      className="bg-white p-6 rounded-lg shadow-lg text-center w-80"
+      onClick={(e) => e.stopPropagation()} 
+    >
+      <h1 className='font-bold text-[22px] mb-2'>Switch Stores ?</h1>
+      <p className="text-[15px] mb-4">
+      Are you sure you want to switch stores, items
+      in your cart would be discarded.
+      </p>
+      <button 
+        onClick={goToLanding} 
+        className="rounded-full px-20 py-2 border border-[#31603D] text-white bg-[#31603D] hover:bg-green-700"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+)}
 
 
 

@@ -39,7 +39,7 @@ function ProductDetail() {
    const [isLoading, setIsLoading] = useState(false);
    const { state, dispatch } = useContext(AuthContext);
    const navigate = useNavigate();
-   const { addToCartOne } = useContext(CartContext);
+   const { addToCartOne, cartError, setCartError, clearCart } = useContext(CartContext);
    const [isDialog, setIsDialog] = React.useState(false);
    const [isDialog2, setIsDialog2] = React.useState(false);
    const [isDialog3, setIsDialog3] = React.useState(false);
@@ -49,6 +49,7 @@ function ProductDetail() {
    const [modalProduct3, setModalProduct3] = useState(null);
    const [modalProduct4, setModalProduct4] = useState(null);
    const [product2, setProduct2] = useState([]);
+   const [switchStore, setSwitchStore] = useState(false);
 
    const handleOpen = () => {
     setIsDialog(true);
@@ -182,6 +183,10 @@ function ProductDetail() {
 
   const buyNow2 = (id) => {
     // addToCart(id);
+    if(cartError){
+      setSwitchStore(true);
+      return;
+     }
     if (!isOpen) {
       return toast.error("The store for this product is closed");
     }
@@ -192,6 +197,10 @@ function ProductDetail() {
   }
 
   const handleSecondAdd = (id) => {
+    if(cartError){
+      setSwitchStore(true);
+      return;
+     }
     if (!isOpen) {
       return toast.error("The store for this product is closed");
     }
@@ -202,6 +211,10 @@ function ProductDetail() {
      }
   }
   const handleSecondAdd2 = (product2) => {
+    if(cartError){
+      setSwitchStore(true);
+      return;
+     }
     if (!isOpen) {
       return toast.error("The store for this product is closed");
     }
@@ -274,6 +287,17 @@ function ProductDetail() {
         .catch((error) => console.error('Error fetching comments', error))
     }, [productId])
 
+    const goToLanding = () => {
+      setCartError(false);
+      clearCart();
+      navigate('/');
+    }
+
+    const closeSwitch = () => {
+      setCartError(false);
+      setSwitchStore(false);
+    }
+
     const formatNumber = (num) => {
       return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
@@ -285,6 +309,30 @@ function ProductDetail() {
   return (<>
   <Navbar/>
     <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
+
+    {switchStore && (
+  <div 
+    className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
+    onClick={closeSwitch} 
+  >
+    <div 
+      className="bg-white p-6 rounded-lg shadow-lg text-center w-80"
+      onClick={(e) => e.stopPropagation()} 
+    >
+      <h1 className='font-bold text-[22px] mb-2'>Switch Stores ?</h1>
+      <p className="text-[15px] mb-4">
+      Are you sure you want to switch stores, items
+      in your cart would be discarded.
+      </p>
+      <button 
+        onClick={goToLanding} 
+        className="rounded-full px-20 py-2 border border-[#31603D] text-white bg-[#31603D] hover:bg-green-700"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+)}
 
     <React.Fragment>
       <Dialog
@@ -738,7 +786,7 @@ product2.peopleAlsoBought.map((products2) => (
 
 
 
-<div className="flex justify-center lg:justify-end relative">
+<div className="flex justify-center lg:justify-end relative my-4 lg:my-0">
 
 <div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[270px]">
 <div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
