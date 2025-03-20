@@ -126,7 +126,7 @@ function Search() {
                       navigate('/signin');
                       dispatch({ type: 'LOG_OUT', payload: { token: null } })
                     } 
-                    
+
             if(response.status === 400){
             setSwitchStore(true);
             throw new Error();
@@ -335,7 +335,7 @@ function Search() {
     </React.Fragment>
 
     {switchStore && (
-  <div 
+ <div 
     className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
     onClick={closeSwitch} 
   >
@@ -348,12 +348,24 @@ function Search() {
       Are you sure you want to switch stores, items
       in your cart would be discarded.
       </p>
+      <div className='flex flex-row justify-center gap-x-2'>
+        <div>
       <button 
         onClick={goToLanding} 
-        className="rounded-full px-20 py-2 border border-[#31603D] text-white bg-[#31603D] hover:bg-green-700"
+        className="rounded-full text-sm  w-[120px] px- py-3 border border-[#31603D] text-[#31603D] bg-[] hover:bg-[#31603D] hover:text-[white]"
       >
-        Continue
+        No
       </button>
+      </div>
+      <div>
+      <button 
+        onClick={goToLanding} 
+        className="rounded-full text-sm w-[120px] px- py-3 border border-[#31603D] text-white bg-[#31603D] hover:bg-[white] hover:text-[#31603D]"
+      >
+        Yes, Procced
+      </button>
+      </div>
+      </div>
     </div>
   </div>
 )}
@@ -368,7 +380,7 @@ function Search() {
 
 
 
-<div className="mt-4 flex flex-col lg:flex-wrap gap-x-[50px] gap-y-[30px]">
+<div className="mt-4 flex flex-col lg:flex-wrap gap-x-[0px] gap-y-[30px]">
   {searchResults.length > 0 ? (
     searchResults.map((result) => (
       <div
@@ -376,7 +388,7 @@ function Search() {
         className="lg:w-full flex flex-col lg:flex-row lg:flex-wra gap-y-[20px]"
       >
         {/* Store Section */}
-        <div className="lg:border lg:border-transparent flex flex-col justify-center lg:flex-col lg:px-[10px] lg:w-[30%]">
+        <div className="lg:border lg:border-transparent flex flex-col justify-center lg:flex-col lg:px-[10px] lg:w-[30%">
           <div className="flex justify-normal">
             <div className="flex lg:flex-col justify-center lg:justify-start gap-[20px] px-[10px]">
               <div className="h-[100px lg:size-[150px flex flex-row gap-x-[20px]">
@@ -545,7 +557,7 @@ function Search() {
                 onClick={() => navigate(`/site/getProduct/${product.id}`)}
                 className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]"
               >
-                <div className="w-[180px] truncate font-saeada font-semibold lg:w-[150px] text-[16px] lg:text-[18px] h-[40px]">
+                <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150px] text-[16px] lg:text-[18px] h-[40px]">
                   {product.name}
                 </div>
                 <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">

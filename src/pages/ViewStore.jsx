@@ -297,12 +297,24 @@ function ViewStore() {
       Are you sure you want to switch stores, items
       in your cart would be discarded.
       </p>
+      <div className='flex flex-row justify-center gap-x-2'>
+        <div>
       <button 
         onClick={goToLanding} 
-        className="rounded-full px-20 py-2 border border-[#31603D] text-white bg-[#31603D] hover:bg-green-700"
+        className="rounded-full text-sm  w-[120px] px- py-3 border border-[#31603D] text-[#31603D] bg-[] hover:bg-[#31603D] hover:text-[white]"
       >
-        Continue
+        No
       </button>
+      </div>
+      <div>
+      <button 
+        onClick={goToLanding} 
+        className="rounded-full text-sm w-[120px] px- py-3 border border-[#31603D] text-white bg-[#31603D] hover:bg-[white] hover:text-[#31603D]"
+      >
+        Yes, Procced
+      </button>
+      </div>
+      </div>
     </div>
   </div>
 )}

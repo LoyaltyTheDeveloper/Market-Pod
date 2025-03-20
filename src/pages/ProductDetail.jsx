@@ -347,27 +347,39 @@ function ProductDetail() {
     <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
 
     {switchStore && (
-  <div 
-    className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
-    onClick={closeSwitch} 
-  >
-    <div 
-      className="bg-white p-6 rounded-lg shadow-lg text-center w-80"
-      onClick={(e) => e.stopPropagation()} 
-    >
-      <h1 className='font-bold text-[22px] mb-2'>Switch Stores ?</h1>
-      <p className="text-[15px] mb-4">
-      Are you sure you want to switch stores, items
-      in your cart would be discarded.
-      </p>
-      <button 
-        onClick={goToLanding} 
-        className="rounded-full px-20 py-2 border border-[#31603D] text-white bg-[#31603D] hover:bg-green-700"
-      >
-        Continue
-      </button>
-    </div>
-  </div>
+ <div 
+ className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
+ onClick={closeSwitch} 
+>
+ <div 
+   className="bg-white p-6 rounded-lg shadow-lg text-center w-80"
+   onClick={(e) => e.stopPropagation()} 
+ >
+   <h1 className='font-bold text-[22px] mb-2'>Switch Stores ?</h1>
+   <p className="text-[15px] mb-4">
+   Are you sure you want to switch stores, items
+   in your cart would be discarded.
+   </p>
+   <div className='flex flex-row justify-center gap-x-2'>
+     <div>
+   <button 
+     onClick={goToLanding} 
+     className="rounded-full text-sm  w-[120px] px- py-3 border border-[#31603D] text-[#31603D] bg-[] hover:bg-[#31603D] hover:text-[white]"
+   >
+     No
+   </button>
+   </div>
+   <div>
+   <button 
+     onClick={goToLanding} 
+     className="rounded-full text-sm w-[120px] px- py-3 border border-[#31603D] text-white bg-[#31603D] hover:bg-[white] hover:text-[#31603D]"
+   >
+     Yes, Procced
+   </button>
+   </div>
+   </div>
+ </div>
+</div>
 )}
 
     <React.Fragment>
@@ -674,7 +686,7 @@ function ProductDetail() {
 
     
 
-<div className='flex flex-col lg:flex-row lg:justify-between mb-8'>
+<div className='flex flex-col lg:flex-row lg:justify-between mb-8 lg:px-6'>
 
   <div className='lg:self-end'>
 <div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt- px-10 lg:px-6 lg:mb-20'>People also bought !</div>
@@ -784,7 +796,7 @@ product2.peopleAlsoBought.map((products2) => (
             onClick={() => navigate(`/site/getProduct/${products2.id}`)}
             className="flex flex-col gap-x-[10px] gap-y-[10px] px-[10px]"
           >
-            <div className="w-[180px] truncate font-saeada font-semibold lg:w-[150px] text-[16px] lg:text-[18px] h-[40px]">
+            <div className="w-[180px] truncat font-saeada font-semibold lg:w-[150px] text-[16px] lg:text-[18px] h-[40px]">
               {products2.name}
             </div>
             <div className="text-[13px] w-[150px] lg:text-[13px] h-[30px] font-sans">
