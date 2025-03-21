@@ -186,6 +186,43 @@ function Search() {
             setSwitchStore(false);
           }
 
+          const clearUserCart = () => {
+                setIsLoading(true);
+                 
+                  fetch('https://apis.emarketpod.com/user/cart/remove-all', {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: state.token,
+                    }
+                  })
+                  .then((response) => {
+                    if (response.status === 403) {
+                      toast.error("Your session has expired");
+                      localStorage.removeItem('user');
+                      navigate('/signin');
+                      dispatch({ type: 'LOG_OUT', payload: { token: null } })
+                    } 
+                      if(response.status === 400){
+                       setSwitchStore(true);
+                      throw new Error();
+                      }
+                     
+                    return response.json()}
+                  )
+                    .then((data) => {
+                      setIsLoading(false);
+                      toast.success("Cart products removed successfully");
+                      goToLanding();
+                      return;
+                    })
+                    .catch((error) => {
+                      setIsLoading(false);
+                      toast.error("There was an error removing cart products");
+                      return;
+                    });
+                }; 
+
       const formatNumber = (num) => {
         return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       };
@@ -359,7 +396,7 @@ function Search() {
       </div>
       <div>
       <button 
-        onClick={goToLanding} 
+        onClick={clearUserCart} 
         className="rounded-full text-sm w-[120px] px- py-3 border border-[#31603D] text-white bg-[#31603D] hover:bg-[white] hover:text-[#31603D]"
       >
         Yes, Procced

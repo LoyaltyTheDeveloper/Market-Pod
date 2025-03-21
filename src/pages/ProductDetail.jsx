@@ -334,6 +334,43 @@ function ProductDetail() {
       setSwitchStore(false);
     }
 
+    const clearUserCart = () => {
+          setIsLoading(true);
+           
+            fetch('https://apis.emarketpod.com/user/cart/remove-all', {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: state.token,
+              }
+            })
+            .then((response) => {
+              if (response.status === 403) {
+                toast.error("Your session has expired");
+                localStorage.removeItem('user');
+                navigate('/signin');
+                dispatch({ type: 'LOG_OUT', payload: { token: null } })
+              } 
+                if(response.status === 400){
+                 setSwitchStore(true);
+                throw new Error();
+                }
+               
+              return response.json()}
+            )
+              .then((data) => {
+                setIsLoading(false);
+                toast.success("Cart products removed successfully");
+                goToLanding();
+                return;
+              })
+              .catch((error) => {
+                setIsLoading(false);
+                toast.error("There was an error removing cart products");
+                return;
+              });
+          }; 
+
     const formatNumber = (num) => {
       return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
@@ -344,7 +381,7 @@ function ProductDetail() {
 
   return (<>
   <Navbar/>
-    <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden">
+    <div className="min-h-screen bg-[#F9F9F9] overflow-x-hidden overflow-y-hidden lg:px-6">
 
     {switchStore && (
  <div 
@@ -371,7 +408,7 @@ function ProductDetail() {
    </div>
    <div>
    <button 
-     onClick={goToLanding} 
+     onClick={clearUserCart} 
      className="rounded-full text-sm w-[120px] px- py-3 border border-[#31603D] text-white bg-[#31603D] hover:bg-[white] hover:text-[#31603D]"
    >
      Yes, Procced
@@ -633,7 +670,7 @@ function ProductDetail() {
 
 
 {product && (<>
-    <div className="px-[20px] mt-[20px] mb-[50px]">
+    <div className="px-[20px] mt-[20px] mb-[50px">
     <div className="flex gap-x-[10px] text-[15px]">
         <div className='cursor-pointer' onClick={() => navigate(-1)}>{product.data.store_name}</div>
         /
@@ -679,6 +716,10 @@ function ProductDetail() {
     </div>
     </>)}
 
+    <div className='py-4 px-4 lg:py-0'>
+      <hr className='hidden lg:flex py-8'></hr>
+    </div>
+
      {/* People also bought */}
 
 
@@ -686,10 +727,10 @@ function ProductDetail() {
 
     
 
-<div className='flex flex-col lg:flex-row lg:justify-between mb-8 lg:px-6'>
+<div className='flex flex-col lg:flex-row lg:justify-between mb-8 lg:px-6 lg:gap-x-'>
 
   <div className='lg:self-end'>
-<div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt- px-10 lg:px-6 lg:mb-20'>People also bought !</div>
+<div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt- px-2 lg:mb-20'>People also bought !</div>
 
 {/* <div className=''>
 <div className='mt-4 m-aut fle grid grid-cols-2 justify-center lg:flex lg:flex-wrap ga-x-16 lg:gap-x-6 gap-y-4 lg:justify-start'>
@@ -834,18 +875,18 @@ product2.peopleAlsoBought.map((products2) => (
 
 
 
-<div className="flex justify-center lg:justify-end relative my-4 lg:my-0">
+<div className="flex justify-center lg:justify-end relative my-4 lg:my-0 lg:w-[270px]">
 
-<div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px] bg-[#31603D] border border-[#31603D] rounded-[8px] w-[95%] lg:w-[270px]">
-<div className="hidden lg:flex"><img className="object-cover" src={productdetail}/></div>
+<div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px bg-[#31603D] border border-[#31603D] rounded-[8px] w-[90%] lg:w-[300px]">
+<div className="hidden lg:flex h-[190px]"><img className="object-cover" src={productdetail}/></div>
 
-<div className="flex flex-col lg:px-4 lg:py-3 lg:pb-6 lg:flex lg:flex-col gap-y-2">
+<div className="flex flex-col lg:px-4 lg:py- lg:pb-6 lg:flex lg:flex-col gap-y-2 lg:gap-y-1">
     <div className="text-[20px] font-bold">Share the experience</div>
     <div className="lg:hidden">Invite friends sha</div>
     <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
 
 
-    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-0 lg:mb-4">
+    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-2 lg:mb-4">
         <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
     <button onClick={copy} className="underline">Copy Link</button>
     </div>
