@@ -4,6 +4,10 @@ import { toast } from 'react-hot-toast';
 export const CartContext = createContext();
 
  export const CartProvider = ({ children }) => {
+  const [updateNavbar, setUpdateNavbar] = useState(false);
+  const triggerNavbarUpdate = () => {
+    setUpdateNavbar((prev) => !prev); 
+  };
 
     const [cartOne, setCartOne] = useState(() => {
       const savedCart = localStorage.getItem("cart");
@@ -109,7 +113,9 @@ export const CartContext = createContext();
             removeFromCart,
             clearCart,
             cartError,
-            setCartError
+            setCartError,
+            updateNavbar, 
+            triggerNavbarUpdate
           }}
         >
           {children}

@@ -59,7 +59,7 @@ function Navbar() {
       }, {})
       : {}
   );
-  const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useContext(CartContext);
+  const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, updateNavbar } = useContext(CartContext);
 
 
   //  const getProducts = () => {
@@ -420,6 +420,8 @@ function Navbar() {
 
 
 
+
+
 // const isCartEmpty =()=> {
 //   return(<>
 //      <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
@@ -619,7 +621,7 @@ function Navbar() {
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
       <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px]">
         <div className="flex justify-between h-[70px]">
-          <div className="flex items-center">
+          <div className="flex items-center">  {updateNavbar ? "" : ""}
             
           {isSearchLoading && <div className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
           size="70"
@@ -943,10 +945,7 @@ function Navbar() {
       </div>
     </nav>
 
-
-
-
-    <div>
+    <div>  {updateNavbar ? "" : ""}
       <div className={`fixed top-0 right-0 w-[100%] md:w-[55%] lg:w-[400px] h-full bg-white shadow-lg transition-transform transform ${isCartOpen ? "translate-x-0" : "translate-x-full"} z-50 flex flex-col`}>
 
         <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">

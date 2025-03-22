@@ -730,7 +730,7 @@ function ProductDetail() {
 <div className='flex flex-col lg:flex-row lg:justify-between mb-8 lg:px-6 lg:gap-x-'>
 
   <div className='lg:self-end'>
-<div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt- px-2 lg:mb-20'>People also bought !</div>
+<div className='font-semibold font-saeada text-[20px] lg:text-[30px] mt- px-2 lg:mb-10'>People also bought !</div>
 
 {/* <div className=''>
 <div className='mt-4 m-aut fle grid grid-cols-2 justify-center lg:flex lg:flex-wrap ga-x-16 lg:gap-x-6 gap-y-4 lg:justify-start'>
@@ -875,25 +875,34 @@ product2.peopleAlsoBought.map((products2) => (
 
 
 
-<div className="flex justify-center lg:justify-end relative my-4 lg:my-0 lg:w-[270px]">
+<div className="flex justify-center lg:justify-end relative my-4 lg:my-0 lg:w-[240px]">
 
-<div className="flex flex-col text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px bg-[#31603D] border border-[#31603D] rounded-[8px] w-[90%] lg:w-[300px]">
-<div className="hidden lg:flex h-[190px]"><img className="object-cover" src={productdetail}/></div>
+<div className="flex flex-col lg:self-end lg:h-[350px] text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px bg-[#31603D] border border-[#31603D] rounded-[8px] w-[90%] lg:w-[300px]">
 
-<div className="flex flex-col lg:px-4 lg:py- lg:pb-6 lg:flex lg:flex-col gap-y-2 lg:gap-y-1">
+<div className="hidden lg:flex h-[190px h-full">
+  <img className="object-cover" src={productdetail}/>
+  </div>
+
+<div className="flex flex-col lg:px-4 lg:py- lg:pb-10 lg:fle lg:flex-col gap-y-2 lg:gap-y-">
     <div className="text-[20px] font-bold">Share the experience</div>
     <div className="lg:hidden">Invite friends sha</div>
-    <div className="hidden lg:flex">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
+    <div className="hidden lg:flex text-[14px]">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
 
 
-    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-2 lg:mb-4">
+    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-2 lg:mt-8 lg:mb-">
         <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
     <button onClick={copy} className="underline">Copy Link</button>
     </div>
 
     </div>
 </div>
+
 </div>
+
+
+
+
+
 
 </div>
 </div>
