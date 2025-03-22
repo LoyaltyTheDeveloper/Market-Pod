@@ -879,19 +879,19 @@ product2.peopleAlsoBought.map((products2) => (
 
 <div className="flex flex-col lg:self-end lg:h-[350px] text-[white] lg:px-[0px] lg:py-[0px] px-[30px] py-[20px] gap-[10px] lg:mt-[10px bg-[#31603D] border border-[#31603D] rounded-[8px] w-[90%] lg:w-[300px]">
 
-<div className="hidden lg:flex h-[190px h-full">
+<div className="hidden lg:flex h-[150px] h-ful">
   <img className="object-cover" src={productdetail}/>
   </div>
 
 <div className="flex flex-col lg:px-4 lg:py- lg:pb-10 lg:fle lg:flex-col gap-y-2 lg:gap-y-">
-    <div className="text-[20px] font-bold">Share the experience</div>
-    <div className="lg:hidden">Invite friends sha</div>
-    <div className="hidden lg:flex text-[14px]">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
+    <div className="text-[20px] font-bold font-saeada">Share the experience</div>
+    <div className="lg:hidden font-sans">Invite friends sha</div>
+    <div className="hidden lg:flex text-[14px] font-sans">Love how easy it is to get fresh groceries from your local markets? Why not share the convenience with your friends!</div>
 
 
-    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-2 lg:mt-8 lg:mb-">
+    <div className="flex items-center gap-x-[5px] cursor-pointer lg:absolute bottom-2 lg:mt- lg:mb-">
         <div onClick={copy} className="hidden lg:flex"><MdOutlineContentCopy className="size-[20px]"/></div>
-    <button onClick={copy} className="underline">Copy Link</button>
+    <button onClick={copy} className="underline font-sans">Copy Link</button>
     </div>
 
     </div>
