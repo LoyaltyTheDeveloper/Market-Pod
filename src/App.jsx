@@ -26,6 +26,7 @@ import { Toaster } from 'react-hot-toast';
 import Checkout from './pages/Checkout';
 import Dashboard from './pages/Dashboard';
 import Location from './pages/Location';
+import { CartProvider } from './context/CartContext';
 
 
 
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <>
+    <CartProvider>
     <Router>
       <Scroll/>
       <Routes>
@@ -62,6 +64,7 @@ function App() {
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Router>
+    </CartProvider>
     </>
   )
 }

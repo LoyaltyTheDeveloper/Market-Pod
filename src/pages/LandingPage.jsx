@@ -146,6 +146,8 @@ useEffect(() => {
     .catch((error) => console.error(error));
 }, []);
 
+
+
 const marketsss = Array.isArray(searchResults) ? searchResults.filter((result) => result.type === "market") : [];
 const products = Array.isArray(searchResults) ? searchResults.filter((result) => result.type === "product") : [];
 
@@ -301,7 +303,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                     }`}
                   />
 
-                  {store.isOpen && (
+                  {store.isOpen === false && (
                    <div className="absolute inset-0 flex rounded-tl-[10px] rounded-tr-[10px] items-center justify-center bg-black bg-opacity-50 text-white text-lg ">
                       Opens at {store.open_time}
                   </div>
@@ -473,9 +475,20 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
           <div className="text-[12px]"><span className="underline">Ilorin, Kwara State.</span> <span>Explore them all with</span></div>
           <div className="text-[12px]">Market Pod today !</div>
           {/* <div onClick={() => navigate(`/site/getStores/${1}/${market.name}/${market.addr}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div> */}
-          <div onClick={() => navigate(`/site/getStores/${1}/${"Yoruba Road"}/${"No 34 off GRA, Adelewola Akinwuyi Road, Ilorin, Kwara State."}`)}><button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">View more</button></div>
-
-
+        
+    
+          <div
+  onClick={() => {
+    if (marketss && marketss.length > 0) {
+      const firstMarket = marketss[0]; 
+      navigate(`/site/getStores/${firstMarket.id}/${firstMarket.name}/${firstMarket.addr}`);
+    }
+  }}
+>
+  <button className="font-bold bg-[#F5C065] border border-[#F5C065] text-[white] mt-[20px] py-[10px] px-[15px] lg:py-[12px] lg:px-[30px] rounded-[25px] text-[14px] lg:text-[16px]">
+    View more
+  </button>
+</div>
 
 
 

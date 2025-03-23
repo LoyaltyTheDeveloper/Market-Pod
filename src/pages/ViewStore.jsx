@@ -124,19 +124,35 @@ function ViewStore() {
       localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    useEffect(() => {
-      fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
-      .then((response) => response.json())
-      .then((data) => setStore(data.data))
-      .catch((error) => console.error('Error fetching comments', error))
-  }, [storeId])
+//     useEffect(() => {
+//       fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`)
+//       .then((response) => response.json())
+//       .then((data) => setStore(data.data))
+//       .catch((error) => console.error('Error fetching comments', error))
+//   }, [storeId])
 
-  useEffect(() => {
-    fetch(`https://apis.emarketpod.com/site/getProducts/${storeId}`)
-    .then((response) => response.json())
-    .then((data) => setProducts(data.data))
-    .catch((error) => console.error('Error fetching comments', error))
-}, [storeId])
+//   useEffect(() => {
+//     fetch(`https://apis.emarketpod.com/site/getProducts/${storeId}`)
+//     .then((response) => response.json())
+//     .then((data) => setProducts(data.data))
+//     .catch((error) => console.error('Error fetching comments', error))
+// }, [storeId])
+
+
+useEffect(() => {
+  if (!storeId) return;
+
+  Promise.all([
+    fetch(`https://apis.emarketpod.com/site/getStore/${storeId}`).then((res) => res.json()),
+    fetch(`https://apis.emarketpod.com/site/getProducts/${storeId}`).then((res) => res.json())
+  ])
+  .then(([storeData, productsData]) => {
+    setStore(storeData.data);
+    setProducts(productsData.data);
+  })
+  .catch((error) => console.error("Error fetching data", error));
+}, [storeId]);
+
 
     const addToCart = (product) => {
     if (store.isOpen !== true){
@@ -603,7 +619,6 @@ function ViewStore() {
                 </div>
               </div>
             ))}
-
 
     <div className="flex mt-[30px] justify-center  lg:justify-start">
         <div className="">

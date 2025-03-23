@@ -95,7 +95,7 @@ function StoreList() {
                       store.isOpen ? "" : ""
                     }`}
                   />
-                  {store.isOpen && (
+                  {store.isOpen === false && (
                    <div className="absolute inset-0 flex rounded-tl-[10px] rounded-tr-[10px] items-center justify-center bg-black bg-opacity-50 text-white text-lg ">
                       Opens at {store.open_time}
                   </div>
