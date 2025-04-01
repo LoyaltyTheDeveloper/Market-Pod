@@ -19,7 +19,7 @@ function Footer() {
                 <h1 className="text-[20px] font-bold">Market Pod</h1>
                 <a href="/aboutus">About Us</a>
                 <a href="/">Shop Groceries</a>
-                <a href="/register">Register as Vendor</a>
+                <a href="https://vendor.emarketpod.com/">Register as Vendor</a>
             </div>
             <div className="flex flex-col gap-[20px] font-sans">
                 <h1 className="text-[20px] font-bold">Legal</h1>
