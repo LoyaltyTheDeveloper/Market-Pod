@@ -859,6 +859,7 @@ function Navbar() {
             dropdown.categories[
               Math.floor(Math.random() * dropdown.categories.length)
             ];
+            // const randomSearch = dropdown.categories.items[Math.floor(Math.random() * dropdown.categories.length)];
 
           return (
             <div key={dropdown.id} className="flex flex-col gap-y-2">
@@ -885,11 +886,12 @@ function Navbar() {
                   <div className="flex flex-col gap-y-[10px]">
                     {dropdown.categories.map((category) => (
                       <span
-                      onClick={()=>handleSearch2(category)}
+                      onClick={()=>handleSearch2(category.category[Math.floor(Math.random() * category.items.length)])}
                         key={category.id}
                         className="cursor-pointer text-[14px] text-gray-600"
                       >
                         {category.category}
+                        {/* {category.category[Math.floor(Math.random() * dropdown.categories.items.length)]} */}
                       </span>
                     ))}
                   </div>
