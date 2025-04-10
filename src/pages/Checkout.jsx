@@ -271,7 +271,11 @@ function Checkout() {
           scroll();
         } 
         };
-
+        const makePayment = () => {
+          if(orderData){
+            window.location.href = orderData.checkout_url;
+          }
+        }
       
 
       const goToDashboard = () => {
@@ -430,7 +434,7 @@ Thank you for letting us bring the best of your local markets to your home!</div
                  </div>
 
                   <div className="flex items-center gap-[15px]">
-                   <div onClick={()=> deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]"/></div>
+                   <div onClick={()=> deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px] cursor-pointer"><GoTrash className="size-[ text-[white]"/></div>
                    <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
                     <div onClick={()=> handleDecrease (product.product_id)}className="text"><FaMinus className="size-[12px]"/></div>
                     <div className="text-[18px]">{product.quantity}</div>
@@ -804,7 +808,7 @@ would request your Order ID for confirmation</p>
           
                     </div>
                     
-                    <div className="mt-[40px]"><button className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px] hover:bg-green-700">Make Payment</button></div>
+                    <div className="mt-[40px]"><button onClick={makePayment} className="bg-[#31603D] border border-[#31603D] text-[white] py-4 w-[350px] rounded-[100px] hover:bg-green-700">Make Payment</button></div>
 
                     {/* <div className="flex justify-center items-center h-scree">
   

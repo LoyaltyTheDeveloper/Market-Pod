@@ -288,7 +288,12 @@ useEffect(() => {
       return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
-
+    const makePayment = (pay) => {
+      console.log(pay)
+      if(pay){
+        window.location.href = pay;
+      }
+    }
 
   const [activeButton, setActiveButton] = useState('button1');
   const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'User' : state.user.last_name) : "User"} ${state.user.first_name ?? ''}`;
@@ -748,8 +753,8 @@ useEffect(() => {
                       </>)}
 
                       {order.payment_status === 0 && ( <>
-                        <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to pay</div>
-                      <div className="hidden lg:flex"><button className="bg-[white] border border-[#31603D] border-[2px] text-[#31603D] px-8 rounded-[50px]">Pay</button></div>
+                        <div onClick={() => makePayment(order.checkout_url)} className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to pay</div>
+                      <div className="hidden lg:flex"><button onClick={() => makePayment(order.checkout_url)} className="bg-[white] border border-[#31603D] border-[2px] text-[#31603D] px-8 rounded-[50px]">Pay</button></div>
                       </>)}
 
                     </div>
