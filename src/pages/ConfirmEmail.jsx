@@ -86,24 +86,27 @@ function ConfirmEmail() {
           body: JSON.stringify(otpData),
         })
           .then((response) => {
+              
             if(response.status === 200){
-              setIsPending(false);
-              navigate("/");
+              setIsPending(false);  
             }
             if (!response.ok){
               setIsPending(false);
+              toast.error("An error occurred. Please try again.");
             }
            return response.json();
+          
           })
           .then((data) => {
             if (data.status === true){
               dispatch({
                 type: 'SIGN_IN',
-                payload: { token: data.token ,user:data.user, email:email},
+                payload: { token: data.token ,user:data.user, email: emailData.userEmail},
               });
               toast.success(data.message);
+              setIsPending(false);
+              navigate("/");
             }
-           
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -111,6 +114,8 @@ function ConfirmEmail() {
           });
       
       }
+
+      
 
       const resendOtp = (e) => {
         
