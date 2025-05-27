@@ -401,7 +401,7 @@ Thank you for letting us bring the best of your local markets to your home!</div
 
     <div className="mb-[20px] mt-[120px] flex flex-row gap-x-[110px] lg:gap-x-[310px] items-center text-[12px] lg:mt-[0px] justify-between">
       <div className="font-bold text-[25px] font-saeada">Checkout</div>
-      <button className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
+      <button onClick={() => navigate('/')} className="flex border border-[#31603D] gap-x-[10px] px-[10px] py-2 items-center border-[1.5px] rounded-[20px] text-[#31603D]">
         <div><GrBasket className="size-[14px]"/></div>
         <div>Continue shopping</div>
       </button>
@@ -790,6 +790,7 @@ would request your Order ID for confirmation</p>
                     <div className="flex justify-between">
                       <div>Service Charge</div>
                       <div className="font-bold">₦ {formatNumber(Number(orderData?.service_charge))}</div>
+                       {/* <div className="font-bold">₦ {orderData?.service_charge}</div> */}
                     </div>
                     </div>
 

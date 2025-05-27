@@ -25,14 +25,42 @@ function SignUp() {
  const { clearCart } = useContext(CartContext);
  const [showPassword, setShowPassword] = useState(false);
 
+
+ const [formData, setFormData] = useState({ email: "", pswd: "" });
+   const [errors, setErrors] = useState({});
+ 
+   const handleChange = (e) => {
+     setFormData({ ...formData, [e.target.name]: e.target.value });
+     setErrors({ ...errors, [e.target.name]: "" }); 
+   };
+ 
+   const validate = () => {
+    const newErrors = {};
+    if (!formData.email.trim()) newErrors.email = "*Email is required";
+    if (!formData.pswd.trim()) newErrors.pswd = "*Password is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email";
+    return newErrors;
+  };
+
+
+
+
   const handleSignup = (e, product_id) => {
     setIsPending(true);
     e.preventDefault();
-    if (email === '' || pswd === '') {
-        toast.error('All fields are required');
-        setIsPending(false);
-        return;
-    }
+    
+    // if (email === '' || pswd === '') {
+    //     toast.error('All fields are required');
+    //     setIsPending(false);
+    //     return;
+    // }
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsPending(false);
+      return;
+    };
 
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -41,11 +69,11 @@ function SignUp() {
       quantity: item.quantity,
     }));
 
-    const formData = {
-      email,
-      pswd,
-      cart: updatedCart
-    };
+    // const formData = {
+    //   email,
+    //   pswd,
+    //   cart: updatedCart
+    // };
 
     // const updateCart =() => {
 
@@ -111,26 +139,42 @@ function SignUp() {
         <h2 className="text-2xl font-bold mb-6 text-center font-saeada">Create An Account !</h2>
         <h3 className="mb-6 text-center">Welcome to the MarketPod Family.</h3>
         <form>
-          <div className="mb-4 items-center flex flex-row">
+
+          <div className="mb-4">
+          <div className=" items-center flex flex-row">
           <PiEnvelopeSimpleLight className="absolute ml-[20px] size-[20px]"/>
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="email"
+              value={formData.email}
+              // onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
+              // className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none ${
+            errors.email ? "border-red-500" : "border-gray-300"
+          }`}
               placeholder="Enter your email"
               required
             />
           </div>
-          <div className="mb-4 relative items-center flex flex-row">
+           {errors.email && <p className="text-red-500 text-md">{errors.email}</p>}
+           </div>
+
+           <div className="mb-4">
+          <div className=" relative items-center flex flex-row">
           <LiaKeySolid className="absolute ml-[20px] size-[20px]"/>
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              value={pswd}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 pl-[50px] pr-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="pswd"
+              value={formData.pswd}
+              // onChange={(e) => setPassword(e.target.value)}
+               onChange={handleChange}
+              // className="w-full border border-gray-300 pl-[50px] pr-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none ${
+            errors.pswd ? "border-red-500" : "border-gray-300"
+          }`}
               placeholder="Enter your password"
               required
             />
@@ -141,6 +185,8 @@ function SignUp() {
                   >
                     {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
                   </button>
+          </div>
+          {errors.pswd && <p className="text-red-500 text-md">{errors.pswd}</p>}
           </div>
           {!isPending &&<div className="flex items-center justify-between">
             <button
@@ -166,7 +212,8 @@ function SignUp() {
           </div>}
 
         </form>
-        <div className="pt-[10px] flex flex-row gap-[10px]">
+
+        {/* <div className="pt-[10px] flex flex-row gap-[10px]">
             <input type="checkbox" id="checkbox" className="size-[17px]"/>
             <label className="block text-gray-700 text-sm" htmlFor="checkbox">
               Keep me signed in
@@ -185,11 +232,12 @@ function SignUp() {
               Continue with google
            <Gmail/>
             </button>
-          </div>
-          <div className="mt-[10px] flex flex-row justify-center gap-[5px]">
+          </div> */}
+
+          <div className="mt-[30px] flex flex-row justify-center gap-[5px]">
             <p>You have an account?</p><Link to="/signin"><p className="text-[#31603D] underline">Login</p></Link>
           </div>
-          <div className="mt-[10px] flex flex-row justify-center gap-[5px] flex-wrap lg:flex-nowrap">
+          <div className="mt-[30px] flex flex-row justify-center gap-[5px] flex-wrap lg:flex-nowrap">
             <p>By proceeding you agree to the</p><Link to="/privacypolicy"><p className="text-[#31603D] underline">Privacy Policy</p></Link>and<Link to="/termsofuse"><p className="text-[#31603D] underline">Terms of Use</p></Link>
           </div>
       </div>

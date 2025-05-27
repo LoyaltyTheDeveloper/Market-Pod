@@ -35,6 +35,7 @@ import beauty from '../assets/beauty.svg';
 import toy from '../assets/toy.svg';
 import stationery from '../assets/stationery.svg';
 import meat from '../assets/meat.svg';
+import { useCartToggle } from '../context/CartToggleContext.jsx';
 
 
 
@@ -47,7 +48,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function ViewStore() {
-
+   const { toggleCart } = useCartToggle();
   const [hovered, setHovered] = useState(null);
 
   const [isDialog, setIsDialog] = React.useState(false);
@@ -418,7 +419,7 @@ useEffect(() => {
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
-                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div className='hidden lg:flex'><button onClick={toggleCart} className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
                 <div onClick ={() => navigate(`/site/getProduct/${modalProduct.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
               </div>
             </div>
@@ -475,7 +476,7 @@ useEffect(() => {
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct2?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice2}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
-                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div className='hidden lg:flex'><button onClick={toggleCart} className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
                 <div onClick ={() => navigate(`/site/getProduct/${modalProduct2.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
               </div>
             </div>
@@ -679,7 +680,7 @@ useEffect(() => {
               <img
                 onClick ={() => navigate(`/site/getProduct/${product.id}`, { state: { isOpen: store.isOpen } })}
                 src={product.image}
-                className="w-24 h-24 w- [100px] h- [100px] object-cove object-contain flex justify-center bg-[white] p-4"
+                className="w-24 h-24 w- [100px] h- [100px] size- [120px] object-cove object-contain flex justify-center bg-[white] p-4"
               />
 
 {state.token && <div className='absolute top-6 right-2'>

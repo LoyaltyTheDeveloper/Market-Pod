@@ -36,12 +36,14 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { styled, lighten, darken } from '@mui/system';
-import dropdownData from '../index.json'
+import dropdownData from '../index.json';
+import { useCartToggle } from '../context/CartToggleContext.jsx';
 
 
 function Navbar() {
 
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  // const [isCartOpen, setIsCartOpen] = useState(false);
+   const {isCartOpen, setIsCartOpen} =  useCartToggle();
   const [locations, setSelectedLocation] = useState('');
   trio.register()
   const [isSearchLoading, setIsSearchLoading] = useState(false);

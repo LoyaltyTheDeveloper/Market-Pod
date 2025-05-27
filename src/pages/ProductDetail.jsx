@@ -24,6 +24,7 @@ import Slide from '@mui/material/Slide';
 import { LiaTimesSolid } from "react-icons/lia";
 import { GrBasket } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa";
+import { useCartToggle } from '../context/CartToggleContext.jsx';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props}
@@ -32,6 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function ProductDetail() {
+   const { toggleCart } = useCartToggle();
   const location = useLocation();
   // useAuthRequest("url","POST",{carId:3})
   const isOpen = location.state?.isOpen;
@@ -456,7 +458,7 @@ function ProductDetail() {
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
-                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div className='hidden lg:flex'><button onClick={toggleCart} className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
                 <div onClick ={() => navigate(`/site/getProduct/${modalProduct.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
               </div>
             </div>
@@ -513,7 +515,7 @@ function ProductDetail() {
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct2?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice2}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
-                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div className='hidden lg:flex'><button onClick={toggleCart} className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
                 <div onClick ={() => navigate(`/site/getProduct/${modalProduct2.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
               </div>
             </div>
@@ -570,7 +572,7 @@ function ProductDetail() {
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct3?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice3}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
-                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div className='hidden lg:flex'><button onClick={toggleCart} className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
                 <div onClick ={() => navigate(`/site/getProduct/${modalProduct3.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
               </div>
             </div>
@@ -626,7 +628,7 @@ function ProductDetail() {
               <p className='h-[20px] text-[11px] text-[black] hidden lg:flex'>{modalProduct4?.subtitle}</p>
               <p className="h-[25px] text-[13px] lg:text-[15px] text-[black] font-semibold hidden lg:flex">₦{formattedPrice4}</p>
               <div className="flex flex-row items-center gap-x-3 mt-[10px]">
-                <div className='hidden lg:flex'><button className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
+                <div className='hidden lg:flex'><button onClick={toggleCart} className="bg-[#31603D] px-2 py-2 lg:px-4 lg:py-2 rounded-full whitespace-nowrap"><div className="flex items-center gap-x-[5px] text-[white] text-[11px] lg:text-[14px]"><GrBasket className="text-[white]"/>View Cart</div></button></div>
                 <div onClick ={() => navigate(`/site/getProduct/${modalProduct4.id}`)} className='hidden lg:flex'><p className="text-[11px] lg:text-[13px] underline font-semibold cursor-pointer text-[#31603D]">Item Description</p></div>
               </div>
             </div>
@@ -810,7 +812,7 @@ product2.peopleAlsoBought.map((products2) => (
             <img
               onClick={() => navigate(`/site/getProduct/${products2.id}`)}
               src={products2.product_image}
-              className="w-24 h-24 object-contain flex justify-center bg-[white] p-4"
+              className="w-24 h-24 size- [110px] object-cove object-contain flex justify-center bg-[white] p-4"
             />
             {state.token && (
               <div className="absolute top-6 right-2">

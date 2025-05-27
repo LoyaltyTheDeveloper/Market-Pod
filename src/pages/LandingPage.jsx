@@ -22,10 +22,12 @@ import landing7 from '/assets/landing7.svg'
 import { FaPlus } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
 import { trio } from 'ldrs'
+import { useCartToggle } from '../context/CartToggleContext.jsx';
 
 
 function LandingPage({ markets }) {
    trio.register()
+   const { toggleCart } = useCartToggle();
    const [isLoading, setIsLoading] = useState(false);
   const [marketss, setMarketss] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -253,6 +255,7 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
       />
          </div>
     </div>
+
     
     <div>
 
@@ -461,7 +464,6 @@ const products = Array.isArray(searchResults) ? searchResults.filter((result) =>
                 
               </>)}
 </div> */} </>
-
 
 
       {index === marketss.length -1 && (

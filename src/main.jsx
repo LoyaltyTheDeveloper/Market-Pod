@@ -4,12 +4,15 @@ import App from './App.jsx'
 import './index.css'
 import { AuthProvider } from './context/Context.jsx';
 import { CartProvider } from './context/CartContext.jsx';
+import { CartToggleProvider } from './context/CartToggleContext.jsx';
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CartToggleContext } from './context/CartToggleContext.jsx';
 const theme = createTheme();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
+    <CartToggleProvider>
+      <AuthProvider>
       <CartProvider>
     <ThemeProvider theme={theme}>
     <CssBaseline />
@@ -17,5 +20,6 @@ createRoot(document.getElementById('root')).render(
     </ThemeProvider>
     </CartProvider>
     </AuthProvider>
+    </CartToggleProvider>
   </StrictMode>,
 )

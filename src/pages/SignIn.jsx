@@ -13,13 +13,12 @@ import Gmail from '../Components/GmailIcon.jsx';
 import { Dialog, DialogContent, Button } from "@mui/material";
 import { trio } from 'ldrs'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 dotPulse.register()
 
-// Default values shown
-
-
 function SignIn() {
+
+
+
    trio.register()
   dotPulse.register()
   const [email, setEmail] = useState('');
@@ -30,6 +29,22 @@ function SignIn() {
    const [isLoading, setIsLoading] = useState();
    const emailData = {userEmail: email};
    const [showPassword, setShowPassword] = useState(false);
+
+   const [formData, setFormData] = useState({ email: "", pswd: "" });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); 
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.email.trim()) newErrors.email = "*Email is required";
+    if (!formData.pswd.trim()) newErrors.pswd = "*Password is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email";
+    return newErrors;
+  };
 
   const [open, setOpen] = useState(false);
 
@@ -44,16 +59,24 @@ function SignIn() {
   const handleSignin = (e) => {
     setIsPending(true);
     e.preventDefault();
-    if (email === '' || pswd === '') {
-      toast.error('All fields are required');
-      setIsPending(false);
-        return;
-    }
+    // if (email === '' || pswd === '') {
+    //   toast.error('All fields are required');
+    //   setIsPending(false);
+    //     return;
+    // }
 
-  const formData = {
-    email, 
-    pswd
-  };
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsPending(false);
+      return;
+    };
+   
+
+  // const formData = {
+  //   email, 
+  //   pswd
+  // };
 
   fetch('https://apis.emarketpod.com/user/signin', { 
     method: 'POST',
@@ -130,6 +153,11 @@ function SignIn() {
                     });
               
        }
+
+  //       const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.email]: e.target.value });
+  //   setErrors({ ...errors, [e.target.email]: "" }); 
+  // };
   
 
   return (<>
@@ -142,26 +170,43 @@ function SignIn() {
         <h2 className="text-2xl font-bold mb-6 text-center font-saeada">Welcome Back !</h2>
         <h3 className="mb-6 text-center">We are glad to have you back with us</h3>
         <form>
-          <div className="mb-4 items-center flex flex-row">
+          <div className="mb-4">
+          <div className="mb- 4 items-center flex flex-row">
           <PiEnvelopeSimpleLight className="absolute ml-[20px] size-[20px]"/>
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="email"
+              value={formData.email}
+              // value={email}
+              // onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
+              // className="w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none ${
+            errors.email ? "border-red-500" : "border-gray-300"
+          }`}
               placeholder="Enter your email"
               required
             />
           </div>
-          <div className="mb-4 relative items-center flex flex-row">
+           {errors.email && <p className="text-red-500 text-md">{errors.email}</p>}
+           </div>
+
+           <div className="mb-4">
+          <div className="mb- 4 relative items-center flex flex-row">
           <LiaKeySolid className="absolute ml-[20px] size-[20px]"/>
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              value={pswd}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 pl-[50px] pr-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="pswd"
+              value={formData.pswd}
+              // value={pswd}
+              // onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
+              // className="w-full border border-gray-300 pl-[50px] pr-[50px] py-5 px-4 rounded-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full border border-gray-300 pl-[50px] py-5 px-4 rounded-[100px] focus:outline-none ${
+            errors.pswd ? "border-red-500" : "border-gray-300"
+          }`}
               placeholder="Enter your password"
               required
             />
@@ -173,6 +218,8 @@ function SignIn() {
         {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
       </button>
           </div>
+           {errors.pswd && <p className="text-red-500 text-md">{errors.pswd}</p>}
+           </div>
 
           {!isPending &&<div className="flex items-center justify-between">
             <button
@@ -201,7 +248,12 @@ function SignIn() {
         <div className="pt-[20px] text-[#31603D] flex flex-row gap-[10px] underline font-bold">
         <Link to="/recoverpassword"><p>Recover Password</p></Link>
         </div>
-        <div className="flex items-center justify-center my-3">
+
+
+        <div></div>
+
+
+        {/* <div className="flex items-center justify-center my-3">
       <hr className="w-full border-t border-gray-300" />
       <span className="px-3 text-gray-500">Or</span>
       <hr className="w-full border-t border-gray-300" />
@@ -214,10 +266,13 @@ function SignIn() {
               Continue with google
               <Gmail/>
             </button>
-          </div>
-          <div className="mt-[10px] flex flex-row justify-center gap-[5px]">
+          </div> */}
+
+          <div className="mt-[30px] flex flex-row justify-center gap-[5px]">
             <p>Don't have an account?</p><Link to="/signup"><p className="text-[#31603D] underline">Create Account</p></Link>
           </div>
+
+          
       </div>
       </div>
       <div className="flex justify-center items-center h-screen">
@@ -227,6 +282,7 @@ function SignIn() {
 
           <div className="bg-white p-6 rounded-lg shadow-lg w-[350px] lg:w-[400px] relative z- 50 text-center">
             <p className="text-lg">Do you want to proceed to verify your account?</p>
+
             {isLoading &&  <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
   size="70"
   speed="1.3" 
