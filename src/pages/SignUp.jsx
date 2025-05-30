@@ -20,13 +20,14 @@ function SignUp() {
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
-  const emailData = {userEmail: email};
+  // const emailData = {userEmail: formData.email};
   const { state } = useContext(AuthContext);
  const { clearCart } = useContext(CartContext);
  const [showPassword, setShowPassword] = useState(false);
 
 
  const [formData, setFormData] = useState({ email: "", pswd: "" });
+   const emailData = {userEmail: formData.email};
    const [errors, setErrors] = useState({});
  
    const handleChange = (e) => {
@@ -38,7 +39,7 @@ function SignUp() {
     const newErrors = {};
     if (!formData.email.trim()) newErrors.email = "*Email is required";
     if (!formData.pswd.trim()) newErrors.pswd = "*Password is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "*Invalid email";
     return newErrors;
   };
 
@@ -48,7 +49,7 @@ function SignUp() {
   const handleSignup = (e, product_id) => {
     setIsPending(true);
     e.preventDefault();
-    
+
     // if (email === '' || pswd === '') {
     //     toast.error('All fields are required');
     //     setIsPending(false);

@@ -90,10 +90,10 @@ function ConfirmEmail() {
             if(response.status === 200){
               setIsPending(false);  
             }
-            if (!response.ok){
-              setIsPending(false);
-              toast.error("An error occurred. Please try again.");
-            }
+            // if (!response.ok){
+            //   setIsPending(false);
+            //   toast.error("An error occurred. Please try again.");
+            // }
            return response.json();
           
           })
@@ -107,8 +107,14 @@ function ConfirmEmail() {
               setIsPending(false);
               navigate("/");
             }
+            if (data.status === false){
+              toast.error(data.message);
+              setIsPending(false);
+              return;
+            }
           })
           .catch((error) => {
+            toast.error(data.message);
             console.error('Error:', error);
             setIsPending(false);
           });
@@ -151,6 +157,7 @@ function ConfirmEmail() {
             }
           })
           .catch((error) => {
+            toast.error(data.message);
             console.error('Error:', error);
             setIsLoading(false);
           });

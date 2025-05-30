@@ -18,6 +18,13 @@ export const setProfileData = (data) => {
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'SIGN_UP':
+       return {
+        ...state,
+        token: action.payload.token,
+        user: action.payload.user,
+        isAuthenticated: true,
+        email: action.payload.email
+      };
     case 'SIGN_IN':
       return {
         ...state,

@@ -27,10 +27,11 @@ function SignIn() {
   const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
    const [isLoading, setIsLoading] = useState();
-   const emailData = {userEmail: email};
+  //  const emailData = {userEmail: formData.email};
    const [showPassword, setShowPassword] = useState(false);
 
    const [formData, setFormData] = useState({ email: "", pswd: "" });
+      const emailData = {userEmail: formData.email};
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -42,7 +43,7 @@ function SignIn() {
     const newErrors = {};
     if (!formData.email.trim()) newErrors.email = "*Email is required";
     if (!formData.pswd.trim()) newErrors.pswd = "*Password is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "*Invalid email";
     return newErrors;
   };
 
@@ -96,7 +97,7 @@ function SignIn() {
           if (data.status === true) {
             dispatch({
               type: 'SIGN_IN',
-              payload: { token: data.token ,user:data.user, email:email},
+              payload: { token: data.token ,user:data.user, email:formData.email},
             });
             toast.success(data.message);
             setIsPending(false);

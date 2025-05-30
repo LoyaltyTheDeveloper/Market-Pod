@@ -597,7 +597,7 @@ function Navbar() {
     return (
       <button className="font-semibold text-[#31603D]" onClick={() => navigate("/dashboard")}>
         {/* {displayName} */}
-        {state.email}
+       {state.email || 'User'}
       </button>
     )
   }
