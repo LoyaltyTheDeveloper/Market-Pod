@@ -8,7 +8,7 @@ function TermsOfUse() {
   <div className="min-h-screen bg-[#F9F9F9]">
     <div className="pt-[120px] px-[5%] h-auto pb-[100px]">
     <div className="bg-[white] mt-[30px] flex flex-col gap-y-[20px] p-[30px] rounded-[10px]">
-      <div className="font-bold text-2xl font-bitter">Terms of Use</div>
+      <div className="font-bold text-2xl font-saeada">Terms of Use</div>
       <div className="font-sans">Welcome to Marketpod! The following Terms of Use ("Terms") outline the rules and regulations for accessing and utilizing our website and services. By using Marketpod, you confirm your agreement to comply with these Terms. Please read them carefully.</div>
 
 <div className="font-bold font-sans">1. Acceptance of Terms</div>

@@ -118,7 +118,6 @@ function ConfirmEmail() {
             console.error('Error:', error);
             setIsPending(false);
           });
-      
       }
 
       
