@@ -278,9 +278,13 @@ function Checkout() {
         }
       
 
+      // const goToDashboard = () => {
+      //   navigate("/dashboard", { state: { showOrders: true } });
+      // }
+
       const goToDashboard = () => {
-        navigate("/dashboard", { state: { showOrders: true } });
-      }
+        navigate("/dashboard?showOrders=true");
+      };
 
       const displayName = `${state.user.last_name ? (state.user.last_name == '' ? 'Full name' : state.user.last_name) : "Full name"} ${state.user.first_name ?? ''}`;
       const displayPhone = `${state.user.phone_number ? (state.user.phone_number == '' ? 'Phone Number' : state.user.phone_number) : "Phone Number"} ${state.user.phone_number2 ?? ''}`;

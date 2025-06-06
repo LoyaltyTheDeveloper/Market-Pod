@@ -29,11 +29,23 @@ function UserDetails() {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (location.state?.showOrders) {
-      setActiveButton('button2');
-    }
-  }, [location]);
+  // const queryParams = new URLSearchParams(location.search);
+  // const showOrders = queryParams.get("showOrders") === "true";
+
+  // useEffect(() => {
+  //   if (location.state?.showOrders) {
+  //     setActiveButton('button2');
+  //   }
+  // }, [location]);
+
+useEffect(() => {
+  const queryParams = new URLSearchParams(location.search);
+  const showOrders = queryParams.get("showOrders") === "true";
+
+  if (showOrders) {
+    setActiveButton("button2");
+  }
+}, [location.search]);
 
   useEffect(()=> {
           if (!state.token){
