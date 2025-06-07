@@ -495,7 +495,7 @@ useEffect(() => {
               </div>
               <div className='font-sans text-sm lg:text-md'>{item.subtitle}</div>
             </div>
-            <div className='text-sm lg:text-lg w-[100px]'>₦{item.amount}</div>
+            <div className='text-sm lg:text-lg w-[100px]'>₦{item.amount * item.quantity}</div>
           </div>
         ))}
         </div>

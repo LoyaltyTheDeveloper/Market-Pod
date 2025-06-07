@@ -421,8 +421,9 @@ function Navbar() {
   }, []);
 
 
-
-
+  const goToDashboard = () => {
+        navigate("/dashboard?showOrders=true");
+      };
 
 // const isCartEmpty =()=> {
 //   return(<>
@@ -685,7 +686,7 @@ function Navbar() {
                 <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
               )}
 
-              {state.token && <div className="flex flex-col items-center hidden lg:flex flex-col">
+              {state.token && <div onClick={goToDashboard} className="flex flex-col items-center hidden lg:flex flex-col cursor-pointer">
                 <div className="font-saeada font-semibold text-[13px]">Orders</div>
                 <div><PiNotepadBold className="size-[20px]" /></div>
               </div>}
