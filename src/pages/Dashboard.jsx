@@ -508,7 +508,7 @@ useEffect(() => {
         <hr className='mt-4' />
         <div className='flex flex-row justify-between items-center mt-4 mb-4'>
           <div className='text-md'>Sub-Total</div>
-          <div>₦{selectedOrderId.product_amount}</div>
+          <div>₦{selectedOrderId?.product_amount}</div>
         </div>
         <hr className='mb-4' />
         </div>
