@@ -18,8 +18,10 @@ import { TfiPackage } from "react-icons/tfi";
 import { MdOutlineCancel } from "react-icons/md";
 import { LiaLuggageCartSolid } from "react-icons/lia";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { Modal, Box, Typography, Button, Card, CardContent } from "@mui/material";
+import { AiOutlineClose } from "react-icons/ai";
 
-function UserDetails() {
+function UserDetails({order}) {
   const location = useLocation();
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -28,6 +30,36 @@ function UserDetails() {
   const { state , dispatch} = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
+
+  const [open, setOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  //  const [selectedOrderId, setSelectedOrderId] = useState(null);
+
+  const copy = () => {
+          const phone = "+2347014131367";
+      
+          navigator.clipboard.writeText(phone)
+            .then(() => {
+              toast.success("Phone number copied to clipboard!");
+            })
+            .catch(err => {
+              console.error("Failed to copy phone number: ", err);
+            });
+          };
+  
+  const handleOpen = (orders) => {
+    setSelectedItems(orders.items); // Assuming orders.items is an array of items
+    setSelectedOrderId(orders); // Assuming items is an array and you want the first item's order_id
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedItems([]);
+  };
+
+
 
   // const queryParams = new URLSearchParams(location.search);
   // const showOrders = queryParams.get("showOrders") === "true";
@@ -317,6 +349,180 @@ useEffect(() => {
       speed="1.3"
       color="#4ade80"
     ></l-trio>    </div>}
+
+     {/* <Modal open={open} onClose={handleClose}>
+
+    
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[450px] lg:w-[450px] bg-white p-4 max-h-[80vh] overflow-y-auto rounded-md'
+        >
+            <div className='flex justify-between items-center mb-4'>
+             <div className='flex flex-col'>
+            <div className='font-bold font-saeada md:text-[20px]'>Order ID #{selectedOrderId?.order_id}</div>
+           
+           {selectedOrderId?.status === "0" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><TfiPackage className='size-[13px] md:size-[15px] lg:size-[15px] text-[#31603D]'/></div>
+                            <div className="whitespace-nowrap text-[13px] md:size-[15px] lg:size-[15px] text-[#31603D]">Awaiting Pick-up</div>
+                          </div>)}
+  
+                          {selectedOrderId?.status === "1" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><TbTruckDelivery className='size-[13px] md:size-[15px] lg:size-[15px] text-[#31603D]'/></div>
+                            <div className="whitespace-nowrap text-[13px] md:size-[15px] lg:size-[15px] text-[#31603D]">In Transit</div>
+                          </div>)}
+  
+                          {selectedOrderId?.status === "2" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><LiaLuggageCartSolid className='size-[13px] md:size-[15px] lg:size-[15px] text-[#31603D]'/></div>
+                            <div className="whitespace-nowrap text-[13px] md:size-[15px] lg:size-[15px] text-[#31603D]">Delivered</div>
+                          </div>)}
+  
+                          {selectedOrderId?.status === "3" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                            <div><MdOutlineCancel className='size-[13px] md:size-[15px] lg:size-[15px] text-[#D23D23]'/></div>
+                            <div className="whitespace-nowrap text-[13px] md:size-[15px] lg:size-[15px] text-[#D23D23]">Cancelled</div>
+                          </div>)}
+
+                          <button className='text-[#31603D] text-sm md:hidden lg:hidden mt-3'>Call Customer Service</button>
+                          </div>
+
+                          <div className='flex items-center gap-x-2'>
+                          <button className="mt- bg-[#31603D] text-sm text-white px-3 py-2 hidden md:flex lg:flex rounded-full">
+            Call Customer Service
+          </button>
+          <button onClick={handleClose}><AiOutlineClose className='text-[#31603D] text-[25px]'/></button>
+          </div>
+          </div>
+        
+
+         <div className='bg-[#F9F9F9]'>
+          {selectedItems?.map((item, i) => (<>
+            <div className=''>
+              <div className=''>
+
+                <div className='flex flex-row gap-x-[20px] items-center mb-4 justify-between w-[95%]' key={i}>
+                  <img src = {item.image} alt={item.product_name} className="w-20 h-20 lg:w-20 lg:h-20 object-contain bg-[white] px-1" />
+                  <div className='flex flex-col gap-y-2'>
+                  <div className='font-bold font-saeada w-[120px] lg:w-[200px] text-md lg:text-xl'>{item.product_name}</div>
+                   <div className='font-sans text-sm lg:text-md'>{item.description}</div>
+                   </div>
+                    <div className='text-sm lg:text-lg w-[100px]'>₦{item.amount}</div>
+                </div>
+
+              </div>
+            </div>
+           
+         </> ))}
+          <div className='font-sans text-sm flex justify-center mt-10'>Sub-Total (before taxes and service fee)</div>
+          <hr className='mt-4'></hr>
+
+          <div className='flex flex-row justify-between items-center mt-4 mb-4'>
+          <div className='text-md'>Sub-Total</div>
+          <div>NGN5000</div>
+          </div>
+          <hr className='mb-4'></hr>
+          </div>
+          
+         
+          
+        </div>
+        
+      </Modal> */}
+
+      <Modal open={open} onClose={handleClose}>
+    
+  <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[450px] lg:w-[450px] bg-white max-h-[80vh] h-[550px'>
+      
+    {/* Modal Wrapper */}
+    <div className='relative h-full flex flex-col'>
+
+      {/* Bar Start - Fixed Header */}
+      <div className='sticky top-0 bg-white z-20 p-4 border-b rounded-t-md'>
+        <div className='flex justify-between items-center'>
+          <div className='flex flex-col'>
+            <div className='font-bold font-saeada md:text-[20px]'>
+              Order ID #{selectedOrderId?.order_id}
+            </div>
+
+            {selectedOrderId?.status === "0" && (
+              <div className="flex items-center gap-x-[5px] text-[12px]">
+                <TfiPackage className='text-[#31603D]' />
+                <div className="text-[#31603D]">Awaiting Pick-up</div>
+              </div>
+            )}
+            {selectedOrderId?.status === "1" && (
+              <div className="flex items-center gap-x-[5px] text-[12px]">
+                <TbTruckDelivery className='text-[#31603D]' />
+                <div className="text-[#31603D]">In Transit</div>
+              </div>
+            )}
+            {selectedOrderId?.status === "2" && (
+              <div className="flex items-center gap-x-[5px] text-[12px]">
+                <LiaLuggageCartSolid className='text-[#31603D]' />
+                <div className="text-[#31603D]">Delivered</div>
+              </div>
+            )}
+            {selectedOrderId?.status === "3" && (
+              <div className="flex items-center gap-x-[5px] text-[12px]">
+                <MdOutlineCancel className='text-[#D23D23]' />
+                <div className="text-[#D23D23]">Cancelled</div>
+              </div>
+            )}
+
+            <button className='text-[#31603D] text-sm md:hidden mt-3' onClick={copy}>
+              Call Customer Service
+            </button>
+          </div>
+
+          <div className='flex items-center gap-x-2'>
+            <button className="bg-[#31603D] text-sm text-white px-3 py-2 hidden md:flex rounded-full" onClick={copy}>
+              Call Customer Service
+            </button>
+            <button onClick={handleClose}>
+              <AiOutlineClose className='text-[#31603D] text-[25px]' />
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* Bar End */}
+
+  <div className='flex flex-col justify-between gap-y -8'>
+      {/* Scrollable Content */}
+      <div>
+      <div className='overflow-y-auto p-4 bg-[#F9F9F9] flex-1'>
+        {selectedItems?.map((item, i) => (
+          <div key={i} className='flex flex-row gap-x-[20px] items-center mb-4 justify-between w-[95%]'>
+            <img src={item.image} alt={item.product_name} className="w-20 h-20 object-contain bg-white px-1" />
+            <div className='flex flex-col gap-y-2'>
+              <div className='font-bold font-saeada w-[120px] lg:w-[200px] text-md lg:text-xl'>
+                {item.product_name}
+              </div>
+              <div className='font-sans text-sm lg:text-md'>{item.subtitle}</div>
+            </div>
+            <div className='text-sm lg:text-lg w-[100px]'>₦{item.amount}</div>
+          </div>
+        ))}
+        </div>
+
+
+      <div className='overflow-y-auto p-4 bg-[#F9F9F9] flex-1'>
+        <div className='font-sans text-sm flex justify-center mt-10'>
+          Sub-Total (before taxes and service fee)
+        </div>
+        <hr className='mt-4' />
+        <div className='flex flex-row justify-between items-center mt-4 mb-4'>
+          <div className='text-md'>Sub-Total</div>
+          <div>₦{selectedOrderId.product_amount}</div>
+        </div>
+        <hr className='mb-4' />
+        </div>
+ </div>
+
+      </div>
+
+    </div>
+  </div>
+</Modal>
+
+      
+
+
     <div className="pt-[80px] min-h-screen">
       <div className="flex flex-col lg:flex-row">
         <div className="flex flex-col pt-[50px] pb-[30px bg-[#F9F9F9] lg:w-[60%]">
@@ -685,6 +891,13 @@ useEffect(() => {
 
 
 
+
+
+
+
+
+
+
                       {!isLoading && (
  
  
@@ -760,8 +973,8 @@ useEffect(() => {
                       </div>
 
                       {order.payment_status === 1 && ( <>
-                        <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
-                      <div className="hidden lg:flex"><button className="bg-[#31603D] border border-[#31603D] text-white px-8 rounded-[50px]">View</button></div>
+                        <div onClick={() => handleOpen(order)} className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
+                      <div onClick={() => handleOpen(order)} className="hidden lg:flex"><button className="bg-[#31603D] border border-[#31603D] text-white px-8 rounded-[50px]">View</button></div>
                       </>)}
 
                       {order.payment_status === 0 && ( <>
@@ -804,6 +1017,16 @@ useEffect(() => {
     )}
   </div>
 )}
+
+
+
+
+
+
+
+
+
+
             </div>
           </div>}
         </div>
