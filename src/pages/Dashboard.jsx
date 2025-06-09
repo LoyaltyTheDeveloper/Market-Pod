@@ -36,6 +36,32 @@ function UserDetails({order}) {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   //  const [selectedOrderId, setSelectedOrderId] = useState(null);
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 768); 
+    };
+
+    checkScreenSize(); 
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+
+
+const handleCheck = (orders) => {
+  if(orders?.payment_status === 1){
+    handleOpen(orders);
+}
+else if (orders?.payment_status === 0){
+ makePayment(orders.checkout_url);
+}
+}
+
+
+
   const copy = () => {
           const phone = "+2347014131367";
       
@@ -922,7 +948,7 @@ useEffect(() => {
               {/* Display the date */}
               <div className="font-bold px-4 lg:px-14">{date}</div>
               {ordersForDate.map((order) => (<>
-                <div className="flex flex-row lg:gap-x-[20px] justify-between lg:items-center lg:px-14" key={order.order_id}>
+                <div onClick={isSmallScreen ? () => handleCheck(order) : undefined} className="flex cursor-pointer md:cursor-default lg:cursor-default flex-row lg:gap-x-[20px] justify-between lg:items-center lg:px-14" key={order.order_id}>
                   <div>
                     <PiNotepadBold className="size-[27px]" />
                   </div>
@@ -973,12 +999,13 @@ useEffect(() => {
                       </div>
 
                       {order.payment_status === 1 && ( <>
-                        <div onClick={() => handleOpen(order)} className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
+                        <div className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to view</div>
                       <div onClick={() => handleOpen(order)} className="hidden lg:flex"><button className="bg-[#31603D] border border-[#31603D] text-white px-8 rounded-[50px]">View</button></div>
                       </>)}
 
                       {order.payment_status === 0 && ( <>
-                        <div onClick={() => makePayment(order.checkout_url)} className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to pay</div>
+                        <div 
+                          className="lg:hidden whitespace-nowrap flex justify-end text-[12px] lg:text-[15px] text-[#31603D] cursor-pointer">Tap to pay</div>
                       <div className="hidden lg:flex"><button onClick={() => makePayment(order.checkout_url)} className="bg-[white] border border-[#31603D] border-[2px] text-[#31603D] px-8 rounded-[50px]">Pay</button></div>
                       </>)}
 
@@ -1017,15 +1044,6 @@ useEffect(() => {
     )}
   </div>
 )}
-
-
-
-
-
-
-
-
-
 
             </div>
           </div>}

@@ -38,7 +38,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { styled, lighten, darken } from '@mui/system';
 import dropdownData from '../index.json';
 import { useCartToggle } from '../context/CartToggleContext.jsx';
-
+import { TbTruckDelivery } from "react-icons/tb";
+import { TfiPackage } from "react-icons/tfi";
+import { MdOutlineCancel } from "react-icons/md";
+import { LiaLuggageCartSolid } from "react-icons/lia";
+import { Modal } from "@mui/material";
 
 function Navbar() {
 
@@ -53,6 +57,7 @@ function Navbar() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [refresh, setRefresh] = useState(false);
+   const [refreshOrders, setRefreshOrders] = useState(false);
   const [quantity, setQuantity] = useState(
     Array.isArray(products)
       ? products.reduce((acc, product) => {
@@ -62,8 +67,8 @@ function Navbar() {
       : {}
   );
   const { cartOne, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, updateNavbar } = useContext(CartContext);
-
-
+  const [orders, setOrders] = useState([]);
+ const [isOrdersOpen, setIsOrdersOpen] = useState(false);
   //  const getProducts = () => {
 
   //        fetch('https://apis.emarketpod.com/user/cart', {
@@ -86,6 +91,32 @@ function Navbar() {
 
   // reload cart
 
+  const [openOrderModal, setOpenOrderModal] = useState(false);
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [selectedOrderId, setSelectedOrderId] = useState(null);
+
+   const handleOpen = (orders) => {
+    setSelectedItems(orders.items); // Assuming orders.items is an array of items
+    setSelectedOrderId(orders); // Assuming items is an array and you want the first item's order_id
+    setOpenOrderModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenOrderModal(false);
+    setSelectedItems([]);
+  };
+
+    const copy = () => {
+            const phone = "+2347014131367";
+        
+            navigator.clipboard.writeText(phone)
+              .then(() => {
+                toast.success("Phone number copied to clipboard!");
+              })
+              .catch(err => {
+                console.error("Failed to copy phone number: ", err);
+              });
+            };
 
 
   const GroupHeader = styled('div')(({ theme }) => ({
@@ -124,8 +155,8 @@ function Navbar() {
     // { location: "Gombe, Gombe State" },
     // { location: "Gusau, Zamfara State" },
 
-    { location: "Ibadan, Oyo State" },
-    { location: "Ikeja, Lagos State" },
+    // { location: "Ibadan, Oyo State" },
+    // { location: "Ikeja, Lagos State" },
     { location: "Ilorin, Kwara State" },
 
     // { location: "Jalingo, Taraba State" },
@@ -139,7 +170,7 @@ function Navbar() {
     // { location: "Makurdi, Benue State" },
     // { location: "Minna, Niger State" },
 
-    { location: "Osogbo, Osun State" },
+    // { location: "Osogbo, Osun State" },
 
     // { location: "Owerri, Imo State" },
     // { location: "Port Harcourt, Rivers State" },
@@ -192,6 +223,31 @@ function Navbar() {
         console.error(error);
       });
   }, [refresh]);
+
+
+  useEffect(() => {
+    setIsLoading(true);
+      fetch('https://apis.emarketpod.com/user/orders',
+        {
+          method: "GET",
+          headers: {
+            "Content-Type":"application/json",
+            Authorization: state.token,
+          }
+        }
+      )
+      .then((response) => response.json())
+      .then((data) => {
+        setIsLoading(false);
+        setOrders(data.data);
+        setError(null);
+      }
+      )
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.message)
+        console.error(error)})
+  }, [refreshOrders])
 
 
   // const reloadCart = () => {
@@ -361,8 +417,15 @@ function Navbar() {
 
   const toggleDrawer = (newOpen) => () => {
     setIsCartOpen(newOpen);
-    // getProducts();
+
     setRefresh(!refresh);
+  };
+
+  
+
+    const toggleOrders = () => {
+    setIsOrdersOpen(true);
+     setRefresh(!refresh);
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -425,172 +488,10 @@ function Navbar() {
         navigate("/dashboard?showOrders=true");
       };
 
-// const isCartEmpty =()=> {
-//   return(<>
-//      <div className="w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
-//       <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-//       </div>
-//   </>)
-// }
-  
-//   const DrawerList = (
-    
-//     <Box s={{ width: 400 }} className="w-[400px] fixed top-0 right-0 h-full w-80 z-50 lg:w-[700px" role="presentation">
-
-//       <div className="bg-[#F9F9F9] min-h-screen">
-//         <div className="bg-[white] z-50 fixed h-[50px] w-[200%] overflow-x-hidden overflow-y-hidden w-full">
-
-//           <div className="flex items-center my-[10px] mx-[10px] gap-[260px justify-between">
-          
-//             <div onClick={toggleDrawer(false)} className="mr-[200px]"><LiaTimesSolid className="size-[25px] text-[#31603D]" /></div>
-//           </div>
-
-//         </div>
-
-//         {isLoading && <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
-//           size="70"
-//           speed="1.3"
-//           color="#4ade80"
-//         ></l-trio>    </div>}
-
-//        {state.token && <div className="flex justify-center pt-[px]">
-
-      
-
-//           <div className="pt-[50px] pb-[50px]">
-
-//             {Array.isArray(products) && products.length > 0 ? (
-//               <ul className="">
-//                 {products.map((product) => (<>
-//                   <div className="bg-[]" key={product.product_id}>
-
-//                     <div className="bg-[] pt-[20px]">
-//                       <div className="font-bold ml-[10px]">Produce</div>
-//                       <div className="flex">
-//                         <div><img src={product.image} className="size-[90px]" /></div>
-//                         <div className="flex flex-col gap-[10px]">
-//                           <div>{product.name} - {product.weight}</div>
-//                           <div className="text-[grey] text-[15px]">Subtitle</div>
-//                           <div className="flex items-center gap-[15px]">
-//                             <div onClick={() => deleteProduct(product)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
-//                             <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-//                               <div onClick={() => handleDecrease(product.product_id)} className="text"><FaMinus className="size-[12px]" /></div>
-//                               <div className="text-[18px]">{product.quantity}</div>
-//                               <div onClick={() => handleIncrease(product.product_id)} className="text"><FaPlus className="size-[12px]" /></div>
-//                             </div>
-//                             <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
-//                           </div>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>
-
-                  
-//                   <hr className="mt-[10px] mx-[2%]"></hr>
-//                 </>
-                
-
-//                 ))}
-//                 <div className="flex flex-col gap-y-[10px] w-[500px w-full md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px pr-[18% md:pr-[50%] lg:pr-[69%]">
-//                 <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-//                 <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
-//                 </div>
-//               </ul>
-
-//             ) : (<>
-
-//               {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
-//                 <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
-//                 </div>
-//                 <div>Your personal cart is empty</div>
-//                 <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
-//               </div>}
-
-//             </>)}
-//           </div>
-
-
-//         </div>}
-
-
-
-
-//         {!state.token && <div className="flex justify-center pt-[px]">
-
-
-// <div className="pt-[50px] pb-[50px]">
-  
-
-//   {Array.isArray(cartOne) && cartOne.length > 0 ? (
-//     <ul className="">
-//       {cartOne.map((product) => (<>
-        
-//         <div className="bg-[]" key={product.product_id}>
-
-//           <div className="bg-[] pt-[20px]">
-//             <div className="font-bold ml-[10px]">Produce</div>
-//             <div className="flex">
-//               <div><img src={product.image} className="size-[90px]" /></div>
-//               <div className="flex flex-col gap-[10px]">
-//                 <div>{product.name} - {product.weight}</div>
-//                 <div className="text-[grey] text-[15px]">Subtitle</div>
-//                 <div className="flex items-center gap-[15px]">
-//                   <div onClick={() => removeFromCart(product.id)} className="bg-[#31603D] rounded-[50%] p-[8px]"><GoTrash className="size-[ text-[white]" /></div>
-//                   <div className="flex gap-x-[22px] items-center border border-[#31603D] rounded-[20px] px-[10px]">
-//                     <div onClick={() => decreaseQuantity(product.id)} className="text"><FaMinus className="size-[12px]" /></div>
-//                     <div className="text-[18px]">{product.quantity}</div>
-//                     <div onClick={() => increaseQuantity(product.id)} className="text"><FaPlus className="size-[12px]" /></div>
-//                   </div>
-//                   <div className="font-semibold ml-[25px] text-[15px] whitespace-nowrap">NGN {product.price * product.quantity}</div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-        
-//         <hr className="mt-[10px] mx-[2%]"></hr>
-//       </>
-
-//       ))}
-      
-//       <div className="flex flex-col gap-y-[10px] w-[500px] md:w-[800px] lg:w-[1350px] fixed bottom-[-50px] bg-[white] py-[50px] pb-[150px] items-center px-[20px flex justify-center ml-[-20px] pr-[18%] md:pr-[50%] lg:pr-[69%]">
-//       <div className="w-[500px"><Link to="/checkout"><button className="text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
-//       <div className="text-[13px] flex items-center gap-x-[5px]">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">NGN {}</span></div>
-//       </div>
-//     </ul>
-//   ) : (<>
-
-//     {!isLoading && <div className="flex flex-col gap-y-[10px] mt-[100%] items-center">
-//       <div className="flex justify-center bg-[white] p-6 rounded-full"><GrBasket className="size-[50px] bg-[red" />
-//       </div>
-//       <div>Your personal cart is empty</div>
-//       <div onClick={toggleDrawer(false)} className="underline font-semibold text-[#31603D]"><Link to="/">Shop Now</Link></div>
-//     </div>}
-
-//   </>)}
-// </div>
-
-
-// </div>}
-
-
-
-
-
-
-//       </div>
-
-//     </Box>
-//   );
-
-
-
-
-
-
-
-
-
+      const goToCheckout = () => {
+        navigate("/checkout");
+        setIsCartOpen(false);
+      }
 
 
   const Profile = () => {
@@ -624,6 +525,9 @@ function Navbar() {
     <nav className="bg-white z-50 fixed shadow-md overflow-x-hidden overflow-y-hidden w-full">
       <div className="mx-auto py-[13px] my-auto px-4 lg:ml-[40px]">
         <div className="flex justify-between h-[70px]">
+
+
+
           <div className="flex items-center">  {updateNavbar ? "" : ""}
             
           {isSearchLoading && <div className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
@@ -686,9 +590,15 @@ function Navbar() {
                 <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
               )}
 
-              {state.token && <div onClick={goToDashboard} className="flex flex-col items-center hidden lg:flex flex-col cursor-pointer">
+              {isOrdersOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsOrdersOpen(false)}></div>
+              )}
+
+              {state.token && 
+              <div
+               className="flex flex-col items-center hidden lg:flex flex-col cursor-pointer">
                 <div className="font-saeada font-semibold text-[13px]">Orders</div>
-                <div><PiNotepadBold className="size-[20px]" /></div>
+                <div   onClick={toggleOrders} ><PiNotepadBold className="size-[20px]" /></div>
               </div>}
 
 
@@ -712,9 +622,10 @@ function Navbar() {
               </div>}
             </div>
 
-            <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center">
+            <div
+            className="absolute right-[30px] flex flex-row gap-x-[30px] items-center cursor-pointer">
               {state.token && <div className="flex flex-col items-center lg:hidden">
-                <div><PiNotepadBold className="size-[20px]" /></div>
+                <div onClick={toggleOrders} ><PiNotepadBold className="size-[20px]" /></div>
               </div>}
 
 
@@ -938,6 +849,106 @@ function Navbar() {
             </div>
 
           </div>
+
+
+             <Modal open={openOrderModal} onClose={handleClose}>
+           
+         <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[450px] lg:w-[450px] bg-white max-h-[80vh] h-[550px'>
+             
+           {/* Modal Wrapper */}
+           <div className='relative h-full flex flex-col'>
+       
+             {/* Bar Start - Fixed Header */}
+             <div className='sticky top-0 bg-white z-20 p-4 border-b rounded-t-md'>
+               <div className='flex justify-between items-center'>
+                 <div className='flex flex-col'>
+                   <div className='font-bold font-saeada md:text-[20px]'>
+                     Order ID #{selectedOrderId?.order_id}
+                   </div>
+       
+                   {selectedOrderId?.status === "0" && (
+                     <div className="flex items-center gap-x-[5px] text-[12px]">
+                       <TfiPackage className='text-[#31603D]' />
+                       <div className="text-[#31603D]">Awaiting Pick-up</div>
+                     </div>
+                   )}
+                   {selectedOrderId?.status === "1" && (
+                     <div className="flex items-center gap-x-[5px] text-[12px]">
+                       <TbTruckDelivery className='text-[#31603D]' />
+                       <div className="text-[#31603D]">In Transit</div>
+                     </div>
+                   )}
+                   {selectedOrderId?.status === "2" && (
+                     <div className="flex items-center gap-x-[5px] text-[12px]">
+                       <LiaLuggageCartSolid className='text-[#31603D]' />
+                       <div className="text-[#31603D]">Delivered</div>
+                     </div>
+                   )}
+                   {selectedOrderId?.status === "3" && (
+                     <div className="flex items-center gap-x-[5px] text-[12px]">
+                       <MdOutlineCancel className='text-[#D23D23]' />
+                       <div className="text-[#D23D23]">Cancelled</div>
+                     </div>
+                   )}
+       
+                   <button className='text-[#31603D] text-sm md:hidden mt-3' onClick={copy}>
+                     Call Customer Service
+                   </button>
+                 </div>
+       
+                 <div className='flex items-center gap-x-2'>
+                   <button className="bg-[#31603D] text-sm text-white px-3 py-2 hidden md:flex rounded-full" onClick={copy}>
+                     Call Customer Service
+                   </button>
+                   <button onClick={handleClose}>
+                     <AiOutlineClose className='text-[#31603D] text-[25px]' />
+                   </button>
+                 </div>
+               </div>
+             </div>
+             {/* Bar End */}
+       
+         <div className='flex flex-col justify-between gap-y -8'>
+             {/* Scrollable Content */}
+             <div>
+             <div className='overflow-y-auto p-4 bg-[#F9F9F9] flex-1'>
+               {selectedItems?.map((item, i) => (
+                 <div key={i} className='flex flex-row gap-x-[20px] items-center mb-4 justify-between w-[95%]'>
+                   <img src={item.image} alt={item.product_name} className="w-20 h-20 object-contain bg-white px-1" />
+                   <div className='flex flex-col gap-y-2'>
+                     <div className='font-bold font-saeada w-[120px] lg:w-[200px] text-md lg:text-xl'>
+                       {item.product_name}
+                     </div>
+                     <div className='font-sans text-sm lg:text-md'>{item.subtitle}</div>
+                   </div>
+                   <div className='text-sm lg:text-lg w-[100px]'>₦{item.amount * item.quantity}</div>
+                 </div>
+               ))}
+               </div>
+       
+       
+             <div className='overflow-y-auto p-4 bg-[#F9F9F9] flex-1'>
+               <div className='font-sans text-sm flex justify-center mt-10'>
+                 Sub-Total (before taxes and service fee)
+               </div>
+               <hr className='mt-4' />
+               <div className='flex flex-row justify-between items-center mt-4 mb-4'>
+                 <div className='text-md'>Sub-Total</div>
+                 <div>₦{selectedOrderId?.product_amount}</div>
+               </div>
+               <hr className='mb-4' />
+               </div>
+        </div>
+       
+             </div>
+       
+           </div>
+         </div>
+       </Modal>
+
+
+
+
         </div>
       </div>
       <div>
@@ -1069,14 +1080,14 @@ function Navbar() {
 
 {state.token &&<div>
        {products.length > 0 && <div className="p- bg-white h-[2 pb-[90px] pt-[20px] flex flex-col justify-center items-center gap-y-4">
-        <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+        <div className="w-[500px"><button onClick={goToCheckout} className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></div>
         <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">₦ {formatNumber(subtotal)}</span></div>
         </div>}
         </div>}
 
 {!state.token && <div>
         {cartOne.length > 0 && <div className="p- bg-white h-[25% pb-[90px] pt-[20px] flex flex-col justify-center items-center gap-y-4">
-        <div className="w-[500px"><Link to="/checkout"><button className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></Link></div>
+        <div className="w-[500px"><button onClick={goToCheckout} className="flex justify-center items-center text-[white] bg-[#31603D] py-[8px] px-[100px] border border-[#31603D] rounded-[20px] whitespace-nowrap">Proceed to Checkout</button></div>
         <div className="text-[13px] flex items-center gap-x-[5px] justify-center">Sub-Total(before taxes and service fee) <span className="text-[16px] font-bold">₦ {formatNumber(subtotal2)}</span></div>
         </div>}
         </div>}
@@ -1088,11 +1099,141 @@ function Navbar() {
       )} */}
       
     </div>
-  
 
-   
+   {/* Orders */}
 
-   
+     <div>  {updateNavbar ? "" : ""}
+      <div className={`fixed top-0 right-0 w-[100%] md:w-[55%] lg:w-[400px] h-full bg-white shadow-lg transition-transform transform ${isOrdersOpen ? "translate-x-0" : "translate-x-full"} z-50 flex flex-col`}>
+
+        <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">
+      
+        <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Orders({orders.length || 0})</div>
+          <button onClick={() => setIsOrdersOpen(false)} className="text-gray-600 hover:text-red-500">
+            <AiOutlineClose size={24} className="text-[#31603D]"/>
+          </button>
+        </div>
+
+        {isLoading && <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> <l-trio
+          size="70"
+          speed="1.3"
+          color="#4ade80"
+        ></l-trio>    </div>}
+
+        
+      <div className="flex- overflow-y-auto p-4 bg-[#F9F9F9]">
+          
+     
+
+
+
+
+
+        <div className="flex flex-col gap-y-[30px] items-center lg:items-star">
+                {/* Group orders by date */}
+                {Object.entries(
+                  orders.reduce((grouped, order) => {
+                    const formattedDate = new Intl.DateTimeFormat('en-GB').format(new Date(order.created_at));
+                    if (!grouped[formattedDate]) {
+                      grouped[formattedDate] = [];
+                    }
+                    grouped[formattedDate].push(order);
+                    return grouped;
+                  }, {})
+                ).map(([date, ordersForDate]) => (
+                  <div className="flex flex-col gap-y-[30px]" key={date}>
+                    {/* Display the date */}
+                    <div className="font-bold px- 4 lg:px-14">{date}</div>
+                    {ordersForDate
+                    .filter(order => order.status !== "2")
+                    .map((order) => (<>
+                      <div onClick={() => handleOpen(order)} className="flex cursor-pointer flex-row lg: gap-x-[10px] justify-between lg: items-center lg:px-14" key={order.order_id}>
+                        <div>
+                          <PiNotepadBold className="size-[30px]" />
+                        </div>
+                        <div className="flex flex-row gap-x-[px] lg:gap-x-[50px]">
+                          <div className="flex flex-col gap-y-[20px] lg:flex-row lg:gap-x-[50px]">
+                            <div className="flex flex-col bg-[]">
+
+                              <div className="font-bold text-[17px] lg:w-[180px] lg:text-[20px] whitespace-nowrap font-saeada">
+                                Order ID #{order.order_id}
+                              </div>
+      
+                              {order.payment_status === 1 && (
+                                <>
+                           
+                                <div>
+                                 {order.status === "0" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                                                            <div><TfiPackage className='size-[15px] text-[#31603D]'/></div>
+                                                            <div className="whitespace-nowrap text-[15px] text-[#31603D]">Awaiting Pick-up</div>
+                                                          </div>)}
+                                  
+                                                          {order.status === "1" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                                                            <div><TbTruckDelivery className='size-[15px] text-[#31603D]'/></div>
+                                                            <div className="whitespace-nowrap text-[15px] text-[#31603D]">In Transit</div>
+                                                          </div>)}
+                                  
+                                                          {order.status === "2" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                                                            <div><LiaLuggageCartSolid className='size-[15px] text-[#31603D]'/></div>
+                                                            <div className="whitespace-nowrap text-[15px] text-[#31603D]">Delivered</div>
+                                                          </div>)}
+                                  
+                                                          {order.status === "3" && (<div className="flex items-center gap-x-[5px] text-[12px]">
+                                                            <div><MdOutlineCancel className='size-[15px] text-[#D23D23]'/></div>
+                                                            <div className="whitespace-nowrap text-[15px] text-[#D23D23]">Cancelled</div>
+                                                          </div>)}
+                                                          <div className='flex justify-between items-center'>
+                                                          <div className="text-[12px] lg:text-[15px] mt-2 whitespace-nowrap">Tap to view details</div>                                                                                         
+                                                          
+                                                             </div>
+                                                             </div>
+
+                                                                <div className='whitespace-nowrap mt-2'> ₦ {formatNumber(Number(order.product_amount))}</div>
+                               
+                             </> )}
+      
+                         
+      
+                            </div>
+                           
+                          </div>
+                          <div className="flex flex-col gap-y-[40px] lg:flex-row lg:gap-x-[50px]">
+      
+                          
+                          
+      
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <hr className="items-center lg:mx-12"></hr>
+                      </>
+                    ))}
+                    
+                  </div>
+                ))}
+              </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+       
+
+      
+      </div>
+
+      {/* Overlay when cart is open */}
+      {/* {isCartOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsCartOpen(false)}></div>
+      )} */}
+      
+    </div>
 
   </>
   )
