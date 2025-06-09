@@ -594,11 +594,12 @@ function Navbar() {
                 <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsOrdersOpen(false)}></div>
               )}
 
-              {state.token && 
-              <div
-               className="flex flex-col items-center hidden lg:flex flex-col cursor-pointer">
+              {orders.length > 0 && <div className="hidden md:flex lg:flex border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[328px] top-[45px]"></div>}
+              {state.token && <div className="hidden cursor-pointer lg:flex flex-col">
+              <div className="flex flex-col items-center hidden lg:flex flex-col cursor-pointer">
                 <div className="font-saeada font-semibold text-[13px]">Orders</div>
-                <div   onClick={toggleOrders} ><PiNotepadBold className="size-[20px]" /></div>
+                <div onClick={toggleOrders} ><PiNotepadBold className="size-[20px]" /></div>
+                </div>
               </div>}
 
 
@@ -620,13 +621,16 @@ function Navbar() {
                   <div className="fixe absolut w-[55px] right-[8% text-[13px] text-[#31603D] font-bold whitespace-nowrap">{(cartOne.length) || 0} Item(s)</div>
                 </div>
               </div>}
+
             </div>
 
-            <div
-            className="absolute right-[30px] flex flex-row gap-x-[30px] items-center cursor-pointer">
+          
+            <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center cursor-pointer">
+              {orders.length > 0 && <div className="md:hidden lg:hidden border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[110px] top-[-4px]"></div>}
               {state.token && <div className="flex flex-col items-center lg:hidden">
                 <div onClick={toggleOrders} ><PiNotepadBold className="size-[20px]" /></div>
               </div>}
+              
 
 
               {state.token&&<div onClick={toggleDrawer(true)} className="lg:flex flex-col cursor-pointer lg:hidden">
@@ -1146,7 +1150,7 @@ function Navbar() {
                     {ordersForDate
                     .filter(order => order.status !== "2")
                     .map((order) => (<>
-                      <div onClick={() => handleOpen(order)} className="flex cursor-pointer flex-row lg: gap-x-[10px] justify-between lg: items-center lg:px-14" key={order.order_id}>
+                      <div onClick={() => handleOpen(order)} className="flex cursor-pointer flex-row lg: gap-x-[10px] justify-betwee lg: items-center lg:px-14" key={order.order_id}>
                         <div>
                           <PiNotepadBold className="size-[30px]" />
                         </div>
