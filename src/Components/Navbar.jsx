@@ -94,7 +94,7 @@ function Navbar() {
   const [openOrderModal, setOpenOrderModal] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedOrderId, setSelectedOrderId] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState([]);
 
    const handleOpen = (orders) => {
     setSelectedItems(orders.items); // Assuming orders.items is an array of items
@@ -1112,7 +1112,7 @@ function Navbar() {
 
         <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">
       
-        <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Pending Orders({orders.length || 0})</div>
+        <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Pending Orders({orders?.length || 0})</div>
           <button onClick={() => setIsOrdersOpen(false)} className="text-gray-600 hover:text-red-500">
             <AiOutlineClose size={24} className="text-[#31603D]"/>
           </button>
@@ -1135,8 +1135,8 @@ function Navbar() {
 
         <div className="flex flex-col gap-y-[30px] items-center lg:items-star">
                 {/* Group orders by date */}
-                {Object.entries(
-                  orders.reduce((grouped, order) => {
+                {Array.isArray(orders) && Object.entries(
+                  orders?.reduce((grouped, order) => {
                     const formattedDate = new Intl.DateTimeFormat('en-GB').format(new Date(order.created_at));
                     if (!grouped[formattedDate]) {
                       grouped[formattedDate] = [];
