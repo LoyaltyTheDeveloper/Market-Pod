@@ -94,6 +94,7 @@ function Navbar() {
   const [openOrderModal, setOpenOrderModal] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedOrderId, setSelectedOrderId] = useState(null);
+    const [error, setError] = useState(null);
 
    const handleOpen = (orders) => {
     setSelectedItems(orders.items); // Assuming orders.items is an array of items
@@ -594,7 +595,7 @@ function Navbar() {
                 <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsOrdersOpen(false)}></div>
               )}
 
-              {orders.length > 0 && <div className="hidden md:flex lg:flex border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[328px] top-[45px]"></div>}
+              {orders?.length > 0 && <div className="hidden md:flex lg:flex border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolut fixed right-[77px top-[18px right-[328px] top-[45px]"></div>}
               {state.token && <div className="hidden cursor-pointer lg:flex flex-col">
               <div className="flex flex-col items-center hidden lg:flex flex-col cursor-pointer">
                 <div className="font-saeada font-semibold text-[13px]">Orders</div>
@@ -626,7 +627,7 @@ function Navbar() {
 
           
             <div className="absolute right-[30px] flex flex-row gap-x-[30px] items-center cursor-pointer">
-              {orders.length > 0 && <div className="md:hidden lg:hidden border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[110px] top-[-4px]"></div>}
+              {orders?.length > 0 && <div className="md:hidden lg:hidden border border-[#F5C065] size-[12px] bg-[#F5C065] rounded-[100%] absolute right-[110px] top-[-4px]"></div>}
               {state.token && <div className="flex flex-col items-center lg:hidden">
                 <div onClick={toggleOrders} ><PiNotepadBold className="size-[20px]" /></div>
               </div>}
@@ -1111,7 +1112,7 @@ function Navbar() {
 
         <div className="flex justify-between items-center p-4 bg-[white] h-auto w-full">
       
-        <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Orders({orders.length || 0})</div>
+        <div className="text-[20px] ml-[20px text-[#31603D] font-semibold">Pending Orders({orders.length || 0})</div>
           <button onClick={() => setIsOrdersOpen(false)} className="text-gray-600 hover:text-red-500">
             <AiOutlineClose size={24} className="text-[#31603D]"/>
           </button>
